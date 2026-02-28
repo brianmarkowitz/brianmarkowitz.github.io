@@ -453,8 +453,8 @@
       box-shadow: var(--shadow);
       padding: 0.82rem;
       display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
-      gap: 0.78rem;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.6rem;
       align-items: start;
     }
 
@@ -465,9 +465,8 @@
       background: rgba(7, 12, 21, 0.7);
       display: grid;
       grid-template-rows: auto 1fr;
-      position: sticky;
-      top: 0.8rem;
-      max-height: calc(100vh - 1.6rem);
+      position: static;
+      max-height: none;
     }
 
     .stage-media {
@@ -508,7 +507,7 @@
       align-content: start;
       align-items: start;
       gap: 0.42rem;
-      overflow: auto;
+      overflow: visible;
     }
 
     .stage-meta {
@@ -660,18 +659,6 @@
       display: grid;
       align-content: start;
       gap: 0.48rem;
-    }
-
-    .mobile-track-fold {
-      display: block;
-    }
-
-    .mobile-track-fold summary {
-      display: none;
-    }
-
-    .mobile-track-fold summary::-webkit-details-marker {
-      display: none;
     }
 
     .filters {
@@ -835,6 +822,111 @@
 
     .atlas-section {
       margin-top: 1.16rem;
+    }
+
+    .projects-list {
+      display: grid;
+      gap: 0.44rem;
+    }
+
+    .projects-controls {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 0.5rem;
+    }
+
+    .projects-toggle {
+      border: 1px solid rgba(174, 195, 233, 0.34);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.02);
+      color: #d7e6ff;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.64rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.22rem 0.5rem;
+      cursor: pointer;
+      transition: all 160ms ease;
+    }
+
+    .projects-toggle:hover {
+      border-color: rgba(255, 122, 0, 0.86);
+      color: #fff;
+    }
+
+    .project-row {
+      border: 1px solid rgba(174, 195, 233, 0.24);
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.02);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.46rem;
+      align-items: center;
+      padding: 0.48rem;
+      transition: border-color 170ms ease, background 170ms ease, transform 170ms ease;
+    }
+
+    .project-row:hover {
+      border-color: rgba(255, 122, 0, 0.72);
+      background: rgba(255, 255, 255, 0.04);
+      transform: translateY(-1px);
+    }
+
+    .project-row-main {
+      border: 0;
+      background: transparent;
+      text-align: left;
+      color: inherit;
+      display: grid;
+      gap: 0.14rem;
+      cursor: pointer;
+      min-width: 0;
+      padding: 0;
+    }
+
+    .project-row-main:focus-visible {
+      outline: 2px solid rgba(255, 122, 0, 0.86);
+      outline-offset: 2px;
+      border-radius: 8px;
+    }
+
+    .project-row-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--muted);
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .project-row-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 0.91rem;
+      line-height: 1.16;
+      color: #f1f6ff;
+      max-width: 50ch;
+    }
+
+    .project-row-summary {
+      color: #bdd0ec;
+      font-size: 0.77rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .project-row-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .project-row-actions .btn {
+      min-height: 30px;
+      font-size: 0.69rem;
+      padding: 0.32rem 0.58rem;
     }
 
     .atlas-toolbar {
@@ -1553,37 +1645,12 @@
     }
 
     @media (max-width: 1080px) {
-      .spotlight-shell {
-        grid-template-columns: 1fr;
-      }
-
-      .spotlight-stage {
-        position: static;
-        max-height: none;
-      }
-
-      .stage-body {
-        overflow: visible;
-      }
-
-      .track-card {
-        min-height: auto;
-      }
-
       .modal-layout {
         grid-template-columns: 1fr;
       }
 
       .modal-media {
         position: static;
-      }
-
-      .graph-shell {
-        grid-template-columns: 1fr;
-      }
-
-      .graph-stage {
-        min-height: 520px;
       }
     }
 
@@ -1703,49 +1770,6 @@
         flex: 1 1 auto;
       }
 
-      .mobile-track-fold {
-        border: 1px solid rgba(174, 195, 233, 0.28);
-        border-radius: var(--radius-md);
-        background: rgba(8, 12, 21, 0.62);
-      }
-
-      .mobile-track-fold summary {
-        display: inline-flex;
-        width: 100%;
-        cursor: pointer;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.5rem;
-        padding: 0.5rem 0.58rem;
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.68rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: #d7e6ff;
-      }
-
-      .mobile-track-fold summary::after {
-        content: 'Show';
-        border: 1px solid rgba(174, 195, 233, 0.44);
-        border-radius: 999px;
-        padding: 0.12rem 0.38rem;
-        font-size: 0.57rem;
-      }
-
-      .mobile-track-fold[open] summary::after {
-        content: 'Hide';
-        border-color: rgba(255, 122, 0, 0.86);
-        color: #fff;
-      }
-
-      .mobile-track-fold .track-panel {
-        border: 0;
-        border-top: 1px solid rgba(174, 195, 233, 0.2);
-        border-radius: 0;
-        background: transparent;
-        padding: 0.5rem;
-      }
-
       .filters {
         flex-wrap: nowrap;
         overflow-x: auto;
@@ -1761,83 +1785,27 @@
         flex: 0 0 auto;
       }
 
-      .track-controls {
-        justify-content: flex-start;
-      }
-
-      .spotlight-track {
-        max-height: min(46vh, 420px);
-      }
-
-      .atlas-row {
+      .project-row {
         grid-template-columns: 1fr;
         align-items: start;
       }
 
-      .atlas-row-actions {
+      .project-row-actions {
         width: 100%;
         justify-content: flex-start;
       }
 
-      .atlas-row-actions .btn {
+      .project-row-actions .btn {
         flex: 1 1 auto;
+      }
+
+      .projects-controls {
+        justify-content: flex-start;
       }
 
       .modal-actions .btn {
         flex: 1 1 auto;
       }
-
-      .atlas-toolbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .atlas-hint {
-        display: none;
-      }
-
-      .view-switch {
-        width: 100%;
-      }
-
-      .view-toggle {
-        flex: 1 1 auto;
-      }
-
-      .atlas-hint {
-        width: 100%;
-      }
-
-      .graph-stage {
-        min-height: 360px;
-      }
-
-      .graph-actions .btn {
-        flex: 1 1 auto;
-      }
-
-      .graph-panel {
-        padding: 0.56rem;
-      }
-
-      .graph-domain-pills {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        scrollbar-width: none;
-      }
-
-      .graph-domain-pills::-webkit-scrollbar {
-        display: none;
-      }
-
-      .lane-summary {
-        align-items: flex-start;
-      }
-
-      .lane-top {
-        display: none;
-      }
-
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1902,7 +1870,6 @@
       <div class="mast-links">
         <a class="chip-link" href="#spotlight">Project Spotlight</a>
         <a class="chip-link" href="#all-projects">Project Atlas</a>
-        <button class="chip-link chip-button" id="open-graph-view" type="button">View as Graph</button>
         <a class="icon-link" href="https://github.com/brianmarkowitz" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
           <svg viewBox="0 0 16 16" aria-hidden="true">
             <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.81.06 1.24.84 1.24.84.72 1.22 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.58.82-2.14-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.14 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.5 0 1.08-.01 1.95-.01 2.22 0 .21.14.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
@@ -1914,7 +1881,7 @@
     <section id="spotlight">
       <div class="section-head reveal">
         <h2>Project Spotlight</h2>
-        <p>Focused by default. Expanded context appears only when you open it.</p>
+        <p>One featured project at a time. Use the project list below to open details when needed.</p>
       </div>
 
       <div class="spotlight-shell reveal">
@@ -1955,59 +1922,18 @@
             <div class="stage-actions" id="spotlight-actions"></div>
           </div>
         </article>
-
-        <details class="mobile-track-fold" id="mobile-track-disclosure" open>
-          <summary>Browse projects</summary>
-          <aside class="track-panel">
-            <div class="filters" id="filters"></div>
-            <div class="track-head">
-              <p id="track-count"></p>
-              <p id="track-progress-label"></p>
-            </div>
-            <div class="track-progress">
-              <span id="track-progress-fill"></span>
-            </div>
-            <div class="track-controls">
-              <button class="track-toggle" id="track-toggle" type="button"></button>
-            </div>
-            <div class="spotlight-track" id="spotlight-track"></div>
-          </aside>
-        </details>
       </div>
     </section>
 
     <section id="all-projects" class="atlas-section">
       <div class="section-head reveal">
         <h2>Project Atlas</h2>
-        <p>Compact directory first. Open rows only when you want deeper project detail.</p>
+        <p>Simple ranked list. Tap any project for full details.</p>
       </div>
-      <div class="atlas-toolbar reveal">
-        <div class="view-switch" id="view-switch">
-          <button class="view-toggle active" data-view="atlas" type="button">Atlas Directory</button>
-          <button class="view-toggle" data-view="graph" type="button">View as Graph</button>
-        </div>
-        <p class="atlas-hint">Directory: minimal rows. Graph: exploratory map.</p>
+      <div class="projects-controls reveal">
+        <button class="projects-toggle" id="projects-toggle" type="button"></button>
       </div>
-
-      <div class="atlas-view atlas-view-active" id="atlas-view-atlas">
-        <div class="atlas-lanes" id="atlas-lanes"></div>
-      </div>
-
-      <div class="atlas-view" id="atlas-view-graph">
-        <div class="graph-shell">
-          <div class="graph-stage" id="project-graph-canvas-wrap">
-            <svg id="project-graph-svg" class="graph-svg" aria-label="Project graph view"></svg>
-          </div>
-          <aside class="graph-panel">
-            <p class="graph-eyebrow">Graph Navigator</p>
-            <h3 id="graph-panel-title">Project Knowledge Graph</h3>
-            <p id="graph-panel-text">Select a domain node to bloom projects, then click a project node for details.</p>
-            <div class="graph-domain-pills" id="graph-domain-pills"></div>
-            <p class="graph-meta" id="graph-panel-meta"></p>
-            <div class="graph-actions" id="graph-panel-actions"></div>
-          </aside>
-        </div>
-      </div>
+      <div class="projects-list reveal" id="projects-list"></div>
     </section>
 
     <footer class="footer reveal">
@@ -2372,8 +2298,8 @@
     const state = {
       activeFilter: 'All',
       activeProjectId: projects[0].id,
-      atlasView: 'atlas',
       trackExpanded: false,
+      projectsExpanded: false,
       graphActiveDomain: null,
       graphSelectedProjectId: null
     };
@@ -2382,7 +2308,6 @@
     let trackResizeTimer = null;
     let lastFocusedElement = null;
     let graphScene = null;
-    let isMobileLayout = null;
 
     function createAction(label, url, type = 'primary', emptyLabel = `${label}: Pending`) {
       const base = type === 'secondary' ? 'btn btn-secondary' : 'btn btn-primary';
@@ -2442,41 +2367,6 @@
       }
 
       graphScene = null;
-    }
-
-    function renderAtlasViewSwitch() {
-      const atlasView = document.getElementById('atlas-view-atlas');
-      const graphView = document.getElementById('atlas-view-graph');
-      if (!atlasView || !graphView) return;
-
-      atlasView.classList.toggle('atlas-view-active', state.atlasView === 'atlas');
-      graphView.classList.toggle('atlas-view-active', state.atlasView === 'graph');
-
-      document.querySelectorAll('.view-toggle').forEach((button) => {
-        button.classList.toggle('active', button.dataset.view === state.atlasView);
-      });
-    }
-
-    function setAtlasView(view, { scrollToSection = false } = {}) {
-      if (!['atlas', 'graph'].includes(view)) return;
-      state.atlasView = view;
-      renderAtlasViewSwitch();
-
-      if (view === 'graph') {
-        renderProjectGraph();
-      } else {
-        stopGraphScene();
-      }
-
-      if (scrollToSection) {
-        const section = document.getElementById('all-projects');
-        if (section) {
-          section.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      }
     }
 
     function renderGraphPanel(domains) {
@@ -3065,32 +2955,6 @@
       graphScene.rafId = requestAnimationFrame(tick);
     }
 
-    function syncMobileLayout({ force = false } = {}) {
-      const mobileNow = window.matchMedia('(max-width: 760px)').matches;
-      if (!force && mobileNow === isMobileLayout) return;
-      isMobileLayout = mobileNow;
-
-      const trackDisclosure = document.getElementById('mobile-track-disclosure');
-      if (trackDisclosure) {
-        trackDisclosure.open = !mobileNow;
-      }
-    }
-
-    function setupAtlasViewControls() {
-      document.querySelectorAll('.view-toggle').forEach((button) => {
-        button.addEventListener('click', () => {
-          setAtlasView(button.dataset.view);
-        });
-      });
-
-      const graphQuickButton = document.getElementById('open-graph-view');
-      if (graphQuickButton) {
-        graphQuickButton.addEventListener('click', () => {
-          setAtlasView('graph', { scrollToSection: true });
-        });
-      }
-    }
-
     function renderStats() {
       const root = document.getElementById('stats-strip');
       if (!root) return;
@@ -3297,11 +3161,6 @@
           updateTrackSelection();
           updateTrackProgress();
           button.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-          const trackDisclosure = document.getElementById('mobile-track-disclosure');
-          if (window.matchMedia('(max-width: 760px)').matches && trackDisclosure?.open) {
-            trackDisclosure.open = false;
-          }
         });
       });
 
@@ -3401,10 +3260,7 @@
       const jumpButton = document.getElementById('modal-spotlight-jump');
       if (jumpButton) {
         jumpButton.addEventListener('click', () => {
-          state.activeFilter = project.domain;
           state.activeProjectId = project.id;
-          renderFilters();
-          renderSpotlightTrack();
           renderSpotlightProject();
           closeProjectModal();
           focusSpotlight();
@@ -3439,67 +3295,49 @@
       });
     }
 
-    function renderAtlasLanes() {
-      const root = document.getElementById('atlas-lanes');
+    function renderProjectsList() {
+      const root = document.getElementById('projects-list');
+      const toggle = document.getElementById('projects-toggle');
       if (!root) return;
 
-      const grouped = projects.reduce((acc, project) => {
-        if (!acc[project.domain]) acc[project.domain] = [];
-        acc[project.domain].push(project);
-        return acc;
-      }, {});
+      const defaultCount = 6;
+      const visibleProjects = state.projectsExpanded
+        ? projects
+        : projects.slice(0, defaultCount);
 
-      root.innerHTML = Object.entries(grouped)
-        .map(([domain, items]) => [
-          domain,
-          items.slice().sort((a, b) => a.impressivenessRank - b.impressivenessRank)
-        ])
-        .sort((a, b) => a[1][0].impressivenessRank - b[1][0].impressivenessRank)
-        .map(([domain, items], index) => `
-          <details class="atlas-lane reveal" ${index === 0 ? 'open' : ''}>
-            <summary class="lane-summary">
-              <div class="lane-head">
-                <h3>${domain}</h3>
-                <p>${items.length} project${items.length === 1 ? '' : 's'}</p>
-              </div>
-              <span class="lane-top">Top rank #${items[0].impressivenessRank}</span>
-            </summary>
-            <div class="lane-body">
-              <div class="atlas-list">
-                ${items.map((project) => `
-                  <article class="atlas-row">
-                    <button class="atlas-row-main atlas-open-modal" data-id="${project.id}" type="button">
-                      <span class="atlas-row-meta">#${project.impressivenessRank} • Project ${project.id} • ${project.year}</span>
-                      <span class="atlas-row-title">${project.title}</span>
-                      <span class="atlas-row-summary">${project.summary}</span>
-                    </button>
-                    <div class="atlas-row-actions">
-                      <button class="btn btn-secondary atlas-jump" data-id="${project.id}" data-domain="${project.domain}" type="button">Spotlight</button>
-                      ${createAction('Visit', project.demoUrl, 'primary', 'No Public Link')}
-                    </div>
-                  </article>
-                `).join('')}
-              </div>
+      if (toggle) {
+        if (projects.length <= defaultCount) {
+          toggle.hidden = true;
+        } else {
+          toggle.hidden = false;
+          toggle.textContent = state.projectsExpanded
+            ? 'Show Fewer'
+            : `Show All ${projects.length}`;
+          toggle.onclick = () => {
+            state.projectsExpanded = !state.projectsExpanded;
+            renderProjectsList();
+          };
+        }
+      }
+
+      root.innerHTML = visibleProjects
+        .map((project) => `
+          <article class="project-row">
+            <button class="project-row-main project-open-modal" data-id="${project.id}" type="button">
+              <span class="project-row-meta">#${project.impressivenessRank} • ${project.domain} • ${project.year}</span>
+              <span class="project-row-title">${project.title}</span>
+              <span class="project-row-summary">${project.summary}</span>
+            </button>
+            <div class="project-row-actions">
+              ${createAction('Visit', project.demoUrl, 'primary', 'No Public Link')}
             </div>
-          </details>
+          </article>
         `)
         .join('');
 
-      root.querySelectorAll('.atlas-open-modal').forEach((button) => {
+      root.querySelectorAll('.project-open-modal').forEach((button) => {
         button.addEventListener('click', () => {
           openProjectModal(Number(button.dataset.id));
-        });
-      });
-
-      root.querySelectorAll('.atlas-jump').forEach((button) => {
-        button.addEventListener('click', () => {
-          state.activeFilter = button.dataset.domain;
-          state.trackExpanded = false;
-          state.activeProjectId = Number(button.dataset.id);
-          renderFilters();
-          renderSpotlightTrack();
-          renderSpotlightProject();
-          focusSpotlight();
         });
       });
     }
@@ -3657,26 +3495,17 @@
 
     renderStats();
     renderDomainRibbon();
-    renderFilters();
-    renderSpotlightTrack();
     renderSpotlightProject();
-    renderAtlasLanes();
-    renderAtlasViewSwitch();
+    renderProjectsList();
     setLastUpdated();
     setupReveal();
     setupProjectModal();
-    setupAtlasViewControls();
     setupBackgroundAnimation();
-    syncMobileLayout({ force: true });
 
     window.addEventListener('resize', () => {
       clearTimeout(trackResizeTimer);
       trackResizeTimer = setTimeout(() => {
-        syncMobileLayout({ force: true });
-        setupTrackObserver();
-        if (state.atlasView === 'graph') {
-          renderProjectGraph();
-        }
+        renderProjectsList();
       }, 180);
     });
   </script>
