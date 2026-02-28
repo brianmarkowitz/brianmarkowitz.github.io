@@ -3,26 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Brian Markowitz portfolio and living resume featuring AI, DevOps, and data engineering work.">
-  <title>Brian Markowitz | Portfolio</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='8' fill='%23cf3f24'/%3E%3C/svg%3E">
+  <meta name="description" content="Brian Markowitz portfolio featuring AI, data engineering, cloud automation, and product builds.">
+  <title>Brian Markowitz | Project Portfolio</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='4' fill='%23f97316'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,700&amp;family=IBM+Plex+Sans:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f6f2ea;
-      --ink: #111111;
-      --muted: #514b43;
-      --panel: #fffdf8;
-      --stroke: #d3c7b8;
-      --accent: #cf3f24;
-      --accent-soft: #fce7dc;
-      --shadow: 0 20px 40px rgba(21, 18, 13, 0.08);
+      --bg-0: #0a0f14;
+      --bg-1: #0f1a22;
+      --bg-2: #15101f;
+      --ink: #f3f6fb;
+      --muted: #b2becf;
+      --stroke: rgba(171, 191, 219, 0.3);
+      --panel: rgba(13, 21, 31, 0.8);
+      --panel-strong: rgba(10, 15, 22, 0.94);
+      --accent: #f97316;
+      --accent-2: #3be6ce;
       --radius-lg: 24px;
-      --radius-md: 14px;
-      --radius-sm: 10px;
-      --max-width: 1160px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --shadow: 0 26px 40px rgba(0, 0, 0, 0.42);
+      --max-width: 1260px;
     }
 
     * {
@@ -31,61 +34,75 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
+      min-height: 100vh;
       font-family: 'IBM Plex Sans', sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at 12% 14%, rgba(207, 63, 36, 0.08), transparent 26%),
-        radial-gradient(circle at 86% 20%, rgba(17, 17, 17, 0.05), transparent 22%),
-        repeating-linear-gradient(
-          -45deg,
-          transparent,
-          transparent 12px,
-          rgba(17, 17, 17, 0.015) 12px,
-          rgba(17, 17, 17, 0.015) 13px
-        ),
-        var(--bg);
-      line-height: 1.6;
-      min-height: 100vh;
+        radial-gradient(circle at 8% 6%, rgba(59, 230, 206, 0.16), transparent 22%),
+        radial-gradient(circle at 88% 12%, rgba(249, 115, 22, 0.2), transparent 28%),
+        radial-gradient(circle at 70% 76%, rgba(137, 92, 246, 0.16), transparent 36%),
+        linear-gradient(145deg, var(--bg-0), var(--bg-1) 55%, var(--bg-2));
+      background-attachment: fixed;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.17;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.26) 0.8px, transparent 0.8px);
+      background-size: 4px 4px;
+      z-index: -1;
     }
 
     .site {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 2rem 1rem 3rem;
+      width: min(var(--max-width), 100% - 2rem);
+      margin: 1rem auto 2rem;
     }
 
     .hero {
-      background: linear-gradient(140deg, #fffdf8 0%, #f7f0e3 100%);
+      position: relative;
       border: 1px solid var(--stroke);
       border-radius: var(--radius-lg);
+      background: linear-gradient(160deg, rgba(24, 35, 48, 0.95), rgba(9, 14, 21, 0.95));
+      padding: clamp(1.25rem, 3vw, 2.2rem);
       box-shadow: var(--shadow);
-      padding: 2rem;
-      margin-bottom: 1.6rem;
-      position: relative;
       overflow: hidden;
-      display: grid;
-      gap: 1.4rem;
     }
 
-    .hero::after {
+    .hero::before {
       content: '';
       position: absolute;
-      right: -6rem;
-      top: -6rem;
-      width: 16rem;
-      height: 16rem;
+      inset: -60% -30% auto auto;
+      width: 420px;
+      height: 420px;
       border-radius: 50%;
-      background: radial-gradient(circle at center, rgba(207, 63, 36, 0.14), transparent 68%);
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.24), transparent 70%);
       pointer-events: none;
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.4rem;
     }
 
     .eyebrow {
       font-family: 'IBM Plex Mono', monospace;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      font-size: 0.8rem;
-      color: var(--accent);
+      color: var(--accent-2);
+      font-size: 0.79rem;
     }
 
     h1, h2, h3 {
@@ -95,154 +112,124 @@
     }
 
     h1 {
-      font-size: clamp(2rem, 6vw, 4rem);
-      max-width: 16ch;
+      margin-top: 0.4rem;
+      font-size: clamp(2rem, 5vw, 3.55rem);
+      max-width: 15ch;
     }
 
     .hero-copy {
       color: var(--muted);
-      max-width: 65ch;
-      font-size: 1.02rem;
+      max-width: 72ch;
+      font-size: 1.03rem;
+      margin-top: 0.85rem;
     }
 
     .hero-links {
       display: flex;
-      gap: 0.75rem;
+      gap: 0.62rem;
       flex-wrap: wrap;
+      margin-top: 1.35rem;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0.72rem 1.1rem;
       border-radius: 999px;
       font-weight: 600;
+      font-size: 0.92rem;
       text-decoration: none;
+      padding: 0.64rem 1rem;
+      transition: transform 180ms ease, box-shadow 180ms ease;
       border: 1px solid transparent;
-      transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+      min-height: 42px;
     }
 
     .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 7px 14px rgba(17, 17, 17, 0.12);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
     }
 
     .btn-primary {
-      background: var(--ink);
+      background: linear-gradient(120deg, #f97316, #f43f5e);
       color: #fff;
     }
 
     .btn-secondary {
-      background: transparent;
+      border-color: rgba(159, 179, 206, 0.46);
       color: var(--ink);
-      border-color: var(--stroke);
+      background: rgba(255, 255, 255, 0.04);
     }
 
     .btn-disabled {
-      opacity: 0.58;
+      opacity: 0.55;
       pointer-events: none;
       cursor: default;
     }
 
-    .layout {
+    .hero-metrics {
       display: grid;
-      grid-template-columns: 1.5fr 1fr;
-      gap: 1.2rem;
-    }
-
-    .panel {
-      background: var(--panel);
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      padding: 1.4rem;
-    }
-
-    .panel h2 {
-      font-size: clamp(1.2rem, 3vw, 1.8rem);
-      margin-bottom: 0.8rem;
-    }
-
-    .panel-intro {
-      color: var(--muted);
-      margin-bottom: 1rem;
-    }
-
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.65rem;
-      margin-top: 1rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+      width: min(520px, 100%);
     }
 
     .metric {
-      background: #f9f3e8;
-      border: 1px solid var(--stroke);
+      border: 1px solid rgba(174, 193, 216, 0.26);
       border-radius: var(--radius-sm);
-      padding: 0.8rem;
+      padding: 0.7rem 0.75rem;
+      background: rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(10px);
     }
 
     .metric-value {
       font-family: 'Fraunces', serif;
-      font-size: 1.55rem;
+      font-size: 1.65rem;
+      color: #fff;
       line-height: 1;
-      margin-bottom: 0.28rem;
+      margin-bottom: 0.2rem;
     }
 
     .metric-label {
-      font-size: 0.86rem;
+      font-size: 0.78rem;
       color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
-    .snapshot-list {
-      list-style: none;
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    .snapshot-list li {
-      padding: 0.8rem;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--stroke);
-      background: #fff;
-      font-size: 0.95rem;
-    }
-
-    .section {
-      margin-top: 1.2rem;
-    }
-
-    .section-head {
+    .projects-head {
+      margin: 1.2rem 0 0.9rem;
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
       gap: 0.8rem;
-      margin-bottom: 0.9rem;
+      align-items: flex-end;
+      flex-wrap: wrap;
     }
 
-    .section-head p {
+    .projects-head h2 {
+      font-size: clamp(1.55rem, 3.4vw, 2.3rem);
+    }
+
+    .projects-head p {
       color: var(--muted);
-      font-size: 0.95rem;
+      max-width: 48ch;
     }
 
     .project-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
-      gap: 0.9rem;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1rem;
     }
 
     .project-card {
-      border: 1px solid var(--stroke);
       border-radius: var(--radius-md);
-      background: #fff;
+      border: 1px solid var(--stroke);
       overflow: hidden;
-      display: grid;
-      grid-template-rows: auto 1fr;
-      min-height: 100%;
+      background: linear-gradient(170deg, rgba(19, 27, 38, 0.95), rgba(11, 17, 26, 0.97));
+      box-shadow: var(--shadow);
       opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 500ms ease, transform 500ms ease;
+      transform: translateY(18px);
+      transition: transform 380ms ease, opacity 380ms ease, border-color 220ms ease;
     }
 
     .project-card.revealed {
@@ -250,146 +237,145 @@
       transform: translateY(0);
     }
 
+    .project-card:hover {
+      border-color: rgba(249, 115, 22, 0.8);
+      transform: translateY(-3px);
+    }
+
     .project-media {
-      height: 176px;
-      border-bottom: 1px solid var(--stroke);
-      background: linear-gradient(125deg, #f8f4ee, #f1e8da);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative;
+      aspect-ratio: 16 / 10;
       overflow: hidden;
+      background: #04070c;
+      border-bottom: 1px solid var(--stroke);
     }
 
     .project-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      animation: drift 18s ease-in-out infinite;
+      animation-delay: var(--delay, 0ms);
+      transform-origin: center;
+      will-change: transform;
     }
 
-    .project-media .placeholder {
+    .project-card:hover .project-media img {
+      animation-play-state: paused;
+      transform: scale(1.04);
+    }
+
+    .status-chip {
+      position: absolute;
+      top: 0.65rem;
+      left: 0.65rem;
+      z-index: 2;
+      background: rgba(8, 13, 20, 0.82);
+      border: 1px solid rgba(179, 205, 228, 0.45);
+      color: #d5f9ff;
+      border-radius: 999px;
+      padding: 0.25rem 0.58rem;
+      font-size: 0.73rem;
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.82rem;
       text-transform: uppercase;
-      color: #8a8074;
-      letter-spacing: 0.06em;
-      padding: 0 1rem;
-      text-align: center;
+      letter-spacing: 0.05em;
     }
 
     .project-body {
-      padding: 0.9rem;
+      padding: 0.92rem;
       display: grid;
-      gap: 0.64rem;
-      align-content: start;
+      gap: 0.58rem;
     }
 
     .project-meta {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.76rem;
+      color: var(--muted);
       font-family: 'IBM Plex Mono', monospace;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--muted);
-    }
-
-    .status {
-      padding: 0.2rem 0.52rem;
-      border-radius: 999px;
-      border: 1px solid var(--stroke);
-      background: #fff;
+      font-size: 0.74rem;
+      gap: 0.45rem;
     }
 
     .project-title {
-      font-family: 'Fraunces', serif;
-      font-size: 1.18rem;
+      font-size: 1.2rem;
       line-height: 1.2;
+      color: #fff;
     }
 
     .project-description {
-      font-size: 0.95rem;
-      color: var(--muted);
+      color: #c6d0dd;
+      font-size: 0.93rem;
     }
 
     .tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.38rem;
+      gap: 0.4rem;
     }
 
     .tag {
-      font-size: 0.75rem;
+      font-size: 0.73rem;
       border-radius: 999px;
-      padding: 0.24rem 0.58rem;
-      background: var(--accent-soft);
-      color: #8d2f1c;
-      border: 1px solid #f1ccb9;
+      border: 1px solid rgba(179, 205, 228, 0.36);
+      padding: 0.2rem 0.52rem;
+      color: #d8e6f7;
+      background: rgba(255, 255, 255, 0.03);
     }
 
     .project-actions {
       display: flex;
+      gap: 0.5rem;
       flex-wrap: wrap;
-      gap: 0.45rem;
-      margin-top: 0.15rem;
+      margin-top: 0.2rem;
     }
 
     .project-actions .btn {
-      font-size: 0.84rem;
-      padding: 0.5rem 0.84rem;
-    }
-
-    .simple-list {
-      list-style: none;
-      display: grid;
-      gap: 0.52rem;
-    }
-
-    .simple-list li {
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius-sm);
-      padding: 0.72rem;
-      background: #fff;
-      font-size: 0.95rem;
+      font-size: 0.81rem;
+      padding: 0.46rem 0.76rem;
+      min-height: 36px;
     }
 
     .footer {
-      margin-top: 1.25rem;
       text-align: center;
+      margin: 1.25rem 0 0.4rem;
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
 
-    .footer code {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.85rem;
-      background: #ece5d8;
-      padding: 0.15rem 0.4rem;
-      border-radius: 6px;
+    @keyframes drift {
+      0% {
+        transform: scale(1.02) translate3d(-1.8%, -1.2%, 0);
+      }
+      50% {
+        transform: scale(1.08) translate3d(1.5%, 0.8%, 0);
+      }
+      100% {
+        transform: scale(1.04) translate3d(0.6%, -1.4%, 0);
+      }
     }
 
-    @media (max-width: 930px) {
-      .layout {
-        grid-template-columns: 1fr;
+    @media (max-width: 900px) {
+      .hero-metrics {
+        width: 100%;
+      }
+
+      .project-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      .site {
+        width: calc(100% - 1rem);
       }
 
       .hero {
-        padding: 1.35rem;
-      }
-
-      .panel {
         padding: 1rem;
       }
-    }
 
-    @media (max-width: 560px) {
-      .site {
-        padding-left: 0.65rem;
-        padding-right: 0.65rem;
-      }
-
-      .metrics {
+      .hero-metrics {
         grid-template-columns: 1fr;
       }
 
@@ -403,91 +389,56 @@
         flex: 1 1 auto;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .project-media img,
+      .project-card,
+      .btn {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="noise" aria-hidden="true"></div>
   <main class="site">
     <header class="hero reveal">
-      <p class="eyebrow">Portfolio / Living Resume</p>
-      <h1>Brian Markowitz builds practical AI and automation systems.</h1>
-      <p class="hero-copy">
-        This page is a living record of hands-on work across AI engineering, data systems, and cloud automation.
-        The goal is simple: show what has been shipped, what is being improved, and what is next.
-      </p>
-      <div class="hero-links">
-        <a class="btn btn-primary" href="#projects">View Projects</a>
-        <a class="btn btn-secondary btn-disabled" href="#" aria-disabled="true">Resume Integration: Next</a>
+      <div class="hero-top">
+        <div>
+          <p class="eyebrow">Brian Markowitz • Project Portfolio</p>
+          <h1>Built systems across AI, data engineering, cloud automation, and product delivery.</h1>
+          <p class="hero-copy">
+            Living portfolio of shipped work and active builds. Every card includes a visual preview and direct links where public demos are available.
+          </p>
+          <div class="hero-links">
+            <a class="btn btn-primary" href="#projects">Explore Projects</a>
+            <a class="btn btn-secondary btn-disabled" href="#" aria-disabled="true">Resume Link: Coming Soon</a>
+          </div>
+        </div>
+        <div class="hero-metrics" id="hero-metrics"></div>
       </div>
     </header>
 
-    <section class="layout">
-      <article class="panel reveal">
-        <p class="eyebrow">Snapshot</p>
-        <h2>How to read this portfolio</h2>
-        <p class="panel-intro">
-          Treat each project as evidence: a focused problem, a concrete build, and technical stack details.
-          This format makes updates straightforward as new work is completed.
-        </p>
-        <ul class="snapshot-list">
-          <li><strong>Living resume:</strong> entries stay current as projects evolve.</li>
-          <li><strong>Execution-first:</strong> focused on systems built and operational outcomes.</li>
-          <li><strong>Future-friendly:</strong> ready to attach formal resume and deeper case studies later.</li>
-        </ul>
-      </article>
-
-      <aside class="panel reveal">
-        <p class="eyebrow">Current Focus</p>
-        <h2>Core Areas</h2>
-        <ul class="simple-list" id="focus-list"></ul>
-        <div class="metrics" id="metrics"></div>
-      </aside>
-    </section>
-
-    <section class="panel section reveal" id="projects">
-      <div class="section-head">
-        <h2>Selected Projects</h2>
-        <p>Real systems across AI, DevOps, and data engineering.</p>
+    <section id="projects">
+      <div class="projects-head reveal">
+        <h2>Project Gallery</h2>
+        <p>Hover any project preview to pause animation, then open the live demo for the full experience.</p>
       </div>
       <div class="project-grid" id="project-grid"></div>
     </section>
 
-    <section class="layout section">
-      <article class="panel reveal">
-        <p class="eyebrow">Experience Pattern</p>
-        <h2>What these projects represent</h2>
-        <ul class="simple-list" id="experience-pattern"></ul>
-      </article>
-
-      <article class="panel reveal">
-        <p class="eyebrow">Next Step</p>
-        <h2>Planned Additions</h2>
-        <ul class="simple-list" id="next-step"></ul>
-      </article>
-    </section>
-
     <footer class="footer reveal">
-      <p>
-        Last refreshed: <span id="last-updated"></span> · Built as a single static page for GitHub Pages.
-      </p>
-      <p>
-        Data source for projects: <code>/index.html (portfolioData)</code>
-      </p>
+      Last refreshed: <span id="last-updated"></span>
     </footer>
   </main>
 
   <script>
     const portfolioData = {
-      focusAreas: [
-        'AI prototyping and applied LLM workflows',
-        'Cloud automation and DevOps reliability patterns',
-        'Data + search pipelines for practical internal tools'
-      ],
-      metrics: [
-        { value: '13', label: 'Portfolio Projects' },
-        { value: '7', label: 'Live Project Links' },
-        { value: '2', label: 'Project Screenshots' },
-        { value: '3', label: 'Core Focus Areas' }
-      ],
       projects: [
         {
           id: 1,
@@ -498,7 +449,7 @@
           tags: ['AWS', 'DynamoDB', 'OpenSearch', 'Automation'],
           demoUrl: '',
           codeUrl: '',
-          image: ''
+          image: 'static/project_1_reload_stag_dev.svg'
         },
         {
           id: 2,
@@ -520,7 +471,7 @@
           tags: ['AI', 'LangFlow', 'ETLLM', 'Vector Search', 'Groq API'],
           demoUrl: 'http://difz-ai-info.s3-website-us-east-1.amazonaws.com/',
           codeUrl: '',
-          image: 'static/getting_started_with_ai_prototyping.png'
+          image: 'static/project_3_ai_prototyping.png'
         },
         {
           id: 4,
@@ -531,7 +482,7 @@
           tags: ['Neo4j', 'Natural Language', 'UI'],
           demoUrl: '',
           codeUrl: '',
-          image: ''
+          image: 'static/project_4_neo4j_nlui.svg'
         },
         {
           id: 5,
@@ -542,7 +493,7 @@
           tags: ['AI', 'MySQL', 'LangChain', 'NLP'],
           demoUrl: '',
           codeUrl: '',
-          image: ''
+          image: 'static/project_5_mysql_nlq.svg'
         },
         {
           id: 6,
@@ -553,7 +504,7 @@
           tags: ['AWS Rekognition', 'AI Agent', 'TTS', 'STT'],
           demoUrl: '',
           codeUrl: '',
-          image: ''
+          image: 'static/project_6_poster_presenter.svg'
         },
         {
           id: 7,
@@ -564,7 +515,7 @@
           tags: ['Resume Parsing', 'LLM', 'Proposal Automation'],
           demoUrl: '',
           codeUrl: '',
-          image: ''
+          image: 'static/project_7_resumeai.svg'
         },
         {
           id: 8,
@@ -575,7 +526,7 @@
           tags: ['Data Engineering', 'Assessment', 'Interactive'],
           demoUrl: 'https://dwba3xr50k6pd.cloudfront.net/',
           codeUrl: '',
-          image: ''
+          image: 'static/project_8_data_engineer_assessment.png'
         },
         {
           id: 9,
@@ -586,7 +537,7 @@
           tags: ['Space', 'Visualization', 'Web App'],
           demoUrl: 'https://isstracker-nine.vercel.app/',
           codeUrl: '',
-          image: ''
+          image: 'static/project_9_aerospace_orbital_command.png'
         },
         {
           id: 10,
@@ -597,7 +548,7 @@
           tags: ['AI', 'Education', 'Frontend'],
           demoUrl: 'https://vibe-journey-xi.vercel.app/',
           codeUrl: '',
-          image: ''
+          image: 'static/project_10_vibe_coding_journey.png'
         },
         {
           id: 11,
@@ -608,7 +559,7 @@
           tags: ['AI Agents', 'Operations', 'Product'],
           demoUrl: 'https://www.clawdmarks.com/',
           codeUrl: '',
-          image: ''
+          image: 'static/project_11_clawdmarks.png'
         },
         {
           id: 12,
@@ -619,7 +570,7 @@
           tags: ['Control Plane', 'Dashboard', 'Automation'],
           demoUrl: 'https://d2vkpyz88pgyjq.cloudfront.net/',
           codeUrl: '',
-          image: ''
+          image: 'static/project_12_mission_control.png'
         },
         {
           id: 13,
@@ -630,39 +581,32 @@
           tags: ['Website', 'Brand', 'Content'],
           demoUrl: 'https://www.vanessamarkowitz.com/',
           codeUrl: '',
-          image: ''
+          image: 'static/project_13_vanessa_markowitz.png'
         }
-      ],
-      experiencePattern: [
-        'Owns projects from idea to working implementation.',
-        'Combines model workflows with infrastructure reliability controls.',
-        'Builds tools that reduce manual effort for technical teams.',
-        'Balances rapid prototyping with production-minded architecture.'
-      ],
-      nextStep: [
-        'Attach formal resume PDF and timeline section.',
-        'Add case-study pages for the top 2-3 projects.',
-        'Replace pending links with public demos/repositories as available.',
-        'Add contact and speaking/publication sections when ready.'
       ]
     };
 
-    function createAction(label, url, variant) {
-      const baseClass = variant === 'secondary' ? 'btn btn-secondary' : 'btn btn-primary';
+    function createAction(label, url, variant = 'primary') {
+      const base = variant === 'secondary' ? 'btn btn-secondary' : 'btn btn-primary';
       if (!url) {
-        return `<span class="${baseClass} btn-disabled" aria-disabled="true">${label}: Pending</span>`;
+        return `<span class="${base} btn-disabled" aria-disabled="true">${label}: Pending</span>`;
       }
-      return `<a class="${baseClass}" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+      return `<a class="${base}" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
     }
 
-    function renderList(listId, values) {
-      const list = document.getElementById(listId);
-      list.innerHTML = values.map((value) => `<li>${value}</li>`).join('');
-    }
+    function renderHeroMetrics() {
+      const total = portfolioData.projects.length;
+      const live = portfolioData.projects.filter((project) => project.demoUrl).length;
+      const visuals = portfolioData.projects.filter((project) => project.image).length;
 
-    function renderMetrics() {
-      const root = document.getElementById('metrics');
-      root.innerHTML = portfolioData.metrics
+      const metrics = [
+        { value: String(total), label: 'projects' },
+        { value: String(live), label: 'live links' },
+        { value: String(visuals), label: 'visual previews' }
+      ];
+
+      const root = document.getElementById('hero-metrics');
+      root.innerHTML = metrics
         .map((metric) => `
           <article class="metric">
             <p class="metric-value">${metric.value}</p>
@@ -675,24 +619,24 @@
     function renderProjects() {
       const root = document.getElementById('project-grid');
       root.innerHTML = portfolioData.projects
-        .map((project) => {
-          const media = project.image
-            ? `<img src="${project.image}" alt="${project.title} screenshot">`
-            : `<div class="placeholder">Screenshot planned</div>`;
-
+        .map((project, index) => {
+          const delay = `${(index % 6) * 140}ms`;
           return `
-            <article class="project-card reveal">
-              <div class="project-media">${media}</div>
+            <article class="project-card reveal" style="--delay:${delay}">
+              <div class="project-media">
+                <span class="status-chip">${project.status}</span>
+                <img src="${project.image}" alt="${project.title} preview" loading="lazy">
+              </div>
               <div class="project-body">
                 <div class="project-meta">
-                  <span>Project ${project.id} / ${project.year}</span>
-                  <span class="status">${project.status}</span>
+                  <span>Project ${project.id}</span>
+                  <span>${project.year}</span>
                 </div>
                 <h3 class="project-title">${project.title}</h3>
                 <p class="project-description">${project.description}</p>
                 <div class="tags">${project.tags.map((tag) => `<span class="tag">${tag}</span>`).join('')}</div>
                 <div class="project-actions">
-                  ${createAction('Demo', project.demoUrl)}
+                  ${createAction('Open', project.demoUrl)}
                   ${createAction('Code', project.codeUrl, 'secondary')}
                 </div>
               </div>
@@ -703,9 +647,8 @@
     }
 
     function setLastUpdated() {
-      const target = document.getElementById('last-updated');
       const now = new Date();
-      target.textContent = now.toLocaleDateString(undefined, {
+      document.getElementById('last-updated').textContent = now.toLocaleDateString(undefined, {
         year: 'numeric',
         month: 'long',
         day: 'numeric'
@@ -722,17 +665,14 @@
             }
           });
         },
-        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+        { threshold: 0.09, rootMargin: '0px 0px -40px 0px' }
       );
 
       document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
     }
 
-    renderList('focus-list', portfolioData.focusAreas);
-    renderMetrics();
+    renderHeroMetrics();
     renderProjects();
-    renderList('experience-pattern', portfolioData.experiencePattern);
-    renderList('next-step', portfolioData.nextStep);
     setLastUpdated();
     setupReveal();
   </script>

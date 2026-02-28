@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Poster Presenter AI Bot</title>
+  <desc id="desc">Abstract preview card for multimodal poster bot.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#101018"/>
+      <stop offset="100%" stop-color="#2c1035"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#46ffe1"/>
+      <stop offset="100%" stop-color="#ff8cf3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1230" cy="200" r="180" fill="#d14dff" opacity="0.22"/>
+  <circle cx="270" cy="680" r="220" fill="#00ffd9" opacity="0.18"/>
+  <rect x="130" y="120" width="1340" height="660" rx="36" fill="#151326" stroke="url(#glow)" stroke-width="3"/>
+  <rect x="230" y="220" width="560" height="420" rx="22" fill="#271f44" stroke="#6a57ad"/>
+  <rect x="850" y="220" width="520" height="200" rx="22" fill="#1d1735" stroke="#6a57ad"/>
+  <rect x="850" y="450" width="520" height="190" rx="22" fill="#1d1735" stroke="#6a57ad"/>
+  <text x="260" y="290" fill="#f7f3ff" font-family="Fraunces, serif" font-size="54">Poster Presenter AI Bot</text>
+  <text x="260" y="350" fill="#9fe7da" font-family="IBM Plex Sans, sans-serif" font-size="30">rekognition + speech + llm orchestration</text>
+  <text x="890" y="328" fill="#d8d3ff" font-family="IBM Plex Mono, monospace" font-size="28">facial cue detection</text>
+  <text x="890" y="520" fill="#d8d3ff" font-family="IBM Plex Mono, monospace" font-size="28">dynamic poster narration</text>
+</svg>
