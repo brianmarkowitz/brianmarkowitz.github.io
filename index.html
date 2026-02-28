@@ -178,14 +178,6 @@
       font-size: 0.94rem;
     }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.52rem;
-      margin-top: 0.76rem;
-      margin-bottom: 0.74rem;
-    }
-
     .btn {
       text-decoration: none;
       border-radius: 999px;
@@ -221,35 +213,6 @@
     .btn-disabled {
       opacity: 0.5;
       pointer-events: none;
-    }
-
-    .hero-stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.42rem;
-    }
-
-    .stat {
-      border: 1px solid rgba(164, 194, 236, 0.3);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.03);
-      padding: 0.34rem 0.62rem;
-      display: inline-flex;
-      align-items: baseline;
-      gap: 0.34rem;
-    }
-
-    .stat strong {
-      font-size: 0.94rem;
-      line-height: 1;
-    }
-
-    .stat span {
-      font-family: 'IBM Plex Mono', monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-size: 0.63rem;
-      color: var(--muted);
     }
 
     .hero-panel {
@@ -846,11 +809,6 @@
         font-size: 0.86rem;
       }
 
-      .hero-actions {
-        margin-top: 0.6rem;
-        margin-bottom: 0.62rem;
-      }
-
       .hero-panel {
         padding: 0.64rem;
       }
@@ -966,11 +924,6 @@
           This portfolio is organized like a data platform: core foundations first, intelligent products second, and interface experiments last.
           Every project is ranked by overall impressiveness through a data architect and data engineer lens.
         </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#spotlight">Open #1 Project</a>
-          <a class="btn btn-secondary" href="#systems">Browse Project Systems</a>
-        </div>
-        <div class="hero-stats" id="hero-stats"></div>
       </div>
 
       <aside class="hero-panel" aria-label="Operating principles">
@@ -1414,30 +1367,6 @@
       return `<a class="${className}" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
     }
 
-    function renderHeroStats() {
-      const root = document.getElementById('hero-stats');
-      if (!root) return;
-
-      const total = projects.length;
-      const live = projects.filter((project) => Boolean(project.demoUrl)).length;
-      const internal = projects.filter((project) => !project.demoUrl).length;
-      const systems = projectSystems.length;
-      const years = projects.map((project) => Number(project.year)).filter((value) => Number.isFinite(value));
-      const yearSpan = years.length ? `${Math.min(...years)}-${Math.max(...years)}` : 'N/A';
-
-      const stats = [
-        { value: total, label: 'projects' },
-        { value: live, label: 'live' },
-        { value: internal, label: 'internal' },
-        { value: systems, label: 'systems' },
-        { value: yearSpan, label: 'years' }
-      ];
-
-      root.innerHTML = stats
-        .map((stat) => `<span class="stat"><strong>${stat.value}</strong><span>${stat.label}</span></span>`)
-        .join('');
-    }
-
     function renderSpotlight() {
       const project = getProject(state.activeProjectId);
       if (!project) return;
@@ -1691,7 +1620,6 @@
       });
     }
 
-    renderHeroStats();
     renderSpotlight();
     renderSystems();
     setupProjectModal();
