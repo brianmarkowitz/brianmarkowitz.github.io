@@ -3,30 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Brian Markowitz portfolio: AI systems, data engineering, cloud automation, and product execution.">
+  <meta name="description" content="Brian Markowitz engineering portfolio: AI systems, data engineering, cloud automation, and interactive product builds.">
   <title>Brian Markowitz | Engineering Portfolio</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='4' fill='%23ff7a00'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,400;10..48,500;10..48,700;10..48,800&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,400;10..48,600;10..48,700;10..48,800&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #070b12;
-      --bg-elev: rgba(11, 17, 29, 0.74);
-      --bg-solid: #0d1422;
-      --ink: #f5f7ff;
-      --muted: #a9b6ce;
-      --stroke: rgba(165, 186, 223, 0.24);
+      --bg: #060b13;
+      --panel: rgba(10, 16, 29, 0.82);
+      --panel-strong: rgba(12, 19, 33, 0.95);
+      --ink: #f4f7ff;
+      --muted: #aab8d2;
+      --stroke: rgba(165, 188, 230, 0.24);
       --accent: #ff7a00;
-      --accent-2: #39ffd1;
-      --accent-3: #5a7dff;
-      --good: #5ef4a2;
-      --radius-xl: 30px;
-      --radius-lg: 20px;
+      --accent-2: #35f4d0;
+      --accent-3: #6b8cff;
+      --radius-xl: 28px;
+      --radius-lg: 18px;
       --radius-md: 14px;
       --radius-sm: 10px;
-      --shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
-      --max-width: 1320px;
+      --shadow: 0 24px 50px rgba(0, 0, 0, 0.52);
+      --max: 1320px;
     }
 
     * {
@@ -44,89 +43,48 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at 10% 8%, rgba(255, 122, 0, 0.28), transparent 24%),
-        radial-gradient(circle at 90% 15%, rgba(57, 255, 209, 0.14), transparent 25%),
-        radial-gradient(circle at 70% 70%, rgba(90, 125, 255, 0.2), transparent 32%),
-        linear-gradient(140deg, #070b12 0%, #0c1322 42%, #100b1e 100%);
+        radial-gradient(circle at 10% 8%, rgba(255, 122, 0, 0.26), transparent 26%),
+        radial-gradient(circle at 88% 12%, rgba(53, 244, 208, 0.13), transparent 24%),
+        radial-gradient(circle at 72% 78%, rgba(107, 140, 255, 0.22), transparent 30%),
+        linear-gradient(145deg, #060b13 0%, #0d1524 45%, #130d25 100%);
       background-attachment: fixed;
-      line-height: 1.58;
+      line-height: 1.56;
       overflow-x: hidden;
-    }
-
-    .ambient {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -3;
-    }
-
-    .ambient::before,
-    .ambient::after {
-      content: '';
-      position: absolute;
-      border-radius: 999px;
-      filter: blur(64px);
-      opacity: 0.5;
-      animation: floatGlow 17s ease-in-out infinite;
-    }
-
-    .ambient::before {
-      width: 38vw;
-      height: 22vw;
-      min-width: 260px;
-      min-height: 180px;
-      top: -6vw;
-      left: -10vw;
-      background: rgba(255, 122, 0, 0.36);
-    }
-
-    .ambient::after {
-      width: 32vw;
-      height: 20vw;
-      min-width: 220px;
-      min-height: 150px;
-      right: -10vw;
-      bottom: 8vh;
-      background: rgba(90, 125, 255, 0.34);
-      animation-delay: -6s;
-    }
-
-    .noise {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -2;
-      opacity: 0.12;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.27) 1px, transparent 1px);
-      background-size: 4px 4px;
     }
 
     .bg-canvas {
       position: fixed;
       inset: 0;
+      z-index: -2;
       pointer-events: none;
-      z-index: -1;
-      opacity: 0.64;
+      opacity: 0.6;
       mix-blend-mode: screen;
     }
 
+    .noise {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.12;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.26) 1px, transparent 1px);
+      background-size: 4px 4px;
+    }
+
     .site {
-      width: min(var(--max-width), 100% - 2rem);
+      width: min(var(--max), 100% - 2rem);
       margin: 1rem auto 2.4rem;
       position: relative;
       z-index: 1;
     }
 
     .topbar {
-      position: sticky;
-      top: 0.7rem;
-      z-index: 30;
-      backdrop-filter: blur(16px);
-      background: rgba(8, 12, 20, 0.72);
       border: 1px solid var(--stroke);
       border-radius: 999px;
+      background: rgba(8, 13, 23, 0.74);
+      backdrop-filter: blur(16px);
       box-shadow: var(--shadow);
-      padding: 0.55rem 0.72rem;
+      padding: 0.55rem 0.7rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -138,32 +96,32 @@
       font-family: 'IBM Plex Mono', monospace;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      font-size: 0.77rem;
+      font-size: 0.78rem;
       color: var(--accent-2);
       white-space: nowrap;
     }
 
-    .nav-links {
+    .top-actions {
       display: flex;
+      align-items: center;
       gap: 0.5rem;
       flex-wrap: wrap;
       justify-content: flex-end;
-      align-items: center;
     }
 
     .chip-link {
       text-decoration: none;
       color: var(--ink);
-      border: 1px solid rgba(179, 199, 236, 0.38);
+      border: 1px solid rgba(174, 195, 233, 0.38);
       border-radius: 999px;
       padding: 0.42rem 0.72rem;
       font-size: 0.8rem;
       font-weight: 600;
-      transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
+      transition: all 170ms ease;
     }
 
     .chip-link:hover {
-      border-color: rgba(255, 122, 0, 0.9);
+      border-color: rgba(255, 122, 0, 0.88);
       background: rgba(255, 122, 0, 0.08);
       transform: translateY(-1px);
     }
@@ -172,18 +130,18 @@
       width: 36px;
       height: 36px;
       border-radius: 999px;
-      border: 1px solid rgba(179, 199, 236, 0.38);
+      border: 1px solid rgba(174, 195, 233, 0.38);
+      color: #e8f1ff;
+      background: rgba(255, 255, 255, 0.04);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: #e7f1ff;
-      background: rgba(255, 255, 255, 0.04);
-      transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
+      transition: all 170ms ease;
     }
 
     .icon-link:hover {
-      border-color: rgba(255, 122, 0, 0.9);
-      background: rgba(255, 122, 0, 0.12);
+      border-color: rgba(255, 122, 0, 0.88);
+      background: rgba(255, 122, 0, 0.14);
       transform: translateY(-1px);
     }
 
@@ -193,37 +151,35 @@
       fill: currentColor;
     }
 
+    h1, h2, h3 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      letter-spacing: -0.02em;
+      line-height: 1.08;
+    }
+
     .hero {
       border: 1px solid var(--stroke);
       border-radius: var(--radius-xl);
       background:
-        linear-gradient(160deg, rgba(17, 26, 42, 0.94) 0%, rgba(9, 14, 24, 0.95) 64%),
-        linear-gradient(110deg, rgba(255, 122, 0, 0.12), rgba(57, 255, 209, 0.08));
+        linear-gradient(160deg, rgba(18, 27, 44, 0.93), rgba(10, 15, 27, 0.95)),
+        linear-gradient(100deg, rgba(255, 122, 0, 0.12), rgba(53, 244, 208, 0.08));
       box-shadow: var(--shadow);
       padding: clamp(1rem, 3.2vw, 2rem);
-      display: grid;
-      gap: 1.4rem;
+      margin-bottom: 1rem;
       position: relative;
       overflow: hidden;
     }
 
-    .hero::before {
+    .hero::after {
       content: '';
       position: absolute;
       width: 460px;
       height: 460px;
-      border-radius: 50%;
-      right: -180px;
+      right: -160px;
       top: -220px;
-      background: radial-gradient(circle, rgba(57, 255, 209, 0.26), transparent 68%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(53, 244, 208, 0.23), transparent 70%);
       pointer-events: none;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-      align-items: end;
     }
 
     .eyebrow {
@@ -234,91 +190,117 @@
       font-size: 0.8rem;
     }
 
-    h1, h2, h3 {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      letter-spacing: -0.02em;
-      line-height: 1.08;
-    }
-
     h1 {
-      margin-top: 0.52rem;
-      font-size: clamp(2rem, 5.2vw, 4.2rem);
-      max-width: 13ch;
+      margin-top: 0.55rem;
+      font-size: clamp(2rem, 5.6vw, 4.15rem);
+      max-width: 14ch;
     }
 
     .hero-lead {
       margin-top: 0.9rem;
       color: var(--muted);
-      max-width: 66ch;
+      max-width: 68ch;
       font-size: 1rem;
     }
 
-    .hero-cta {
-      margin-top: 1.2rem;
+    .signal-grid {
+      margin-top: 0.95rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.58rem;
+    }
+
+    .signal-card {
+      border: 1px solid rgba(174, 195, 233, 0.32);
+      border-radius: var(--radius-md);
+      background: rgba(8, 13, 22, 0.52);
+      padding: 0.72rem;
+      min-height: 124px;
+    }
+
+    .signal-label {
+      font-family: 'IBM Plex Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent-2);
+      font-size: 0.68rem;
+      margin-bottom: 0.28rem;
+    }
+
+    .signal-card h3 {
+      font-size: 1.04rem;
+      margin-bottom: 0.26rem;
+    }
+
+    .signal-card p {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .hero-actions {
+      margin-top: 1.1rem;
       display: flex;
+      gap: 0.58rem;
       flex-wrap: wrap;
-      gap: 0.56rem;
     }
 
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
       text-decoration: none;
       border-radius: 999px;
       font-weight: 700;
       font-size: 0.9rem;
       min-height: 42px;
       padding: 0.58rem 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       border: 1px solid transparent;
       transition: transform 170ms ease, box-shadow 170ms ease;
     }
 
     .btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
     }
 
     .btn-primary {
       color: #fff;
-      background: linear-gradient(115deg, #ff7a00, #ff4f5a);
+      background: linear-gradient(115deg, #ff7a00, #ff4f63);
     }
 
     .btn-secondary {
       color: var(--ink);
-      border-color: rgba(176, 196, 232, 0.44);
-      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(174, 195, 233, 0.4);
+      background: rgba(255, 255, 255, 0.04);
     }
 
     .btn-disabled {
-      opacity: 0.55;
       pointer-events: none;
-      cursor: default;
+      opacity: 0.55;
     }
 
     .stats-strip {
       margin-top: 0.95rem;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.48rem;
       align-items: center;
     }
 
     .stat-pill {
-      border: 1px solid rgba(174, 195, 230, 0.32);
+      border: 1px solid rgba(174, 195, 233, 0.32);
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.03);
-      padding: 0.35rem 0.62rem;
+      padding: 0.34rem 0.6rem;
       display: inline-flex;
       align-items: baseline;
-      gap: 0.4rem;
+      gap: 0.38rem;
       min-height: 34px;
     }
 
     .stat-pill strong {
       font-family: 'Bricolage Grotesque', sans-serif;
       font-size: 0.98rem;
-      color: #fff;
       line-height: 1;
     }
 
@@ -331,41 +313,49 @@
       white-space: nowrap;
     }
 
-    .capabilities {
+    .domain-grid {
       margin-top: 1rem;
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 0.66rem;
+      gap: 0.62rem;
     }
 
-    .capability {
-      border: 1px solid rgba(174, 195, 230, 0.24);
+    .domain-card {
+      border: 1px solid rgba(174, 195, 233, 0.25);
       border-radius: var(--radius-md);
-      background: rgba(7, 12, 20, 0.55);
-      padding: 0.72rem;
-      min-height: 110px;
-      transition: border-color 180ms ease, transform 180ms ease;
+      background: rgba(8, 13, 22, 0.56);
+      padding: 0.74rem;
+      min-height: 112px;
+      transition: all 180ms ease;
     }
 
-    .capability:hover {
-      border-color: rgba(255, 122, 0, 0.76);
+    .domain-card:hover {
+      border-color: rgba(255, 122, 0, 0.75);
       transform: translateY(-2px);
     }
 
-    .capability h3 {
-      font-size: 1rem;
-      margin-bottom: 0.28rem;
+    .domain-kicker {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.69rem;
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.2rem;
     }
 
-    .capability p {
+    .domain-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.24rem;
+    }
+
+    .domain-card p {
       color: var(--muted);
-      font-size: 0.86rem;
-      line-height: 1.45;
+      font-size: 0.85rem;
     }
 
     .section-head {
       margin-top: 1.2rem;
-      margin-bottom: 0.7rem;
+      margin-bottom: 0.72rem;
       display: flex;
       justify-content: space-between;
       align-items: end;
@@ -374,96 +364,136 @@
     }
 
     .section-head h2 {
-      font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+      font-size: clamp(1.45rem, 3.6vw, 2.4rem);
     }
 
     .section-head p {
       color: var(--muted);
-      max-width: 52ch;
+      max-width: 54ch;
     }
 
-    .spotlight {
+    .console {
       border: 1px solid var(--stroke);
       border-radius: var(--radius-lg);
-      background: linear-gradient(170deg, rgba(13, 20, 34, 0.93), rgba(9, 14, 25, 0.95));
+      background: linear-gradient(170deg, rgba(13, 20, 35, 0.93), rgba(9, 14, 25, 0.95));
       box-shadow: var(--shadow);
       padding: 0.9rem;
       display: grid;
-      grid-template-columns: 1.16fr 0.84fr;
-      gap: 0.9rem;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 0.8rem;
       align-items: start;
-      min-height: calc(100vh - 6rem);
     }
 
-    .spotlight-main {
-      border: 1px solid rgba(171, 193, 232, 0.28);
+    .console-main {
+      border: 1px solid rgba(174, 195, 233, 0.28);
       border-radius: var(--radius-md);
       overflow: hidden;
-      background: rgba(7, 12, 20, 0.7);
+      background: rgba(7, 12, 21, 0.7);
       display: grid;
       grid-template-rows: auto 1fr;
       min-height: 520px;
       position: sticky;
-      top: 5.2rem;
-      align-self: start;
+      top: 0.8rem;
     }
 
-    .spotlight-media {
+    .console-media {
       position: relative;
       aspect-ratio: 16 / 9;
       overflow: hidden;
       border-bottom: 1px solid var(--stroke);
-      background: #04070d;
+      background: #03060b;
     }
 
-    .spotlight-media img {
+    .console-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transform: scale(1.02);
-      animation: pulseZoom 16s ease-in-out infinite;
+      animation: pulse 15s ease-in-out infinite;
     }
 
-    .spotlight-status {
+    .console-status {
       position: absolute;
-      left: 0.62rem;
-      top: 0.62rem;
-      background: rgba(6, 11, 18, 0.82);
-      border: 1px solid rgba(174, 195, 230, 0.5);
+      top: 0.64rem;
+      left: 0.64rem;
       border-radius: 999px;
-      padding: 0.26rem 0.56rem;
-      color: #e7f4ff;
+      border: 1px solid rgba(174, 195, 233, 0.5);
+      background: rgba(7, 12, 20, 0.82);
+      color: #e8f5ff;
       font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.73rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      font-size: 0.73rem;
+      padding: 0.24rem 0.56rem;
     }
 
-    .spotlight-body {
-      padding: 0.9rem;
+    .console-body {
+      padding: 0.88rem;
       display: grid;
       align-content: start;
-      gap: 0.54rem;
+      gap: 0.52rem;
     }
 
-    .spotlight-meta {
+    .console-meta {
       display: flex;
       justify-content: space-between;
       gap: 0.5rem;
       color: var(--muted);
       font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      font-size: 0.73rem;
     }
 
-    .spotlight-body h3 {
+    .console-body h3 {
       font-size: clamp(1.2rem, 3vw, 1.9rem);
     }
 
-    .spotlight-body p {
-      color: #ccd7e8;
+    .console-body p {
+      color: #ccd8ea;
       font-size: 0.95rem;
+    }
+
+    .console-intent {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.74rem;
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.45rem;
+    }
+
+    .detail-card {
+      border: 1px solid rgba(174, 195, 233, 0.26);
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.02);
+      padding: 0.52rem;
+      display: grid;
+      gap: 0.24rem;
+      align-content: start;
+    }
+
+    .detail-card.detail-wide {
+      grid-column: 1 / -1;
+    }
+
+    .detail-label {
+      font-family: 'IBM Plex Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 0.64rem;
+      color: var(--muted);
+    }
+
+    .detail-card p {
+      margin: 0;
+      color: #d6e4fb;
+      font-size: 0.83rem;
     }
 
     .tags {
@@ -473,145 +503,146 @@
     }
 
     .tag {
-      border: 1px solid rgba(177, 199, 235, 0.38);
-      background: rgba(255, 255, 255, 0.03);
-      color: #dde8f8;
+      border: 1px solid rgba(174, 195, 233, 0.37);
       border-radius: 999px;
-      padding: 0.2rem 0.55rem;
-      font-size: 0.73rem;
+      padding: 0.2rem 0.54rem;
+      font-size: 0.72rem;
+      color: #deebff;
+      background: rgba(255, 255, 255, 0.03);
     }
 
-    .spotlight-actions {
-      margin-top: 0.25rem;
+    .console-actions {
+      margin-top: 0.2rem;
       display: flex;
-      flex-wrap: wrap;
       gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
-    .dock {
-      border: 1px solid rgba(174, 195, 230, 0.27);
+    .console-side {
+      border: 1px solid rgba(174, 195, 233, 0.28);
       border-radius: var(--radius-md);
-      background: rgba(8, 12, 20, 0.7);
-      overflow: hidden;
-      min-height: 0;
-      max-height: calc(100vh - 6rem);
+      background: rgba(8, 12, 21, 0.74);
       display: grid;
       grid-template-rows: auto auto 1fr;
-      position: sticky;
-      top: 5.2rem;
-      align-self: start;
+      min-height: 520px;
+      overflow: hidden;
     }
 
-    .dock-title {
-      padding: 0.75rem 0.75rem 0.45rem;
-      border-bottom: 1px solid rgba(174, 195, 230, 0.21);
+    .side-title {
+      padding: 0.72rem 0.72rem 0.44rem;
+      border-bottom: 1px solid rgba(174, 195, 233, 0.21);
       font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.74rem;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      font-size: 0.75rem;
       color: var(--muted);
     }
 
     .filters {
-      padding: 0.6rem 0.65rem;
+      padding: 0.58rem 0.65rem;
       display: flex;
       flex-wrap: wrap;
       gap: 0.42rem;
-      border-bottom: 1px solid rgba(174, 195, 230, 0.21);
+      border-bottom: 1px solid rgba(174, 195, 233, 0.2);
     }
 
     .filter {
-      border: 1px solid rgba(174, 195, 230, 0.36);
-      background: rgba(255, 255, 255, 0.02);
-      color: #d8e6fb;
+      border: 1px solid rgba(174, 195, 233, 0.36);
       border-radius: 999px;
-      font-size: 0.74rem;
-      padding: 0.22rem 0.52rem;
-      cursor: pointer;
-      transition: all 160ms ease;
+      padding: 0.22rem 0.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      color: #dbe8fd;
       font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.73rem;
       text-transform: uppercase;
       letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: all 160ms ease;
     }
 
     .filter:hover {
-      border-color: rgba(255, 122, 0, 0.85);
+      border-color: rgba(255, 122, 0, 0.9);
     }
 
     .filter.active {
-      border-color: rgba(255, 122, 0, 0.95);
-      background: rgba(255, 122, 0, 0.16);
+      border-color: rgba(255, 122, 0, 0.96);
+      background: rgba(255, 122, 0, 0.18);
       color: #fff;
     }
 
-    .dock-list {
+    .project-list {
       overflow: auto;
       display: grid;
       align-content: start;
       overscroll-behavior: contain;
     }
 
-    .dock-item {
+    .project-row {
       width: 100%;
-      text-align: left;
       border: 0;
-      border-bottom: 1px solid rgba(174, 195, 230, 0.17);
+      border-bottom: 1px solid rgba(174, 195, 233, 0.18);
+      text-align: left;
       background: transparent;
       color: var(--ink);
       padding: 0.7rem;
       cursor: pointer;
-      transition: background 180ms ease, transform 180ms ease;
+      transition: background 180ms ease;
       display: grid;
-      gap: 0.24rem;
+      gap: 0.26rem;
     }
 
-    .dock-item:hover {
+    .project-row:hover {
       background: rgba(255, 255, 255, 0.04);
     }
 
-    .dock-item.active {
-      background: linear-gradient(100deg, rgba(255, 122, 0, 0.16), rgba(255, 122, 0, 0.04));
+    .project-row.active {
+      background: linear-gradient(100deg, rgba(255, 122, 0, 0.17), rgba(255, 122, 0, 0.04));
       border-left: 3px solid var(--accent);
       padding-left: calc(0.7rem - 3px);
     }
 
-    .dock-line-1 {
+    .row-line {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       gap: 0.5rem;
-      font-size: 0.8rem;
-      color: #d4e2f8;
+      align-items: center;
+      font-size: 0.79rem;
+      color: #d8e6ff;
       font-family: 'IBM Plex Mono', monospace;
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
 
-    .dock-title-text {
+    .row-title {
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 0.97rem;
+      font-size: 0.96rem;
       letter-spacing: -0.01em;
-      color: #f6f8ff;
+      color: #f6f9ff;
       text-transform: none;
     }
 
-    .dock-status {
-      font-size: 0.67rem;
-      border: 1px solid rgba(166, 190, 228, 0.5);
+    .row-status {
+      border: 1px solid rgba(174, 195, 233, 0.46);
       border-radius: 999px;
-      padding: 0.12rem 0.45rem;
-      color: #dff3ff;
+      padding: 0.12rem 0.44rem;
+      font-size: 0.66rem;
+      color: #e2f0ff;
     }
 
-    .dock-domain {
+    .row-domain {
       color: var(--muted);
-      font-size: 0.77rem;
+      font-size: 0.76rem;
     }
 
-    .gallery {
+    .row-intent {
+      color: #b6caea;
+      font-size: 0.75rem;
+    }
+
+    .grid {
       margin-top: 1rem;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 0.72rem;
     }
 
@@ -622,7 +653,7 @@
       background: linear-gradient(170deg, rgba(13, 20, 34, 0.93), rgba(9, 14, 24, 0.95));
       box-shadow: var(--shadow);
       opacity: 0;
-      transform: translateY(18px);
+      transform: translateY(16px);
       transition: opacity 360ms ease, transform 360ms ease, border-color 170ms ease;
     }
 
@@ -632,23 +663,23 @@
     }
 
     .card:hover {
-      border-color: rgba(255, 122, 0, 0.88);
+      border-color: rgba(255, 122, 0, 0.86);
       transform: translateY(-2px);
     }
 
     .card-media {
       aspect-ratio: 16 / 10;
       overflow: hidden;
-      position: relative;
       border-bottom: 1px solid var(--stroke);
       background: #03060b;
+      position: relative;
     }
 
     .card-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      animation: glide 18s ease-in-out infinite;
+      animation: drift 16s ease-in-out infinite;
       animation-delay: var(--delay, 0ms);
     }
 
@@ -658,7 +689,7 @@
     }
 
     .card-body {
-      padding: 0.65rem;
+      padding: 0.64rem;
       display: grid;
       gap: 0.4rem;
     }
@@ -668,7 +699,7 @@
       justify-content: space-between;
       color: var(--muted);
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
+      font-size: 0.67rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
@@ -679,26 +710,33 @@
     }
 
     .card p {
-      color: #c5d1e3;
-      font-size: 0.85rem;
-      line-height: 1.46;
+      color: #c4d2e8;
+      font-size: 0.84rem;
+    }
+
+    .card-why {
+      color: #9cc4f9;
+      font-size: 0.78rem;
+      border-top: 1px dashed rgba(174, 195, 233, 0.28);
+      padding-top: 0.35rem;
     }
 
     .card-actions {
-      margin-top: 0.12rem;
+      margin-top: 0.15rem;
       display: flex;
       gap: 0.4rem;
       flex-wrap: wrap;
     }
 
-    .card-actions .btn {
+    .card-actions .btn,
+    .console-actions .btn {
       min-height: 34px;
       font-size: 0.77rem;
-      padding: 0.42rem 0.68rem;
+      padding: 0.42rem 0.66rem;
     }
 
     .footer {
-      margin-top: 1.15rem;
+      margin-top: 1.2rem;
       text-align: center;
       color: var(--muted);
       font-size: 0.86rem;
@@ -715,101 +753,89 @@
       transform: translateY(0);
     }
 
-    @keyframes floatGlow {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(3vw, -2vh) scale(1.06); }
-    }
-
-    @keyframes pulseZoom {
+    @keyframes pulse {
       0%, 100% { transform: scale(1.02) translate3d(0, 0, 0); }
-      50% { transform: scale(1.08) translate3d(0.8%, 1.2%, 0); }
+      50% { transform: scale(1.07) translate3d(0.8%, 1.2%, 0); }
     }
 
-    @keyframes glide {
-      0% { transform: scale(1.01) translate3d(-1.4%, -0.8%, 0); }
-      50% { transform: scale(1.07) translate3d(1.2%, 1%, 0); }
-      100% { transform: scale(1.03) translate3d(0.5%, -1.1%, 0); }
+    @keyframes drift {
+      0% { transform: scale(1.01) translate3d(-1.2%, -0.8%, 0); }
+      50% { transform: scale(1.06) translate3d(1.1%, 0.8%, 0); }
+      100% { transform: scale(1.03) translate3d(0.4%, -1%, 0); }
     }
 
     @media (max-width: 1100px) {
-      .hero-grid,
-      .spotlight {
+      .signal-grid {
         grid-template-columns: 1fr;
       }
 
-      .spotlight {
-        min-height: auto;
-      }
-
-      .spotlight-main,
-      .dock {
-        position: static;
-        top: auto;
-        max-height: none;
-        min-height: auto;
-      }
-
-      .capabilities {
+      .domain-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .console {
+        grid-template-columns: 1fr;
+      }
+
+      .console-main,
+      .console-side {
+        min-height: auto;
+      }
+
+      .console-main {
+        position: static;
+      }
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 760px) {
       .site {
         width: calc(100% - 1rem);
       }
 
       .topbar {
-        flex-direction: column;
         border-radius: 16px;
+        flex-direction: column;
         align-items: flex-start;
       }
 
-      .brand {
-        padding-top: 0.2rem;
-      }
-
-      .nav-links {
+      .top-actions {
         width: 100%;
         justify-content: flex-start;
       }
 
-      .stats-strip {
-        gap: 0.42rem;
-      }
-
-      .capabilities {
+      .domain-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero-cta,
-      .card-actions,
-      .spotlight-actions {
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions,
+      .console-actions,
+      .card-actions {
         width: 100%;
       }
 
-      .hero-cta .btn,
-      .card-actions .btn,
-      .spotlight-actions .btn {
+      .hero-actions .btn,
+      .console-actions .btn,
+      .card-actions .btn {
         flex: 1 1 auto;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .ambient::before,
-      .ambient::after,
       .bg-canvas,
-      .spotlight-media img,
+      .console-media img,
       .card-media img,
-      .card,
       .reveal,
       .btn,
       .chip-link,
       .filter,
-      .capability,
-      .dock-item {
+      .domain-card,
+      .project-row,
+      .card {
         animation: none !important;
         transition: none !important;
       }
@@ -817,16 +843,15 @@
   </style>
 </head>
 <body>
-  <div class="ambient" aria-hidden="true"></div>
-  <div class="noise" aria-hidden="true"></div>
   <canvas class="bg-canvas" id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
 
   <main class="site">
     <header class="topbar reveal">
       <div class="brand">Brian Markowitz • Engineering Portfolio</div>
-      <nav class="nav-links">
-        <a class="chip-link" href="#spotlight">Spotlight</a>
-        <a class="chip-link" href="#gallery">All Projects</a>
+      <nav class="top-actions">
+        <a class="chip-link" href="#console">Project Console</a>
+        <a class="chip-link" href="#projects">All Projects</a>
         <a class="icon-link" href="https://github.com/brianmarkowitz" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
           <svg viewBox="0 0 16 16" aria-hidden="true">
             <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.81.06 1.24.84 1.24.84.72 1.22 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.58.82-2.14-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.14 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.5 0 1.08-.01 1.95-.01 2.22 0 .21.14.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
@@ -835,80 +860,94 @@
       </nav>
     </header>
 
-    <section class="hero reveal" id="top">
-      <div class="hero-grid">
-        <div>
-          <p class="eyebrow">Living Resume / Proof of Execution</p>
-          <h1>I design and deliver production-ready systems that evolve with real-world use.</h1>
-          <p class="hero-lead">
-            AI workflows, data platforms, cloud automation, and product interfaces. This page is designed as evidence: live demos, concrete builds, and the technical range behind them.
-          </p>
-          <div class="hero-cta">
-            <a class="btn btn-primary" href="#spotlight">Open Project Spotlight</a>
-            <span class="btn btn-secondary btn-disabled" aria-disabled="true">Resume PDF: Integrating Next</span>
-          </div>
-          <div class="stats-strip" id="metrics"></div>
-        </div>
+    <section class="hero reveal">
+      <p class="eyebrow">Living Resume / Systems Work</p>
+      <h1>I build AI, data, and cloud systems that solve real operational problems.</h1>
+      <p class="hero-lead">
+        This portfolio is a working view of what I build and why I build it. Every project includes context, execution domain, and access notes so reviewers can quickly evaluate technical depth, product judgment, and delivery quality.
+      </p>
+
+      <div class="signal-grid">
+        <article class="signal-card">
+          <p class="signal-label">What I Build</p>
+          <h3>Production Systems</h3>
+          <p>AI workflows, data infrastructure, cloud automation, and product-grade interfaces.</p>
+        </article>
+        <article class="signal-card">
+          <p class="signal-label">Why I Build</p>
+          <h3>Operational Leverage</h3>
+          <p>Each build targets a real bottleneck: speed, clarity, reliability, or user adoption.</p>
+        </article>
+        <article class="signal-card">
+          <p class="signal-label">How To Evaluate</p>
+          <h3>Outcome + Rationale</h3>
+          <p>Use Project Console for deep review, then scan All Projects for breadth and execution patterns.</p>
+        </article>
       </div>
 
-      <div class="capabilities">
-        <article class="capability">
-          <h3>Applied AI Systems</h3>
-          <p>LLM-backed workflows, agent behavior patterns, and practical AI products with real user surfaces.</p>
-        </article>
-        <article class="capability">
-          <h3>Data Engineering</h3>
-          <p>Schema-aware tooling, query interfaces, assessment systems, and transformation pipelines.</p>
-        </article>
-        <article class="capability">
-          <h3>Cloud + DevOps</h3>
-          <p>AWS operations, automation scripts, observability loops, and reliability-oriented controls.</p>
-        </article>
-        <article class="capability">
-          <h3>Product Execution</h3>
-          <p>Concept-to-demo delivery, polished frontend experiences, and iterative production improvements.</p>
-        </article>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#console">Open Project Console</a>
+        <a class="btn btn-secondary" href="#projects">Scan All Projects</a>
       </div>
+
+      <div class="stats-strip" id="stats-strip"></div>
+
+      <div class="domain-grid" id="domain-grid"></div>
     </section>
 
-    <section id="spotlight">
+    <section id="console">
       <div class="section-head reveal">
-        <h2>Project Spotlight</h2>
-        <p>Choose any project from the command list to inspect details, tags, and live link status.</p>
+        <h2>Project Console</h2>
+        <p>Select by domain to review what each project does, why it exists, and whether a live link is public.</p>
       </div>
 
-      <div class="spotlight">
-        <article class="spotlight-main">
-          <div class="spotlight-media">
-            <span class="spotlight-status" id="spotlight-status"></span>
-            <img id="spotlight-image" src="" alt="Featured project preview" loading="lazy">
+      <div class="console reveal">
+        <article class="console-main" id="console-main">
+          <div class="console-media">
+            <span class="console-status" id="console-status"></span>
+            <img id="console-image" src="" alt="Project preview" loading="lazy">
           </div>
-          <div class="spotlight-body">
-            <div class="spotlight-meta">
-              <span id="spotlight-id-year"></span>
-              <span id="spotlight-domain"></span>
+          <div class="console-body">
+            <div class="console-meta">
+              <span id="console-id-year"></span>
+              <span id="console-domain"></span>
             </div>
-            <h3 id="spotlight-title"></h3>
-            <p id="spotlight-summary"></p>
-            <div class="tags" id="spotlight-tags"></div>
-            <div class="spotlight-actions" id="spotlight-actions"></div>
+            <h3 id="console-title"></h3>
+            <p class="console-intent" id="console-intent"></p>
+            <p id="console-summary"></p>
+            <div class="detail-grid">
+              <article class="detail-card">
+                <p class="detail-label">What It Is</p>
+                <p id="console-what"></p>
+              </article>
+              <article class="detail-card">
+                <p class="detail-label">Why I Built It</p>
+                <p id="console-why"></p>
+              </article>
+              <article class="detail-card detail-wide">
+                <p class="detail-label">Access / Proof</p>
+                <p id="console-access"></p>
+              </article>
+            </div>
+            <div class="tags" id="console-tags"></div>
+            <div class="console-actions" id="console-actions"></div>
           </div>
         </article>
 
-        <aside class="dock">
-          <p class="dock-title">Project Command List</p>
+        <aside class="console-side">
+          <p class="side-title">Project Selection</p>
           <div class="filters" id="filters"></div>
-          <div class="dock-list" id="dock-list"></div>
+          <div class="project-list" id="project-list"></div>
         </aside>
       </div>
     </section>
 
-    <section id="gallery">
+    <section id="projects">
       <div class="section-head reveal">
         <h2>All Projects</h2>
-        <p>Fast scan mode. Hover preview media to pause movement.</p>
+        <p>Portfolio breadth view. Projects without public links still include rationale and context for review.</p>
       </div>
-      <div class="gallery" id="gallery-grid"></div>
+      <div class="grid" id="project-grid"></div>
     </section>
 
     <footer class="footer reveal">
@@ -917,7 +956,7 @@
   </main>
 
   <script>
-    const projects = [
+    const rawProjects = [
       {
         id: 1,
         title: 'Reload STAG/DEV from PROD',
@@ -1073,89 +1112,199 @@
         demoUrl: 'https://www.vanessamarkowitz.com/',
         codeUrl: '',
         image: 'static/project_13_vanessa_markowitz.png'
+      },
+      {
+        id: 14,
+        title: 'DMBMarko Studio Album Experience',
+        year: '2026',
+        status: 'Live Demo',
+        domain: 'Creative Experience',
+        summary: 'Interactive album experience with track navigation, playback controls, and lyric storytelling in a cinematic interface.',
+        tags: ['Audio UX', 'Interactive Media', 'Frontend'],
+        demoUrl: 'https://dmbrian.vercel.app/',
+        codeUrl: '',
+        image: 'static/project_14_dmbrian.png'
+      },
+      {
+        id: 15,
+        title: 'Clawbot Patch Blog',
+        year: '2026',
+        status: 'Live Blog',
+        domain: 'Applied AI',
+        summary: 'Public engineering notes from Clawbot operations, focused on automation behavior, fixes, and assistant workflow lessons.',
+        tags: ['AI Ops', 'Engineering Blog', 'Automation'],
+        demoUrl: 'https://brianmarkowitz.github.io/patch-blog/',
+        codeUrl: '',
+        image: 'static/project_15_patch_blog.png'
       }
     ];
+
+    const projectProfiles = {
+      1: {
+        intent: 'Safer environment resets for release velocity.',
+        what: 'Internal utility that refreshes staging and development environments from production-safe snapshots with automated cleanup.',
+        why: 'Manual refresh processes were error-prone and slow. This reduced risk and made non-production testing environments consistently usable.',
+        access: 'No public link. Internal engineering utility; architecture walkthrough and process details available on request.'
+      },
+      2: {
+        intent: 'Make log pipelines resilient under failure.',
+        what: 'Event logging workflow with Step Functions retry control to improve observability and fault tolerance.',
+        why: 'Needed durable operational telemetry and fewer blind spots during incident review.',
+        access: 'No public link. Deployed inside internal AWS environment.'
+      },
+      3: {
+        intent: 'Accelerate AI prototyping for engineers.',
+        what: 'Practical guide site for AI prototyping patterns, including orchestration and vector-search integrations.',
+        why: 'Created to shorten onboarding and establish repeatable implementation patterns across teams.',
+        access: 'Public demo available through the live link.'
+      },
+      4: {
+        intent: 'Reduce friction to graph insights.',
+        what: 'Natural-language interface for querying and exploring Neo4j graph data.',
+        why: 'Designed so non-specialists could interrogate connected data without writing Cypher.',
+        access: 'No public link. Prototype build demonstrated internally.'
+      },
+      5: {
+        intent: 'Enable self-serve analytics for non-SQL users.',
+        what: 'Natural-language to SQL translation workflow for MySQL data exploration.',
+        why: 'Built to cut analyst dependency for routine questions and speed up decision loops.',
+        access: 'No public link. Prototype available for walkthrough.'
+      },
+      6: {
+        intent: 'Create interactive AI-guided demonstrations.',
+        what: 'Poster assistant bot combining vision, speech, and LLM orchestration for live presentation scenarios.',
+        why: 'Built to test multimodal interaction patterns and reduce presenter bottlenecks in demo contexts.',
+        access: 'No public link. Prototype assembled for event/demo use.'
+      },
+      7: {
+        intent: 'Automate resume-to-opportunity matching.',
+        what: 'LLM-driven workflow that parses resumes, normalizes structure, and aligns candidates to proposal needs.',
+        why: 'Built to reduce manual formatting and improve candidate-to-requirement matching quality.',
+        access: 'No public link. In-development system.'
+      },
+      8: {
+        intent: 'Demonstrate practical data engineering competency.',
+        what: 'Interactive assessment experience focused on real-world data engineering tasks and checkpoints.',
+        why: 'Created as a proof-oriented project to demonstrate applied skills, not just theoretical knowledge.',
+        access: 'Public demo available through the live link.'
+      },
+      9: {
+        intent: 'Test telemetry-driven UI storytelling.',
+        what: 'Immersive orbital command interface with tracking visuals and console interactions.',
+        why: 'Built to explore complex, data-rich interaction design in a themed command environment.',
+        access: 'Public demo available through the live link.'
+      },
+      10: {
+        intent: 'Teach modern build workflows through product UX.',
+        what: 'Step-by-step learning journey that introduces vibe-coding concepts through interactive lessons.',
+        why: 'Created to combine instructional design with product-quality frontend execution.',
+        access: 'Public demo available through the live link.'
+      },
+      11: {
+        intent: 'Centralize AI-agent operational visibility.',
+        what: 'Operations-focused workspace for monitoring and managing agent-driven execution.',
+        why: 'Built to improve reliability and decision speed in AI-heavy operating environments.',
+        access: 'Public site available through the live link.'
+      },
+      12: {
+        intent: 'Unify operational command workflows.',
+        what: 'Mission-oriented control interface for orchestrating systems and tracking ongoing events.',
+        why: 'Built to consolidate execution state into a single command surface.',
+        access: 'Public demo available through the live link.'
+      },
+      13: {
+        intent: 'Deliver polished external-facing brand storytelling.',
+        what: 'Personal brand website designed for clear narrative, credibility, and audience engagement.',
+        why: 'Built to showcase product thinking and high-quality content presentation.',
+        access: 'Public site available through the live link.'
+      },
+      14: {
+        intent: 'Blend creative media and frontend engineering.',
+        what: 'Interactive studio album experience with playback controls, track navigation, and lyric presentation.',
+        why: 'Built to demonstrate technical execution in a cinematic, narrative-first creative interface.',
+        access: 'Public demo available through the live link.'
+      },
+      15: {
+        intent: 'Document AI assistant operations in public.',
+        what: 'A running patch blog capturing Clawbot decisions, cleanup tasks, and operational improvements over time.',
+        why: 'Built to show process transparency and how automated assistants are managed in real-world engineering workflows.',
+        access: 'Public blog available through the live link.'
+      }
+    };
+
+    const projects = rawProjects.map((project) => {
+      const profile = projectProfiles[project.id] || {};
+      return {
+        ...project,
+        intent: profile.intent || 'Build and ship practical software with measurable value.',
+        what: profile.what || project.summary,
+        why: profile.why || 'Built to improve user and operator outcomes through better tooling.',
+        access: profile.access || (project.demoUrl
+          ? 'Public demo available through the live link.'
+          : 'No public link. Additional implementation detail available on request.')
+      };
+    });
 
     const state = {
       activeFilter: 'All',
       activeProjectId: projects.find((project) => project.demoUrl)?.id || projects[0].id
     };
 
-    function createAction(label, url, style = 'primary') {
-      const base = style === 'secondary' ? 'btn btn-secondary' : 'btn btn-primary';
+    function createAction(label, url, type = 'primary', emptyLabel = `${label}: Pending`) {
+      const base = type === 'secondary' ? 'btn btn-secondary' : 'btn btn-primary';
       if (!url) {
-        return `<span class="${base} btn-disabled" aria-disabled="true">${label}: Pending</span>`;
+        return `<span class="${base} btn-disabled" aria-disabled="true">${emptyLabel}</span>`;
       }
       return `<a class="${base}" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
     }
 
-    function formatMetrics() {
+    function renderStats() {
       const total = projects.length;
       const live = projects.filter((project) => Boolean(project.demoUrl)).length;
+      const privateCount = projects.filter((project) => !project.demoUrl).length;
       const domains = new Set(projects.map((project) => project.domain)).size;
-      const years = projects.map((project) => Number(project.year)).filter((year) => Number.isFinite(year));
+      const years = projects.map((project) => Number(project.year)).filter((value) => Number.isFinite(value));
       const span = `${Math.min(...years)}-${Math.max(...years)}`;
 
-      const metrics = [
-        { value: String(total), label: 'projects' },
-        { value: String(live), label: 'live demos' },
-        { value: String(domains), label: 'domains' },
+      const stats = [
+        { value: total, label: 'projects' },
+        { value: live, label: 'live demos' },
+        { value: privateCount, label: 'private/internal' },
+        { value: domains, label: 'domains' },
         { value: span, label: 'delivery span' }
       ];
 
-      const root = document.getElementById('metrics');
-      root.innerHTML = metrics
-        .map((metric) => `
-          <span class="stat-pill">
-            <strong>${metric.value}</strong>
-            <span>${metric.label}</span>
-          </span>
-        `)
+      document.getElementById('stats-strip').innerHTML = stats
+        .map((stat) => `<span class="stat-pill"><strong>${stat.value}</strong><span>${stat.label}</span></span>`)
         .join('');
     }
 
-    function scrollSpotlightIntoView() {
-      const spotlight = document.getElementById('spotlight');
-      const topbar = document.querySelector('.topbar');
-      if (!spotlight) return;
+    function renderDomainCards() {
+      const byDomain = projects.reduce((acc, project) => {
+        acc[project.domain] = (acc[project.domain] || 0) + 1;
+        return acc;
+      }, {});
 
-      const offset = (topbar?.getBoundingClientRect().height || 0) + 18;
-      const rect = spotlight.getBoundingClientRect();
-      const outsideComfortZone = rect.top < offset || rect.top > window.innerHeight * 0.35;
+      const blurbs = {
+        'Applied AI': 'LLM workflows, agent-based systems, and AI-first product experiments.',
+        'Data Engineering': 'Structured query systems, graph interfaces, and assessment-oriented tooling.',
+        'Cloud & DevOps': 'Automation, observability pipelines, and operational control surfaces.',
+        'Product Experience': 'Interactive interfaces focused on usability, storytelling, and adoption.',
+        'Creative Experience': 'Media-rich web experiences blending narrative and technical execution.'
+      };
 
-      if (outsideComfortZone) {
-        window.scrollTo({
-          top: window.scrollY + rect.top - offset,
-          behavior: 'smooth'
-        });
-      }
-    }
-
-    function renderFilters() {
-      const root = document.getElementById('filters');
-      const filters = ['All', ...new Set(projects.map((project) => project.domain))];
-      root.innerHTML = filters
-        .map((filter) => `
-          <button
-            class="filter ${filter === state.activeFilter ? 'active' : ''}"
-            type="button"
-            data-filter="${filter}"
-          >${filter}</button>
+      const items = Object.entries(byDomain)
+        .sort((a, b) => b[1] - a[1])
+        .map(([domain, count]) => `
+          <article class="domain-card">
+            <p class="domain-kicker">${count} project${count === 1 ? '' : 's'}</p>
+            <h3>${domain}</h3>
+            <p>${blurbs[domain] || 'Cross-functional system delivery and product execution.'}</p>
+          </article>
         `)
         .join('');
 
-      root.querySelectorAll('.filter').forEach((button) => {
-        button.addEventListener('click', () => {
-          state.activeFilter = button.dataset.filter;
-          renderFilters();
-          renderDock();
-          if (!getVisibleProjects().some((project) => project.id === state.activeProjectId)) {
-            state.activeProjectId = getVisibleProjects()[0]?.id || projects[0].id;
-          }
-          renderSpotlight();
-          scrollSpotlightIntoView();
-        });
-      });
+      document.getElementById('domain-grid').innerHTML = items;
     }
 
     function getVisibleProjects() {
@@ -1164,81 +1313,126 @@
         : projects.filter((project) => project.domain === state.activeFilter);
     }
 
-    function renderDock() {
-      const root = document.getElementById('dock-list');
-      const visible = getVisibleProjects();
+    function renderFilters() {
+      const filters = ['All', ...new Set(projects.map((project) => project.domain))];
+      const root = document.getElementById('filters');
 
-      root.innerHTML = visible
-        .map((project) => `
-          <button class="dock-item ${project.id === state.activeProjectId ? 'active' : ''}" data-id="${project.id}" type="button">
-            <span class="dock-line-1">
-              <span class="dock-title-text">${project.title}</span>
-              <span class="dock-status">${project.status}</span>
-            </span>
-            <span class="dock-domain">${project.domain} • ${project.year}</span>
-          </button>
+      root.innerHTML = filters
+        .map((filter) => `
+          <button class="filter ${filter === state.activeFilter ? 'active' : ''}" data-filter="${filter}" type="button">${filter}</button>
         `)
         .join('');
 
-      root.querySelectorAll('.dock-item').forEach((button) => {
+      root.querySelectorAll('.filter').forEach((button) => {
         button.addEventListener('click', () => {
-          state.activeProjectId = Number(button.dataset.id);
-          renderDock();
-          renderSpotlight();
-          scrollSpotlightIntoView();
+          state.activeFilter = button.dataset.filter;
+          const visible = getVisibleProjects();
+          if (!visible.some((project) => project.id === state.activeProjectId)) {
+            state.activeProjectId = visible[0]?.id || projects[0].id;
+          }
+          renderFilters();
+          renderProjectList();
+          renderConsoleProject();
+          focusConsole();
         });
       });
     }
 
-    function renderSpotlight() {
+    function renderProjectList() {
+      const root = document.getElementById('project-list');
+      const visible = getVisibleProjects();
+
+      root.innerHTML = visible
+        .map((project) => `
+          <button class="project-row ${project.id === state.activeProjectId ? 'active' : ''}" data-id="${project.id}" type="button">
+            <span class="row-line">
+              <span class="row-title">${project.title}</span>
+              <span class="row-status">${project.status}</span>
+            </span>
+            <span class="row-domain">${project.domain} • ${project.year}</span>
+            <span class="row-intent">${project.intent}</span>
+          </button>
+        `)
+        .join('');
+
+      root.querySelectorAll('.project-row').forEach((button) => {
+        button.addEventListener('click', () => {
+          state.activeProjectId = Number(button.dataset.id);
+          renderProjectList();
+          renderConsoleProject();
+          focusConsole();
+        });
+      });
+    }
+
+    function renderConsoleProject() {
       const project = projects.find((item) => item.id === state.activeProjectId) || projects[0];
 
-      const image = document.getElementById('spotlight-image');
+      const image = document.getElementById('console-image');
       image.src = project.image;
       image.alt = `${project.title} preview`;
 
-      document.getElementById('spotlight-status').textContent = project.status;
-      document.getElementById('spotlight-id-year').textContent = `Project ${project.id} • ${project.year}`;
-      document.getElementById('spotlight-domain').textContent = project.domain;
-      document.getElementById('spotlight-title').textContent = project.title;
-      document.getElementById('spotlight-summary').textContent = project.summary;
+      document.getElementById('console-status').textContent = project.status;
+      document.getElementById('console-id-year').textContent = `Project ${project.id} • ${project.year}`;
+      document.getElementById('console-domain').textContent = project.domain;
+      document.getElementById('console-title').textContent = project.title;
+      document.getElementById('console-intent').textContent = project.intent;
+      document.getElementById('console-summary').textContent = project.summary;
+      document.getElementById('console-what').textContent = project.what;
+      document.getElementById('console-why').textContent = project.why;
+      document.getElementById('console-access').textContent = project.access;
 
-      document.getElementById('spotlight-tags').innerHTML = project.tags
+      document.getElementById('console-tags').innerHTML = project.tags
         .map((tag) => `<span class="tag">${tag}</span>`)
         .join('');
 
-      document.getElementById('spotlight-actions').innerHTML = `
-        ${createAction('Open Live', project.demoUrl)}
-        ${createAction('View Code', project.codeUrl, 'secondary')}
+      document.getElementById('console-actions').innerHTML = `
+        ${createAction('Open Live', project.demoUrl, 'primary', 'No Public Link')}
+        ${createAction('View Code', project.codeUrl, 'secondary', 'Code Not Public')}
       `;
     }
 
-    function renderGallery() {
-      const root = document.getElementById('gallery-grid');
+    function renderProjectGrid() {
+      const root = document.getElementById('project-grid');
       root.innerHTML = projects
         .map((project, index) => {
-          const delay = `${(index % 7) * 120}ms`;
+          const delay = `${(index % 8) * 110}ms`;
           return `
             <article class="card reveal" style="--delay:${delay}">
               <div class="card-media">
                 <img src="${project.image}" alt="${project.title} preview" loading="lazy">
               </div>
               <div class="card-body">
-                <div class="card-meta">
-                  <span>Project ${project.id}</span>
-                  <span>${project.year}</span>
-                </div>
+                <div class="card-meta"><span>Project ${project.id}</span><span>${project.year}</span></div>
                 <h3>${project.title}</h3>
                 <p>${project.summary}</p>
+                <p class="card-why"><strong>Why:</strong> ${project.why}</p>
                 <div class="card-actions">
-                  ${createAction('Open', project.demoUrl)}
-                  ${createAction('Code', project.codeUrl, 'secondary')}
+                  ${createAction('Open', project.demoUrl, 'primary', 'No Public Link')}
+                  ${createAction('Code', project.codeUrl, 'secondary', 'Code Not Public')}
                 </div>
               </div>
             </article>
           `;
         })
         .join('');
+    }
+
+    function focusConsole() {
+      const section = document.getElementById('console');
+      if (!section) return;
+
+      const topbar = document.querySelector('.topbar');
+      const offset = (topbar?.getBoundingClientRect().height || 0) + 16;
+      const rect = section.getBoundingClientRect();
+      const outOfRange = rect.top < offset || rect.top > window.innerHeight * 0.42;
+
+      if (outOfRange) {
+        window.scrollTo({
+          top: window.scrollY + rect.top - offset,
+          behavior: 'smooth'
+        });
+      }
     }
 
     function setLastUpdated() {
@@ -1259,7 +1453,7 @@
             }
           });
         },
-        { threshold: 0.09, rootMargin: '0px 0px -40px 0px' }
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
       );
 
       document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
@@ -1279,14 +1473,14 @@
       let particles = [];
 
       function createParticle() {
-        const speed = 0.12 + Math.random() * 0.28;
+        const speed = 0.12 + Math.random() * 0.26;
         const angle = Math.random() * Math.PI * 2;
         return {
           x: Math.random() * width,
           y: Math.random() * height,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
-          r: 1 + Math.random() * 2.4
+          r: 1 + Math.random() * 2.3
         };
       }
 
@@ -1299,34 +1493,34 @@
         canvas.style.height = `${height}px`;
         context.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        const targetCount = Math.min(140, Math.max(46, Math.floor((width * height) / 21000)));
+        const targetCount = Math.min(140, Math.max(48, Math.floor((width * height) / 22000)));
         particles = Array.from({ length: targetCount }, createParticle);
       }
 
-      function drawFrame(time) {
+      function draw(time) {
         context.clearRect(0, 0, width, height);
-        const pulse = 0.5 + Math.sin(time * 0.55) * 0.5;
 
+        const pulse = 0.5 + Math.sin(time * 0.55) * 0.5;
         const wash = context.createLinearGradient(0, 0, width, height);
         wash.addColorStop(0, `rgba(255, 122, 0, ${(0.05 + pulse * 0.04).toFixed(3)})`);
-        wash.addColorStop(1, `rgba(57, 255, 209, ${(0.03 + pulse * 0.03).toFixed(3)})`);
+        wash.addColorStop(1, `rgba(53, 244, 208, ${(0.03 + pulse * 0.03).toFixed(3)})`);
         context.fillStyle = wash;
         context.fillRect(0, 0, width, height);
 
-        for (let i = 0; i < 6; i += 1) {
-          const y = ((i + 1) * height) / 7;
-          const phase = time * (0.35 + i * 0.02);
+        for (let i = 0; i < 7; i += 1) {
+          const y = ((i + 1) * height) / 8;
+          const phase = time * (0.34 + i * 0.02);
           context.beginPath();
-          context.strokeStyle = `rgba(104, 167, 255, ${(0.05 + i * 0.01).toFixed(3)})`;
-          context.lineWidth = 1.1;
+          context.strokeStyle = `rgba(106, 161, 255, ${(0.045 + i * 0.008).toFixed(3)})`;
+          context.lineWidth = 1.05;
           context.moveTo(-40, y);
           context.bezierCurveTo(
-            width * 0.28,
+            width * 0.3,
             y + Math.sin(phase) * 28,
             width * 0.72,
-            y + Math.cos(phase * 1.2) * 34,
+            y + Math.cos(phase * 1.18) * 32,
             width + 40,
-            y + Math.sin(phase * 1.5) * 26
+            y + Math.sin(phase * 1.5) * 24
           );
           context.stroke();
         }
@@ -1334,7 +1528,7 @@
         for (let i = 0; i < particles.length; i += 1) {
           const a = particles[i];
           context.beginPath();
-          context.fillStyle = 'rgba(158, 207, 255, 0.56)';
+          context.fillStyle = 'rgba(157, 209, 255, 0.56)';
           context.arc(a.x, a.y, a.r, 0, Math.PI * 2);
           context.fill();
 
@@ -1343,11 +1537,10 @@
             const dx = a.x - b.x;
             const dy = a.y - b.y;
             const distance = Math.hypot(dx, dy);
-
-            if (distance < 160) {
-              const alpha = (1 - distance / 160) * 0.24;
+            if (distance < 158) {
+              const alpha = (1 - distance / 158) * 0.24;
               context.beginPath();
-              context.strokeStyle = `rgba(104, 167, 255, ${alpha.toFixed(3)})`;
+              context.strokeStyle = `rgba(102, 169, 255, ${alpha.toFixed(3)})`;
               context.lineWidth = 1;
               context.moveTo(a.x, a.y);
               context.lineTo(b.x, b.y);
@@ -1357,32 +1550,33 @@
         }
       }
 
-      function update(timestamp = 0) {
+      function tick(timestamp = 0) {
         const time = timestamp * 0.001;
+
         if (!reduceMotion) {
           particles.forEach((particle) => {
             particle.x += particle.vx;
             particle.y += particle.vy;
-
             if (particle.x <= 0 || particle.x >= width) particle.vx *= -1;
             if (particle.y <= 0 || particle.y >= height) particle.vy *= -1;
           });
         }
 
-        drawFrame(time);
-        if (!reduceMotion) requestAnimationFrame(update);
+        draw(time);
+        if (!reduceMotion) requestAnimationFrame(tick);
       }
 
       resize();
       window.addEventListener('resize', resize);
-      update();
+      tick();
     }
 
-    formatMetrics();
+    renderStats();
+    renderDomainCards();
     renderFilters();
-    renderDock();
-    renderSpotlight();
-    renderGallery();
+    renderProjectList();
+    renderConsoleProject();
+    renderProjectGrid();
     setLastUpdated();
     setupReveal();
     setupBackgroundAnimation();
