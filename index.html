@@ -662,6 +662,18 @@
       gap: 0.48rem;
     }
 
+    .mobile-track-fold {
+      display: block;
+    }
+
+    .mobile-track-fold summary {
+      display: none;
+    }
+
+    .mobile-track-fold summary::-webkit-details-marker {
+      display: none;
+    }
+
     .filters {
       display: flex;
       flex-wrap: wrap;
@@ -1592,20 +1604,89 @@
       .mast-links {
         width: 100%;
         justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 0.34rem;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .mast-links::-webkit-scrollbar {
+        display: none;
       }
 
       .nav-dock {
-        top: 0.35rem;
-        border-radius: 12px;
-        padding: 0.44rem;
+        top: 0.2rem;
+        border-radius: 11px;
+        padding: 0.36rem;
+        margin-bottom: 0.68rem;
+      }
+
+      #spotlight,
+      #all-projects {
+        scroll-margin-top: 4rem;
+      }
+
+      .chip-link {
+        flex: 0 0 auto;
+        font-size: 0.68rem;
+        padding: 0.34rem 0.54rem;
       }
 
       .nav-kicker {
-        width: 100%;
+        display: none;
+      }
+
+      .icon-link {
+        width: 30px;
+        height: 30px;
+      }
+
+      .icon-link svg {
+        width: 14px;
+        height: 14px;
       }
 
       h1 {
-        font-size: clamp(1.72rem, 9vw, 2.6rem);
+        font-size: clamp(1.56rem, 8.2vw, 2.2rem);
+        max-width: 18ch;
+      }
+
+      .intro-lead {
+        font-size: 0.85rem;
+      }
+
+      .section-head {
+        margin-top: 0.88rem;
+        margin-bottom: 0.52rem;
+      }
+
+      .section-head p {
+        display: none;
+      }
+
+      .spotlight-shell {
+        padding: 0.56rem;
+        gap: 0.56rem;
+      }
+
+      .spotlight-stage {
+        position: static;
+      }
+
+      .stage-media {
+        aspect-ratio: 4 / 3;
+      }
+
+      .stage-body {
+        padding: 0.62rem;
+        gap: 0.38rem;
+      }
+
+      .stage-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.16rem;
       }
 
       .detail-grid {
@@ -1620,6 +1701,72 @@
       .hero-actions .btn,
       .stage-actions .btn {
         flex: 1 1 auto;
+      }
+
+      .mobile-track-fold {
+        border: 1px solid rgba(174, 195, 233, 0.28);
+        border-radius: var(--radius-md);
+        background: rgba(8, 12, 21, 0.62);
+      }
+
+      .mobile-track-fold summary {
+        display: inline-flex;
+        width: 100%;
+        cursor: pointer;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        padding: 0.5rem 0.58rem;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #d7e6ff;
+      }
+
+      .mobile-track-fold summary::after {
+        content: 'Show';
+        border: 1px solid rgba(174, 195, 233, 0.44);
+        border-radius: 999px;
+        padding: 0.12rem 0.38rem;
+        font-size: 0.57rem;
+      }
+
+      .mobile-track-fold[open] summary::after {
+        content: 'Hide';
+        border-color: rgba(255, 122, 0, 0.86);
+        color: #fff;
+      }
+
+      .mobile-track-fold .track-panel {
+        border: 0;
+        border-top: 1px solid rgba(174, 195, 233, 0.2);
+        border-radius: 0;
+        background: transparent;
+        padding: 0.5rem;
+      }
+
+      .filters {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .filters::-webkit-scrollbar {
+        display: none;
+      }
+
+      .filter {
+        flex: 0 0 auto;
+      }
+
+      .track-controls {
+        justify-content: flex-start;
+      }
+
+      .spotlight-track {
+        max-height: min(46vh, 420px);
       }
 
       .atlas-row {
@@ -1645,6 +1792,10 @@
         align-items: flex-start;
       }
 
+      .atlas-hint {
+        display: none;
+      }
+
       .view-switch {
         width: 100%;
       }
@@ -1658,11 +1809,33 @@
       }
 
       .graph-stage {
-        min-height: 430px;
+        min-height: 360px;
       }
 
       .graph-actions .btn {
         flex: 1 1 auto;
+      }
+
+      .graph-panel {
+        padding: 0.56rem;
+      }
+
+      .graph-domain-pills {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .graph-domain-pills::-webkit-scrollbar {
+        display: none;
+      }
+
+      .lane-summary {
+        align-items: flex-start;
+      }
+
+      .lane-top {
+        display: none;
       }
 
     }
@@ -1783,20 +1956,23 @@
           </div>
         </article>
 
-        <aside class="track-panel">
-          <div class="filters" id="filters"></div>
-          <div class="track-head">
-            <p id="track-count"></p>
-            <p id="track-progress-label"></p>
-          </div>
-          <div class="track-progress">
-            <span id="track-progress-fill"></span>
-          </div>
-          <div class="track-controls">
-            <button class="track-toggle" id="track-toggle" type="button"></button>
-          </div>
-          <div class="spotlight-track" id="spotlight-track"></div>
-        </aside>
+        <details class="mobile-track-fold" id="mobile-track-disclosure" open>
+          <summary>Browse projects</summary>
+          <aside class="track-panel">
+            <div class="filters" id="filters"></div>
+            <div class="track-head">
+              <p id="track-count"></p>
+              <p id="track-progress-label"></p>
+            </div>
+            <div class="track-progress">
+              <span id="track-progress-fill"></span>
+            </div>
+            <div class="track-controls">
+              <button class="track-toggle" id="track-toggle" type="button"></button>
+            </div>
+            <div class="spotlight-track" id="spotlight-track"></div>
+          </aside>
+        </details>
       </div>
     </section>
 
@@ -2206,6 +2382,7 @@
     let trackResizeTimer = null;
     let lastFocusedElement = null;
     let graphScene = null;
+    let isMobileLayout = null;
 
     function createAction(label, url, type = 'primary', emptyLabel = `${label}: Pending`) {
       const base = type === 'secondary' ? 'btn btn-secondary' : 'btn btn-primary';
@@ -2888,6 +3065,17 @@
       graphScene.rafId = requestAnimationFrame(tick);
     }
 
+    function syncMobileLayout({ force = false } = {}) {
+      const mobileNow = window.matchMedia('(max-width: 760px)').matches;
+      if (!force && mobileNow === isMobileLayout) return;
+      isMobileLayout = mobileNow;
+
+      const trackDisclosure = document.getElementById('mobile-track-disclosure');
+      if (trackDisclosure) {
+        trackDisclosure.open = !mobileNow;
+      }
+    }
+
     function setupAtlasViewControls() {
       document.querySelectorAll('.view-toggle').forEach((button) => {
         button.addEventListener('click', () => {
@@ -3109,6 +3297,11 @@
           updateTrackSelection();
           updateTrackProgress();
           button.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+          const trackDisclosure = document.getElementById('mobile-track-disclosure');
+          if (window.matchMedia('(max-width: 760px)').matches && trackDisclosure?.open) {
+            trackDisclosure.open = false;
+          }
         });
       });
 
@@ -3474,10 +3667,12 @@
     setupProjectModal();
     setupAtlasViewControls();
     setupBackgroundAnimation();
+    syncMobileLayout({ force: true });
 
     window.addEventListener('resize', () => {
       clearTimeout(trackResizeTimer);
       trackResizeTimer = setTimeout(() => {
+        syncMobileLayout({ force: true });
         setupTrackObserver();
         if (state.atlasView === 'graph') {
           renderProjectGraph();
