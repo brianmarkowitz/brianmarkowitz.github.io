@@ -57,7 +57,7 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: -1;
+      z-index: -3;
     }
 
     .ambient::before,
@@ -95,15 +95,26 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: -1;
+      z-index: -2;
       opacity: 0.12;
       background-image: radial-gradient(rgba(255, 255, 255, 0.27) 1px, transparent 1px);
       background-size: 4px 4px;
     }
 
+    .bg-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.64;
+      mix-blend-mode: screen;
+    }
+
     .site {
       width: min(var(--max-width), 100% - 2rem);
       margin: 1rem auto 2.4rem;
+      position: relative;
+      z-index: 1;
     }
 
     .topbar {
@@ -137,6 +148,7 @@
       gap: 0.5rem;
       flex-wrap: wrap;
       justify-content: flex-end;
+      align-items: center;
     }
 
     .chip-link {
@@ -154,6 +166,31 @@
       border-color: rgba(255, 122, 0, 0.9);
       background: rgba(255, 122, 0, 0.08);
       transform: translateY(-1px);
+    }
+
+    .icon-link {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 1px solid rgba(179, 199, 236, 0.38);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #e7f1ff;
+      background: rgba(255, 255, 255, 0.04);
+      transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
+    }
+
+    .icon-link:hover {
+      border-color: rgba(255, 122, 0, 0.9);
+      background: rgba(255, 122, 0, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .icon-link svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
     }
 
     .hero {
@@ -184,7 +221,7 @@
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.9fr;
+      grid-template-columns: 1fr;
       gap: 1rem;
       align-items: end;
     }
@@ -259,35 +296,39 @@
       cursor: default;
     }
 
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.66rem;
-      align-self: stretch;
+    .stats-strip {
+      margin-top: 0.95rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
     }
 
-    .metric {
-      border: 1px solid rgba(174, 195, 230, 0.28);
-      border-radius: var(--radius-md);
+    .stat-pill {
+      border: 1px solid rgba(174, 195, 230, 0.32);
+      border-radius: 999px;
       background: rgba(255, 255, 255, 0.03);
-      padding: 0.8rem;
-      min-height: 94px;
+      padding: 0.35rem 0.62rem;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.4rem;
+      min-height: 34px;
     }
 
-    .metric-value {
+    .stat-pill strong {
       font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 0.98rem;
       color: #fff;
-      font-size: 1.9rem;
       line-height: 1;
-      margin-bottom: 0.2rem;
     }
 
-    .metric-label {
+    .stat-pill span {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
+      font-size: 0.66rem;
       color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
     }
 
     .capabilities {
@@ -350,6 +391,7 @@
       display: grid;
       grid-template-columns: 1.16fr 0.84fr;
       gap: 0.9rem;
+      align-items: start;
     }
 
     .spotlight-main {
@@ -360,6 +402,8 @@
       display: grid;
       grid-template-rows: auto 1fr;
       min-height: 520px;
+      position: sticky;
+      top: 5.2rem;
     }
 
     .spotlight-media {
@@ -447,9 +491,12 @@
       border-radius: var(--radius-md);
       background: rgba(8, 12, 20, 0.7);
       overflow: hidden;
-      min-height: 520px;
+      min-height: 0;
+      max-height: calc(100vh - 6rem);
       display: grid;
       grid-template-rows: auto auto 1fr;
+      position: sticky;
+      top: 5.2rem;
     }
 
     .dock-title {
@@ -498,6 +545,7 @@
       overflow: auto;
       display: grid;
       align-content: start;
+      overscroll-behavior: contain;
     }
 
     .dock-item {
@@ -688,6 +736,9 @@
 
       .spotlight-main,
       .dock {
+        position: static;
+        top: auto;
+        max-height: none;
         min-height: auto;
       }
 
@@ -695,9 +746,6 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .metrics {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
     }
 
     @media (max-width: 720px) {
@@ -720,8 +768,8 @@
         justify-content: flex-start;
       }
 
-      .metrics {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .stats-strip {
+        gap: 0.42rem;
       }
 
       .capabilities {
@@ -745,6 +793,7 @@
       html { scroll-behavior: auto; }
       .ambient::before,
       .ambient::after,
+      .bg-canvas,
       .spotlight-media img,
       .card-media img,
       .card,
@@ -763,6 +812,7 @@
 <body>
   <div class="ambient" aria-hidden="true"></div>
   <div class="noise" aria-hidden="true"></div>
+  <canvas class="bg-canvas" id="bg-canvas" aria-hidden="true"></canvas>
 
   <main class="site">
     <header class="topbar reveal">
@@ -770,7 +820,11 @@
       <nav class="nav-links">
         <a class="chip-link" href="#spotlight">Spotlight</a>
         <a class="chip-link" href="#gallery">All Projects</a>
-        <a class="chip-link" href="https://github.com/brianmarkowitz" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="icon-link" href="https://github.com/brianmarkowitz" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.81.06 1.24.84 1.24.84.72 1.22 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.58.82-2.14-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.14 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.5 0 1.08-.01 1.95-.01 2.22 0 .21.14.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+          </svg>
+        </a>
       </nav>
     </header>
 
@@ -778,17 +832,16 @@
       <div class="hero-grid">
         <div>
           <p class="eyebrow">Living Resume / Proof of Execution</p>
-          <h1>I build systems that ship, survive production, and keep improving.</h1>
+          <h1>I design and deliver production-ready systems that evolve with real-world use.</h1>
           <p class="hero-lead">
             AI workflows, data platforms, cloud automation, and product interfaces. This page is designed as evidence: live demos, concrete builds, and the technical range behind them.
           </p>
           <div class="hero-cta">
             <a class="btn btn-primary" href="#spotlight">Open Project Spotlight</a>
-            <a class="btn btn-secondary" href="https://github.com/brianmarkowitz" target="_blank" rel="noopener noreferrer">View GitHub</a>
             <span class="btn btn-secondary btn-disabled" aria-disabled="true">Resume PDF: Integrating Next</span>
           </div>
+          <div class="stats-strip" id="metrics"></div>
         </div>
-        <div class="metrics" id="metrics"></div>
       </div>
 
       <div class="capabilities">
@@ -1033,24 +1086,42 @@
       const total = projects.length;
       const live = projects.filter((project) => Boolean(project.demoUrl)).length;
       const domains = new Set(projects.map((project) => project.domain)).size;
-      const inProgress = projects.filter((project) => /prototype|development/i.test(project.status)).length;
+      const years = projects.map((project) => Number(project.year)).filter((year) => Number.isFinite(year));
+      const span = `${Math.min(...years)}-${Math.max(...years)}`;
 
       const metrics = [
-        { value: String(total), label: 'projects shipped or in build' },
-        { value: String(live), label: 'live public links' },
-        { value: String(domains), label: 'execution domains' },
-        { value: String(inProgress), label: 'active prototype tracks' }
+        { value: String(total), label: 'projects' },
+        { value: String(live), label: 'live demos' },
+        { value: String(domains), label: 'domains' },
+        { value: span, label: 'delivery span' }
       ];
 
       const root = document.getElementById('metrics');
       root.innerHTML = metrics
         .map((metric) => `
-          <article class="metric">
-            <p class="metric-value">${metric.value}</p>
-            <p class="metric-label">${metric.label}</p>
-          </article>
+          <span class="stat-pill">
+            <strong>${metric.value}</strong>
+            <span>${metric.label}</span>
+          </span>
         `)
         .join('');
+    }
+
+    function scrollSpotlightIntoView() {
+      const spotlight = document.getElementById('spotlight');
+      const topbar = document.querySelector('.topbar');
+      if (!spotlight) return;
+
+      const offset = (topbar?.getBoundingClientRect().height || 0) + 18;
+      const rect = spotlight.getBoundingClientRect();
+      const outsideComfortZone = rect.top < offset || rect.top > window.innerHeight * 0.35;
+
+      if (outsideComfortZone) {
+        window.scrollTo({
+          top: window.scrollY + rect.top - offset,
+          behavior: 'smooth'
+        });
+      }
     }
 
     function renderFilters() {
@@ -1075,6 +1146,7 @@
             state.activeProjectId = getVisibleProjects()[0]?.id || projects[0].id;
           }
           renderSpotlight();
+          scrollSpotlightIntoView();
         });
       });
     }
@@ -1106,6 +1178,7 @@
           state.activeProjectId = Number(button.dataset.id);
           renderDock();
           renderSpotlight();
+          scrollSpotlightIntoView();
         });
       });
     }
@@ -1185,6 +1258,119 @@
       document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
     }
 
+    function setupBackgroundAnimation() {
+      const canvas = document.getElementById('bg-canvas');
+      if (!canvas) return;
+
+      const context = canvas.getContext('2d');
+      if (!context) return;
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      let width = 0;
+      let height = 0;
+      let particles = [];
+
+      function createParticle() {
+        const speed = 0.12 + Math.random() * 0.28;
+        const angle = Math.random() * Math.PI * 2;
+        return {
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          r: 1 + Math.random() * 2.4
+        };
+      }
+
+      function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        context.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const targetCount = Math.min(140, Math.max(46, Math.floor((width * height) / 21000)));
+        particles = Array.from({ length: targetCount }, createParticle);
+      }
+
+      function drawFrame(time) {
+        context.clearRect(0, 0, width, height);
+        const pulse = 0.5 + Math.sin(time * 0.55) * 0.5;
+
+        const wash = context.createLinearGradient(0, 0, width, height);
+        wash.addColorStop(0, `rgba(255, 122, 0, ${(0.05 + pulse * 0.04).toFixed(3)})`);
+        wash.addColorStop(1, `rgba(57, 255, 209, ${(0.03 + pulse * 0.03).toFixed(3)})`);
+        context.fillStyle = wash;
+        context.fillRect(0, 0, width, height);
+
+        for (let i = 0; i < 6; i += 1) {
+          const y = ((i + 1) * height) / 7;
+          const phase = time * (0.35 + i * 0.02);
+          context.beginPath();
+          context.strokeStyle = `rgba(104, 167, 255, ${(0.05 + i * 0.01).toFixed(3)})`;
+          context.lineWidth = 1.1;
+          context.moveTo(-40, y);
+          context.bezierCurveTo(
+            width * 0.28,
+            y + Math.sin(phase) * 28,
+            width * 0.72,
+            y + Math.cos(phase * 1.2) * 34,
+            width + 40,
+            y + Math.sin(phase * 1.5) * 26
+          );
+          context.stroke();
+        }
+
+        for (let i = 0; i < particles.length; i += 1) {
+          const a = particles[i];
+          context.beginPath();
+          context.fillStyle = 'rgba(158, 207, 255, 0.56)';
+          context.arc(a.x, a.y, a.r, 0, Math.PI * 2);
+          context.fill();
+
+          for (let j = i + 1; j < particles.length; j += 1) {
+            const b = particles[j];
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            const distance = Math.hypot(dx, dy);
+
+            if (distance < 160) {
+              const alpha = (1 - distance / 160) * 0.24;
+              context.beginPath();
+              context.strokeStyle = `rgba(104, 167, 255, ${alpha.toFixed(3)})`;
+              context.lineWidth = 1;
+              context.moveTo(a.x, a.y);
+              context.lineTo(b.x, b.y);
+              context.stroke();
+            }
+          }
+        }
+      }
+
+      function update(timestamp = 0) {
+        const time = timestamp * 0.001;
+        if (!reduceMotion) {
+          particles.forEach((particle) => {
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+
+            if (particle.x <= 0 || particle.x >= width) particle.vx *= -1;
+            if (particle.y <= 0 || particle.y >= height) particle.vy *= -1;
+          });
+        }
+
+        drawFrame(time);
+        if (!reduceMotion) requestAnimationFrame(update);
+      }
+
+      resize();
+      window.addEventListener('resize', resize);
+      update();
+    }
+
     formatMetrics();
     renderFilters();
     renderDock();
@@ -1192,6 +1378,7 @@
     renderGallery();
     setLastUpdated();
     setupReveal();
+    setupBackgroundAnimation();
   </script>
 </body>
 </html>
