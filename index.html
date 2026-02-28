@@ -3,29 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Brian Markowitz engineering portfolio: AI systems, data engineering, cloud automation, and interactive product builds.">
-  <title>Brian Markowitz | Engineering Portfolio</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='4' fill='%23ff7a00'/%3E%3C/svg%3E">
+  <meta name="description" content="Brian Markowitz portfolio focused on data architecture, data engineering, and intelligent data products.">
+  <title>Brian Markowitz | Data Architect & Data Engineer</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='4' fill='%231fb6ff'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,400;10..48,600;10..48,700;10..48,800&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #060b13;
-      --panel: rgba(10, 16, 29, 0.84);
-      --panel-strong: rgba(12, 19, 33, 0.94);
-      --ink: #f4f7ff;
-      --muted: #aab8d2;
-      --stroke: rgba(165, 188, 230, 0.24);
-      --accent: #ff7a00;
-      --accent-2: #35f4d0;
-      --accent-3: #6b8cff;
+      --bg: #07101b;
+      --bg-soft: #0d1a2a;
+      --panel: rgba(11, 21, 36, 0.9);
+      --panel-strong: rgba(12, 25, 42, 0.96);
+      --ink: #edf4ff;
+      --muted: #9bb0cb;
+      --stroke: rgba(159, 193, 237, 0.24);
+      --accent: #1fb6ff;
+      --accent-2: #39d98a;
+      --accent-3: #ffbc5f;
       --radius-xl: 28px;
       --radius-lg: 18px;
       --radius-md: 14px;
       --radius-sm: 10px;
-      --shadow: 0 24px 50px rgba(0, 0, 0, 0.52);
-      --max: 1320px;
+      --shadow: 0 24px 48px rgba(0, 0, 0, 0.42);
+      --max: 1120px;
+      --nav-height: 76px;
     }
 
     * {
@@ -40,1900 +42,1010 @@
 
     body {
       min-height: 100vh;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Sora', sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at 10% 8%, rgba(255, 122, 0, 0.26), transparent 26%),
-        radial-gradient(circle at 88% 12%, rgba(53, 244, 208, 0.13), transparent 24%),
-        radial-gradient(circle at 72% 78%, rgba(107, 140, 255, 0.22), transparent 30%),
-        linear-gradient(145deg, #060b13 0%, #0d1524 45%, #130d25 100%);
-      background-attachment: fixed;
-      line-height: 1.56;
+        radial-gradient(circle at 8% 5%, rgba(31, 182, 255, 0.18), transparent 28%),
+        radial-gradient(circle at 84% 10%, rgba(57, 217, 138, 0.14), transparent 25%),
+        linear-gradient(170deg, #07101b 0%, #0a1422 40%, #0f1828 100%);
+      line-height: 1.5;
       overflow-x: hidden;
     }
 
-    .bg-canvas {
+    body::before {
+      content: '';
       position: fixed;
       inset: 0;
-      z-index: -2;
       pointer-events: none;
-      opacity: 0.6;
-      mix-blend-mode: screen;
-    }
-
-    .noise {
-      position: fixed;
-      inset: 0;
       z-index: -1;
-      pointer-events: none;
-      opacity: 0.12;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.26) 1px, transparent 1px);
-      background-size: 4px 4px;
+      opacity: 0.18;
+      background-image:
+        linear-gradient(rgba(128, 164, 206, 0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(128, 164, 206, 0.14) 1px, transparent 1px);
+      background-size: 38px 38px;
+      mask-image: radial-gradient(circle at 50% 30%, #000 15%, transparent 72%);
     }
 
     .site {
-      width: min(var(--max), 100% - 2rem);
-      margin: 1rem auto 2.4rem;
-      position: relative;
-      z-index: 1;
+      width: min(var(--max), 100% - 1.4rem);
+      margin: 0.8rem auto 2.6rem;
     }
 
-    h1, h2, h3, h4 {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      letter-spacing: -0.02em;
-      line-height: 1.08;
+    #spotlight,
+    #systems {
+      scroll-margin-top: calc(var(--nav-height) + 0.8rem);
     }
 
-    .mast {
+    .topbar {
+      position: sticky;
+      top: 0.6rem;
+      z-index: 40;
+      margin-bottom: 0.8rem;
       border: 1px solid var(--stroke);
-      border-radius: var(--radius-xl);
-      background:
-        linear-gradient(160deg, rgba(18, 27, 44, 0.93), rgba(10, 15, 27, 0.95)),
-        linear-gradient(100deg, rgba(255, 122, 0, 0.14), rgba(53, 244, 208, 0.08));
-      backdrop-filter: blur(16px);
-      box-shadow: var(--shadow);
-      padding: clamp(0.9rem, 2.4vw, 1.6rem);
-      margin-bottom: 1rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .mast::after {
-      content: '';
-      position: absolute;
-      width: 420px;
-      height: 420px;
-      right: -140px;
-      top: -230px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(53, 244, 208, 0.24), transparent 72%);
-      pointer-events: none;
-    }
-
-    .mast-top {
+      border-radius: 16px;
+      background: rgba(8, 16, 29, 0.9);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.34);
+      padding: 0.74rem 0.9rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 0.8rem;
+      flex-wrap: wrap;
+      min-height: var(--nav-height);
     }
 
     .brand {
+      font-size: 1.03rem;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .role {
+      margin-top: 0.16rem;
       font-family: 'IBM Plex Mono', monospace;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 0.76rem;
+      letter-spacing: 0.06em;
+      font-size: 0.7rem;
       color: var(--accent-2);
-      display: inline-flex;
-      align-items: center;
+    }
+
+    .topnav {
+      display: flex;
+      flex-wrap: wrap;
       gap: 0.42rem;
-      flex-wrap: wrap;
-    }
-
-    .brand span {
-      color: #d8e7ff;
-      opacity: 0.76;
-    }
-
-    .mast-links {
-      display: flex;
       align-items: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      justify-content: flex-end;
     }
 
-    .nav-dock {
-      position: sticky;
-      top: 0.62rem;
-      z-index: 50;
-      margin-bottom: 0.92rem;
-      border: 1px solid var(--stroke);
-      border-radius: 14px;
-      background: rgba(9, 14, 25, 0.96);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42);
-      backdrop-filter: blur(14px);
-      padding: 0.5rem 0.58rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-    }
-
-    .nav-kicker {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    #spotlight,
-    #all-projects {
-      scroll-margin-top: 5.2rem;
-    }
-
-    .chip-link {
+    .topnav a {
       text-decoration: none;
       color: var(--ink);
-      border: 1px solid rgba(174, 195, 233, 0.38);
+      border: 1px solid rgba(164, 194, 236, 0.34);
       border-radius: 999px;
-      padding: 0.4rem 0.72rem;
+      background: rgba(255, 255, 255, 0.03);
+      min-height: 36px;
+      padding: 0.42rem 0.72rem;
       font-size: 0.78rem;
       font-weight: 600;
-      transition: all 170ms ease;
-      background: rgba(255, 255, 255, 0.02);
+      transition: 170ms ease;
     }
 
-    .chip-link:hover {
-      border-color: rgba(255, 122, 0, 0.88);
-      background: rgba(255, 122, 0, 0.1);
+    .topnav a:hover {
+      border-color: rgba(31, 182, 255, 0.78);
+      background: rgba(31, 182, 255, 0.12);
       transform: translateY(-1px);
     }
 
-    .chip-button {
-      appearance: none;
-      -webkit-appearance: none;
-      font-family: inherit;
-      cursor: pointer;
-      line-height: 1;
+    .panel {
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-xl);
+      background: linear-gradient(165deg, rgba(12, 24, 40, 0.95), rgba(9, 17, 30, 0.95));
+      box-shadow: var(--shadow);
     }
 
-    .icon-link {
-      width: 36px;
-      height: 36px;
-      border-radius: 999px;
-      border: 1px solid rgba(174, 195, 233, 0.38);
-      color: #e8f1ff;
-      background: rgba(255, 255, 255, 0.04);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 170ms ease;
-      text-decoration: none;
-    }
-
-    .icon-link:hover {
-      border-color: rgba(255, 122, 0, 0.88);
-      background: rgba(255, 122, 0, 0.14);
-      transform: translateY(-1px);
-    }
-
-    .icon-link svg {
-      width: 18px;
-      height: 18px;
-      fill: currentColor;
-    }
-
-    .intro-shell {
-      margin-top: 0.85rem;
+    .hero {
+      padding: clamp(1rem, 2.4vw, 1.5rem);
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.7rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .intro-copy {
-      display: grid;
-      align-content: start;
-      gap: 0.62rem;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 1fr);
+      gap: 0.9rem;
+      align-items: start;
+      margin-bottom: 1rem;
     }
 
     .eyebrow {
       font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.07em;
       color: var(--accent-2);
-      font-size: 0.76rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h1, h2, h3 {
+      letter-spacing: -0.02em;
+      line-height: 1.1;
     }
 
     h1 {
-      font-size: clamp(1.95rem, 4.8vw, 3.5rem);
-      max-width: 15ch;
+      font-size: clamp(1.7rem, 3.8vw, 2.8rem);
+      max-width: 21ch;
+      margin-bottom: 0.66rem;
     }
 
-    .intro-lead {
+    .hero-lead {
       color: var(--muted);
-      max-width: 58ch;
-      font-size: 0.93rem;
+      max-width: 62ch;
+      font-size: 0.94rem;
     }
 
     .hero-actions {
       display: flex;
-      gap: 0.56rem;
       flex-wrap: wrap;
+      gap: 0.52rem;
+      margin-top: 0.76rem;
+      margin-bottom: 0.74rem;
     }
 
     .btn {
       text-decoration: none;
       border-radius: 999px;
-      font-weight: 700;
-      font-size: 0.88rem;
       min-height: 40px;
       padding: 0.56rem 0.92rem;
+      border: 1px solid transparent;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid transparent;
-      transition: transform 170ms ease, box-shadow 170ms ease, border-color 170ms ease;
+      gap: 0.32rem;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--ink);
+      transition: transform 170ms ease, box-shadow 170ms ease, border-color 170ms ease, background 170ms ease;
     }
 
     .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.34);
     }
 
     .btn-primary {
-      color: #fff;
-      background: linear-gradient(115deg, #ff7a00, #ff4f63);
+      background: linear-gradient(120deg, #1fb6ff, #2f94ff);
+      color: #03101f;
+      border-color: rgba(119, 216, 255, 0.42);
     }
 
     .btn-secondary {
-      color: var(--ink);
-      border-color: rgba(174, 195, 233, 0.42);
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(164, 194, 236, 0.38);
     }
 
     .btn-disabled {
+      opacity: 0.5;
       pointer-events: none;
-      opacity: 0.55;
     }
 
-    .stats-strip {
+    .hero-stats {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.44rem;
-      align-items: center;
+      gap: 0.42rem;
     }
 
-    .stat-pill {
-      border: 1px solid rgba(174, 195, 233, 0.34);
+    .stat {
+      border: 1px solid rgba(164, 194, 236, 0.3);
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.03);
-      padding: 0.32rem 0.58rem;
+      padding: 0.34rem 0.62rem;
       display: inline-flex;
       align-items: baseline;
-      gap: 0.32rem;
-      min-height: 32px;
+      gap: 0.34rem;
     }
 
-    .stat-pill strong {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 0.96rem;
+    .stat strong {
+      font-size: 0.94rem;
       line-height: 1;
     }
 
-    .stat-pill span {
+    .stat span {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.64rem;
-      color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      white-space: nowrap;
+      font-size: 0.63rem;
+      color: var(--muted);
     }
 
-    .intro-disclosure {
-      border: 1px solid rgba(174, 195, 233, 0.28);
+    .hero-panel {
+      border: 1px solid rgba(164, 194, 236, 0.28);
       border-radius: var(--radius-md);
-      background: rgba(7, 12, 22, 0.62);
-      padding: 0.62rem;
+      background: rgba(7, 15, 27, 0.58);
+      padding: 0.8rem;
       display: grid;
+      gap: 0.52rem;
       align-content: start;
-      gap: 0.56rem;
     }
 
-    .intro-disclosure summary {
-      list-style: none;
-      cursor: pointer;
-      font-family: 'IBM Plex Mono', monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      font-size: 0.7rem;
-      color: #dce9ff;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.38rem;
-      user-select: none;
+    .hero-panel h2 {
+      font-size: 1.02rem;
     }
 
-    .intro-disclosure summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .intro-disclosure summary::before {
-      content: '+';
-      width: 1rem;
-      height: 1rem;
-      border-radius: 999px;
-      border: 1px solid rgba(174, 195, 233, 0.46);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.74rem;
-      line-height: 1;
-    }
-
-    .intro-disclosure[open] summary::before {
-      content: '−';
-    }
-
-    .intro-disclosure p {
-      color: var(--muted);
-      font-size: 0.82rem;
-      margin-top: 0.22rem;
-    }
-
-    .intro-list {
+    .principles {
       list-style: none;
       display: grid;
-      gap: 0.34rem;
+      gap: 0.42rem;
     }
 
-    .intro-list li {
-      border: 1px solid rgba(174, 195, 233, 0.2);
+    .principles li {
+      border: 1px solid rgba(164, 194, 236, 0.22);
       border-radius: var(--radius-sm);
-      padding: 0.4rem 0.48rem;
-      font-size: 0.79rem;
-      color: #d9e6fb;
-      display: grid;
-      gap: 0.2rem;
+      padding: 0.5rem;
       background: rgba(255, 255, 255, 0.02);
+      font-size: 0.82rem;
+      color: #d4e1f4;
     }
 
-    .intro-list span {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.66rem;
-      color: var(--accent-2);
+    .principles strong {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .domain-ribbon {
-      margin-top: 0.04rem;
-      display: flex;
-      gap: 0.34rem;
-      flex-wrap: wrap;
-    }
-
-    .domain-pill {
-      border: 1px solid rgba(174, 195, 233, 0.3);
-      border-radius: 999px;
-      padding: 0.16rem 0.42rem;
-      background: rgba(255, 255, 255, 0.02);
-      font-size: 0.67rem;
-      color: #d7e5fb;
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--accent-3);
+      margin-bottom: 0.2rem;
     }
 
     .section-head {
-      margin-top: 1.16rem;
-      margin-bottom: 0.72rem;
+      margin: 1.06rem 0 0.72rem;
       display: flex;
       justify-content: space-between;
       align-items: end;
-      flex-wrap: wrap;
       gap: 0.6rem;
+      flex-wrap: wrap;
     }
 
     .section-head h2 {
-      font-size: clamp(1.42rem, 3.4vw, 2.28rem);
+      font-size: clamp(1.32rem, 2.6vw, 1.95rem);
     }
 
     .section-head p {
       color: var(--muted);
-      max-width: 60ch;
-      font-size: 0.9rem;
+      max-width: 62ch;
+      font-size: 0.89rem;
     }
 
-    .spotlight-shell {
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius-lg);
-      background: linear-gradient(170deg, rgba(13, 20, 35, 0.94), rgba(9, 14, 25, 0.95));
-      box-shadow: var(--shadow);
-      padding: 0.82rem;
+    .section-tight {
+      margin-top: 0;
+    }
+
+    .systems-shell {
       display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 0.6rem;
+      grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+      gap: 0.76rem;
       align-items: start;
     }
 
-    .spotlight-stage {
-      border: 1px solid rgba(174, 195, 233, 0.28);
-      border-radius: var(--radius-md);
+    .spotlight-card {
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(172deg, rgba(12, 24, 40, 0.96), rgba(9, 17, 30, 0.98));
       overflow: hidden;
-      background: rgba(7, 12, 21, 0.7);
-      display: grid;
-      grid-template-rows: auto 1fr;
-      position: static;
-      max-height: none;
+      position: sticky;
+      top: calc(var(--nav-height) + 1rem);
+      box-shadow: var(--shadow);
     }
 
-    .stage-media {
+    .spotlight-media {
       position: relative;
       aspect-ratio: 16 / 9;
-      overflow: hidden;
       border-bottom: 1px solid var(--stroke);
-      background: #03060b;
-      flex-shrink: 0;
+      background: #030a14;
+      overflow: hidden;
     }
 
-    .stage-media img {
+    .spotlight-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: scale(1.02);
-      animation: pulse 15s ease-in-out infinite;
+      transform: scale(1.015);
+      animation: breathe 12s ease-in-out infinite;
     }
 
-    .stage-status {
+    .spotlight-rank {
       position: absolute;
-      top: 0.64rem;
-      left: 0.64rem;
+      top: 0.62rem;
+      left: 0.62rem;
       border-radius: 999px;
-      border: 1px solid rgba(174, 195, 233, 0.5);
-      background: rgba(7, 12, 20, 0.82);
-      color: #e8f5ff;
+      border: 1px solid rgba(173, 206, 245, 0.48);
+      background: rgba(8, 15, 27, 0.84);
+      padding: 0.28rem 0.56rem;
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 0.24rem 0.56rem;
-    }
-
-    .stage-body {
-      padding: 0.76rem;
-      display: grid;
-      align-content: start;
-      align-items: start;
-      gap: 0.42rem;
-      overflow: visible;
-    }
-
-    .stage-meta {
-      display: flex;
-      justify-content: space-between;
-      gap: 0.5rem;
-      color: var(--muted);
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.71rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .stage-body h3 {
-      font-size: clamp(1.16rem, 2.8vw, 1.84rem);
-    }
-
-    .stage-body p {
-      color: #ccd8ea;
-      font-size: 0.9rem;
-    }
-
-    .stage-intent {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--accent-2);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .stage-rank {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.69rem;
-      color: #ffc48f;
+      font-size: 0.68rem;
       text-transform: uppercase;
       letter-spacing: 0.06em;
+      color: #e5f0ff;
     }
 
-    .detail-grid {
+    .spotlight-body {
+      padding: 0.84rem;
+      display: grid;
+      gap: 0.5rem;
+      align-content: start;
+    }
+
+    .spotlight-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.46rem;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .spotlight-body h3 {
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+    }
+
+    .spotlight-body p {
+      color: #cfddf1;
+      font-size: 0.89rem;
+    }
+
+    .insight-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 0.42rem;
     }
 
-    .detail-card {
-      border: 1px solid rgba(174, 195, 233, 0.24);
+    .insight {
+      border: 1px solid rgba(164, 194, 236, 0.24);
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.02);
+      padding: 0.48rem;
+      display: grid;
+      gap: 0.2rem;
+    }
+
+    .insight.wide {
+      grid-column: 1 / -1;
+    }
+
+    .insight-label {
+      font-family: 'IBM Plex Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.61rem;
+      color: var(--muted);
+    }
+
+    .insight p {
+      margin: 0;
+      font-size: 0.8rem;
+    }
+
+    .spotlight-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.34rem;
+    }
+
+    .tag {
+      border: 1px solid rgba(164, 194, 236, 0.28);
+      border-radius: 999px;
+      padding: 0.2rem 0.48rem;
+      font-size: 0.67rem;
+      color: #dce9fc;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .spotlight-actions {
+      margin-top: 0.12rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.44rem;
+    }
+
+    .systems-column {
+      min-width: 0;
+    }
+
+    .systems-note {
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+      font-size: 0.84rem;
+      border-left: 2px solid rgba(31, 182, 255, 0.4);
+      padding-left: 0.58rem;
+    }
+
+    .systems-grid {
+      display: grid;
+      gap: 0.58rem;
+    }
+
+    .system-card {
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-md);
+      background: linear-gradient(160deg, rgba(12, 23, 39, 0.94), rgba(10, 18, 31, 0.94));
+      overflow: hidden;
+    }
+
+    .system-card summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 0.72rem;
+      display: grid;
+      gap: 0.34rem;
+      user-select: none;
+    }
+
+    .system-card summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .system-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .system-top h3 {
+      font-size: 1rem;
+    }
+
+    .system-count {
+      border-radius: 999px;
+      border: 1px solid rgba(164, 194, 236, 0.3);
+      padding: 0.18rem 0.48rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+
+    .system-card summary p {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin: 0;
+    }
+
+    .system-body {
+      border-top: 1px solid rgba(164, 194, 236, 0.18);
+      padding: 0.6rem;
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .project-row {
+      border: 1px solid rgba(164, 194, 236, 0.22);
       border-radius: var(--radius-sm);
       background: rgba(255, 255, 255, 0.02);
       padding: 0.5rem;
       display: grid;
-      gap: 0.22rem;
-      align-content: start;
-    }
-
-    .detail-card.detail-wide {
-      grid-column: 1 / -1;
-    }
-
-    .detail-label {
-      font-family: 'IBM Plex Mono', monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      font-size: 0.63rem;
-      color: var(--muted);
-    }
-
-    .detail-card p {
-      margin: 0;
-      color: #d6e4fb;
-      font-size: 0.82rem;
-    }
-
-    .spotlight-more {
-      border: 1px solid rgba(174, 195, 233, 0.24);
-      border-radius: var(--radius-sm);
-      background: rgba(255, 255, 255, 0.02);
-      padding: 0.44rem 0.48rem;
-      display: grid;
-      gap: 0.42rem;
-    }
-
-    .spotlight-more summary {
-      list-style: none;
-      cursor: pointer;
-      font-family: 'IBM Plex Mono', monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-size: 0.68rem;
-      color: #d9e8ff;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.34rem;
-      user-select: none;
-    }
-
-    .spotlight-more summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .spotlight-more summary::before {
-      content: '+';
-      width: 0.95rem;
-      height: 0.95rem;
-      border-radius: 999px;
-      border: 1px solid rgba(174, 195, 233, 0.44);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.74rem;
-      line-height: 1;
-    }
-
-    .spotlight-more[open] summary::before {
-      content: '−';
-    }
-
-    .spotlight-more-body {
-      display: grid;
-      gap: 0.4rem;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.36rem;
-    }
-
-    .tag {
-      border: 1px solid rgba(174, 195, 233, 0.35);
-      border-radius: 999px;
-      padding: 0.18rem 0.5rem;
-      font-size: 0.71rem;
-      color: #deebff;
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    .stage-actions {
-      margin-top: 0.2rem;
-      display: flex;
-      gap: 0.44rem;
-      flex-wrap: wrap;
-    }
-
-    .track-panel {
-      border: 1px solid rgba(174, 195, 233, 0.28);
-      border-radius: var(--radius-md);
-      background: rgba(8, 12, 21, 0.72);
-      padding: 0.62rem;
-      display: grid;
-      align-content: start;
-      gap: 0.48rem;
-    }
-
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .filter {
-      border: 1px solid rgba(174, 195, 233, 0.36);
-      border-radius: 999px;
-      padding: 0.22rem 0.5rem;
-      background: rgba(255, 255, 255, 0.02);
-      color: #dbe8fd;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.71rem;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      cursor: pointer;
-      transition: all 160ms ease;
-    }
-
-    .filter:hover {
-      border-color: rgba(255, 122, 0, 0.9);
-    }
-
-    .filter.active {
-      border-color: rgba(255, 122, 0, 0.96);
-      background: rgba(255, 122, 0, 0.18);
-      color: #fff;
-    }
-
-    .track-head {
-      display: flex;
-      justify-content: space-between;
+      grid-template-columns: minmax(0, 1fr) auto;
       gap: 0.5rem;
       align-items: center;
-      color: var(--muted);
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      transition: border-color 170ms ease, background 170ms ease, transform 170ms ease;
     }
 
-    .track-progress {
+    .project-row.is-active {
+      border-color: rgba(31, 182, 255, 0.82);
+      background: rgba(31, 182, 255, 0.08);
+      transform: translateX(2px);
+    }
+
+    .project-main {
+      appearance: none;
+      -webkit-appearance: none;
+      background: none;
+      border: none;
+      color: inherit;
+      text-align: left;
+      cursor: pointer;
+      display: grid;
+      gap: 0.24rem;
       width: 100%;
-      height: 5px;
-      border-radius: 999px;
-      background: rgba(174, 195, 233, 0.2);
-      overflow: hidden;
-      margin-top: -0.2rem;
+      padding: 0;
+      min-width: 0;
     }
 
-    .track-controls {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: -0.2rem;
-    }
-
-    .track-toggle {
-      border: 1px solid rgba(174, 195, 233, 0.34);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.02);
-      color: #d7e6ff;
+    .project-rank {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.63rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      padding: 0.2rem 0.46rem;
-      cursor: pointer;
-      transition: all 160ms ease;
+      color: #ffcc81;
     }
 
-    .track-toggle:hover {
-      border-color: rgba(255, 122, 0, 0.86);
-      color: #fff;
+    .project-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #eef5ff;
+      line-height: 1.3;
     }
 
-    .track-progress span {
-      display: block;
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(100deg, #ff7a00, #35f4d0);
-      transition: width 250ms ease;
-    }
-
-    .spotlight-track {
-      display: grid;
-      gap: 0.52rem;
-      max-height: min(64vh, 760px);
-      overflow: auto;
-      padding-right: 0.14rem;
-    }
-
-    .track-card {
-      width: 100%;
-      border: 1px solid rgba(174, 195, 233, 0.24);
-      border-radius: var(--radius-sm);
-      text-align: left;
-      background: rgba(255, 255, 255, 0.02);
-      color: var(--ink);
-      padding: 0.62rem;
-      cursor: pointer;
-      transition: all 180ms ease;
-      display: grid;
-      gap: 0.18rem;
-      min-height: 86px;
-    }
-
-    .track-card:hover {
-      border-color: rgba(255, 122, 0, 0.62);
-      transform: translateY(-2px);
-      background: rgba(255, 255, 255, 0.04);
-    }
-
-    .track-card.active {
-      background: linear-gradient(110deg, rgba(255, 122, 0, 0.16), rgba(255, 122, 0, 0.05));
-      border-color: rgba(255, 122, 0, 0.86);
-      box-shadow: 0 10px 24px rgba(255, 122, 0, 0.16);
-      transform: translateY(-2px);
-    }
-
-    .track-line {
-      display: flex;
-      justify-content: space-between;
-      gap: 0.4rem;
-      align-items: center;
-      font-size: 0.69rem;
+    .project-meta {
       font-family: 'IBM Plex Mono', monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: #d8e6ff;
-    }
-
-    .track-label {
-      color: var(--accent-2);
-    }
-
-    .track-status {
-      border: 1px solid rgba(174, 195, 233, 0.46);
-      border-radius: 999px;
-      padding: 0.1rem 0.4rem;
-      font-size: 0.61rem;
-      color: #e2f0ff;
-      white-space: nowrap;
-    }
-
-    .track-title {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 0.93rem;
-      color: #f6f9ff;
-      line-height: 1.16;
-    }
-
-    .track-domain {
-      color: var(--muted);
-      font-size: 0.7rem;
-      font-family: 'IBM Plex Mono', monospace;
-      letter-spacing: 0.02em;
-    }
-
-    .atlas-section {
-      margin-top: 1.16rem;
-    }
-
-    .projects-list {
-      display: grid;
-      gap: 0.44rem;
-    }
-
-    .projects-controls {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 0.5rem;
-    }
-
-    .projects-toggle {
-      border: 1px solid rgba(174, 195, 233, 0.34);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.02);
-      color: #d7e6ff;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.64rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 0.22rem 0.5rem;
-      cursor: pointer;
-      transition: all 160ms ease;
-    }
-
-    .projects-toggle:hover {
-      border-color: rgba(255, 122, 0, 0.86);
-      color: #fff;
-    }
-
-    .project-row {
-      border: 1px solid rgba(174, 195, 233, 0.24);
-      border-radius: var(--radius-sm);
-      background: rgba(255, 255, 255, 0.02);
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 0.46rem;
-      align-items: center;
-      padding: 0.48rem;
-      transition: border-color 170ms ease, background 170ms ease, transform 170ms ease;
-    }
-
-    .project-row:hover {
-      border-color: rgba(255, 122, 0, 0.72);
-      background: rgba(255, 255, 255, 0.04);
-      transform: translateY(-1px);
-    }
-
-    .project-row-main {
-      border: 0;
-      background: transparent;
-      text-align: left;
-      color: inherit;
-      display: grid;
-      gap: 0.14rem;
-      cursor: pointer;
-      min-width: 0;
-      padding: 0;
-    }
-
-    .project-row-main:focus-visible {
-      outline: 2px solid rgba(255, 122, 0, 0.86);
-      outline-offset: 2px;
-      border-radius: 8px;
-    }
-
-    .project-row-meta {
-      font-family: 'IBM Plex Mono', monospace;
-      color: var(--muted);
       font-size: 0.62rem;
+      color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
-    .project-row-title {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 0.91rem;
-      line-height: 1.16;
-      color: #f1f6ff;
-      max-width: 50ch;
-    }
-
-    .project-row-summary {
-      color: #bdd0ec;
-      font-size: 0.77rem;
+    .project-summary {
+      font-size: 0.76rem;
+      color: #c2d2ea;
       display: -webkit-box;
-      -webkit-line-clamp: 1;
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
 
-    .project-row-actions {
+    .project-actions {
       display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      flex-wrap: wrap;
-      justify-content: flex-end;
+      flex-direction: column;
+      gap: 0.34rem;
+      justify-content: center;
+      align-items: stretch;
+      min-width: 112px;
     }
 
-    .project-row-actions .btn {
-      min-height: 30px;
-      font-size: 0.69rem;
-      padding: 0.32rem 0.58rem;
-    }
-
-    .atlas-toolbar {
-      margin-top: -0.18rem;
-      margin-bottom: 0.72rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.58rem;
-      flex-wrap: wrap;
-    }
-
-    .atlas-hint {
-      font-family: 'IBM Plex Mono', monospace;
-      color: var(--muted);
-      font-size: 0.66rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .view-switch {
-      border: 1px solid rgba(174, 195, 233, 0.3);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.03);
-      padding: 0.18rem;
-      display: inline-flex;
-      gap: 0.14rem;
-    }
-
-    .view-toggle {
+    .mini-btn {
+      text-decoration: none;
       appearance: none;
       -webkit-appearance: none;
-      border: 0;
       border-radius: 999px;
-      background: transparent;
-      color: #d6e4fb;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      padding: 0.38rem 0.58rem;
-      cursor: pointer;
-      transition: all 170ms ease;
-    }
-
-    .view-toggle:hover {
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .view-toggle.active {
-      background: linear-gradient(110deg, rgba(255, 122, 0, 0.23), rgba(255, 122, 0, 0.08));
-      color: #fff;
-      box-shadow: inset 0 0 0 1px rgba(255, 122, 0, 0.5);
-    }
-
-    .atlas-view {
-      display: none;
-    }
-
-    .atlas-view.atlas-view-active {
-      display: block;
-    }
-
-    .atlas-lanes {
-      display: grid;
-      gap: 0.62rem;
-    }
-
-    .atlas-lane {
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius-md);
-      background: rgba(10, 16, 30, 0.74);
-      box-shadow: var(--shadow);
-      padding: 0;
-      opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 340ms ease, transform 340ms ease;
-      overflow: hidden;
-    }
-
-    .atlas-lane.revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .lane-summary {
-      list-style: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.56rem 0.62rem;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .lane-summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .lane-summary::after {
-      content: '+';
-      width: 1.12rem;
-      height: 1.12rem;
-      border-radius: 999px;
-      border: 1px solid rgba(174, 195, 233, 0.4);
+      border: 1px solid rgba(164, 194, 236, 0.36);
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.02);
+      min-height: 30px;
+      padding: 0.34rem 0.58rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.76rem;
-      color: #d7e6ff;
-      flex-shrink: 0;
-    }
-
-    .atlas-lane[open] .lane-summary::after {
-      content: '−';
-    }
-
-    .lane-head {
-      display: grid;
-      gap: 0.12rem;
-    }
-
-    .lane-head h3 {
-      font-size: 0.98rem;
-    }
-
-    .lane-head p {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.63rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .lane-top {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.63rem;
-      color: #ffcf9f;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      font-size: 0.71rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 160ms ease;
+      text-align: center;
       white-space: nowrap;
     }
 
-    .lane-body {
-      border-top: 1px solid rgba(174, 195, 233, 0.2);
-      padding: 0.5rem 0.62rem 0.62rem;
-      display: grid;
-      gap: 0.42rem;
-    }
-
-    .atlas-list {
-      display: grid;
-      gap: 0.34rem;
-    }
-
-    .atlas-row {
-      border: 1px solid rgba(174, 195, 233, 0.24);
-      border-radius: var(--radius-sm);
-      background: rgba(255, 255, 255, 0.02);
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 0.48rem;
-      align-items: center;
-      padding: 0.42rem;
-      transition: border-color 170ms ease, background 170ms ease, transform 170ms ease;
-    }
-
-    .atlas-row:hover {
-      border-color: rgba(255, 122, 0, 0.72);
-      background: rgba(255, 255, 255, 0.04);
+    .mini-btn:hover {
+      border-color: rgba(31, 182, 255, 0.84);
+      background: rgba(31, 182, 255, 0.12);
       transform: translateY(-1px);
     }
 
-    .atlas-row-main {
-      border: 0;
-      background: transparent;
-      text-align: left;
-      color: inherit;
-      display: grid;
-      gap: 0.14rem;
-      cursor: pointer;
-      min-width: 0;
-      padding: 0;
+    .mini-btn.primary {
+      border-color: rgba(57, 217, 138, 0.52);
+      background: rgba(57, 217, 138, 0.14);
+      color: #ddffe9;
     }
 
-    .atlas-row-main:focus-visible {
-      outline: 2px solid rgba(255, 122, 0, 0.86);
-      outline-offset: 2px;
-      border-radius: 8px;
+    .mini-btn.disabled {
+      cursor: default;
+      opacity: 0.48;
+      pointer-events: none;
     }
 
-    .atlas-row-meta {
-      font-family: 'IBM Plex Mono', monospace;
+    .footer {
+      margin-top: 1rem;
+      padding: 0.7rem 0.2rem;
       color: var(--muted);
-      font-size: 0.62rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .atlas-row-title {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 0.9rem;
-      line-height: 1.15;
-      color: #f1f6ff;
-      max-width: 44ch;
-    }
-
-    .atlas-row-summary {
-      color: #b8cae7;
-      font-size: 0.76rem;
-      display: -webkit-box;
-      -webkit-line-clamp: 1;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .atlas-row-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .atlas-row-actions .btn {
-      min-height: 30px;
-      font-size: 0.69rem;
-      padding: 0.32rem 0.58rem;
-    }
-
-    .stage-actions .btn {
-      min-height: 33px;
-      font-size: 0.76rem;
-      padding: 0.4rem 0.64rem;
-    }
-
-    .graph-shell {
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius-lg);
-      background: linear-gradient(170deg, rgba(12, 18, 31, 0.94), rgba(8, 12, 22, 0.96));
-      box-shadow: var(--shadow);
-      padding: 0.68rem;
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
-      gap: 0.72rem;
-    }
-
-    .graph-stage {
-      border: 1px solid rgba(174, 195, 233, 0.22);
-      border-radius: var(--radius-md);
-      background:
-        radial-gradient(circle at 20% 22%, rgba(255, 122, 0, 0.16), transparent 34%),
-        radial-gradient(circle at 78% 75%, rgba(107, 140, 255, 0.2), transparent 36%),
-        linear-gradient(145deg, rgba(6, 11, 18, 0.98), rgba(8, 14, 24, 0.98));
-      position: relative;
-      min-height: 620px;
-      overflow: hidden;
-    }
-
-    .graph-stage::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(190, 212, 246, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(190, 212, 246, 0.06) 1px, transparent 1px);
-      background-size: 38px 38px;
-      opacity: 0.32;
-      pointer-events: none;
-    }
-
-    .graph-stage::after {
-      content: '';
-      position: absolute;
-      inset: -18%;
-      background:
-        radial-gradient(circle at 18% 20%, rgba(255, 122, 0, 0.2), transparent 34%),
-        radial-gradient(circle at 82% 76%, rgba(53, 244, 208, 0.19), transparent 36%),
-        linear-gradient(120deg, rgba(255, 255, 255, 0.04), transparent 40%, rgba(255, 255, 255, 0.02));
-      mix-blend-mode: screen;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 240ms ease;
-      animation: graphNebula 18s linear infinite;
-    }
-
-    .graph-stage.graph-live::after {
-      opacity: 0.42;
-    }
-
-    .graph-svg {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      z-index: 1;
-      display: block;
-    }
-
-    .graph-link {
-      fill: none;
-      stroke: rgba(173, 197, 240, 0.3);
-      stroke-width: 1.5;
-      vector-effect: non-scaling-stroke;
-      stroke-linecap: round;
-      transition: stroke 220ms ease, stroke-width 220ms ease, opacity 220ms ease;
-    }
-
-    .graph-link.domain {
-      stroke: rgba(147, 186, 246, 0.46);
-      stroke-dasharray: 2 8;
-      opacity: 0.78;
-    }
-
-    .graph-link.domain.active {
-      stroke: rgba(255, 122, 0, 0.82);
-      stroke-width: 2.2;
-      stroke-dasharray: none;
-      opacity: 1;
-    }
-
-    .graph-link.project {
-      stroke: rgba(53, 244, 208, 0.65);
-      stroke-width: 1.6;
-      stroke-dasharray: 5 6;
-      animation: graphEdgeFlow 3.6s linear infinite;
-      opacity: 0.9;
-    }
-
-    .graph-link.project.energized {
-      stroke: rgba(255, 170, 84, 0.94);
-      stroke-width: 2.2;
-      opacity: 1;
-    }
-
-    .graph-cursor-force {
-      fill: rgba(255, 122, 0, 0.1);
-      stroke: rgba(255, 122, 0, 0.58);
-      stroke-width: 1.4;
-      pointer-events: none;
-      opacity: 0;
-      mix-blend-mode: screen;
-      transition: opacity 180ms ease;
-    }
-
-    .graph-cursor-force-core {
-      fill: rgba(255, 191, 130, 0.45);
-      stroke: rgba(255, 122, 0, 0.88);
-      stroke-width: 1.1;
-      pointer-events: none;
-      opacity: 0;
-      mix-blend-mode: screen;
-    }
-
-    .graph-node {
-      cursor: pointer;
-    }
-
-    .graph-node circle {
-      transition: transform 180ms ease, stroke 180ms ease, fill 180ms ease, filter 180ms ease;
-      transform-origin: center;
-      filter: drop-shadow(0 0 9px rgba(0, 0, 0, 0.34));
-    }
-
-    .graph-node text {
       font-family: 'IBM Plex Mono', monospace;
-      fill: #e2efff;
-      font-size: 11px;
-      letter-spacing: 0.02em;
-      text-anchor: middle;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    .graph-node.root circle {
-      fill: rgba(255, 122, 0, 0.34);
-      stroke: rgba(255, 122, 0, 0.92);
-      stroke-width: 2;
-    }
-
-    .graph-node.root .graph-root-orbit {
-      fill: none !important;
-      stroke: rgba(255, 122, 0, 0.34) !important;
-      stroke-width: 1.2 !important;
-    }
-
-    .graph-node.root text {
-      fill: #ffe5cb;
-      font-size: 11.5px;
-    }
-
-    .graph-node.domain circle {
-      fill: rgba(68, 94, 150, 0.48);
-      stroke: rgba(150, 183, 244, 0.72);
-      stroke-width: 1.8;
-    }
-
-    .graph-node.domain.active circle {
-      fill: rgba(255, 122, 0, 0.33);
-      stroke: rgba(255, 122, 0, 0.9);
-      animation: graphNodePulse 2.8s ease-in-out infinite;
-    }
-
-    .graph-node.project circle {
-      fill: rgba(53, 244, 208, 0.2);
-      stroke: rgba(53, 244, 208, 0.82);
-      stroke-width: 1.5;
-    }
-
-    .graph-node.project.selected circle {
-      fill: rgba(255, 122, 0, 0.33);
-      stroke: rgba(255, 122, 0, 0.9);
-      stroke-width: 1.9;
-      animation: graphNodePulse 2.1s ease-in-out infinite;
-    }
-
-    .graph-node.energized circle {
-      transform: scale(1.1);
-      filter: drop-shadow(0 0 14px rgba(255, 155, 80, 0.55));
-    }
-
-    .graph-node:hover circle {
-      transform: scale(1.06);
-    }
-
-    .graph-project-label {
-      fill: #d6e6ff;
-      font-size: 10px;
-      text-anchor: middle;
-      font-family: 'IBM Plex Mono', monospace;
-      pointer-events: none;
-      opacity: 0.9;
-      transition: fill 180ms ease, opacity 180ms ease;
-      user-select: none;
-    }
-
-    .graph-project-label.selected {
-      fill: #ffd8b7;
-      opacity: 1;
-    }
-
-    .graph-panel {
-      border: 1px solid rgba(174, 195, 233, 0.24);
-      border-radius: var(--radius-md);
-      background: rgba(8, 13, 23, 0.72);
-      padding: 0.7rem;
-      display: grid;
-      align-content: start;
-      gap: 0.54rem;
-    }
-
-    .graph-eyebrow {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.69rem;
-      color: var(--accent-2);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .graph-panel h3 {
-      font-size: 1.08rem;
-    }
-
-    .graph-panel p {
-      color: #cedbef;
-      font-size: 0.87rem;
-    }
-
-    .graph-domain-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.38rem;
-    }
-
-    .graph-domain-pill {
-      border: 1px solid rgba(174, 195, 233, 0.32);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.03);
-      color: #deebff;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      padding: 0.24rem 0.44rem;
-      cursor: pointer;
-      transition: all 170ms ease;
-    }
-
-    .graph-domain-pill:hover {
-      border-color: rgba(255, 122, 0, 0.8);
-      background: rgba(255, 122, 0, 0.12);
-    }
-
-    .graph-domain-pill.active {
-      border-color: rgba(255, 122, 0, 0.92);
-      background: rgba(255, 122, 0, 0.16);
-      color: #fff;
-    }
-
-    .graph-meta {
-      font-family: 'IBM Plex Mono', monospace;
-      color: var(--muted);
       font-size: 0.68rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      min-height: 1.2em;
-    }
-
-    .graph-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.42rem;
-    }
-
-    .graph-actions .btn {
-      min-height: 34px;
-      font-size: 0.76rem;
-      padding: 0.4rem 0.64rem;
-    }
-
-    body.modal-open {
-      overflow: hidden;
+      letter-spacing: 0.06em;
+      text-align: center;
     }
 
     .modal-overlay {
       position: fixed;
       inset: 0;
+      background: rgba(2, 6, 12, 0.72);
+      backdrop-filter: blur(5px);
       z-index: 80;
-      background: rgba(2, 5, 12, 0.78);
-      backdrop-filter: blur(4px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1.1rem;
+      display: grid;
+      place-items: center;
+      padding: 0.84rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 170ms ease;
     }
 
     .modal-overlay.open {
-      display: flex;
+      opacity: 1;
+      pointer-events: auto;
     }
 
-    .project-modal {
-      width: min(980px, 100%);
-      max-height: calc(100vh - 2.2rem);
-      border: 1px solid rgba(174, 195, 233, 0.3);
-      border-radius: var(--radius-lg);
-      background: linear-gradient(170deg, rgba(13, 20, 35, 0.97), rgba(9, 14, 25, 0.98));
-      box-shadow: 0 24px 56px rgba(0, 0, 0, 0.6);
+    .modal {
+      width: min(860px, 100%);
+      max-height: min(90vh, 920px);
       overflow: auto;
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(165deg, rgba(10, 20, 35, 0.98), rgba(8, 16, 29, 0.98));
+      box-shadow: 0 28px 56px rgba(0, 0, 0, 0.46);
+      padding: 0.84rem;
+      display: grid;
+      gap: 0.72rem;
     }
 
-    .modal-top {
-      position: sticky;
-      top: 0;
-      z-index: 2;
+    .modal-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 0.6rem;
-      padding: 0.65rem 0.72rem;
-      border-bottom: 1px solid rgba(174, 195, 233, 0.2);
-      background: rgba(8, 13, 24, 0.95);
+      gap: 0.5rem;
     }
 
     .modal-kicker {
       font-family: 'IBM Plex Mono', monospace;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      font-size: 0.7rem;
-      color: var(--accent-2);
+      font-size: 0.68rem;
+      color: var(--muted);
     }
 
     .modal-close {
       width: 34px;
       height: 34px;
-      border: 1px solid rgba(174, 195, 233, 0.42);
       border-radius: 999px;
+      border: 1px solid rgba(164, 194, 236, 0.42);
       background: rgba(255, 255, 255, 0.04);
-      color: #deebff;
-      font-size: 1rem;
+      color: var(--ink);
+      font-size: 1.2rem;
+      line-height: 1;
       cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 170ms ease;
+      transition: 160ms ease;
     }
 
     .modal-close:hover {
-      border-color: rgba(255, 122, 0, 0.86);
-      background: rgba(255, 122, 0, 0.12);
+      border-color: rgba(31, 182, 255, 0.8);
+      background: rgba(31, 182, 255, 0.12);
     }
 
     .modal-layout {
       display: grid;
-      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-      gap: 0.8rem;
-      padding: 0.8rem;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+      gap: 0.7rem;
+      align-items: start;
     }
 
     .modal-media {
-      border: 1px solid rgba(174, 195, 233, 0.24);
+      border: 1px solid rgba(164, 194, 236, 0.24);
       border-radius: var(--radius-md);
       overflow: hidden;
-      background: #03060b;
-      align-self: start;
-      position: sticky;
-      top: 3.2rem;
+      background: #030914;
+      aspect-ratio: 16 / 10;
     }
 
     .modal-media img {
       width: 100%;
-      height: auto;
-      display: block;
+      height: 100%;
       object-fit: cover;
     }
 
-    .modal-content {
+    .modal-body {
       display: grid;
+      gap: 0.46rem;
       align-content: start;
-      gap: 0.5rem;
     }
 
     .modal-meta {
       display: flex;
       justify-content: space-between;
-      gap: 0.5rem;
+      gap: 0.42rem;
       color: var(--muted);
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.69rem;
+      font-size: 0.64rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
+      flex-wrap: wrap;
     }
 
-    .modal-content h3 {
-      font-size: clamp(1.3rem, 2.8vw, 2rem);
-      line-height: 1.12;
+    .modal-body h3 {
+      font-size: 1.34rem;
+      line-height: 1.2;
     }
 
-    .modal-content p {
-      color: #cfdaee;
-      font-size: 0.9rem;
+    .modal-body p {
+      color: #c8d7ef;
+      font-size: 0.86rem;
     }
 
-    .modal-intent {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.71rem;
-      color: var(--accent-2);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+    .modal-grid {
+      display: grid;
+      gap: 0.4rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .modal-rank {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      color: #ffc48f;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
+    .modal-grid .insight {
+      min-height: 100%;
+    }
+
+    .modal-grid .insight.wide {
+      grid-column: 1 / -1;
     }
 
     .modal-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.42rem;
-      margin-top: 0.2rem;
-    }
-
-    .footer {
-      margin-top: 1.2rem;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.84rem;
+      gap: 0.44rem;
     }
 
     .reveal {
       opacity: 0;
-      transform: translateY(14px);
+      transform: translateY(16px);
       transition: opacity 380ms ease, transform 380ms ease;
     }
 
-    .reveal.revealed {
+    .reveal.on {
       opacity: 1;
       transform: translateY(0);
     }
 
-    @keyframes pulse {
-      0%, 100% { transform: scale(1.02) translate3d(0, 0, 0); }
-      50% { transform: scale(1.07) translate3d(0.8%, 1.2%, 0); }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1.015); }
+      50% { transform: scale(1.045); }
     }
 
-    @keyframes drift {
-      0% { transform: scale(1.01) translate3d(-1.2%, -0.8%, 0); }
-      50% { transform: scale(1.06) translate3d(1.1%, 0.8%, 0); }
-      100% { transform: scale(1.03) translate3d(0.4%, -1%, 0); }
-    }
-
-    @keyframes graphEdgeFlow {
-      0% { stroke-dashoffset: 0; }
-      100% { stroke-dashoffset: -44; }
-    }
-
-    @keyframes graphNebula {
-      0% { transform: translate3d(-2%, -1%, 0) scale(1); }
-      50% { transform: translate3d(3%, 2.5%, 0) scale(1.03); }
-      100% { transform: translate3d(-1.5%, 1%, 0) scale(1); }
-    }
-
-    @keyframes graphNodePulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.09); }
-    }
-
-    @media (max-width: 1180px) {
-      .intro-shell {
+    @media (max-width: 1020px) {
+      .hero {
         grid-template-columns: 1fr;
       }
-    }
 
-    @media (max-width: 1080px) {
+      .systems-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .spotlight-card {
+        position: static;
+      }
+
       .modal-layout {
         grid-template-columns: 1fr;
-      }
-
-      .modal-media {
-        position: static;
       }
     }
 
     @media (max-width: 760px) {
       .site {
-        width: calc(100% - 1rem);
+        width: min(var(--max), 100% - 1rem);
       }
 
-      .mast {
-        padding: 0.82rem;
+      .topbar {
+        padding: 0.64rem 0.7rem;
+        border-radius: 14px;
+        top: 0.4rem;
+        --nav-height: 68px;
       }
 
-      .mast-top {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .mast-links {
+      .topnav {
         width: 100%;
-        justify-content: flex-start;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        gap: 0.34rem;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
       }
 
-      .mast-links::-webkit-scrollbar {
-        display: none;
+      .topnav a {
+        flex: 1 1 auto;
+        text-align: center;
+        min-height: 34px;
+        padding: 0.36rem 0.52rem;
+        font-size: 0.72rem;
       }
 
-      .nav-dock {
-        top: 0.2rem;
-        border-radius: 11px;
-        padding: 0.36rem;
-        margin-bottom: 0.68rem;
-      }
-
-      #spotlight,
-      #all-projects {
-        scroll-margin-top: 4rem;
-      }
-
-      .chip-link {
-        flex: 0 0 auto;
-        font-size: 0.68rem;
-        padding: 0.34rem 0.54rem;
-      }
-
-      .nav-kicker {
-        display: none;
-      }
-
-      .icon-link {
-        width: 30px;
-        height: 30px;
-      }
-
-      .icon-link svg {
-        width: 14px;
-        height: 14px;
+      .hero {
+        padding: 0.78rem;
+        border-radius: 18px;
       }
 
       h1 {
-        font-size: clamp(1.56rem, 8.2vw, 2.2rem);
-        max-width: 18ch;
+        font-size: 1.58rem;
       }
 
-      .intro-lead {
-        font-size: 0.85rem;
+      .hero-lead {
+        font-size: 0.86rem;
+      }
+
+      .hero-actions {
+        margin-top: 0.6rem;
+        margin-bottom: 0.62rem;
+      }
+
+      .hero-panel {
+        padding: 0.64rem;
+      }
+
+      .principles li {
+        font-size: 0.77rem;
       }
 
       .section-head {
-        margin-top: 0.88rem;
+        margin-top: 0.82rem;
         margin-bottom: 0.52rem;
       }
 
-      .section-head p {
-        display: none;
+      .section-head p,
+      .systems-note {
+        font-size: 0.8rem;
       }
 
-      .spotlight-shell {
-        padding: 0.56rem;
-        gap: 0.56rem;
+      .spotlight-body {
+        padding: 0.68rem;
       }
 
-      .spotlight-stage {
-        position: static;
-      }
-
-      .stage-media {
-        aspect-ratio: 4 / 3;
-      }
-
-      .stage-body {
-        padding: 0.62rem;
-        gap: 0.38rem;
-      }
-
-      .stage-meta {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.16rem;
-      }
-
-      .detail-grid {
+      .insight-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero-actions,
-      .stage-actions {
-        width: 100%;
+      .insight.wide {
+        grid-column: auto;
       }
 
-      .hero-actions .btn,
-      .stage-actions .btn {
-        flex: 1 1 auto;
+      .system-card summary {
+        padding: 0.58rem;
       }
 
-      .filters {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-      }
-
-      .filters::-webkit-scrollbar {
-        display: none;
-      }
-
-      .filter {
-        flex: 0 0 auto;
+      .system-body {
+        padding: 0.5rem;
       }
 
       .project-row {
         grid-template-columns: 1fr;
-        align-items: start;
+        gap: 0.4rem;
+        padding: 0.44rem;
       }
 
-      .project-row-actions {
-        width: 100%;
-        justify-content: flex-start;
+      .project-title {
+        font-size: 0.84rem;
       }
 
-      .project-row-actions .btn {
-        flex: 1 1 auto;
+      .project-summary {
+        font-size: 0.72rem;
       }
 
-      .projects-controls {
-        justify-content: flex-start;
+      .project-actions {
+        min-width: 0;
+        flex-direction: row;
+        flex-wrap: wrap;
       }
 
-      .modal-actions .btn {
-        flex: 1 1 auto;
+      .mini-btn {
+        flex: 1 1 48%;
+      }
+
+      .modal {
+        padding: 0.66rem;
+      }
+
+      .modal-body h3 {
+        font-size: 1.12rem;
+      }
+
+      .modal-grid {
+        grid-template-columns: 1fr;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .bg-canvas,
-      .stage-media img,
+      html {
+        scroll-behavior: auto;
+      }
+
       .reveal,
       .btn,
-      .chip-link,
-      .filter,
-      .track-card,
-      .modal-close,
-      .view-toggle,
-      .graph-node circle,
-      .graph-domain-pill,
-      .graph-link,
-      .graph-stage::after {
-        animation: none !important;
+      .mini-btn,
+      .topnav a,
+      .project-row,
+      .modal-overlay,
+      .spotlight-media img {
         transition: none !important;
+        animation: none !important;
       }
     }
   </style>
 </head>
 <body>
-  <canvas class="bg-canvas" id="bg-canvas" aria-hidden="true"></canvas>
-  <div class="noise" aria-hidden="true"></div>
-
   <main class="site">
-    <header class="mast reveal">
-      <div class="mast-top">
-        <div class="brand">Brian Markowitz <span>Engineering Portfolio</span></div>
+    <header class="topbar reveal">
+      <div>
+        <p class="brand">Brian Markowitz</p>
+        <p class="role">Data Architect + Data Engineer</p>
       </div>
-
-      <div class="intro-shell">
-        <div class="intro-copy">
-          <p class="eyebrow">Hands-on Engineering</p>
-          <h1>AI, data, and cloud systems built for operational leverage.</h1>
-          <p class="intro-lead">
-            Clean, ranked, and easy to scan. Start with one highlighted project, then open details only when you want more depth.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#spotlight">Open Spotlight</a>
-            <a class="btn btn-secondary" href="#all-projects">Browse Atlas</a>
-          </div>
-          <details class="intro-disclosure">
-            <summary>Quick Facts & Navigation</summary>
-            <p>Use Spotlight for fast evaluation, then open full details in modal view when needed.</p>
-            <ul class="intro-list">
-              <li><span>01</span>Use domain filters to narrow what you see.</li>
-              <li><span>02</span>Open “More context” only on projects that matter.</li>
-              <li><span>03</span>Use compact atlas rows to jump into details.</li>
-            </ul>
-            <div class="stats-strip" id="stats-strip"></div>
-            <div class="domain-ribbon" id="domain-ribbon"></div>
-          </details>
-        </div>
-      </div>
+      <nav class="topnav" aria-label="Primary navigation">
+        <a href="#spotlight">Flagship</a>
+        <a href="#systems">Project Systems</a>
+        <a href="https://github.com/brianmarkowitz" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
     </header>
 
-    <nav class="nav-dock reveal" aria-label="Primary">
-      <p class="nav-kicker">Quick Jump</p>
-      <div class="mast-links">
-        <a class="chip-link" href="#spotlight">Project Spotlight</a>
-        <a class="chip-link" href="#all-projects">Project Atlas</a>
-        <a class="icon-link" href="https://github.com/brianmarkowitz" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
-          <svg viewBox="0 0 16 16" aria-hidden="true">
-            <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.81.06 1.24.84 1.24.84.72 1.22 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.58.82-2.14-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.14 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.5 0 1.08-.01 1.95-.01 2.22 0 .21.14.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
-          </svg>
-        </a>
+    <section class="hero panel reveal" id="intro">
+      <div>
+        <p class="eyebrow">Portfolio Narrative</p>
+        <h1>I design data architecture that makes decisions faster and operations safer.</h1>
+        <p class="hero-lead">
+          This portfolio is organized like a data platform: core foundations first, intelligent products second, and interface experiments last.
+          Every project is ranked by overall impressiveness through a data architect and data engineer lens.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#spotlight">Open #1 Project</a>
+          <a class="btn btn-secondary" href="#systems">Browse Project Systems</a>
+        </div>
+        <div class="hero-stats" id="hero-stats"></div>
       </div>
-    </nav>
+
+      <aside class="hero-panel" aria-label="Operating principles">
+        <h2>Operating Principles</h2>
+        <ul class="principles">
+          <li>
+            <strong>Model First</strong>
+            Start with entity relationships, lifecycle boundaries, and data contracts before building interfaces.
+          </li>
+          <li>
+            <strong>Reliability by Design</strong>
+            Build retries, observability, and controlled failure paths into pipelines from day one.
+          </li>
+          <li>
+            <strong>Access Without Friction</strong>
+            Use semantic query layers and natural language interfaces to reduce dependency bottlenecks.
+          </li>
+          <li>
+            <strong>Proof Over Claims</strong>
+            Prioritize demonstrable systems, live artifacts, and measurable outcomes.
+          </li>
+        </ul>
+      </aside>
+    </section>
 
     <section id="spotlight">
       <div class="section-head reveal">
-        <h2>Project Spotlight</h2>
-        <p>One featured project at a time. Use the project list below to open details when needed.</p>
+        <h2>Flagship Project</h2>
+        <p>Most impressive project first, with deep context and direct access to live artifacts.</p>
       </div>
 
-      <div class="spotlight-shell reveal">
-        <article class="spotlight-stage" id="spotlight-stage">
-          <div class="stage-media">
-            <span class="stage-status" id="spotlight-status"></span>
+      <div class="systems-shell">
+        <article class="spotlight-card reveal" id="spotlight-card">
+          <div class="spotlight-media">
+            <span class="spotlight-rank" id="spotlight-rank">Rank #1</span>
             <img id="spotlight-image" src="" alt="Project preview" loading="lazy">
           </div>
-          <div class="stage-body">
-            <div class="stage-meta">
-              <span id="spotlight-id-year"></span>
-              <span id="spotlight-domain"></span>
-            </div>
+
+          <div class="spotlight-body">
+            <p class="spotlight-meta">
+              <span id="spotlight-system"></span>
+              <span id="spotlight-status"></span>
+            </p>
             <h3 id="spotlight-title"></h3>
             <p id="spotlight-summary"></p>
-            <details class="spotlight-more">
-              <summary>More project context</summary>
-              <div class="spotlight-more-body">
-                <p class="stage-intent" id="spotlight-intent"></p>
-                <p class="stage-rank" id="spotlight-rank"></p>
-                <div class="detail-grid">
-                  <article class="detail-card">
-                    <p class="detail-label">What It Is</p>
-                    <p id="spotlight-what"></p>
-                  </article>
-                  <article class="detail-card">
-                    <p class="detail-label">Why I Built It</p>
-                    <p id="spotlight-why"></p>
-                  </article>
-                  <article class="detail-card detail-wide">
-                    <p class="detail-label">Access / Proof</p>
-                    <p id="spotlight-access"></p>
-                  </article>
-                </div>
-                <div class="tags" id="spotlight-tags"></div>
-              </div>
-            </details>
-            <div class="stage-actions" id="spotlight-actions"></div>
+
+            <div class="insight-grid">
+              <article class="insight">
+                <p class="insight-label">Architecture Role</p>
+                <p id="spotlight-architecture"></p>
+              </article>
+              <article class="insight">
+                <p class="insight-label">Impact</p>
+                <p id="spotlight-impact"></p>
+              </article>
+              <article class="insight wide">
+                <p class="insight-label">Stack</p>
+                <p id="spotlight-stack"></p>
+              </article>
+            </div>
+
+            <div class="spotlight-tags" id="spotlight-tags"></div>
+            <div class="spotlight-actions" id="spotlight-actions"></div>
           </div>
         </article>
-      </div>
-    </section>
 
-    <section id="all-projects" class="atlas-section">
-      <div class="section-head reveal">
-        <h2>Project Atlas</h2>
-        <p>Simple ranked list. Tap any project for full details.</p>
+        <div class="systems-column" id="systems">
+          <div class="section-head section-tight reveal">
+            <h2>Project Systems</h2>
+            <p>Grouped by architecture layer. Scroll the list and the spotlight adapts to what is in view.</p>
+          </div>
+          <p class="systems-note reveal">Tap any project row to open a full modal. Visit actions stay available in both row and modal.</p>
+          <div class="systems-grid" id="systems-grid"></div>
+        </div>
       </div>
-      <div class="projects-controls reveal">
-        <button class="projects-toggle" id="projects-toggle" type="button"></button>
-      </div>
-      <div class="projects-list reveal" id="projects-list"></div>
     </section>
 
     <footer class="footer reveal">
@@ -1941,39 +1053,45 @@
     </footer>
 
     <div class="modal-overlay" id="project-modal-overlay" aria-hidden="true">
-      <article class="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <div class="modal-top">
+      <article class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-head">
           <p class="modal-kicker" id="modal-kicker">Project Detail</p>
           <button class="modal-close" id="modal-close" type="button" aria-label="Close project details">×</button>
         </div>
+
         <div class="modal-layout">
           <div class="modal-media">
             <img id="modal-image" src="" alt="" loading="lazy">
           </div>
-          <div class="modal-content">
-            <div class="modal-meta">
+
+          <div class="modal-body">
+            <p class="modal-meta">
               <span id="modal-id-year"></span>
-              <span id="modal-domain"></span>
-            </div>
+              <span id="modal-system-status"></span>
+            </p>
             <h3 id="modal-title"></h3>
-            <p class="modal-intent" id="modal-intent"></p>
-            <p class="modal-rank" id="modal-rank"></p>
             <p id="modal-summary"></p>
-            <div class="detail-grid">
-              <article class="detail-card">
-                <p class="detail-label">What It Is</p>
-                <p id="modal-what"></p>
+
+            <div class="modal-grid">
+              <article class="insight">
+                <p class="insight-label">Architecture Role</p>
+                <p id="modal-architecture"></p>
               </article>
-              <article class="detail-card">
-                <p class="detail-label">Why I Built It</p>
-                <p id="modal-why"></p>
+              <article class="insight">
+                <p class="insight-label">Impact</p>
+                <p id="modal-impact"></p>
               </article>
-              <article class="detail-card detail-wide">
-                <p class="detail-label">Access / Proof</p>
-                <p id="modal-access"></p>
+              <article class="insight wide">
+                <p class="insight-label">Stack</p>
+                <p id="modal-stack"></p>
+              </article>
+              <article class="insight wide">
+                <p class="insight-label">Access / Proof</p>
+                <p id="modal-proof"></p>
               </article>
             </div>
-            <div class="tags" id="modal-tags"></div>
+
+            <div class="spotlight-tags" id="modal-tags"></div>
             <div class="modal-actions" id="modal-actions"></div>
           </div>
         </div>
@@ -1988,9 +1106,14 @@
         title: 'Reload STAG/DEV from PROD',
         year: '2025',
         status: 'Internal Utility',
-        domain: 'Cloud & DevOps',
-        summary: 'Automation utility to reset STAG or DEV from production data, including OpenSearch and DynamoDB cleanup.',
-        tags: ['AWS', 'DynamoDB', 'OpenSearch', 'Automation'],
+        systemId: 'core-data',
+        systemLabel: 'Core Data Architecture',
+        summary: 'Automated environment refresh pipeline that resets staging and development from production-safe snapshots.',
+        architecture: 'Designed guarded reset workflows, data scrub sequencing, and repeatable environment provisioning patterns.',
+        impact: 'Reduced reset time and prevented stale data drift between environments.',
+        stack: 'AWS, DynamoDB, OpenSearch, automation scripting',
+        proof: 'Internal utility in active engineering workflow.',
+        tags: ['Automation', 'Environment Management', 'AWS'],
         demoUrl: '',
         codeUrl: '',
         image: 'static/project_1_reload_stag_dev.svg'
@@ -2000,9 +1123,14 @@
         title: 'ImmPort Log System with Retry Controls',
         year: '2025',
         status: 'Pipeline Delivered',
-        domain: 'Cloud & DevOps',
-        summary: 'Logging pipeline with Step Functions and retry controls to improve observability and fault tolerance.',
-        tags: ['AWS Step Functions', 'Logging', 'DevOps'],
+        systemId: 'core-data',
+        systemLabel: 'Core Data Architecture',
+        summary: 'Resilient logging pipeline using Step Functions retry controls for observable and recoverable ingestion.',
+        architecture: 'Specified retry and failure-state transitions for durable pipeline execution and incident traceability.',
+        impact: 'Increased fault tolerance and reduced silent pipeline failures during operational load.',
+        stack: 'AWS Step Functions, event logging, operational telemetry',
+        proof: 'Deployed internally for production support workflows.',
+        tags: ['Data Pipelines', 'Reliability', 'Observability'],
         demoUrl: '',
         codeUrl: '',
         image: 'static/immport_log.png'
@@ -2012,9 +1140,14 @@
         title: 'Getting Started with AI Prototyping',
         year: '2025',
         status: 'Live Demo',
-        domain: 'Applied AI',
-        summary: 'Engineer-facing guide with LangFlow tutorials, ETLLM pipelines, Groq integration, and vector search patterns.',
-        tags: ['AI', 'LangFlow', 'ETLLM', 'Vector Search', 'Groq API'],
+        systemId: 'intelligent-products',
+        systemLabel: 'Intelligent Data Products',
+        summary: 'Practical AI build system for engineers covering orchestration, vector retrieval, and model integration.',
+        architecture: 'Structured reusable prototyping patterns for ingestion, retrieval, and response flows.',
+        impact: 'Accelerated onboarding into applied AI/data workflows with repeatable templates.',
+        stack: 'LangFlow, ETLLM, vector search, Groq API',
+        proof: 'Public live demo available.',
+        tags: ['AI Workflows', 'Enablement', 'Knowledge Systems'],
         demoUrl: 'http://difz-ai-info.s3-website-us-east-1.amazonaws.com/',
         codeUrl: '',
         image: 'static/project_3_ai_prototyping.png'
@@ -2024,9 +1157,14 @@
         title: 'Neo4j Natural Language UI',
         year: '2025',
         status: 'Prototype',
-        domain: 'Data Engineering',
-        summary: 'Web interface for querying and visualizing Neo4j knowledge graphs in natural language.',
-        tags: ['Neo4j', 'Natural Language', 'UI'],
+        systemId: 'core-data',
+        systemLabel: 'Core Data Architecture',
+        summary: 'Natural language access layer for graph data exploration and relationship-centric query workflows.',
+        architecture: 'Mapped intent-to-graph-query translation into a usable retrieval interface for non-Cypher users.',
+        impact: 'Lowered graph database access friction and improved cross-team data fluency.',
+        stack: 'Neo4j, natural language interface, graph visualization',
+        proof: 'Prototype demonstrated through internal walkthrough.',
+        tags: ['Graph Databases', 'Semantic Query', 'Neo4j'],
         demoUrl: '',
         codeUrl: '',
         image: 'static/project_4_neo4j_nlui.svg'
@@ -2036,9 +1174,14 @@
         title: 'MySQL Natural Language Query System',
         year: '2025',
         status: 'Prototype',
-        domain: 'Data Engineering',
-        summary: 'System that translates user questions into structured SQL queries for faster data access.',
-        tags: ['AI', 'MySQL', 'LangChain', 'NLP'],
+        systemId: 'core-data',
+        systemLabel: 'Core Data Architecture',
+        summary: 'NL-to-SQL query layer that translates intent into structured MySQL queries for business users.',
+        architecture: 'Defined translation and validation flow between user prompts and executable SQL.',
+        impact: 'Enabled faster self-service analytics without requiring direct SQL expertise.',
+        stack: 'MySQL, LangChain, NLP parsing',
+        proof: 'Prototype available for architecture review.',
+        tags: ['SQL Access', 'NLP', 'Data Democratization'],
         demoUrl: '',
         codeUrl: '',
         image: 'static/project_5_mysql_nlq.svg'
@@ -2048,9 +1191,14 @@
         title: 'Poster Presenter AI Bot',
         year: '2025',
         status: 'Prototype',
-        domain: 'Applied AI',
-        summary: 'AI poster assistant using Rekognition, TTS/STT, and LLM orchestration for conference-style interactions.',
-        tags: ['AWS Rekognition', 'AI Agent', 'TTS', 'STT'],
+        systemId: 'intelligent-products',
+        systemLabel: 'Intelligent Data Products',
+        summary: 'Multimodal assistant that combines vision, speech, and LLM orchestration for interactive poster sessions.',
+        architecture: 'Composed event routing across Rekognition, STT/TTS, and LLM response generation.',
+        impact: 'Validated real-time multimodal interaction model for guided knowledge delivery.',
+        stack: 'AWS Rekognition, STT/TTS, AI agent orchestration',
+        proof: 'Working prototype for demo environments.',
+        tags: ['Multimodal AI', 'Agents', 'Realtime'],
         demoUrl: '',
         codeUrl: '',
         image: 'static/project_6_poster_presenter.svg'
@@ -2060,9 +1208,14 @@
         title: 'ResumeAI - LLM Resume Parser & Matcher',
         year: '2025',
         status: 'In Development',
-        domain: 'Applied AI',
-        summary: 'Resume extraction and correction workflow powered by LLMs for template conversion and proposal matching.',
-        tags: ['Resume Parsing', 'LLM', 'Proposal Automation'],
+        systemId: 'intelligent-products',
+        systemLabel: 'Intelligent Data Products',
+        summary: 'Resume extraction and matching workflow that structures unformatted candidate data for proposal alignment.',
+        architecture: 'Built normalization pipeline from document parsing to criteria-based matching outputs.',
+        impact: 'Reduced manual transformation effort in staffing and proposal workflows.',
+        stack: 'LLM pipelines, extraction logic, matching heuristics',
+        proof: 'In-development system with internal validation.',
+        tags: ['Data Normalization', 'LLM', 'Workflow Automation'],
         demoUrl: '',
         codeUrl: '',
         image: 'static/project_7_resumeai.svg'
@@ -2072,21 +1225,31 @@
         title: 'Data Engineer Skills Assessment',
         year: '2026',
         status: 'Live Demo',
-        domain: 'Data Engineering',
-        summary: 'Interactive assessment experience showcasing practical data engineering workflows and skill checkpoints.',
-        tags: ['Data Engineering', 'Assessment', 'Interactive'],
+        systemId: 'core-data',
+        systemLabel: 'Core Data Architecture',
+        summary: 'Interactive assessment platform that demonstrates applied data engineering capability through realistic workflows.',
+        architecture: 'Designed scenario-based checkpoints around modeling, pipeline logic, orchestration, and troubleshooting.',
+        impact: 'Creates concrete proof of data engineering depth for hiring and stakeholder evaluation.',
+        stack: 'Interactive web application, data workflow simulation, competency scoring',
+        proof: 'Public live demo available.',
+        tags: ['Data Engineering', 'Assessment', 'Applied Skills'],
         demoUrl: 'https://dwba3xr50k6pd.cloudfront.net/',
         codeUrl: '',
         image: 'static/project_8_data_engineer_assessment.png'
       },
       {
         id: 9,
-        title: 'aerospace orbital command',
+        title: 'Aerospace Orbital Command',
         year: '2026',
         status: 'Live Demo',
-        domain: 'Product Experience',
-        summary: 'Themed orbital tracking interface with immersive telemetry, map overlays, and command-console interactions.',
-        tags: ['Space', 'Visualization', 'Web App'],
+        systemId: 'interface-labs',
+        systemLabel: 'Applied Product Interfaces',
+        summary: 'Telemetry-rich orbital interface for tracking movement, state, and mission context in real time.',
+        architecture: 'Applied data-to-visual mapping patterns for high-signal command surfaces.',
+        impact: 'Demonstrates translating complex streams into understandable control interfaces.',
+        stack: 'Realtime visualization, map overlays, frontend telemetry UX',
+        proof: 'Public live demo available.',
+        tags: ['Visualization', 'Telemetry', 'Interaction Design'],
         demoUrl: 'https://isstracker-nine.vercel.app/',
         codeUrl: '',
         image: 'static/project_9_aerospace_orbital_command.png'
@@ -2096,9 +1259,14 @@
         title: 'Vibe Coding Journey',
         year: '2026',
         status: 'Live Demo',
-        domain: 'Product Experience',
-        summary: 'Guided onboarding journey that teaches vibe-coding through progressive lessons and interactive checkpoints.',
-        tags: ['AI', 'Education', 'Frontend'],
+        systemId: 'interface-labs',
+        systemLabel: 'Applied Product Interfaces',
+        summary: 'Guided learning product that sequences concept delivery with progressive interactive checkpoints.',
+        architecture: 'Structured instructional flow and state progression for high-completion onboarding.',
+        impact: 'Improved knowledge transfer through measurable, staged interaction design.',
+        stack: 'Frontend application, educational UX, progressive interaction',
+        proof: 'Public live demo available.',
+        tags: ['Learning Systems', 'Product UX', 'Frontend'],
         demoUrl: 'https://vibe-journey-xi.vercel.app/',
         codeUrl: '',
         image: 'static/project_10_vibe_coding_journey.png'
@@ -2108,9 +1276,14 @@
         title: 'ClawdMarks',
         year: '2026',
         status: 'Live Site',
-        domain: 'Applied AI',
-        summary: 'Operational intelligence workspace focused on AI-agent workflows, reliability patterns, and execution visibility.',
-        tags: ['AI Agents', 'Operations', 'Product'],
+        systemId: 'intelligent-products',
+        systemLabel: 'Intelligent Data Products',
+        summary: 'Operational intelligence workspace for monitoring and coordinating AI-assisted execution at scale.',
+        architecture: 'Established data surfaces for agent-state visibility, workflow control, and reliability inspection.',
+        impact: 'Improved operational clarity in AI-heavy delivery environments.',
+        stack: 'AI operations UX, execution telemetry, coordination layer',
+        proof: 'Public site available.',
+        tags: ['AI Operations', 'Control Plane', 'Operational Intelligence'],
         demoUrl: 'https://www.clawdmarks.com/',
         codeUrl: '',
         image: 'static/project_11_clawdmarks.png'
@@ -2120,9 +1293,14 @@
         title: 'Mission Control',
         year: '2026',
         status: 'Live Demo',
-        domain: 'Cloud & DevOps',
-        summary: 'Mission-oriented control interface for orchestrating systems, tracking status, and monitoring operational events.',
-        tags: ['Control Plane', 'Dashboard', 'Automation'],
+        systemId: 'core-data',
+        systemLabel: 'Core Data Architecture',
+        summary: 'Mission-style control interface for orchestrating system operations with status-aware dashboards.',
+        architecture: 'Consolidated multi-source operational data into a single command and response surface.',
+        impact: 'Reduced context switching and improved response speed during operations.',
+        stack: 'Dashboard architecture, orchestration UX, operational status tracking',
+        proof: 'Public live demo available.',
+        tags: ['Command Interface', 'Operations', 'Monitoring'],
         demoUrl: 'https://d2vkpyz88pgyjq.cloudfront.net/',
         codeUrl: '',
         image: 'static/project_12_mission_control.png'
@@ -2132,9 +1310,14 @@
         title: 'Vanessa Markowitz',
         year: '2026',
         status: 'Live Site',
-        domain: 'Product Experience',
-        summary: 'Public-facing personal site with branded storytelling, media-ready layout, and audience-oriented presentation.',
-        tags: ['Website', 'Brand', 'Content'],
+        systemId: 'interface-labs',
+        systemLabel: 'Applied Product Interfaces',
+        summary: 'Narrative-first web presence engineered for clarity, credibility, and audience conversion.',
+        architecture: 'Designed content architecture and responsive structure for clean information hierarchy.',
+        impact: 'Delivered polished external communication platform with strong readability.',
+        stack: 'Frontend architecture, branding UX, content systems',
+        proof: 'Public site available.',
+        tags: ['Website Architecture', 'Storytelling', 'UX'],
         demoUrl: 'https://www.vanessamarkowitz.com/',
         codeUrl: '',
         image: 'static/project_13_vanessa_markowitz.png'
@@ -2144,9 +1327,14 @@
         title: 'DMBMarko Studio Album Experience',
         year: '2026',
         status: 'Live Demo',
-        domain: 'Creative Experience',
-        summary: 'Interactive album experience with track navigation, playback controls, and lyric storytelling in a cinematic interface.',
-        tags: ['Audio UX', 'Interactive Media', 'Frontend'],
+        systemId: 'interface-labs',
+        systemLabel: 'Applied Product Interfaces',
+        summary: 'Media-rich interactive album system with track sequencing, lyrics, and cinematic transitions.',
+        architecture: 'Engineered interaction choreography and playback-centric state handling.',
+        impact: 'Showcases strong frontend systems thinking in a creative product environment.',
+        stack: 'Interactive media UI, audio UX, motion-led frontend',
+        proof: 'Public live demo available.',
+        tags: ['Creative Systems', 'Audio UX', 'Interaction'],
         demoUrl: 'https://dmbrian.vercel.app/',
         codeUrl: '',
         image: 'static/project_14_dmbrian.png'
@@ -2156,1112 +1344,234 @@
         title: 'Clawbot Patch Blog',
         year: '2026',
         status: 'Live Blog',
-        domain: 'Applied AI',
-        summary: 'Public engineering notes from Clawbot operations, focused on automation behavior, fixes, and assistant workflow lessons.',
-        tags: ['AI Ops', 'Engineering Blog', 'Automation'],
+        systemId: 'intelligent-products',
+        systemLabel: 'Intelligent Data Products',
+        summary: 'Operational patch log documenting AI workflow behavior, fixes, and reliability improvements.',
+        architecture: 'Created engineering knowledge stream for change transparency and operational learning loops.',
+        impact: 'Captured repeatable lessons and reduced ambiguity in AI-assistant operations.',
+        stack: 'Documentation pipeline, AI operations reporting, public engineering notes',
+        proof: 'Public blog available.',
+        tags: ['Knowledge Ops', 'AI Reliability', 'Engineering Notes'],
         demoUrl: 'https://brianmarkowitz.github.io/patch-blog/',
         codeUrl: '',
         image: 'static/project_15_patch_blog.png'
       }
     ];
 
-    const projectProfiles = {
-      1: {
-        intent: 'Safer environment resets for release velocity.',
-        what: 'Internal utility that refreshes staging and development environments from production-safe snapshots with automated cleanup.',
-        why: 'Manual refresh processes were error-prone and slow. This reduced risk and made non-production testing environments consistently usable.',
-        access: 'No public link. Internal engineering utility; architecture walkthrough and process details available on request.'
+    const projectSystems = [
+      {
+        id: 'core-data',
+        title: 'Core Data Architecture',
+        description: 'Pipelines, storage/query interfaces, and reliability-first data operations.'
       },
-      2: {
-        intent: 'Make log pipelines resilient under failure.',
-        what: 'Event logging workflow with Step Functions retry control to improve observability and fault tolerance.',
-        why: 'Needed durable operational telemetry and fewer blind spots during incident review.',
-        access: 'No public link. Deployed inside internal AWS environment.'
+      {
+        id: 'intelligent-products',
+        title: 'Intelligent Data Products',
+        description: 'AI-enabled products that convert data into clear operational decisions.'
       },
-      3: {
-        intent: 'Accelerate AI prototyping for engineers.',
-        what: 'Practical guide site for AI prototyping patterns, including orchestration and vector-search integrations.',
-        why: 'Created to shorten onboarding and establish repeatable implementation patterns across teams.',
-        access: 'Public demo available through the live link.'
-      },
-      4: {
-        intent: 'Reduce friction to graph insights.',
-        what: 'Natural-language interface for querying and exploring Neo4j graph data.',
-        why: 'Designed so non-specialists could interrogate connected data without writing Cypher.',
-        access: 'No public link. Prototype build demonstrated internally.'
-      },
-      5: {
-        intent: 'Enable self-serve analytics for non-SQL users.',
-        what: 'Natural-language to SQL translation workflow for MySQL data exploration.',
-        why: 'Built to cut analyst dependency for routine questions and speed up decision loops.',
-        access: 'No public link. Prototype available for walkthrough.'
-      },
-      6: {
-        intent: 'Create interactive AI-guided demonstrations.',
-        what: 'Poster assistant bot combining vision, speech, and LLM orchestration for live presentation scenarios.',
-        why: 'Built to test multimodal interaction patterns and reduce presenter bottlenecks in demo contexts.',
-        access: 'No public link. Prototype assembled for event/demo use.'
-      },
-      7: {
-        intent: 'Automate resume-to-opportunity matching.',
-        what: 'LLM-driven workflow that parses resumes, normalizes structure, and aligns candidates to proposal needs.',
-        why: 'Built to reduce manual formatting and improve candidate-to-requirement matching quality.',
-        access: 'No public link. In-development system.'
-      },
-      8: {
-        intent: 'Demonstrate practical data engineering competency.',
-        what: 'Interactive assessment experience focused on real-world data engineering tasks and checkpoints.',
-        why: 'Created as a proof-oriented project to demonstrate applied skills, not just theoretical knowledge.',
-        access: 'Public demo available through the live link.'
-      },
-      9: {
-        intent: 'Test telemetry-driven UI storytelling.',
-        what: 'Immersive orbital command interface with tracking visuals and console interactions.',
-        why: 'Built to explore complex, data-rich interaction design in a themed command environment.',
-        access: 'Public demo available through the live link.'
-      },
-      10: {
-        intent: 'Teach modern build workflows through product UX.',
-        what: 'Step-by-step learning journey that introduces vibe-coding concepts through interactive lessons.',
-        why: 'Created to combine instructional design with product-quality frontend execution.',
-        access: 'Public demo available through the live link.'
-      },
-      11: {
-        intent: 'Centralize AI-agent operational visibility.',
-        what: 'Operations-focused workspace for monitoring and managing agent-driven execution.',
-        why: 'Built to improve reliability and decision speed in AI-heavy operating environments.',
-        access: 'Public site available through the live link.'
-      },
-      12: {
-        intent: 'Unify operational command workflows.',
-        what: 'Mission-oriented control interface for orchestrating systems and tracking ongoing events.',
-        why: 'Built to consolidate execution state into a single command surface.',
-        access: 'Public demo available through the live link.'
-      },
-      13: {
-        intent: 'Deliver polished external-facing brand storytelling.',
-        what: 'Personal brand website designed for clear narrative, credibility, and audience engagement.',
-        why: 'Built to showcase product thinking and high-quality content presentation.',
-        access: 'Public site available through the live link.'
-      },
-      14: {
-        intent: 'Blend creative media and frontend engineering.',
-        what: 'Interactive studio album experience with playback controls, track navigation, and lyric presentation.',
-        why: 'Built to demonstrate technical execution in a cinematic, narrative-first creative interface.',
-        access: 'Public demo available through the live link.'
-      },
-      15: {
-        intent: 'Document AI assistant operations in public.',
-        what: 'A running patch blog capturing Clawbot decisions, cleanup tasks, and operational improvements over time.',
-        why: 'Built to show process transparency and how automated assistants are managed in real-world engineering workflows.',
-        access: 'Public blog available through the live link.'
+      {
+        id: 'interface-labs',
+        title: 'Applied Product Interfaces',
+        description: 'Visualization and product experiments informed by data-system thinking.'
       }
-    };
-
-    const domainNarratives = {
-      'Applied AI': 'Agent workflows, multimodal prototypes, and AI operating systems.',
-      'Cloud & DevOps': 'Automation surfaces and resilient operational command workflows.',
-      'Data Engineering': 'Query acceleration, graph interfaces, and data fluency tooling.',
-      'Product Experience': 'High-interaction user journeys and narrative UI systems.',
-      'Creative Experience': 'Media-rich experiences where engineering and storytelling merge.'
-    };
-
-    const impressivenessOrder = [
-      11, 12, 14, 9, 10, 8, 15, 6, 3, 7, 1, 2, 5, 4, 13
     ];
 
-    const impressivenessRank = Object.fromEntries(
-      impressivenessOrder.map((id, index) => [id, index + 1])
-    );
+    const impressivenessOrder = [8, 2, 4, 5, 11, 1, 12, 3, 7, 15, 6, 9, 10, 13, 14];
+    const rankById = Object.fromEntries(impressivenessOrder.map((id, index) => [id, index + 1]));
 
     const projects = rawProjects
-      .map((project) => {
-        const profile = projectProfiles[project.id] || {};
-        return {
-          ...project,
-          impressivenessRank: impressivenessRank[project.id] || Number.MAX_SAFE_INTEGER,
-          intent: profile.intent || 'Build and ship practical software with measurable value.',
-          what: profile.what || project.summary,
-          why: profile.why || 'Built to improve user and operator outcomes through better tooling.',
-          access: profile.access || (project.demoUrl
-            ? 'Public demo available through the live link.'
-            : 'No public link. Additional implementation detail available on request.')
-        };
-      })
-      .sort((a, b) => {
-        if (a.impressivenessRank !== b.impressivenessRank) {
-          return a.impressivenessRank - b.impressivenessRank;
-        }
-        return a.id - b.id;
-      });
+      .map((project) => ({
+        ...project,
+        rank: rankById[project.id] || Number.MAX_SAFE_INTEGER
+      }))
+      .sort((a, b) => a.rank - b.rank);
 
     const state = {
-      activeFilter: 'All',
-      activeProjectId: projects[0].id,
-      trackExpanded: false,
-      projectsExpanded: false,
-      graphActiveDomain: null,
-      graphSelectedProjectId: null
+      activeProjectId: projects[0]?.id || null
     };
 
-    let trackObserver = null;
-    let trackResizeTimer = null;
-    let lastFocusedElement = null;
-    let graphScene = null;
+    let lastFocused = null;
+    let scrollSyncObserver = null;
+    let resizeTimer = null;
 
-    function createAction(label, url, type = 'primary', emptyLabel = `${label}: Pending`) {
-      const base = type === 'secondary' ? 'btn btn-secondary' : 'btn btn-primary';
+    function getProject(projectId) {
+      return projects.find((project) => project.id === projectId) || projects[0];
+    }
+
+    function createMainAction(label, url, type = 'primary', emptyLabel = 'Not Public') {
+      const className = type === 'secondary' ? 'btn btn-secondary' : 'btn btn-primary';
       if (!url) {
-        return `<span class="${base} btn-disabled" aria-disabled="true">${emptyLabel}</span>`;
+        return `<span class="${className} btn-disabled" aria-disabled="true">${emptyLabel}</span>`;
       }
-      return `<a class="${base}" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+      return `<a class="${className}" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
     }
 
-    function createSvgNode(tag, attrs = {}, text = '') {
-      const element = document.createElementNS('http://www.w3.org/2000/svg', tag);
-      Object.entries(attrs).forEach(([key, value]) => element.setAttribute(key, String(value)));
-      if (text) element.textContent = text;
-      return element;
+    function createMiniAction(label, url, variant = '', emptyLabel = 'No Link') {
+      const className = ['mini-btn', variant].filter(Boolean).join(' ');
+      if (!url) {
+        return `<span class="${className} disabled" aria-disabled="true">${emptyLabel}</span>`;
+      }
+      return `<a class="${className}" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
     }
 
-    function truncateLabel(value, max = 22) {
-      if (value.length <= max) return value;
-      return `${value.slice(0, max - 1)}…`;
-    }
-
-    function getGraphDomains() {
-      const grouped = projects.reduce((acc, project) => {
-        if (!acc[project.domain]) {
-          acc[project.domain] = {
-            domain: project.domain,
-            projects: []
-          };
-        }
-        acc[project.domain].projects.push(project);
-        return acc;
-      }, {});
-
-      return Object.values(grouped)
-        .map((entry) => ({
-          ...entry,
-          projects: entry.projects.sort((a, b) => a.impressivenessRank - b.impressivenessRank),
-          topRank: Math.min(...entry.projects.map((project) => project.impressivenessRank))
-        }))
-        .sort((a, b) => a.topRank - b.topRank);
-    }
-
-    function stopGraphScene() {
-      if (!graphScene) return;
-
-      if (graphScene.rafId) {
-        cancelAnimationFrame(graphScene.rafId);
-      }
-
-      if (graphScene.wrap) {
-        graphScene.wrap.classList.remove('graph-live');
-        graphScene.wrap.removeEventListener('pointermove', graphScene.onPointerMove);
-        graphScene.wrap.removeEventListener('pointerenter', graphScene.onPointerEnter);
-        graphScene.wrap.removeEventListener('pointerleave', graphScene.onPointerLeave);
-        graphScene.wrap.removeEventListener('pointerdown', graphScene.onPointerDown);
-        graphScene.wrap.removeEventListener('pointerup', graphScene.onPointerUp);
-      }
-
-      graphScene = null;
-    }
-
-    function renderGraphPanel(domains) {
-      const title = document.getElementById('graph-panel-title');
-      const text = document.getElementById('graph-panel-text');
-      const meta = document.getElementById('graph-panel-meta');
-      const actions = document.getElementById('graph-panel-actions');
-      const pills = document.getElementById('graph-domain-pills');
-
-      if (!title || !text || !meta || !actions || !pills) return;
-
-      const activeDomainData = domains.find((domain) => domain.domain === state.graphActiveDomain) || null;
-      const selectedProject = projects.find((project) => project.id === state.graphSelectedProjectId) || null;
-
-      pills.innerHTML = domains
-        .map((domain) => `
-          <button class="graph-domain-pill ${state.graphActiveDomain === domain.domain ? 'active' : ''}" data-domain="${domain.domain}" type="button">
-            ${domain.domain} • ${domain.projects.length}
-          </button>
-        `)
-        .join('');
-
-      pills.querySelectorAll('.graph-domain-pill').forEach((button) => {
-        button.addEventListener('click', () => {
-          const nextDomain = button.dataset.domain;
-          state.graphSelectedProjectId = null;
-          state.graphActiveDomain = state.graphActiveDomain === nextDomain ? null : nextDomain;
-          renderProjectGraph();
-        });
-      });
-
-      if (selectedProject) {
-        title.textContent = selectedProject.title;
-        text.textContent = selectedProject.summary;
-        meta.textContent = `#${selectedProject.impressivenessRank} • ${selectedProject.domain} • ${selectedProject.status}`;
-        actions.innerHTML = `
-          ${createAction('Visit Project', selectedProject.demoUrl, 'primary', 'No Public Link')}
-          <button class="btn btn-secondary" id="graph-open-modal" type="button">Open Details</button>
-          <button class="btn btn-secondary" id="graph-focus-spotlight" type="button">Focus In Spotlight</button>
-        `;
-
-        const modalButton = document.getElementById('graph-open-modal');
-        if (modalButton) {
-          modalButton.addEventListener('click', () => openProjectModal(selectedProject.id));
-        }
-
-        const spotlightButton = document.getElementById('graph-focus-spotlight');
-        if (spotlightButton) {
-          spotlightButton.addEventListener('click', () => {
-            state.activeFilter = selectedProject.domain;
-            state.activeProjectId = selectedProject.id;
-            renderFilters();
-            renderSpotlightTrack();
-            renderSpotlightProject();
-            focusSpotlight();
-          });
-        }
-        return;
-      }
-
-      if (activeDomainData) {
-        title.textContent = `${activeDomainData.domain} Cluster`;
-        text.textContent = domainNarratives[activeDomainData.domain] || 'Project cluster selected. Click a node to open details.';
-        meta.textContent = `${activeDomainData.projects.length} projects • best rank #${activeDomainData.topRank}`;
-        actions.innerHTML = `
-          <button class="btn btn-secondary" id="graph-collapse-domain" type="button">Collapse Bloom</button>
-          <button class="btn btn-primary" id="graph-open-top-project" type="button">Open Top Project</button>
-        `;
-
-        const collapseButton = document.getElementById('graph-collapse-domain');
-        if (collapseButton) {
-          collapseButton.addEventListener('click', () => {
-            state.graphActiveDomain = null;
-            state.graphSelectedProjectId = null;
-            renderProjectGraph();
-          });
-        }
-
-        const openTopProjectButton = document.getElementById('graph-open-top-project');
-        if (openTopProjectButton) {
-          openTopProjectButton.addEventListener('click', () => {
-            const topProject = activeDomainData.projects[0];
-            state.graphSelectedProjectId = topProject.id;
-            renderProjectGraph();
-            openProjectModal(topProject.id);
-          });
-        }
-        return;
-      }
-
-      title.textContent = 'Project Knowledge Graph';
-      text.textContent = 'Click a domain node to bloom its connected projects. Click a project node to open full details.';
-      meta.textContent = `${domains.length} domains • ${projects.length} projects`;
-      actions.innerHTML = `
-        <button class="btn btn-secondary" id="graph-highlight-top" type="button">Highlight Top Domain</button>
-      `;
-
-      const highlightTopButton = document.getElementById('graph-highlight-top');
-      if (highlightTopButton) {
-        highlightTopButton.addEventListener('click', () => {
-          const topDomain = domains[0];
-          if (!topDomain) return;
-          state.graphActiveDomain = topDomain.domain;
-          state.graphSelectedProjectId = null;
-          renderProjectGraph();
-        });
-      }
-    }
-
-    function renderProjectGraph() {
-      const svg = document.getElementById('project-graph-svg');
-      const wrap = document.getElementById('project-graph-canvas-wrap');
-      stopGraphScene();
-      if (!svg || !wrap) return;
-
-      const domains = getGraphDomains();
-      if (!domains.length) return;
-
-      if (state.graphActiveDomain && !domains.some((domain) => domain.domain === state.graphActiveDomain)) {
-        state.graphActiveDomain = null;
-      }
-
-      if (state.graphSelectedProjectId) {
-        const selected = projects.find((project) => project.id === state.graphSelectedProjectId);
-        if (!selected || (state.graphActiveDomain && selected.domain !== state.graphActiveDomain)) {
-          state.graphSelectedProjectId = null;
-        }
-      }
-
-      const bounds = wrap.getBoundingClientRect();
-      const width = Math.max(620, Math.floor(bounds.width || 620));
-      const height = Math.max(430, Math.floor(bounds.height || 430));
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
-      svg.innerHTML = '';
-
-      const center = { x: width / 2, y: height / 2 };
-      const rootRadius = 30;
-      const domainOrbit = Math.min(width, height) * (state.graphActiveDomain ? 0.35 : 0.32);
-      const domainLayout = domains.map((domain, index) => {
-        const angle = (-Math.PI / 2) + ((Math.PI * 2 * index) / domains.length);
-        return {
-          ...domain,
-          angle,
-          baseX: center.x + Math.cos(angle) * domainOrbit,
-          baseY: center.y + Math.sin(angle) * domainOrbit
-        };
-      });
-
-      const linksGroup = createSvgNode('g');
-      const labelsGroup = createSvgNode('g');
-      const nodesGroup = createSvgNode('g');
-      const cursorHalo = createSvgNode('circle', {
-        class: 'graph-cursor-force',
-        cx: center.x,
-        cy: center.y,
-        r: 24
-      });
-      const cursorCore = createSvgNode('circle', {
-        class: 'graph-cursor-force-core',
-        cx: center.x,
-        cy: center.y,
-        r: 8
-      });
-      svg.append(linksGroup, cursorHalo, cursorCore, labelsGroup, nodesGroup);
-
-      const cursor = {
-        x: center.x,
-        y: center.y,
-        active: false,
-        pressed: false,
-        energy: 0
-      };
-
-      const dynamicNodes = [];
-      const linkRefs = [];
-
-      const rootNodeData = {
-        kind: 'root',
-        key: 'root',
-        x: center.x,
-        y: center.y,
-        baseX: center.x,
-        baseY: center.y,
-        r: rootRadius,
-        vx: 0,
-        vy: 0,
-        spring: 0.084,
-        damping: 0.88,
-        floatAmp: reduceMotion ? 0 : 5,
-        floatSpeed: 0.52,
-        floatPhase: 0.8,
-        pointerPull: 0.05,
-        energy: 0,
-        labelEl: null,
-        element: null
-      };
-
-      const rootNode = createSvgNode('g', {
-        class: 'graph-node root',
-        transform: `translate(${center.x} ${center.y})`
-      });
-      rootNode.appendChild(
-        createSvgNode('circle', {
-          class: 'graph-root-orbit',
-          r: rootRadius + 8,
-          fill: 'none',
-          stroke: 'rgba(255, 122, 0, 0.3)',
-          'stroke-width': 1.2
-        })
-      );
-      rootNode.appendChild(createSvgNode('circle', { r: rootRadius }));
-      rootNode.appendChild(createSvgNode('text', { y: 4 }, 'PROJECTS'));
-      rootNode.addEventListener('click', () => {
-        state.graphActiveDomain = null;
-        state.graphSelectedProjectId = null;
-        renderProjectGraph();
-      });
-      nodesGroup.appendChild(rootNode);
-      rootNodeData.element = rootNode;
-      dynamicNodes.push(rootNodeData);
-
-      const domainByName = new Map();
-
-      domainLayout.forEach((domain, index) => {
-        const isActive = state.graphActiveDomain === domain.domain;
-        const domainNodeData = {
-          kind: 'domain',
-          key: `domain-${domain.domain}`,
-          domain: domain.domain,
-          x: domain.baseX,
-          y: domain.baseY,
-          baseX: domain.baseX,
-          baseY: domain.baseY,
-          r: isActive ? 26 : 22,
-          vx: 0,
-          vy: 0,
-          spring: 0.11,
-          damping: 0.87,
-          floatAmp: reduceMotion ? 0 : 4 + (index % 3),
-          floatSpeed: 0.6 + (index % 5) * 0.05,
-          floatPhase: index * 0.9,
-          pointerPull: isActive ? 0.55 : 0.42,
-          energy: 0,
-          labelEl: null,
-          element: null
-        };
-
-        const link = createSvgNode('line', {
-          class: `graph-link domain ${isActive ? 'active' : ''}`,
-          x1: center.x,
-          y1: center.y,
-          x2: domain.baseX,
-          y2: domain.baseY
-        });
-        linksGroup.appendChild(link);
-        linkRefs.push({
-          element: link,
-          from: rootNodeData,
-          to: domainNodeData,
-          type: 'domain',
-          phase: index * 5
-        });
-
-        const domainNode = createSvgNode('g', {
-          class: `graph-node domain ${isActive ? 'active' : ''}`,
-          transform: `translate(${domain.baseX} ${domain.baseY})`
-        });
-        domainNode.appendChild(createSvgNode('circle', { r: isActive ? 26 : 22 }));
-        domainNode.appendChild(createSvgNode('text', { y: -2 }, truncateLabel(domain.domain, 18)));
-        domainNode.appendChild(
-          createSvgNode(
-            'text',
-            {
-              y: 11,
-              fill: '#b2c7e8',
-              'font-size': 10
-            },
-            `${domain.projects.length}`
-          )
-        );
-        domainNode.addEventListener('click', () => {
-          state.graphSelectedProjectId = null;
-          state.graphActiveDomain = isActive ? null : domain.domain;
-          renderProjectGraph();
-        });
-        nodesGroup.appendChild(domainNode);
-        domainNodeData.element = domainNode;
-        domainByName.set(domain.domain, domainNodeData);
-        dynamicNodes.push(domainNodeData);
-      });
-
-      if (state.graphActiveDomain) {
-        const activeDomain = domainLayout.find((domain) => domain.domain === state.graphActiveDomain);
-        const activeDomainNode = activeDomain ? domainByName.get(activeDomain.domain) : null;
-
-        if (activeDomain && activeDomainNode) {
-          const count = activeDomain.projects.length;
-          const projectOrbit = Math.min(220, Math.max(118, 80 + count * 11));
-
-          activeDomain.projects.forEach((project, index) => {
-            const angle = (-Math.PI / 2) + ((Math.PI * 2 * index) / Math.max(count, 1));
-            let baseX = activeDomainNode.baseX + Math.cos(angle) * projectOrbit;
-            let baseY = activeDomainNode.baseY + Math.sin(angle) * projectOrbit;
-            baseX = Math.min(Math.max(baseX, 48), width - 48);
-            baseY = Math.min(Math.max(baseY, 48), height - 48);
-
-            const selected = state.graphSelectedProjectId === project.id;
-            const projectNodeData = {
-              kind: 'project',
-              key: `project-${project.id}`,
-              projectId: project.id,
-              x: baseX,
-              y: baseY,
-              baseX,
-              baseY,
-              r: selected ? 16 : 13,
-              vx: (Math.random() - 0.5) * 0.35,
-              vy: (Math.random() - 0.5) * 0.35,
-              spring: selected ? 0.14 : 0.12,
-              damping: selected ? 0.84 : 0.86,
-              floatAmp: reduceMotion ? 0 : 4 + (index % 4) * 1.4,
-              floatSpeed: 0.72 + (index % 6) * 0.05,
-              floatPhase: (index + 1) * 1.04,
-              pointerPull: selected ? 0.7 : 0.56,
-              energy: 0,
-              labelEl: null,
-              element: null
-            };
-
-            const edge = createSvgNode('line', {
-              class: 'graph-link project',
-              x1: activeDomainNode.baseX,
-              y1: activeDomainNode.baseY,
-              x2: baseX,
-              y2: baseY
-            });
-            linksGroup.appendChild(edge);
-            linkRefs.push({
-              element: edge,
-              from: activeDomainNode,
-              to: projectNodeData,
-              type: 'project',
-              phase: Math.random() * 64
-            });
-
-            const projectNode = createSvgNode('g', {
-              class: `graph-node project ${selected ? 'selected' : ''}`,
-              transform: `translate(${baseX} ${baseY})`
-            });
-            projectNode.appendChild(createSvgNode('circle', { r: selected ? 16 : 13 }));
-            projectNode.appendChild(createSvgNode('text', { y: 4 }, `#${project.impressivenessRank}`));
-            projectNode.addEventListener('click', () => {
-              state.graphSelectedProjectId = project.id;
-              renderProjectGraph();
-              openProjectModal(project.id);
-            });
-            nodesGroup.appendChild(projectNode);
-            projectNodeData.element = projectNode;
-
-            const label = createSvgNode(
-              'text',
-              {
-                class: `graph-project-label ${selected ? 'selected' : ''}`,
-                x: baseX,
-                y: baseY + 25
-              },
-              truncateLabel(project.title, 24)
-            );
-            labelsGroup.appendChild(label);
-            projectNodeData.labelEl = label;
-
-            dynamicNodes.push(projectNodeData);
-          });
-        }
-      }
-
-      renderGraphPanel(domains);
-
-      const clampNode = (node) => {
-        const margin = node.r + 14;
-        if (node.x < margin) {
-          node.x = margin;
-          node.vx = Math.abs(node.vx) * 0.35;
-        }
-        if (node.x > width - margin) {
-          node.x = width - margin;
-          node.vx = -Math.abs(node.vx) * 0.35;
-        }
-        if (node.y < margin) {
-          node.y = margin;
-          node.vy = Math.abs(node.vy) * 0.35;
-        }
-        if (node.y > height - margin) {
-          node.y = height - margin;
-          node.vy = -Math.abs(node.vy) * 0.35;
-        }
-      };
-
-      const renderFrame = (time = 0) => {
-        dynamicNodes.forEach((node) => {
-          if (node.element) {
-            node.element.setAttribute('transform', `translate(${node.x.toFixed(2)} ${node.y.toFixed(2)})`);
-          }
-          if (node.labelEl) {
-            node.labelEl.setAttribute('x', node.x.toFixed(2));
-            node.labelEl.setAttribute('y', (node.y + node.r + 12).toFixed(2));
-          }
-        });
-
-        linkRefs.forEach((link) => {
-          link.element.setAttribute('x1', link.from.x.toFixed(2));
-          link.element.setAttribute('y1', link.from.y.toFixed(2));
-          link.element.setAttribute('x2', link.to.x.toFixed(2));
-          link.element.setAttribute('y2', link.to.y.toFixed(2));
-
-          if (link.type === 'project') {
-            const linkEnergy = Math.max(link.from.energy || 0, link.to.energy || 0);
-            link.element.classList.toggle('energized', linkEnergy > 0.56);
-            link.element.style.strokeDashoffset = `${((-time * 42) + link.phase).toFixed(2)}`;
-          } else {
-            link.element.style.strokeDashoffset = `${((-time * 14) + link.phase).toFixed(2)}`;
-          }
-        });
-      };
-
-      renderFrame(0);
-
-      if (reduceMotion) {
-        return;
-      }
-
-      wrap.classList.add('graph-live');
-
-      const setPointerPosition = (event) => {
-        const rect = wrap.getBoundingClientRect();
-        const scaleX = width / Math.max(rect.width, 1);
-        const scaleY = height / Math.max(rect.height, 1);
-        cursor.x = Math.min(width, Math.max(0, (event.clientX - rect.left) * scaleX));
-        cursor.y = Math.min(height, Math.max(0, (event.clientY - rect.top) * scaleY));
-      };
-
-      const onPointerMove = (event) => {
-        setPointerPosition(event);
-        cursor.active = true;
-      };
-
-      const onPointerEnter = (event) => {
-        setPointerPosition(event);
-        cursor.active = true;
-      };
-
-      const onPointerLeave = () => {
-        cursor.active = false;
-        cursor.pressed = false;
-      };
-
-      const onPointerDown = (event) => {
-        setPointerPosition(event);
-        cursor.active = true;
-        cursor.pressed = true;
-      };
-
-      const onPointerUp = () => {
-        cursor.pressed = false;
-      };
-
-      wrap.addEventListener('pointermove', onPointerMove);
-      wrap.addEventListener('pointerenter', onPointerEnter);
-      wrap.addEventListener('pointerleave', onPointerLeave);
-      wrap.addEventListener('pointerdown', onPointerDown);
-      wrap.addEventListener('pointerup', onPointerUp);
-
-      graphScene = {
-        wrap,
-        onPointerMove,
-        onPointerEnter,
-        onPointerLeave,
-        onPointerDown,
-        onPointerUp,
-        rafId: 0
-      };
-
-      let lastTick = performance.now();
-
-      const tick = (now) => {
-        if (!graphScene) return;
-
-        const delta = Math.min(1.7, Math.max(0.6, (now - lastTick) / 16.666));
-        lastTick = now;
-        const time = now * 0.001;
-        let strongestFeedback = 0;
-
-        dynamicNodes.forEach((node) => {
-          const floatX = Math.sin((time * node.floatSpeed) + node.floatPhase) * node.floatAmp;
-          const floatY = Math.cos((time * node.floatSpeed * 1.16) + node.floatPhase) * node.floatAmp * 0.88;
-          const targetX = node.baseX + floatX;
-          const targetY = node.baseY + floatY;
-          let localEnergy = 0;
-
-          if (cursor.active) {
-            const dx = cursor.x - node.x;
-            const dy = cursor.y - node.y;
-            const distance = Math.hypot(dx, dy) || 0.001;
-            const range = node.kind === 'root' ? 140 : 220;
-
-            if (distance < range) {
-              const falloff = 1 - (distance / range);
-              const pull = (falloff * node.pointerPull * (cursor.pressed ? 2.1 : 1.35))
-                + (falloff * falloff * 0.08);
-              node.vx += (dx / distance) * pull * delta;
-              node.vy += (dy / distance) * pull * delta;
-              localEnergy = falloff;
-              strongestFeedback = Math.max(strongestFeedback, falloff);
-            }
-          }
-
-          node.vx += (targetX - node.x) * node.spring * delta;
-          node.vy += (targetY - node.y) * node.spring * delta;
-          node.vx *= Math.pow(node.damping, delta);
-          node.vy *= Math.pow(node.damping, delta);
-          node.x += node.vx * delta;
-          node.y += node.vy * delta;
-          clampNode(node);
-
-          node.energy = localEnergy;
-          if (node.element) {
-            node.element.classList.toggle('energized', localEnergy > (node.kind === 'project' ? 0.5 : 0.58));
-          }
-        });
-
-        for (let i = 0; i < dynamicNodes.length; i += 1) {
-          for (let j = i + 1; j < dynamicNodes.length; j += 1) {
-            const a = dynamicNodes[i];
-            const b = dynamicNodes[j];
-            const dx = b.x - a.x;
-            const dy = b.y - a.y;
-            const distance = Math.hypot(dx, dy) || 0.001;
-            const minimum = (a.r + b.r) * (a.kind === 'project' && b.kind === 'project' ? 1.22 : 1.08);
-
-            if (distance >= minimum) continue;
-
-            const overlap = (minimum - distance) / 2;
-            const nx = dx / distance;
-            const ny = dy / distance;
-            const aWeight = a.kind === 'root' ? 0.22 : 0.5;
-            const bWeight = b.kind === 'root' ? 0.22 : 0.5;
-
-            a.x -= nx * overlap * bWeight;
-            a.y -= ny * overlap * bWeight;
-            b.x += nx * overlap * aWeight;
-            b.y += ny * overlap * aWeight;
-
-            a.vx -= nx * overlap * 0.07;
-            a.vy -= ny * overlap * 0.07;
-            b.vx += nx * overlap * 0.07;
-            b.vy += ny * overlap * 0.07;
-
-            clampNode(a);
-            clampNode(b);
-          }
-        }
-
-        const feedbackTarget = cursor.active
-          ? Math.min(1, strongestFeedback * 1.22 + (cursor.pressed ? 0.28 : 0.07))
-          : 0;
-        cursor.energy += (feedbackTarget - cursor.energy) * 0.18;
-        const haloRadius = 20 + (cursor.energy * 76) + (cursor.pressed ? 10 : 0);
-        const coreRadius = 6 + (cursor.energy * 12);
-
-        cursorHalo.setAttribute('cx', cursor.x.toFixed(2));
-        cursorHalo.setAttribute('cy', cursor.y.toFixed(2));
-        cursorHalo.setAttribute('r', haloRadius.toFixed(2));
-        cursorHalo.style.opacity = cursor.energy.toFixed(3);
-
-        cursorCore.setAttribute('cx', cursor.x.toFixed(2));
-        cursorCore.setAttribute('cy', cursor.y.toFixed(2));
-        cursorCore.setAttribute('r', coreRadius.toFixed(2));
-        cursorCore.style.opacity = Math.min(1, cursor.energy + 0.1).toFixed(3);
-
-        renderFrame(time);
-        if (!graphScene) return;
-        graphScene.rafId = requestAnimationFrame(tick);
-      };
-
-      graphScene.rafId = requestAnimationFrame(tick);
-    }
-
-    function renderStats() {
-      const root = document.getElementById('stats-strip');
+    function renderHeroStats() {
+      const root = document.getElementById('hero-stats');
       if (!root) return;
 
       const total = projects.length;
       const live = projects.filter((project) => Boolean(project.demoUrl)).length;
-      const privateCount = projects.filter((project) => !project.demoUrl).length;
-      const domains = new Set(projects.map((project) => project.domain)).size;
+      const internal = projects.filter((project) => !project.demoUrl).length;
+      const systems = projectSystems.length;
       const years = projects.map((project) => Number(project.year)).filter((value) => Number.isFinite(value));
-      const span = `${Math.min(...years)}-${Math.max(...years)}`;
+      const yearSpan = years.length ? `${Math.min(...years)}-${Math.max(...years)}` : 'N/A';
 
       const stats = [
         { value: total, label: 'projects' },
         { value: live, label: 'live' },
-        { value: privateCount, label: 'internal' },
-        { value: domains, label: 'domains' },
-        { value: span, label: 'years' }
+        { value: internal, label: 'internal' },
+        { value: systems, label: 'systems' },
+        { value: yearSpan, label: 'years' }
       ];
 
       root.innerHTML = stats
-        .map((stat) => `<span class="stat-pill"><strong>${stat.value}</strong><span>${stat.label}</span></span>`)
+        .map((stat) => `<span class="stat"><strong>${stat.value}</strong><span>${stat.label}</span></span>`)
         .join('');
     }
 
-    function renderDomainRibbon() {
-      const root = document.getElementById('domain-ribbon');
-      if (!root) return;
-
-      const byDomain = projects.reduce((acc, project) => {
-        acc[project.domain] = (acc[project.domain] || 0) + 1;
-        return acc;
-      }, {});
-
-      root.innerHTML = Object.entries(byDomain)
-        .sort((a, b) => b[1] - a[1])
-        .map(([domain, count]) => `<span class="domain-pill">${domain} • ${count}</span>`)
-        .join('');
-    }
-
-    function getVisibleProjects() {
-      return state.activeFilter === 'All'
-        ? projects
-        : projects.filter((project) => project.domain === state.activeFilter);
-    }
-
-    function renderFilters() {
-      const filters = ['All', ...new Set(projects.map((project) => project.domain))];
-      const root = document.getElementById('filters');
-
-      root.innerHTML = filters
-        .map((filter) => `
-          <button class="filter ${filter === state.activeFilter ? 'active' : ''}" data-filter="${filter}" type="button">${filter}</button>
-        `)
-        .join('');
-
-      root.querySelectorAll('.filter').forEach((button) => {
-        button.addEventListener('click', () => {
-          state.activeFilter = button.dataset.filter;
-          state.trackExpanded = false;
-          const visible = getVisibleProjects();
-          if (!visible.some((project) => project.id === state.activeProjectId)) {
-            state.activeProjectId = visible[0]?.id || projects[0].id;
-          }
-          renderFilters();
-          renderSpotlightTrack();
-          renderSpotlightProject();
-          focusSpotlight();
-        });
-      });
-    }
-
-    function updateTrackSelection() {
-      document.querySelectorAll('.track-card').forEach((card) => {
-        card.classList.toggle('active', Number(card.dataset.id) === state.activeProjectId);
-      });
-    }
-
-    function updateTrackProgress() {
-      const visible = getVisibleProjects();
-      const countEl = document.getElementById('track-count');
-      const labelEl = document.getElementById('track-progress-label');
-      const fillEl = document.getElementById('track-progress-fill');
-
-      if (!visible.length) {
-        countEl.textContent = '0 projects';
-        labelEl.textContent = '0/0';
-        fillEl.style.width = '0%';
-        return;
-      }
-
-      const index = Math.max(visible.findIndex((project) => project.id === state.activeProjectId), 0);
-      const percent = visible.length > 1 ? (index / (visible.length - 1)) * 100 : 100;
-
-      countEl.textContent = state.activeFilter === 'All'
-        ? `${visible.length} projects`
-        : `${visible.length} project${visible.length === 1 ? '' : 's'} in ${state.activeFilter}`;
-      labelEl.textContent = `${index + 1}/${visible.length}`;
-      fillEl.style.width = `${percent}%`;
-    }
-
-    function setupTrackObserver() {
-      if (trackObserver) {
-        trackObserver.disconnect();
-        trackObserver = null;
-      }
-
-      if (window.matchMedia('(max-width: 1080px)').matches) return;
-
-      const trackRoot = document.getElementById('spotlight-track');
-      if (!trackRoot) return;
-
-      const cards = Array.from(document.querySelectorAll('.track-card'));
-      if (!cards.length) return;
-
-      trackObserver = new IntersectionObserver(
-        (entries) => {
-          if (trackRoot.scrollTop < 10) return;
-
-          const activeEntry = entries
-            .filter((entry) => entry.isIntersecting)
-            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-          if (!activeEntry) return;
-
-          const nextId = Number(activeEntry.target.dataset.id);
-          if (nextId === state.activeProjectId) return;
-
-          state.activeProjectId = nextId;
-          renderSpotlightProject();
-          updateTrackSelection();
-          updateTrackProgress();
-        },
-        {
-          root: trackRoot,
-          threshold: [0.55, 0.75, 0.9],
-          rootMargin: '0px'
-        }
-      );
-
-      cards.forEach((card) => trackObserver.observe(card));
-    }
-
-    function renderTrackToggle(total) {
-      const toggle = document.getElementById('track-toggle');
-      if (!toggle) return;
-
-      if (total <= 6) {
-        toggle.hidden = true;
-        return;
-      }
-
-      toggle.hidden = false;
-      toggle.textContent = state.trackExpanded
-        ? 'Show Fewer'
-        : `Show All ${total}`;
-
-      toggle.onclick = () => {
-        state.trackExpanded = !state.trackExpanded;
-        renderSpotlightTrack();
-      };
-    }
-
-    function renderSpotlightTrack() {
-      const root = document.getElementById('spotlight-track');
-      const visible = getVisibleProjects();
-      const compactLimit = 6;
-
-      if (!visible.some((project) => project.id === state.activeProjectId)) {
-        state.activeProjectId = visible[0]?.id || projects[0].id;
-      }
-
-      const visibleSlice = (() => {
-        if (state.trackExpanded || visible.length <= compactLimit) {
-          return visible;
-        }
-
-        const head = visible.slice(0, compactLimit);
-        if (head.some((project) => project.id === state.activeProjectId)) {
-          return head;
-        }
-
-        const active = visible.find((project) => project.id === state.activeProjectId);
-        if (!active) return head;
-        return [...head.slice(0, compactLimit - 1), active];
-      })();
-
-      root.innerHTML = visibleSlice
-        .map((project) => `
-          <button class="track-card ${project.id === state.activeProjectId ? 'active' : ''}" data-id="${project.id}" type="button">
-            <span class="track-line">
-              <span class="track-label">#${project.impressivenessRank} • Project ${project.id}</span>
-              <span class="track-status">${project.status}</span>
-            </span>
-            <span class="track-title">${project.title}</span>
-            <span class="track-domain">${project.domain} • ${project.year}</span>
-          </button>
-        `)
-        .join('');
-
-      root.querySelectorAll('.track-card').forEach((button) => {
-        button.addEventListener('click', () => {
-          state.activeProjectId = Number(button.dataset.id);
-          renderSpotlightProject();
-          updateTrackSelection();
-          updateTrackProgress();
-          button.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
-      });
-
-      updateTrackSelection();
-      updateTrackProgress();
-      renderTrackToggle(visible.length);
-      setupTrackObserver();
-    }
-
-    function renderSpotlightProject() {
-      const project = projects.find((item) => item.id === state.activeProjectId) || projects[0];
+    function renderSpotlight() {
+      const project = getProject(state.activeProjectId);
+      if (!project) return;
 
       const image = document.getElementById('spotlight-image');
       image.src = project.image;
       image.alt = `${project.title} preview`;
 
-      document.getElementById('spotlight-status').textContent = project.impressivenessRank === 1
-        ? `Top Pick • ${project.status}`
-        : project.status;
-      document.getElementById('spotlight-id-year').textContent = `Project ${project.id} • ${project.year}`;
-      document.getElementById('spotlight-domain').textContent = project.domain;
+      document.getElementById('spotlight-rank').textContent = `Rank #${project.rank}`;
+      document.getElementById('spotlight-system').textContent = `${project.systemLabel} • Project ${project.id}`;
+      document.getElementById('spotlight-status').textContent = `${project.year} • ${project.status}`;
       document.getElementById('spotlight-title').textContent = project.title;
-      document.getElementById('spotlight-intent').textContent = project.intent;
-      document.getElementById('spotlight-rank').textContent = project.impressivenessRank === 1
-        ? 'Ranked #1 Overall by Impressiveness'
-        : `Ranked #${project.impressivenessRank} Overall by Impressiveness`;
       document.getElementById('spotlight-summary').textContent = project.summary;
-      document.getElementById('spotlight-what').textContent = project.what;
-      document.getElementById('spotlight-why').textContent = project.why;
-      document.getElementById('spotlight-access').textContent = project.access;
+      document.getElementById('spotlight-architecture').textContent = project.architecture;
+      document.getElementById('spotlight-impact').textContent = project.impact;
+      document.getElementById('spotlight-stack').textContent = project.stack;
 
       document.getElementById('spotlight-tags').innerHTML = project.tags
         .map((tag) => `<span class="tag">${tag}</span>`)
         .join('');
 
       document.getElementById('spotlight-actions').innerHTML = `
-        <button class="btn btn-secondary" id="spotlight-open-modal" type="button">Open Details</button>
-        ${createAction('Open Live', project.demoUrl, 'primary', 'No Public Link')}
-        ${createAction('View Code', project.codeUrl, 'secondary', 'Code Not Public')}
+        <button class="btn btn-secondary" id="spotlight-open-details" type="button">Open Details</button>
+        ${createMainAction('Visit Project', project.demoUrl, 'primary', 'No Public Link')}
       `;
 
-      const spotlightModalButton = document.getElementById('spotlight-open-modal');
-      if (spotlightModalButton) {
-        spotlightModalButton.addEventListener('click', () => openProjectModal(project.id));
+      const openDetails = document.getElementById('spotlight-open-details');
+      if (openDetails) {
+        openDetails.addEventListener('click', () => openProjectModal(project.id));
       }
+
+      markActiveRows();
     }
 
-    function closeProjectModal() {
-      const overlay = document.getElementById('project-modal-overlay');
-      if (!overlay) return;
+    function renderSystems() {
+      const root = document.getElementById('systems-grid');
+      if (!root) return;
 
-      const active = document.activeElement;
-      if (active && overlay.contains(active) && typeof active.blur === 'function') {
-        active.blur();
-      }
+      root.innerHTML = projectSystems
+        .map((system, index) => {
+          const systemProjects = projects
+            .filter((project) => project.systemId === system.id)
+            .sort((a, b) => a.rank - b.rank);
 
-      overlay.classList.remove('open');
-      overlay.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('modal-open');
+          const rows = systemProjects
+            .map((project) => `
+              <article class="project-row ${project.id === state.activeProjectId ? 'is-active' : ''}" data-id="${project.id}">
+                <button class="project-main js-open-project" type="button" data-id="${project.id}">
+                  <span class="project-rank">Rank #${project.rank}</span>
+                  <span class="project-title">${project.title}</span>
+                  <span class="project-meta">${project.year} • ${project.status}</span>
+                  <span class="project-summary">${project.summary}</span>
+                </button>
+                <div class="project-actions">
+                  <button class="mini-btn js-open-project" type="button" data-id="${project.id}">Details</button>
+                  ${createMiniAction('Visit', project.demoUrl, 'primary', 'No Link')}
+                </div>
+              </article>
+            `)
+            .join('');
 
-      if (lastFocusedElement && document.contains(lastFocusedElement) && typeof lastFocusedElement.focus === 'function') {
-        lastFocusedElement.focus();
-      }
+          return `
+            <details class="system-card reveal" ${index === 0 ? 'open' : ''}>
+              <summary>
+                <div class="system-top">
+                  <h3>${system.title}</h3>
+                  <span class="system-count">${systemProjects.length} projects</span>
+                </div>
+                <p>${system.description}</p>
+              </summary>
+              <div class="system-body">${rows}</div>
+            </details>
+          `;
+        })
+        .join('');
+
+      root.querySelectorAll('.js-open-project').forEach((button) => {
+        button.addEventListener('click', () => {
+          const projectId = Number(button.dataset.id);
+          if (!Number.isFinite(projectId)) return;
+
+          state.activeProjectId = projectId;
+          renderSpotlight();
+          openProjectModal(projectId);
+        });
+      });
+
+      setupAdaptiveSpotlight();
+      setupReveal();
+    }
+
+    function markActiveRows() {
+      document.querySelectorAll('.project-row').forEach((row) => {
+        row.classList.toggle('is-active', Number(row.dataset.id) === state.activeProjectId);
+      });
     }
 
     function openProjectModal(projectId) {
-      const project = projects.find((item) => item.id === projectId);
       const overlay = document.getElementById('project-modal-overlay');
-      if (!project || !overlay) return;
+      const project = getProject(projectId);
+      if (!overlay || !project) return;
 
-      lastFocusedElement = document.activeElement;
+      state.activeProjectId = project.id;
+      renderSpotlight();
 
-      document.getElementById('modal-kicker').textContent = `Project Detail • #${project.impressivenessRank}`;
+      lastFocused = document.activeElement;
+
+      document.getElementById('modal-kicker').textContent = `Project Detail • Rank #${project.rank}`;
       document.getElementById('modal-image').src = project.image;
       document.getElementById('modal-image').alt = `${project.title} preview`;
       document.getElementById('modal-id-year').textContent = `Project ${project.id} • ${project.year}`;
-      document.getElementById('modal-domain').textContent = `${project.domain} • ${project.status}`;
+      document.getElementById('modal-system-status').textContent = `${project.systemLabel} • ${project.status}`;
       document.getElementById('modal-title').textContent = project.title;
-      document.getElementById('modal-intent').textContent = project.intent;
-      document.getElementById('modal-rank').textContent = project.impressivenessRank === 1
-        ? 'Top Ranked Project'
-        : `Ranked #${project.impressivenessRank} Overall`;
       document.getElementById('modal-summary').textContent = project.summary;
-      document.getElementById('modal-what').textContent = project.what;
-      document.getElementById('modal-why').textContent = project.why;
-      document.getElementById('modal-access').textContent = project.access;
+      document.getElementById('modal-architecture').textContent = project.architecture;
+      document.getElementById('modal-impact').textContent = project.impact;
+      document.getElementById('modal-stack').textContent = project.stack;
+      document.getElementById('modal-proof').textContent = project.proof;
 
       document.getElementById('modal-tags').innerHTML = project.tags
         .map((tag) => `<span class="tag">${tag}</span>`)
         .join('');
 
       document.getElementById('modal-actions').innerHTML = `
-        ${createAction('Visit Project', project.demoUrl, 'primary', 'No Public Link')}
-        <button class="btn btn-secondary" id="modal-spotlight-jump" type="button">Open In Spotlight</button>
+        ${createMainAction('Visit Project', project.demoUrl, 'primary', 'No Public Link')}
+        ${createMainAction('View Code', project.codeUrl, 'secondary', 'Code Not Public')}
+        <button class="btn btn-secondary" id="modal-focus-spotlight" type="button">Focus In Spotlight</button>
       `;
 
-      const jumpButton = document.getElementById('modal-spotlight-jump');
-      if (jumpButton) {
-        jumpButton.addEventListener('click', () => {
+      const focusButton = document.getElementById('modal-focus-spotlight');
+      if (focusButton) {
+        focusButton.addEventListener('click', () => {
           state.activeProjectId = project.id;
-          renderSpotlightProject();
+          renderSpotlight();
           closeProjectModal();
           focusSpotlight();
         });
@@ -3269,10 +1579,23 @@
 
       overlay.classList.add('open');
       overlay.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('modal-open');
+      document.body.style.overflow = 'hidden';
 
       const closeButton = document.getElementById('modal-close');
       if (closeButton) closeButton.focus();
+    }
+
+    function closeProjectModal() {
+      const overlay = document.getElementById('project-modal-overlay');
+      if (!overlay) return;
+
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+
+      if (lastFocused && document.contains(lastFocused) && typeof lastFocused.focus === 'function') {
+        lastFocused.focus();
+      }
     }
 
     function setupProjectModal() {
@@ -3295,217 +1618,90 @@
       });
     }
 
-    function renderProjectsList() {
-      const root = document.getElementById('projects-list');
-      const toggle = document.getElementById('projects-toggle');
-      if (!root) return;
-
-      const defaultCount = 6;
-      const visibleProjects = state.projectsExpanded
-        ? projects
-        : projects.slice(0, defaultCount);
-
-      if (toggle) {
-        if (projects.length <= defaultCount) {
-          toggle.hidden = true;
-        } else {
-          toggle.hidden = false;
-          toggle.textContent = state.projectsExpanded
-            ? 'Show Fewer'
-            : `Show All ${projects.length}`;
-          toggle.onclick = () => {
-            state.projectsExpanded = !state.projectsExpanded;
-            renderProjectsList();
-          };
-        }
-      }
-
-      root.innerHTML = visibleProjects
-        .map((project) => `
-          <article class="project-row">
-            <button class="project-row-main project-open-modal" data-id="${project.id}" type="button">
-              <span class="project-row-meta">#${project.impressivenessRank} • ${project.domain} • ${project.year}</span>
-              <span class="project-row-title">${project.title}</span>
-              <span class="project-row-summary">${project.summary}</span>
-            </button>
-            <div class="project-row-actions">
-              ${createAction('Visit', project.demoUrl, 'primary', 'No Public Link')}
-            </div>
-          </article>
-        `)
-        .join('');
-
-      root.querySelectorAll('.project-open-modal').forEach((button) => {
-        button.addEventListener('click', () => {
-          openProjectModal(Number(button.dataset.id));
-        });
-      });
-    }
-
     function focusSpotlight() {
       const section = document.getElementById('spotlight');
       if (!section) return;
 
       const rect = section.getBoundingClientRect();
-      const outOfRange = rect.top < -80 || rect.top > window.innerHeight * 0.5;
-
-      if (outOfRange) {
-        section.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
+      if (rect.top < -80 || rect.top > window.innerHeight * 0.45) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
 
+    function setupAdaptiveSpotlight() {
+      if (scrollSyncObserver) {
+        scrollSyncObserver.disconnect();
+        scrollSyncObserver = null;
+      }
+
+      if (window.matchMedia('(max-width: 1020px)').matches) return;
+
+      const rows = Array.from(document.querySelectorAll('.project-row'));
+      if (!rows.length) return;
+
+      scrollSyncObserver = new IntersectionObserver(
+        (entries) => {
+          const candidate = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+          if (!candidate) return;
+
+          const nextId = Number(candidate.target.dataset.id);
+          if (!Number.isFinite(nextId) || nextId === state.activeProjectId) return;
+
+          state.activeProjectId = nextId;
+          renderSpotlight();
+        },
+        {
+          threshold: [0.52, 0.72],
+          rootMargin: '-12% 0px -22% 0px'
+        }
+      );
+
+      rows.forEach((row) => scrollSyncObserver.observe(row));
+    }
+
+    function setupReveal() {
+      const targets = Array.from(document.querySelectorAll('.reveal')).filter((item) => !item.classList.contains('on'));
+      if (!targets.length) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('on');
+            observer.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      targets.forEach((target) => observer.observe(target));
+    }
+
     function setLastUpdated() {
-      document.getElementById('last-updated').textContent = new Date().toLocaleDateString(undefined, {
+      const updated = document.getElementById('last-updated');
+      if (!updated) return;
+
+      updated.textContent = new Date().toLocaleDateString(undefined, {
         year: 'numeric',
         month: 'long',
         day: 'numeric'
       });
     }
 
-    function setupReveal() {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('revealed');
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-      );
-
-      document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
-    }
-
-    function setupBackgroundAnimation() {
-      const canvas = document.getElementById('bg-canvas');
-      if (!canvas) return;
-
-      const context = canvas.getContext('2d');
-      if (!context) return;
-
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      let width = 0;
-      let height = 0;
-      let particles = [];
-
-      function createParticle() {
-        const speed = 0.12 + Math.random() * 0.26;
-        const angle = Math.random() * Math.PI * 2;
-        return {
-          x: Math.random() * width,
-          y: Math.random() * height,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed,
-          r: 1 + Math.random() * 2.3
-        };
-      }
-
-      function resize() {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = Math.floor(width * dpr);
-        canvas.height = Math.floor(height * dpr);
-        canvas.style.width = `${width}px`;
-        canvas.style.height = `${height}px`;
-        context.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-        const targetCount = Math.min(140, Math.max(48, Math.floor((width * height) / 22000)));
-        particles = Array.from({ length: targetCount }, createParticle);
-      }
-
-      function draw(time) {
-        context.clearRect(0, 0, width, height);
-
-        const pulse = 0.5 + Math.sin(time * 0.55) * 0.5;
-        const wash = context.createLinearGradient(0, 0, width, height);
-        wash.addColorStop(0, `rgba(255, 122, 0, ${(0.05 + pulse * 0.04).toFixed(3)})`);
-        wash.addColorStop(1, `rgba(53, 244, 208, ${(0.03 + pulse * 0.03).toFixed(3)})`);
-        context.fillStyle = wash;
-        context.fillRect(0, 0, width, height);
-
-        for (let i = 0; i < 7; i += 1) {
-          const y = ((i + 1) * height) / 8;
-          const phase = time * (0.34 + i * 0.02);
-          context.beginPath();
-          context.strokeStyle = `rgba(106, 161, 255, ${(0.045 + i * 0.008).toFixed(3)})`;
-          context.lineWidth = 1.05;
-          context.moveTo(-40, y);
-          context.bezierCurveTo(
-            width * 0.3,
-            y + Math.sin(phase) * 28,
-            width * 0.72,
-            y + Math.cos(phase * 1.18) * 32,
-            width + 40,
-            y + Math.sin(phase * 1.5) * 24
-          );
-          context.stroke();
-        }
-
-        for (let i = 0; i < particles.length; i += 1) {
-          const a = particles[i];
-          context.beginPath();
-          context.fillStyle = 'rgba(157, 209, 255, 0.56)';
-          context.arc(a.x, a.y, a.r, 0, Math.PI * 2);
-          context.fill();
-
-          for (let j = i + 1; j < particles.length; j += 1) {
-            const b = particles[j];
-            const dx = a.x - b.x;
-            const dy = a.y - b.y;
-            const distance = Math.hypot(dx, dy);
-            if (distance < 158) {
-              const alpha = (1 - distance / 158) * 0.24;
-              context.beginPath();
-              context.strokeStyle = `rgba(102, 169, 255, ${alpha.toFixed(3)})`;
-              context.lineWidth = 1;
-              context.moveTo(a.x, a.y);
-              context.lineTo(b.x, b.y);
-              context.stroke();
-            }
-          }
-        }
-      }
-
-      function tick(timestamp = 0) {
-        const time = timestamp * 0.001;
-
-        if (!reduceMotion) {
-          particles.forEach((particle) => {
-            particle.x += particle.vx;
-            particle.y += particle.vy;
-            if (particle.x <= 0 || particle.x >= width) particle.vx *= -1;
-            if (particle.y <= 0 || particle.y >= height) particle.vy *= -1;
-          });
-        }
-
-        draw(time);
-        if (!reduceMotion) requestAnimationFrame(tick);
-      }
-
-      resize();
-      window.addEventListener('resize', resize);
-      tick();
-    }
-
-    renderStats();
-    renderDomainRibbon();
-    renderSpotlightProject();
-    renderProjectsList();
-    setLastUpdated();
-    setupReveal();
+    renderHeroStats();
+    renderSpotlight();
+    renderSystems();
     setupProjectModal();
-    setupBackgroundAnimation();
+    setupReveal();
+    setLastUpdated();
 
     window.addEventListener('resize', () => {
-      clearTimeout(trackResizeTimer);
-      trackResizeTimer = setTimeout(() => {
-        renderProjectsList();
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        setupAdaptiveSpotlight();
       }, 180);
     });
   </script>
