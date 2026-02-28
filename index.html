@@ -1,495 +1,740 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo Projects Portfolio</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Brian Markowitz portfolio and living resume featuring AI, DevOps, and data engineering work.">
+  <title>Brian Markowitz | Portfolio</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='8' fill='%23cf3f24'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,700&amp;family=IBM+Plex+Sans:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f2ea;
+      --ink: #111111;
+      --muted: #514b43;
+      --panel: #fffdf8;
+      --stroke: #d3c7b8;
+      --accent: #cf3f24;
+      --accent-soft: #fce7dc;
+      --shadow: 0 20px 40px rgba(21, 18, 13, 0.08);
+      --radius-lg: 24px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+      --max-width: 1160px;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 14%, rgba(207, 63, 36, 0.08), transparent 26%),
+        radial-gradient(circle at 86% 20%, rgba(17, 17, 17, 0.05), transparent 22%),
+        repeating-linear-gradient(
+          -45deg,
+          transparent,
+          transparent 12px,
+          rgba(17, 17, 17, 0.015) 12px,
+          rgba(17, 17, 17, 0.015) 13px
+        ),
+        var(--bg);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
 
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: white;
-        }
+    .site {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2rem 1rem 3rem;
+    }
 
-        .header h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
+    .hero {
+      background: linear-gradient(140deg, #fffdf8 0%, #f7f0e3 100%);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      margin-bottom: 1.6rem;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      gap: 1.4rem;
+    }
 
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: -6rem;
+      top: -6rem;
+      width: 16rem;
+      height: 16rem;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, rgba(207, 63, 36, 0.14), transparent 68%);
+      pointer-events: none;
+    }
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.8rem;
+      color: var(--accent);
+    }
 
-        .project-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+    h1, h2, h3 {
+      font-family: 'Fraunces', serif;
+      letter-spacing: -0.015em;
+      line-height: 1.1;
+    }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
+    h1 {
+      font-size: clamp(2rem, 6vw, 4rem);
+      max-width: 16ch;
+    }
 
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-        }
+    .hero-copy {
+      color: var(--muted);
+      max-width: 65ch;
+      font-size: 1.02rem;
+    }
 
-        .project-number {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
+    .hero-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
 
-        .project-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            color: #2c3e50;
-            padding-right: 3rem;
-        }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.72rem 1.1rem;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+    }
 
-        .project-description {
-            color: #666;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 7px 14px rgba(17, 17, 17, 0.12);
+    }
 
-        .screenshot-placeholder {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            border: 2px dashed #ddd;
-        }
+    .btn-primary {
+      background: var(--ink);
+      color: #fff;
+    }
 
-        .screenshot-placeholder i {
-            font-size: 3rem;
-            color: #bbb;
-        }
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--stroke);
+    }
 
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
+    .btn-disabled {
+      opacity: 0.58;
+      pointer-events: none;
+      cursor: default;
+    }
 
-        .tag {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
+    .layout {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 1.2rem;
+    }
 
-        .project-actions {
-            display: flex;
-            gap: 1rem;
-        }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 1.4rem;
+    }
 
-        .btn {
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-        }
+    .panel h2 {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      margin-bottom: 0.8rem;
+    }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
+    .panel-intro {
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
 
-        .btn-secondary {
-            background: transparent;
-            color: #667eea;
-            border: 2px solid #667eea;
-        }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.65rem;
+      margin-top: 1rem;
+    }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
+    .metric {
+      background: #f9f3e8;
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-sm);
+      padding: 0.8rem;
+    }
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 3rem;
-        }
+    .metric-value {
+      font-family: 'Fraunces', serif;
+      font-size: 1.55rem;
+      line-height: 1;
+      margin-bottom: 0.28rem;
+    }
 
-        .stat-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 1.5rem;
-            text-align: center;
-            color: white;
-        }
+    .metric-label {
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
 
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
+    .snapshot-list {
+      list-style: none;
+      display: grid;
+      gap: 0.75rem;
+    }
 
-        .stat-label {
-            opacity: 0.9;
-        }
+    .snapshot-list li {
+      padding: 0.8rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--stroke);
+      background: #fff;
+      font-size: 0.95rem;
+    }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
+    .section {
+      margin-top: 1.2rem;
+    }
 
-            .header h1 {
-                font-size: 2rem;
-            }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.8rem;
+      margin-bottom: 0.9rem;
+    }
 
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
+    .section-head p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
 
-            .project-actions {
-                flex-direction: column;
-            }
-        }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+      gap: 0.9rem;
+    }
 
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            color: white;
-            opacity: 0.8;
-        }
-    </style>
+    .project-card {
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-md);
+      background: #fff;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      min-height: 100%;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 500ms ease, transform 500ms ease;
+    }
+
+    .project-card.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .project-media {
+      height: 176px;
+      border-bottom: 1px solid var(--stroke);
+      background: linear-gradient(125deg, #f8f4ee, #f1e8da);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .project-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .project-media .placeholder {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      color: #8a8074;
+      letter-spacing: 0.06em;
+      padding: 0 1rem;
+      text-align: center;
+    }
+
+    .project-body {
+      padding: 0.9rem;
+      display: grid;
+      gap: 0.64rem;
+      align-content: start;
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.76rem;
+      font-family: 'IBM Plex Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+
+    .status {
+      padding: 0.2rem 0.52rem;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: #fff;
+    }
+
+    .project-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.18rem;
+      line-height: 1.2;
+    }
+
+    .project-description {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.38rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      border-radius: 999px;
+      padding: 0.24rem 0.58rem;
+      background: var(--accent-soft);
+      color: #8d2f1c;
+      border: 1px solid #f1ccb9;
+    }
+
+    .project-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.15rem;
+    }
+
+    .project-actions .btn {
+      font-size: 0.84rem;
+      padding: 0.5rem 0.84rem;
+    }
+
+    .simple-list {
+      list-style: none;
+      display: grid;
+      gap: 0.52rem;
+    }
+
+    .simple-list li {
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-sm);
+      padding: 0.72rem;
+      background: #fff;
+      font-size: 0.95rem;
+    }
+
+    .footer {
+      margin-top: 1.25rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .footer code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      background: #ece5d8;
+      padding: 0.15rem 0.4rem;
+      border-radius: 6px;
+    }
+
+    @media (max-width: 930px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 1.35rem;
+      }
+
+      .panel {
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .site {
+        padding-left: 0.65rem;
+        padding-right: 0.65rem;
+      }
+
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-links,
+      .project-actions {
+        width: 100%;
+      }
+
+      .hero-links .btn,
+      .project-actions .btn {
+        flex: 1 1 auto;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <h1><i class="fas fa-rocket"></i> Demo Projects Portfolio</h1>
-            <p>Showcasing innovative solutions across AI, DevOps, and Data Engineering</p>
-        </header>
+  <main class="site">
+    <header class="hero reveal">
+      <p class="eyebrow">Portfolio / Living Resume</p>
+      <h1>Brian Markowitz builds practical AI and automation systems.</h1>
+      <p class="hero-copy">
+        This page is a living record of hands-on work across AI engineering, data systems, and cloud automation.
+        The goal is simple: show what has been shipped, what is being improved, and what is next.
+      </p>
+      <div class="hero-links">
+        <a class="btn btn-primary" href="#projects">View Projects</a>
+        <a class="btn btn-secondary btn-disabled" href="#" aria-disabled="true">Resume Integration: Next</a>
+      </div>
+    </header>
 
-        <div class="projects-grid">
-            <!-- Project 1 -->
-            <div class="project-card">
-                <div class="project-number">1</div>
-                <h3 class="project-title">Reload STAG/DEV from PROD</h3>
-                <div class="screenshot-placeholder">
-                    <i class="fas fa-image"></i>
+    <section class="layout">
+      <article class="panel reveal">
+        <p class="eyebrow">Snapshot</p>
+        <h2>How to read this portfolio</h2>
+        <p class="panel-intro">
+          Treat each project as evidence: a focused problem, a concrete build, and technical stack details.
+          This format makes updates straightforward as new work is completed.
+        </p>
+        <ul class="snapshot-list">
+          <li><strong>Living resume:</strong> entries stay current as projects evolve.</li>
+          <li><strong>Execution-first:</strong> focused on systems built and operational outcomes.</li>
+          <li><strong>Future-friendly:</strong> ready to attach formal resume and deeper case studies later.</li>
+        </ul>
+      </article>
+
+      <aside class="panel reveal">
+        <p class="eyebrow">Current Focus</p>
+        <h2>Core Areas</h2>
+        <ul class="simple-list" id="focus-list"></ul>
+        <div class="metrics" id="metrics"></div>
+      </aside>
+    </section>
+
+    <section class="panel section reveal" id="projects">
+      <div class="section-head">
+        <h2>Selected Projects</h2>
+        <p>Real systems across AI, DevOps, and data engineering.</p>
+      </div>
+      <div class="project-grid" id="project-grid"></div>
+    </section>
+
+    <section class="layout section">
+      <article class="panel reveal">
+        <p class="eyebrow">Experience Pattern</p>
+        <h2>What these projects represent</h2>
+        <ul class="simple-list" id="experience-pattern"></ul>
+      </article>
+
+      <article class="panel reveal">
+        <p class="eyebrow">Next Step</p>
+        <h2>Planned Additions</h2>
+        <ul class="simple-list" id="next-step"></ul>
+      </article>
+    </section>
+
+    <footer class="footer reveal">
+      <p>
+        Last refreshed: <span id="last-updated"></span> · Built as a single static page for GitHub Pages.
+      </p>
+      <p>
+        Data source for projects: <code>/index.html (portfolioData)</code>
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    const portfolioData = {
+      focusAreas: [
+        'AI prototyping and applied LLM workflows',
+        'Cloud automation and DevOps reliability patterns',
+        'Data + search pipelines for practical internal tools'
+      ],
+      metrics: [
+        { value: '13', label: 'Portfolio Projects' },
+        { value: '7', label: 'Live Project Links' },
+        { value: '2', label: 'Project Screenshots' },
+        { value: '3', label: 'Core Focus Areas' }
+      ],
+      projects: [
+        {
+          id: 1,
+          title: 'Reload STAG/DEV from PROD',
+          year: '2025',
+          status: 'Internal Utility',
+          description: 'Automation utility to reset STAG or DEV from production data, including OpenSearch and DynamoDB cleanup.',
+          tags: ['AWS', 'DynamoDB', 'OpenSearch', 'Automation'],
+          demoUrl: '',
+          codeUrl: '',
+          image: ''
+        },
+        {
+          id: 2,
+          title: 'ImmPort Log System with Retry Controls',
+          year: '2025',
+          status: 'Pipeline Delivered',
+          description: 'Logging pipeline with Step Functions and retry controls to improve observability and fault tolerance.',
+          tags: ['AWS Step Functions', 'Logging', 'DevOps'],
+          demoUrl: '',
+          codeUrl: '',
+          image: 'static/immport_log.png'
+        },
+        {
+          id: 3,
+          title: 'Getting Started with AI Prototyping',
+          year: '2025',
+          status: 'Live Demo',
+          description: 'Engineer-facing guide with LangFlow tutorials, ETLLM pipelines, Groq integration, and vector search patterns.',
+          tags: ['AI', 'LangFlow', 'ETLLM', 'Vector Search', 'Groq API'],
+          demoUrl: 'http://difz-ai-info.s3-website-us-east-1.amazonaws.com/',
+          codeUrl: '',
+          image: 'static/getting_started_with_ai_prototyping.png'
+        },
+        {
+          id: 4,
+          title: 'Neo4j Natural Language UI',
+          year: '2025',
+          status: 'Prototype',
+          description: 'Web interface for querying and visualizing Neo4j knowledge graphs in natural language.',
+          tags: ['Neo4j', 'Natural Language', 'UI'],
+          demoUrl: '',
+          codeUrl: '',
+          image: ''
+        },
+        {
+          id: 5,
+          title: 'MySQL Natural Language Query System',
+          year: '2025',
+          status: 'Prototype',
+          description: 'System that translates user questions into structured SQL queries for faster data access.',
+          tags: ['AI', 'MySQL', 'LangChain', 'NLP'],
+          demoUrl: '',
+          codeUrl: '',
+          image: ''
+        },
+        {
+          id: 6,
+          title: 'Poster Presenter AI Bot',
+          year: '2025',
+          status: 'Prototype',
+          description: 'AI poster assistant using Rekognition, TTS/STT, and LLM orchestration for conference-style interactions.',
+          tags: ['AWS Rekognition', 'AI Agent', 'TTS', 'STT'],
+          demoUrl: '',
+          codeUrl: '',
+          image: ''
+        },
+        {
+          id: 7,
+          title: 'ResumeAI - LLM Resume Parser & Matcher',
+          year: '2025',
+          status: 'In Development',
+          description: 'Resume extraction and correction workflow powered by LLMs for template conversion and proposal matching.',
+          tags: ['Resume Parsing', 'LLM', 'Proposal Automation'],
+          demoUrl: '',
+          codeUrl: '',
+          image: ''
+        },
+        {
+          id: 8,
+          title: 'Data Engineer Skills Assessment',
+          year: '2026',
+          status: 'Live Demo',
+          description: 'Interactive assessment experience showcasing practical data engineering workflows and skill checkpoints.',
+          tags: ['Data Engineering', 'Assessment', 'Interactive'],
+          demoUrl: 'https://dwba3xr50k6pd.cloudfront.net/',
+          codeUrl: '',
+          image: ''
+        },
+        {
+          id: 9,
+          title: 'aerospace orbital command',
+          year: '2026',
+          status: 'Live Demo',
+          description: 'A themed orbital tracking experience with real-time visualization and command-console interaction.',
+          tags: ['Space', 'Visualization', 'Web App'],
+          demoUrl: 'https://isstracker-nine.vercel.app/',
+          codeUrl: '',
+          image: ''
+        },
+        {
+          id: 10,
+          title: 'Vibe Coding Journey',
+          year: '2026',
+          status: 'Live Demo',
+          description: 'A guided journey through vibe-coding concepts, patterns, and practical build examples.',
+          tags: ['AI', 'Education', 'Frontend'],
+          demoUrl: 'https://vibe-journey-xi.vercel.app/',
+          codeUrl: '',
+          image: ''
+        },
+        {
+          id: 11,
+          title: 'ClawdMarks',
+          year: '2026',
+          status: 'Live Site',
+          description: 'Operational intelligence workspace focused on AI-agent workflows and execution visibility.',
+          tags: ['AI Agents', 'Operations', 'Product'],
+          demoUrl: 'https://www.clawdmarks.com/',
+          codeUrl: '',
+          image: ''
+        },
+        {
+          id: 12,
+          title: 'Mission Control',
+          year: '2026',
+          status: 'Live Demo',
+          description: 'Mission-oriented control interface for orchestrating tasks, tracking states, and monitoring progress.',
+          tags: ['Control Plane', 'Dashboard', 'Automation'],
+          demoUrl: 'https://d2vkpyz88pgyjq.cloudfront.net/',
+          codeUrl: '',
+          image: ''
+        },
+        {
+          id: 13,
+          title: 'Vanessa Markowitz',
+          year: '2026',
+          status: 'Live Site',
+          description: 'Public-facing personal website highlighting profile, content, and current work.',
+          tags: ['Website', 'Brand', 'Content'],
+          demoUrl: 'https://www.vanessamarkowitz.com/',
+          codeUrl: '',
+          image: ''
+        }
+      ],
+      experiencePattern: [
+        'Owns projects from idea to working implementation.',
+        'Combines model workflows with infrastructure reliability controls.',
+        'Builds tools that reduce manual effort for technical teams.',
+        'Balances rapid prototyping with production-minded architecture.'
+      ],
+      nextStep: [
+        'Attach formal resume PDF and timeline section.',
+        'Add case-study pages for the top 2-3 projects.',
+        'Replace pending links with public demos/repositories as available.',
+        'Add contact and speaking/publication sections when ready.'
+      ]
+    };
+
+    function createAction(label, url, variant) {
+      const baseClass = variant === 'secondary' ? 'btn btn-secondary' : 'btn btn-primary';
+      if (!url) {
+        return `<span class="${baseClass} btn-disabled" aria-disabled="true">${label}: Pending</span>`;
+      }
+      return `<a class="${baseClass}" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+    }
+
+    function renderList(listId, values) {
+      const list = document.getElementById(listId);
+      list.innerHTML = values.map((value) => `<li>${value}</li>`).join('');
+    }
+
+    function renderMetrics() {
+      const root = document.getElementById('metrics');
+      root.innerHTML = portfolioData.metrics
+        .map((metric) => `
+          <article class="metric">
+            <p class="metric-value">${metric.value}</p>
+            <p class="metric-label">${metric.label}</p>
+          </article>
+        `)
+        .join('');
+    }
+
+    function renderProjects() {
+      const root = document.getElementById('project-grid');
+      root.innerHTML = portfolioData.projects
+        .map((project) => {
+          const media = project.image
+            ? `<img src="${project.image}" alt="${project.title} screenshot">`
+            : `<div class="placeholder">Screenshot planned</div>`;
+
+          return `
+            <article class="project-card reveal">
+              <div class="project-media">${media}</div>
+              <div class="project-body">
+                <div class="project-meta">
+                  <span>Project ${project.id} / ${project.year}</span>
+                  <span class="status">${project.status}</span>
                 </div>
-                <p class="project-description">
-                    Utility script to reset STAG or DEV environments using production data, clearing OpenSearch and DynamoDB.
-                </p>
-                <div class="tags">
-                    <span class="tag">AWS</span>
-                    <span class="tag">DynamoDB</span>
-                    <span class="tag">OpenSearch</span>
-                    <span class="tag">Automation</span>
-                </div>
+                <h3 class="project-title">${project.title}</h3>
+                <p class="project-description">${project.description}</p>
+                <div class="tags">${project.tags.map((tag) => `<span class="tag">${tag}</span>`).join('')}</div>
                 <div class="project-actions">
-                    <a href="#" class="btn btn-primary">
-                        <i class="fas fa-play"></i> View Demo
-                    </a>
-                    <a href="#" class="btn btn-secondary">
-                        <i class="fab fa-github"></i> Code
-                    </a>
+                  ${createAction('Demo', project.demoUrl)}
+                  ${createAction('Code', project.codeUrl, 'secondary')}
                 </div>
-            </div>
+              </div>
+            </article>
+          `;
+        })
+        .join('');
+    }
 
-            <!-- Project 2 -->
-            <div class="project-card">
-                <div class="project-number">2</div>
-                <h3 class="project-title">ImmPort Log System with Retry Controls</h3>
-                <div class="screenshot-container" style="width: 100%; height: 200px; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px; border: 2px solid #ddd; background: #f8f9fa; padding: 10px;">
-                    <img src="static/immport_log.png" alt="ImmPort Log System Screenshot" style="width: 100%; height: 100%; object-fit: contain; object-position: center;">
-                </div>
-                <p class="project-description">
-                    Logging pipeline for ImmPort with Step Functions and controlled retry logic for better fault tolerance.
-                </p>
-                <div class="tags">
-                    <span class="tag">AWS Step Functions</span>
-                    <span class="tag">Logging</span>
-                    <span class="tag">DevOps</span>
-                </div>
-                <div class="project-actions">
-                    <a href="#" class="btn btn-primary">
-                        <i class="fas fa-play"></i> View Demo
-                    </a>
-                    <a href="#" class="btn btn-secondary">
-                        <i class="fab fa-github"></i> Code
-                    </a>
-                </div>
-            </div>
+    function setLastUpdated() {
+      const target = document.getElementById('last-updated');
+      const now = new Date();
+      target.textContent = now.toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    }
 
-            <!-- Project 3 -->
-            <div class="project-card">
-                <div class="project-number">3</div>
-                <h3 class="project-title">Getting Started with AI Prototyping</h3>
-                <div class="screenshot-container" style="width: 100%; height: 200px; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px; border: 2px solid #ddd; background: #f8f9fa; padding: 10px;">
-                    <img src="static/getting_started_with_ai_prototyping.png" alt="Getting Started with AI Prototyping Screenshot" style="width: 100%; height: 100%; object-fit: contain; object-position: center;">
-                </div>
-                <p class="project-description">
-                    Comprehensive guide for engineers and scientists featuring LangFlow tutorials, ETLLM pipelines, Groq API integration, and vector search implementations. Includes practical resources for building GenAI demos and chat prototypes.
-                </p>
-                <div class="tags">
-                    <span class="tag">AI</span>
-                    <span class="tag">LangFlow</span>
-                    <span class="tag">Prototyping</span>
-                    <span class="tag">ETLLM</span>
-                    <span class="tag">Vector Search</span>
-                    <span class="tag">Groq API</span>
-                </div>
-                <div class="project-actions">
-                    <a href="http://difz-ai-info.s3-website-us-east-1.amazonaws.com/" target="_blank" class="btn btn-primary">
-                        <i class="fas fa-play"></i> View Demo
-                    </a>
-                    <a href="#" class="btn btn-secondary">
-                        <i class="fab fa-github"></i> Code
-                    </a>
-                </div>
-            </div>
+    function setupReveal() {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      );
 
-            <!-- Project 4 -->
-            <div class="project-card">
-                <div class="project-number">4</div>
-                <h3 class="project-title">Neo4j Natural Language UI</h3>
-                <div class="screenshot-placeholder">
-                    <i class="fas fa-image"></i>
-                </div>
-                <p class="project-description">
-                    Web-based natural language interface and visualizer for querying Neo4j knowledge graphs.
-                </p>
-                <div class="tags">
-                    <span class="tag">Neo4j</span>
-                    <span class="tag">Natural Language</span>
-                    <span class="tag">UI</span>
-                </div>
-                <div class="project-actions">
-                    <a href="#" class="btn btn-primary">
-                        <i class="fas fa-play"></i> View Demo
-                    </a>
-                    <a href="#" class="btn btn-secondary">
-                        <i class="fab fa-github"></i> Code
-                    </a>
-                </div>
-            </div>
+      document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+    }
 
-            <!-- Project 5 -->
-            <div class="project-card">
-                <div class="project-number">5</div>
-                <h3 class="project-title">MySQL Natural Language Query System</h3>
-                <div class="screenshot-placeholder">
-                    <i class="fas fa-image"></i>
-                </div>
-                <p class="project-description">
-                    System for translating user natural language questions into structured MySQL queries.
-                </p>
-                <div class="tags">
-                    <span class="tag">AI</span>
-                    <span class="tag">MySQL</span>
-                    <span class="tag">LangChain</span>
-                    <span class="tag">NLP</span>
-                </div>
-                <div class="project-actions">
-                    <a href="#" class="btn btn-primary">
-                        <i class="fas fa-play"></i> View Demo
-                    </a>
-                    <a href="#" class="btn btn-secondary">
-                        <i class="fab fa-github"></i> Code
-                    </a>
-                </div>
-            </div>
-
-            <!-- Project 6 -->
-            <div class="project-card">
-                <div class="project-number">6</div>
-                <h3 class="project-title">Poster Presenter AI Bot</h3>
-                <div class="screenshot-placeholder">
-                    <i class="fas fa-image"></i>
-                </div>
-                <p class="project-description">
-                    AI poster bot that uses facial recognition (Rekognition), TTS/STT, and LLMs to simulate conference poster sessions.
-                </p>
-                <div class="tags">
-                    <span class="tag">AWS Rekognition</span>
-                    <span class="tag">AI Agent</span>
-                    <span class="tag">TTS</span>
-                    <span class="tag">STT</span>
-                </div>
-                <div class="project-actions">
-                    <a href="#" class="btn btn-primary">
-                        <i class="fas fa-play"></i> View Demo
-                    </a>
-                    <a href="#" class="btn btn-secondary">
-                        <i class="fab fa-github"></i> Code
-                    </a>
-                </div>
-            </div>
-
-            <!-- Project 7 -->
-            <div class="project-card">
-                <div class="project-number">7</div>
-                <h3 class="project-title">ResumeAI - LLM Resume Parser & Matcher</h3>
-                <div class="screenshot-placeholder">
-                    <i class="fas fa-image"></i>
-                </div>
-                <p class="project-description">
-                    Extracts and corrects resumes using LLMs, enabling template conversion and proposal matching.
-                </p>
-                <div class="tags">
-                    <span class="tag">Resume Parsing</span>
-                    <span class="tag">LLM</span>
-                    <span class="tag">Proposal Automation</span>
-                </div>
-                <div class="project-actions">
-                    <a href="#" class="btn btn-primary">
-                        <i class="fas fa-play"></i> View Demo
-                    </a>
-                    <a href="#" class="btn btn-secondary">
-                        <i class="fab fa-github"></i> Code
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Stats Section -->
-        <div class="stats">
-            <div class="stat-card">
-                <div class="stat-number">7</div>
-                <div class="stat-label">Demo Projects</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">5</div>
-                <div class="stat-label">AI/ML Projects</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">3</div>
-                <div class="stat-label">AWS Solutions</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">2</div>
-                <div class="stat-label">Database Systems</div>
-            </div>
-        </div>
-
-        <footer class="footer">
-            <p>&copy; 2024 Demo Projects Portfolio. Built with passion for innovation.</p>
-        </footer>
-    </div>
-
-    <script>
-        // Add smooth scrolling and interactive effects
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add click handlers for demo buttons (placeholder)
-            const demoButtons = document.querySelectorAll('.btn-primary');
-            demoButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    // Only show alert for placeholder links (href="#")
-                    if (this.getAttribute('href') === '#') {
-                        e.preventDefault();
-                        alert('Demo link would go here! Add your actual demo URLs.');
-                    }
-                    // Real links will navigate normally
-                });
-            });
-
-            // Add click handlers for code buttons (placeholder)
-            const codeButtons = document.querySelectorAll('.btn-secondary');
-            codeButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    if (this.getAttribute('href') === '#') {
-                        e.preventDefault();
-                        alert('GitHub repository link would go here! Add your actual repo URLs.');
-                    }
-                });
-            });
-
-            // Add animation on scroll
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
-
-            // Observe all project cards
-            const projectCards = document.querySelectorAll('.project-card');
-            projectCards.forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(card);
-            });
-        });
-    </script>
+    renderList('focus-list', portfolioData.focusAreas);
+    renderMetrics();
+    renderProjects();
+    renderList('experience-pattern', portfolioData.experiencePattern);
+    renderList('next-step', portfolioData.nextStep);
+    setLastUpdated();
+    setupReveal();
+  </script>
 </body>
-</html> 
+</html>
