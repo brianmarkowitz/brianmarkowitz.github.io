@@ -12,8 +12,8 @@
   <style>
     :root {
       --bg: #060b13;
-      --panel: rgba(10, 16, 29, 0.82);
-      --panel-strong: rgba(12, 19, 33, 0.95);
+      --panel: rgba(10, 16, 29, 0.84);
+      --panel-strong: rgba(12, 19, 33, 0.94);
       --ink: #f4f7ff;
       --muted: #aab8d2;
       --stroke: rgba(165, 188, 230, 0.24);
@@ -78,30 +78,63 @@
       z-index: 1;
     }
 
-    .topbar {
+    h1, h2, h3, h4 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      letter-spacing: -0.02em;
+      line-height: 1.08;
+    }
+
+    .mast {
       border: 1px solid var(--stroke);
-      border-radius: 999px;
-      background: rgba(8, 13, 23, 0.74);
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(160deg, rgba(18, 27, 44, 0.93), rgba(10, 15, 27, 0.95)),
+        linear-gradient(100deg, rgba(255, 122, 0, 0.14), rgba(53, 244, 208, 0.08));
       backdrop-filter: blur(16px);
       box-shadow: var(--shadow);
-      padding: 0.55rem 0.7rem;
+      padding: clamp(0.9rem, 2.4vw, 1.6rem);
+      margin-bottom: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mast::after {
+      content: '';
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      right: -140px;
+      top: -230px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(53, 244, 208, 0.24), transparent 72%);
+      pointer-events: none;
+    }
+
+    .mast-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 0.8rem;
-      margin-bottom: 1rem;
     }
 
     .brand {
       font-family: 'IBM Plex Mono', monospace;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--accent-2);
-      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.42rem;
+      flex-wrap: wrap;
     }
 
-    .top-actions {
+    .brand span {
+      color: #d8e7ff;
+      opacity: 0.76;
+    }
+
+    .mast-links {
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -109,21 +142,62 @@
       justify-content: flex-end;
     }
 
+    .nav-dock {
+      position: sticky;
+      top: 0.62rem;
+      z-index: 50;
+      margin-bottom: 0.92rem;
+      border: 1px solid var(--stroke);
+      border-radius: 14px;
+      background: rgba(9, 14, 25, 0.96);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42);
+      backdrop-filter: blur(14px);
+      padding: 0.5rem 0.58rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-kicker {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    #spotlight,
+    #all-projects {
+      scroll-margin-top: 5.2rem;
+    }
+
     .chip-link {
       text-decoration: none;
       color: var(--ink);
       border: 1px solid rgba(174, 195, 233, 0.38);
       border-radius: 999px;
-      padding: 0.42rem 0.72rem;
-      font-size: 0.8rem;
+      padding: 0.4rem 0.72rem;
+      font-size: 0.78rem;
       font-weight: 600;
       transition: all 170ms ease;
+      background: rgba(255, 255, 255, 0.02);
     }
 
     .chip-link:hover {
       border-color: rgba(255, 122, 0, 0.88);
-      background: rgba(255, 122, 0, 0.08);
+      background: rgba(255, 122, 0, 0.1);
       transform: translateY(-1px);
+    }
+
+    .chip-button {
+      appearance: none;
+      -webkit-appearance: none;
+      font-family: inherit;
+      cursor: pointer;
+      line-height: 1;
     }
 
     .icon-link {
@@ -137,6 +211,7 @@
       align-items: center;
       justify-content: center;
       transition: all 170ms ease;
+      text-decoration: none;
     }
 
     .icon-link:hover {
@@ -151,35 +226,19 @@
       fill: currentColor;
     }
 
-    h1, h2, h3 {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      letter-spacing: -0.02em;
-      line-height: 1.08;
-    }
-
-    .hero {
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius-xl);
-      background:
-        linear-gradient(160deg, rgba(18, 27, 44, 0.93), rgba(10, 15, 27, 0.95)),
-        linear-gradient(100deg, rgba(255, 122, 0, 0.12), rgba(53, 244, 208, 0.08));
-      box-shadow: var(--shadow);
-      padding: clamp(1rem, 3.2vw, 2rem);
-      margin-bottom: 1rem;
+    .intro-shell {
+      margin-top: 0.85rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+      gap: 0.8rem;
       position: relative;
-      overflow: hidden;
+      z-index: 1;
     }
 
-    .hero::after {
-      content: '';
-      position: absolute;
-      width: 460px;
-      height: 460px;
-      right: -160px;
-      top: -220px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(53, 244, 208, 0.23), transparent 70%);
-      pointer-events: none;
+    .intro-copy {
+      display: grid;
+      align-content: start;
+      gap: 0.72rem;
     }
 
     .eyebrow {
@@ -187,60 +246,23 @@
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--accent-2);
-      font-size: 0.8rem;
+      font-size: 0.76rem;
     }
 
     h1 {
-      margin-top: 0.55rem;
-      font-size: clamp(2rem, 5.6vw, 4.15rem);
-      max-width: 14ch;
+      font-size: clamp(1.95rem, 4.8vw, 3.5rem);
+      max-width: 15ch;
     }
 
-    .hero-lead {
-      margin-top: 0.9rem;
+    .intro-lead {
       color: var(--muted);
-      max-width: 68ch;
-      font-size: 1rem;
-    }
-
-    .signal-grid {
-      margin-top: 0.95rem;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.58rem;
-    }
-
-    .signal-card {
-      border: 1px solid rgba(174, 195, 233, 0.32);
-      border-radius: var(--radius-md);
-      background: rgba(8, 13, 22, 0.52);
-      padding: 0.72rem;
-      min-height: 124px;
-    }
-
-    .signal-label {
-      font-family: 'IBM Plex Mono', monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--accent-2);
-      font-size: 0.68rem;
-      margin-bottom: 0.28rem;
-    }
-
-    .signal-card h3 {
-      font-size: 1.04rem;
-      margin-bottom: 0.26rem;
-    }
-
-    .signal-card p {
-      color: var(--muted);
-      font-size: 0.84rem;
+      max-width: 62ch;
+      font-size: 0.97rem;
     }
 
     .hero-actions {
-      margin-top: 1.1rem;
       display: flex;
-      gap: 0.58rem;
+      gap: 0.56rem;
       flex-wrap: wrap;
     }
 
@@ -248,14 +270,14 @@
       text-decoration: none;
       border-radius: 999px;
       font-weight: 700;
-      font-size: 0.9rem;
-      min-height: 42px;
-      padding: 0.58rem 0.95rem;
+      font-size: 0.88rem;
+      min-height: 40px;
+      padding: 0.56rem 0.92rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       border: 1px solid transparent;
-      transition: transform 170ms ease, box-shadow 170ms ease;
+      transition: transform 170ms ease, box-shadow 170ms ease, border-color 170ms ease;
     }
 
     .btn:hover {
@@ -270,7 +292,7 @@
 
     .btn-secondary {
       color: var(--ink);
-      border-color: rgba(174, 195, 233, 0.4);
+      border-color: rgba(174, 195, 233, 0.42);
       background: rgba(255, 255, 255, 0.04);
     }
 
@@ -280,81 +302,100 @@
     }
 
     .stats-strip {
-      margin-top: 0.95rem;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.48rem;
+      gap: 0.44rem;
       align-items: center;
     }
 
     .stat-pill {
-      border: 1px solid rgba(174, 195, 233, 0.32);
+      border: 1px solid rgba(174, 195, 233, 0.34);
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.03);
-      padding: 0.34rem 0.6rem;
+      padding: 0.32rem 0.58rem;
       display: inline-flex;
       align-items: baseline;
-      gap: 0.38rem;
-      min-height: 34px;
+      gap: 0.32rem;
+      min-height: 32px;
     }
 
     .stat-pill strong {
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 0.98rem;
+      font-size: 0.96rem;
       line-height: 1;
     }
 
     .stat-pill span {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.66rem;
+      font-size: 0.64rem;
       color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.05em;
       white-space: nowrap;
     }
 
-    .domain-grid {
-      margin-top: 1rem;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 0.62rem;
-    }
-
-    .domain-card {
-      border: 1px solid rgba(174, 195, 233, 0.25);
+    .intro-side {
+      border: 1px solid rgba(174, 195, 233, 0.28);
       border-radius: var(--radius-md);
-      background: rgba(8, 13, 22, 0.56);
-      padding: 0.74rem;
-      min-height: 112px;
-      transition: all 180ms ease;
+      background: rgba(7, 12, 22, 0.62);
+      padding: 0.78rem;
+      display: grid;
+      align-content: start;
+      gap: 0.66rem;
     }
 
-    .domain-card:hover {
-      border-color: rgba(255, 122, 0, 0.75);
-      transform: translateY(-2px);
+    .intro-side h2 {
+      font-size: 1.08rem;
     }
 
-    .domain-kicker {
+    .intro-side p {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .intro-list {
+      list-style: none;
+      display: grid;
+      gap: 0.42rem;
+    }
+
+    .intro-list li {
+      border: 1px solid rgba(174, 195, 233, 0.2);
+      border-radius: var(--radius-sm);
+      padding: 0.44rem 0.5rem;
+      font-size: 0.82rem;
+      color: #d9e6fb;
+      display: grid;
+      gap: 0.2rem;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .intro-list span {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.69rem;
+      font-size: 0.66rem;
       color: var(--accent-2);
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      margin-bottom: 0.2rem;
     }
 
-    .domain-card h3 {
-      font-size: 1rem;
-      margin-bottom: 0.24rem;
+    .domain-ribbon {
+      margin-top: 0.08rem;
+      display: flex;
+      gap: 0.44rem;
+      flex-wrap: wrap;
     }
 
-    .domain-card p {
-      color: var(--muted);
-      font-size: 0.85rem;
+    .domain-pill {
+      border: 1px solid rgba(174, 195, 233, 0.3);
+      border-radius: 999px;
+      padding: 0.22rem 0.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      font-size: 0.72rem;
+      color: #d7e5fb;
     }
 
     .section-head {
-      margin-top: 1.2rem;
+      margin-top: 1.16rem;
       margin-bottom: 0.72rem;
       display: flex;
       justify-content: space-between;
@@ -364,47 +405,49 @@
     }
 
     .section-head h2 {
-      font-size: clamp(1.45rem, 3.6vw, 2.4rem);
+      font-size: clamp(1.42rem, 3.4vw, 2.28rem);
     }
 
     .section-head p {
       color: var(--muted);
-      max-width: 54ch;
+      max-width: 60ch;
+      font-size: 0.9rem;
     }
 
-    .console {
+    .spotlight-shell {
       border: 1px solid var(--stroke);
       border-radius: var(--radius-lg);
-      background: linear-gradient(170deg, rgba(13, 20, 35, 0.93), rgba(9, 14, 25, 0.95));
+      background: linear-gradient(170deg, rgba(13, 20, 35, 0.94), rgba(9, 14, 25, 0.95));
       box-shadow: var(--shadow);
-      padding: 0.9rem;
+      padding: 0.82rem;
       display: grid;
-      grid-template-columns: 1.12fr 0.88fr;
-      gap: 0.8rem;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      gap: 0.78rem;
       align-items: start;
     }
 
-    .console-main {
+    .spotlight-stage {
       border: 1px solid rgba(174, 195, 233, 0.28);
       border-radius: var(--radius-md);
       overflow: hidden;
       background: rgba(7, 12, 21, 0.7);
       display: grid;
       grid-template-rows: auto 1fr;
-      min-height: 520px;
       position: sticky;
       top: 0.8rem;
+      max-height: calc(100vh - 1.6rem);
     }
 
-    .console-media {
+    .stage-media {
       position: relative;
       aspect-ratio: 16 / 9;
       overflow: hidden;
       border-bottom: 1px solid var(--stroke);
       background: #03060b;
+      flex-shrink: 0;
     }
 
-    .console-media img {
+    .stage-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -412,7 +455,7 @@
       animation: pulse 15s ease-in-out infinite;
     }
 
-    .console-status {
+    .stage-status {
       position: absolute;
       top: 0.64rem;
       left: 0.64rem;
@@ -421,60 +464,70 @@
       background: rgba(7, 12, 20, 0.82);
       color: #e8f5ff;
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.73rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       padding: 0.24rem 0.56rem;
     }
 
-    .console-body {
-      padding: 0.88rem;
+    .stage-body {
+      padding: 0.84rem;
       display: grid;
       align-content: start;
-      gap: 0.52rem;
+      align-items: start;
+      gap: 0.5rem;
+      overflow: auto;
     }
 
-    .console-meta {
+    .stage-meta {
       display: flex;
       justify-content: space-between;
       gap: 0.5rem;
       color: var(--muted);
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.71rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
-    .console-body h3 {
-      font-size: clamp(1.2rem, 3vw, 1.9rem);
+    .stage-body h3 {
+      font-size: clamp(1.16rem, 2.8vw, 1.84rem);
     }
 
-    .console-body p {
+    .stage-body p {
       color: #ccd8ea;
-      font-size: 0.95rem;
+      font-size: 0.93rem;
     }
 
-    .console-intent {
+    .stage-intent {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       color: var(--accent-2);
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
+    .stage-rank {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.69rem;
+      color: #ffc48f;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
     .detail-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.45rem;
+      gap: 0.42rem;
     }
 
     .detail-card {
-      border: 1px solid rgba(174, 195, 233, 0.26);
+      border: 1px solid rgba(174, 195, 233, 0.24);
       border-radius: var(--radius-sm);
       background: rgba(255, 255, 255, 0.02);
-      padding: 0.52rem;
+      padding: 0.5rem;
       display: grid;
-      gap: 0.24rem;
+      gap: 0.22rem;
       align-content: start;
     }
 
@@ -486,64 +539,52 @@
       font-family: 'IBM Plex Mono', monospace;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      font-size: 0.64rem;
+      font-size: 0.63rem;
       color: var(--muted);
     }
 
     .detail-card p {
       margin: 0;
       color: #d6e4fb;
-      font-size: 0.83rem;
+      font-size: 0.82rem;
     }
 
     .tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
+      gap: 0.36rem;
     }
 
     .tag {
-      border: 1px solid rgba(174, 195, 233, 0.37);
+      border: 1px solid rgba(174, 195, 233, 0.35);
       border-radius: 999px;
-      padding: 0.2rem 0.54rem;
-      font-size: 0.72rem;
+      padding: 0.18rem 0.5rem;
+      font-size: 0.71rem;
       color: #deebff;
       background: rgba(255, 255, 255, 0.03);
     }
 
-    .console-actions {
+    .stage-actions {
       margin-top: 0.2rem;
       display: flex;
-      gap: 0.5rem;
+      gap: 0.44rem;
       flex-wrap: wrap;
     }
 
-    .console-side {
+    .track-panel {
       border: 1px solid rgba(174, 195, 233, 0.28);
       border-radius: var(--radius-md);
-      background: rgba(8, 12, 21, 0.74);
+      background: rgba(8, 12, 21, 0.72);
+      padding: 0.62rem;
       display: grid;
-      grid-template-rows: auto auto 1fr;
-      min-height: 520px;
-      overflow: hidden;
-    }
-
-    .side-title {
-      padding: 0.72rem 0.72rem 0.44rem;
-      border-bottom: 1px solid rgba(174, 195, 233, 0.21);
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.74rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--muted);
+      align-content: start;
+      gap: 0.58rem;
     }
 
     .filters {
-      padding: 0.58rem 0.65rem;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.42rem;
-      border-bottom: 1px solid rgba(174, 195, 233, 0.2);
+      gap: 0.4rem;
     }
 
     .filter {
@@ -553,7 +594,7 @@
       background: rgba(255, 255, 255, 0.02);
       color: #dbe8fd;
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.73rem;
+      font-size: 0.71rem;
       text-transform: uppercase;
       letter-spacing: 0.03em;
       cursor: pointer;
@@ -570,176 +611,651 @@
       color: #fff;
     }
 
-    .project-list {
-      overflow: auto;
-      display: grid;
-      align-content: start;
-      overscroll-behavior: contain;
-    }
-
-    .project-row {
-      width: 100%;
-      border: 0;
-      border-bottom: 1px solid rgba(174, 195, 233, 0.18);
-      text-align: left;
-      background: transparent;
-      color: var(--ink);
-      padding: 0.7rem;
-      cursor: pointer;
-      transition: background 180ms ease;
-      display: grid;
-      gap: 0.26rem;
-    }
-
-    .project-row:hover {
-      background: rgba(255, 255, 255, 0.04);
-    }
-
-    .project-row.active {
-      background: linear-gradient(100deg, rgba(255, 122, 0, 0.17), rgba(255, 122, 0, 0.04));
-      border-left: 3px solid var(--accent);
-      padding-left: calc(0.7rem - 3px);
-    }
-
-    .row-line {
+    .track-head {
       display: flex;
       justify-content: space-between;
       gap: 0.5rem;
       align-items: center;
-      font-size: 0.79rem;
-      color: #d8e6ff;
-      font-family: 'IBM Plex Mono', monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .row-title {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 0.96rem;
-      letter-spacing: -0.01em;
-      color: #f6f9ff;
-      text-transform: none;
-    }
-
-    .row-status {
-      border: 1px solid rgba(174, 195, 233, 0.46);
-      border-radius: 999px;
-      padding: 0.12rem 0.44rem;
-      font-size: 0.66rem;
-      color: #e2f0ff;
-    }
-
-    .row-domain {
-      color: var(--muted);
-      font-size: 0.76rem;
-    }
-
-    .row-intent {
-      color: #b6caea;
-      font-size: 0.75rem;
-    }
-
-    .grid {
-      margin-top: 1rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 0.72rem;
-    }
-
-    .card {
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      background: linear-gradient(170deg, rgba(13, 20, 34, 0.93), rgba(9, 14, 24, 0.95));
-      box-shadow: var(--shadow);
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 360ms ease, transform 360ms ease, border-color 170ms ease;
-    }
-
-    .card.revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .card:hover {
-      border-color: rgba(255, 122, 0, 0.86);
-      transform: translateY(-2px);
-    }
-
-    .card-media {
-      aspect-ratio: 16 / 10;
-      overflow: hidden;
-      border-bottom: 1px solid var(--stroke);
-      background: #03060b;
-      position: relative;
-    }
-
-    .card-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      animation: drift 16s ease-in-out infinite;
-      animation-delay: var(--delay, 0ms);
-    }
-
-    .card:hover .card-media img {
-      animation-play-state: paused;
-      transform: scale(1.04);
-    }
-
-    .card-body {
-      padding: 0.64rem;
-      display: grid;
-      gap: 0.4rem;
-    }
-
-    .card-meta {
-      display: flex;
-      justify-content: space-between;
       color: var(--muted);
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.67rem;
+      font-size: 0.68rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
-    .card h3 {
-      font-size: 1rem;
-      line-height: 1.2;
+    .track-progress {
+      width: 100%;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(174, 195, 233, 0.2);
+      overflow: hidden;
+      margin-top: -0.2rem;
     }
 
-    .card p {
-      color: #c4d2e8;
-      font-size: 0.84rem;
+    .track-progress span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(100deg, #ff7a00, #35f4d0);
+      transition: width 250ms ease;
     }
 
-    .card-why {
-      color: #9cc4f9;
-      font-size: 0.78rem;
-      border-top: 1px dashed rgba(174, 195, 233, 0.28);
-      padding-top: 0.35rem;
+    .spotlight-track {
+      display: grid;
+      gap: 0.52rem;
     }
 
-    .card-actions {
-      margin-top: 0.15rem;
+    .track-card {
+      width: 100%;
+      border: 1px solid rgba(174, 195, 233, 0.24);
+      border-radius: var(--radius-sm);
+      text-align: left;
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--ink);
+      padding: 0.62rem;
+      cursor: pointer;
+      transition: all 180ms ease;
+      display: grid;
+      gap: 0.25rem;
+      min-height: clamp(148px, 24vh, 220px);
+    }
+
+    .track-card:hover {
+      border-color: rgba(255, 122, 0, 0.62);
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .track-card.active {
+      background: linear-gradient(110deg, rgba(255, 122, 0, 0.16), rgba(255, 122, 0, 0.05));
+      border-color: rgba(255, 122, 0, 0.86);
+      box-shadow: 0 10px 24px rgba(255, 122, 0, 0.16);
+      transform: translateY(-2px);
+    }
+
+    .track-line {
       display: flex;
+      justify-content: space-between;
       gap: 0.4rem;
+      align-items: center;
+      font-size: 0.69rem;
+      font-family: 'IBM Plex Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #d8e6ff;
+    }
+
+    .track-label {
+      color: var(--accent-2);
+    }
+
+    .track-status {
+      border: 1px solid rgba(174, 195, 233, 0.46);
+      border-radius: 999px;
+      padding: 0.1rem 0.4rem;
+      font-size: 0.61rem;
+      color: #e2f0ff;
+      white-space: nowrap;
+    }
+
+    .track-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 0.98rem;
+      color: #f6f9ff;
+      line-height: 1.16;
+    }
+
+    .track-domain {
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.02em;
+    }
+
+    .track-intent {
+      color: #bed0ec;
+      font-size: 0.78rem;
+      max-width: 48ch;
+    }
+
+    .atlas-section {
+      margin-top: 1.16rem;
+    }
+
+    .atlas-toolbar {
+      margin-top: -0.18rem;
+      margin-bottom: 0.72rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.58rem;
       flex-wrap: wrap;
     }
 
-    .card-actions .btn,
-    .console-actions .btn {
+    .atlas-hint {
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--muted);
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .view-switch {
+      border: 1px solid rgba(174, 195, 233, 0.3);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.18rem;
+      display: inline-flex;
+      gap: 0.14rem;
+    }
+
+    .view-toggle {
+      appearance: none;
+      -webkit-appearance: none;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: #d6e4fb;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.38rem 0.58rem;
+      cursor: pointer;
+      transition: all 170ms ease;
+    }
+
+    .view-toggle:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .view-toggle.active {
+      background: linear-gradient(110deg, rgba(255, 122, 0, 0.23), rgba(255, 122, 0, 0.08));
+      color: #fff;
+      box-shadow: inset 0 0 0 1px rgba(255, 122, 0, 0.5);
+    }
+
+    .atlas-view {
+      display: none;
+    }
+
+    .atlas-view.atlas-view-active {
+      display: block;
+    }
+
+    .atlas-lanes {
+      display: grid;
+      gap: 0.72rem;
+    }
+
+    .atlas-lane {
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-md);
+      background: rgba(10, 16, 30, 0.74);
+      box-shadow: var(--shadow);
+      padding: 0.66rem;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 340ms ease, transform 340ms ease;
+    }
+
+    .atlas-lane.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .lane-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.56rem;
+    }
+
+    .lane-head h3 {
+      font-size: 1.04rem;
+    }
+
+    .lane-head p {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.66rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .lane-scroll {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(220px, 280px);
+      gap: 0.56rem;
+      overflow-x: auto;
+      padding-bottom: 0.18rem;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+      overscroll-behavior-x: contain;
+    }
+
+    .atlas-card {
+      border: 1px solid rgba(174, 195, 233, 0.24);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.02);
+      display: grid;
+      grid-template-rows: auto 1fr;
+      scroll-snap-align: start;
+      transition: border-color 170ms ease, transform 170ms ease;
+    }
+
+    .atlas-card:hover {
+      border-color: rgba(255, 122, 0, 0.72);
+      transform: translateY(-2px);
+    }
+
+    .atlas-card:focus-visible {
+      outline: 2px solid rgba(255, 122, 0, 0.86);
+      outline-offset: 2px;
+    }
+
+    .atlas-media {
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(174, 195, 233, 0.2);
+      background: #03060b;
+    }
+
+    .atlas-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      animation: drift 16s ease-in-out infinite;
+    }
+
+    .atlas-body {
+      padding: 0.56rem;
+      display: grid;
+      gap: 0.34rem;
+      align-content: start;
+    }
+
+    .atlas-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--muted);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .atlas-body h4 {
+      font-size: 0.96rem;
+      line-height: 1.2;
+    }
+
+    .atlas-body p {
+      color: #c4d2e8;
+      font-size: 0.8rem;
+    }
+
+    .atlas-actions {
+      display: flex;
+      gap: 0.36rem;
+      flex-wrap: wrap;
+      margin-top: 0.12rem;
+    }
+
+    .atlas-actions .btn,
+    .stage-actions .btn {
+      min-height: 33px;
+      font-size: 0.76rem;
+      padding: 0.4rem 0.64rem;
+    }
+
+    .graph-shell {
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(170deg, rgba(12, 18, 31, 0.94), rgba(8, 12, 22, 0.96));
+      box-shadow: var(--shadow);
+      padding: 0.68rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+      gap: 0.72rem;
+    }
+
+    .graph-stage {
+      border: 1px solid rgba(174, 195, 233, 0.22);
+      border-radius: var(--radius-md);
+      background:
+        radial-gradient(circle at 20% 22%, rgba(255, 122, 0, 0.16), transparent 34%),
+        radial-gradient(circle at 78% 75%, rgba(107, 140, 255, 0.2), transparent 36%),
+        linear-gradient(145deg, rgba(6, 11, 18, 0.98), rgba(8, 14, 24, 0.98));
+      position: relative;
+      min-height: 620px;
+      overflow: hidden;
+    }
+
+    .graph-stage::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(190, 212, 246, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(190, 212, 246, 0.06) 1px, transparent 1px);
+      background-size: 38px 38px;
+      opacity: 0.32;
+      pointer-events: none;
+    }
+
+    .graph-svg {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+
+    .graph-link {
+      fill: none;
+      stroke: rgba(173, 197, 240, 0.3);
+      stroke-width: 1.5;
+    }
+
+    .graph-link.domain.active {
+      stroke: rgba(255, 122, 0, 0.7);
+      stroke-width: 2;
+    }
+
+    .graph-link.project {
+      stroke: rgba(53, 244, 208, 0.56);
+      stroke-width: 1.6;
+      stroke-dasharray: 4 4;
+    }
+
+    .graph-node {
+      cursor: pointer;
+    }
+
+    .graph-node circle {
+      transition: transform 180ms ease, stroke 180ms ease, fill 180ms ease;
+      transform-origin: center;
+    }
+
+    .graph-node text {
+      font-family: 'IBM Plex Mono', monospace;
+      fill: #e2efff;
+      font-size: 11px;
+      letter-spacing: 0.02em;
+      text-anchor: middle;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .graph-node.root circle {
+      fill: rgba(255, 122, 0, 0.34);
+      stroke: rgba(255, 122, 0, 0.92);
+      stroke-width: 2;
+    }
+
+    .graph-node.root text {
+      fill: #ffe5cb;
+      font-size: 11.5px;
+    }
+
+    .graph-node.domain circle {
+      fill: rgba(68, 94, 150, 0.48);
+      stroke: rgba(150, 183, 244, 0.72);
+      stroke-width: 1.8;
+    }
+
+    .graph-node.domain.active circle {
+      fill: rgba(255, 122, 0, 0.33);
+      stroke: rgba(255, 122, 0, 0.9);
+    }
+
+    .graph-node.project circle {
+      fill: rgba(53, 244, 208, 0.2);
+      stroke: rgba(53, 244, 208, 0.82);
+      stroke-width: 1.5;
+    }
+
+    .graph-node.project.selected circle {
+      fill: rgba(255, 122, 0, 0.33);
+      stroke: rgba(255, 122, 0, 0.9);
+      stroke-width: 1.8;
+    }
+
+    .graph-node:hover circle {
+      transform: scale(1.06);
+    }
+
+    .graph-panel {
+      border: 1px solid rgba(174, 195, 233, 0.24);
+      border-radius: var(--radius-md);
+      background: rgba(8, 13, 23, 0.72);
+      padding: 0.7rem;
+      display: grid;
+      align-content: start;
+      gap: 0.54rem;
+    }
+
+    .graph-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.69rem;
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .graph-panel h3 {
+      font-size: 1.08rem;
+    }
+
+    .graph-panel p {
+      color: #cedbef;
+      font-size: 0.87rem;
+    }
+
+    .graph-domain-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.38rem;
+    }
+
+    .graph-domain-pill {
+      border: 1px solid rgba(174, 195, 233, 0.32);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      color: #deebff;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.24rem 0.44rem;
+      cursor: pointer;
+      transition: all 170ms ease;
+    }
+
+    .graph-domain-pill:hover {
+      border-color: rgba(255, 122, 0, 0.8);
+      background: rgba(255, 122, 0, 0.12);
+    }
+
+    .graph-domain-pill.active {
+      border-color: rgba(255, 122, 0, 0.92);
+      background: rgba(255, 122, 0, 0.16);
+      color: #fff;
+    }
+
+    .graph-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--muted);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      min-height: 1.2em;
+    }
+
+    .graph-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.42rem;
+    }
+
+    .graph-actions .btn {
       min-height: 34px;
-      font-size: 0.77rem;
-      padding: 0.42rem 0.66rem;
+      font-size: 0.76rem;
+      padding: 0.4rem 0.64rem;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      background: rgba(2, 5, 12, 0.78);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.1rem;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .project-modal {
+      width: min(980px, 100%);
+      max-height: calc(100vh - 2.2rem);
+      border: 1px solid rgba(174, 195, 233, 0.3);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(170deg, rgba(13, 20, 35, 0.97), rgba(9, 14, 25, 0.98));
+      box-shadow: 0 24px 56px rgba(0, 0, 0, 0.6);
+      overflow: auto;
+    }
+
+    .modal-top {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.65rem 0.72rem;
+      border-bottom: 1px solid rgba(174, 195, 233, 0.2);
+      background: rgba(8, 13, 24, 0.95);
+    }
+
+    .modal-kicker {
+      font-family: 'IBM Plex Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 0.7rem;
+      color: var(--accent-2);
+    }
+
+    .modal-close {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(174, 195, 233, 0.42);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      color: #deebff;
+      font-size: 1rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 170ms ease;
+    }
+
+    .modal-close:hover {
+      border-color: rgba(255, 122, 0, 0.86);
+      background: rgba(255, 122, 0, 0.12);
+    }
+
+    .modal-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 0.8rem;
+      padding: 0.8rem;
+    }
+
+    .modal-media {
+      border: 1px solid rgba(174, 195, 233, 0.24);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: #03060b;
+      align-self: start;
+      position: sticky;
+      top: 3.2rem;
+    }
+
+    .modal-media img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    .modal-content {
+      display: grid;
+      align-content: start;
+      gap: 0.5rem;
+    }
+
+    .modal-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.69rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .modal-content h3 {
+      font-size: clamp(1.3rem, 2.8vw, 2rem);
+      line-height: 1.12;
+    }
+
+    .modal-content p {
+      color: #cfdaee;
+      font-size: 0.9rem;
+    }
+
+    .modal-intent {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.71rem;
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .modal-rank {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      color: #ffc48f;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.42rem;
+      margin-top: 0.2rem;
     }
 
     .footer {
       margin-top: 1.2rem;
       text-align: center;
       color: var(--muted);
-      font-size: 0.86rem;
+      font-size: 0.84rem;
     }
 
     .reveal {
@@ -764,26 +1280,44 @@
       100% { transform: scale(1.03) translate3d(0.4%, -1%, 0); }
     }
 
-    @media (max-width: 1100px) {
-      .signal-grid {
+    @media (max-width: 1180px) {
+      .intro-shell {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .spotlight-shell {
         grid-template-columns: 1fr;
       }
 
-      .domain-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .spotlight-stage {
+        position: static;
+        max-height: none;
       }
 
-      .console {
-        grid-template-columns: 1fr;
+      .stage-body {
+        overflow: visible;
       }
 
-      .console-main,
-      .console-side {
+      .track-card {
         min-height: auto;
       }
 
-      .console-main {
+      .modal-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-media {
         position: static;
+      }
+
+      .graph-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .graph-stage {
+        min-height: 520px;
       }
     }
 
@@ -792,19 +1326,32 @@
         width: calc(100% - 1rem);
       }
 
-      .topbar {
-        border-radius: 16px;
+      .mast {
+        padding: 0.82rem;
+      }
+
+      .mast-top {
         flex-direction: column;
         align-items: flex-start;
       }
 
-      .top-actions {
+      .mast-links {
         width: 100%;
         justify-content: flex-start;
       }
 
-      .domain-grid {
-        grid-template-columns: 1fr;
+      .nav-dock {
+        top: 0.35rem;
+        border-radius: 12px;
+        padding: 0.44rem;
+      }
+
+      .nav-kicker {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: clamp(1.72rem, 9vw, 2.6rem);
       }
 
       .detail-grid {
@@ -812,30 +1359,67 @@
       }
 
       .hero-actions,
-      .console-actions,
-      .card-actions {
+      .stage-actions,
+      .atlas-actions {
         width: 100%;
       }
 
       .hero-actions .btn,
-      .console-actions .btn,
-      .card-actions .btn {
+      .stage-actions .btn,
+      .atlas-actions .btn {
         flex: 1 1 auto;
+      }
+
+      .modal-actions .btn {
+        flex: 1 1 auto;
+      }
+
+      .atlas-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .view-switch {
+        width: 100%;
+      }
+
+      .view-toggle {
+        flex: 1 1 auto;
+      }
+
+      .atlas-hint {
+        width: 100%;
+      }
+
+      .graph-stage {
+        min-height: 430px;
+      }
+
+      .graph-actions .btn {
+        flex: 1 1 auto;
+      }
+
+      .lane-scroll {
+        grid-auto-columns: minmax(82%, 1fr);
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .bg-canvas,
-      .console-media img,
-      .card-media img,
+      .stage-media img,
+      .atlas-media img,
       .reveal,
       .btn,
       .chip-link,
       .filter,
-      .domain-card,
-      .project-row,
-      .card {
+      .track-card,
+      .atlas-card,
+      .modal-close,
+      .view-toggle,
+      .graph-node circle,
+      .graph-domain-pill,
+      .graph-link {
         animation: none !important;
         transition: none !important;
       }
@@ -847,112 +1431,183 @@
   <div class="noise" aria-hidden="true"></div>
 
   <main class="site">
-    <header class="topbar reveal">
-      <div class="brand">Brian Markowitz • Engineering Portfolio</div>
-      <nav class="top-actions">
-        <a class="chip-link" href="#console">Project Console</a>
-        <a class="chip-link" href="#projects">All Projects</a>
+    <header class="mast reveal">
+      <div class="mast-top">
+        <div class="brand">Brian Markowitz <span>Engineering Portfolio</span></div>
+      </div>
+
+      <div class="intro-shell">
+        <div class="intro-copy">
+          <p class="eyebrow">Hands-on Engineering</p>
+          <h1>AI, data, and cloud systems built for operational leverage.</h1>
+          <p class="intro-lead">
+            This is a compressed working portfolio: high-signal project details up front, then a broad domain scan below. Spotlight mode stays anchored while you scroll project cues so context stays visible.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#spotlight">Open Spotlight</a>
+            <a class="btn btn-secondary" href="#all-projects">Browse Atlas</a>
+          </div>
+          <div class="stats-strip" id="stats-strip"></div>
+        </div>
+
+        <aside class="intro-side">
+          <h2>How To Navigate</h2>
+          <p>Start with Spotlight for depth, then scan Project Atlas for breadth by domain.</p>
+          <ul class="intro-list">
+            <li><span>01</span>Use domain filters to narrow the spotlight track.</li>
+            <li><span>02</span>Scroll the track to drive a pinned project detail panel.</li>
+            <li><span>03</span>Use atlas cards to jump any project back into spotlight.</li>
+          </ul>
+          <div class="domain-ribbon" id="domain-ribbon"></div>
+        </aside>
+      </div>
+    </header>
+
+    <nav class="nav-dock reveal" aria-label="Primary">
+      <p class="nav-kicker">Quick Jump</p>
+      <div class="mast-links">
+        <a class="chip-link" href="#spotlight">Project Spotlight</a>
+        <a class="chip-link" href="#all-projects">Project Atlas</a>
+        <button class="chip-link chip-button" id="open-graph-view" type="button">View as Graph</button>
         <a class="icon-link" href="https://github.com/brianmarkowitz" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
           <svg viewBox="0 0 16 16" aria-hidden="true">
             <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.23.49-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.81.06 1.24.84 1.24.84.72 1.22 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.58.82-2.14-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.14 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.5 0 1.08-.01 1.95-.01 2.22 0 .21.14.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
           </svg>
         </a>
-      </nav>
-    </header>
-
-    <section class="hero reveal">
-      <p class="eyebrow">Living Resume / Systems Work</p>
-      <h1>I build AI, data, and cloud systems that solve real operational problems.</h1>
-      <p class="hero-lead">
-        This portfolio is a working view of what I build and why I build it. Every project includes context, execution domain, and access notes so reviewers can quickly evaluate technical depth, product judgment, and delivery quality.
-      </p>
-
-      <div class="signal-grid">
-        <article class="signal-card">
-          <p class="signal-label">What I Build</p>
-          <h3>Production Systems</h3>
-          <p>AI workflows, data infrastructure, cloud automation, and product-grade interfaces.</p>
-        </article>
-        <article class="signal-card">
-          <p class="signal-label">Why I Build</p>
-          <h3>Operational Leverage</h3>
-          <p>Each build targets a real bottleneck: speed, clarity, reliability, or user adoption.</p>
-        </article>
-        <article class="signal-card">
-          <p class="signal-label">How To Evaluate</p>
-          <h3>Outcome + Rationale</h3>
-          <p>Use Project Console for deep review, then scan All Projects for breadth and execution patterns.</p>
-        </article>
       </div>
+    </nav>
 
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#console">Open Project Console</a>
-        <a class="btn btn-secondary" href="#projects">Scan All Projects</a>
-      </div>
-
-      <div class="stats-strip" id="stats-strip"></div>
-
-      <div class="domain-grid" id="domain-grid"></div>
-    </section>
-
-    <section id="console">
+    <section id="spotlight">
       <div class="section-head reveal">
-        <h2>Project Console</h2>
-        <p>Select by domain to review what each project does, why it exists, and whether a live link is public.</p>
+        <h2>Project Spotlight</h2>
+        <p>Projects are ranked by overall impressiveness; adaptive scroll keeps details pinned while cues drive focus.</p>
       </div>
 
-      <div class="console reveal">
-        <article class="console-main" id="console-main">
-          <div class="console-media">
-            <span class="console-status" id="console-status"></span>
-            <img id="console-image" src="" alt="Project preview" loading="lazy">
+      <div class="spotlight-shell reveal">
+        <article class="spotlight-stage" id="spotlight-stage">
+          <div class="stage-media">
+            <span class="stage-status" id="spotlight-status"></span>
+            <img id="spotlight-image" src="" alt="Project preview" loading="lazy">
           </div>
-          <div class="console-body">
-            <div class="console-meta">
-              <span id="console-id-year"></span>
-              <span id="console-domain"></span>
+          <div class="stage-body">
+            <div class="stage-meta">
+              <span id="spotlight-id-year"></span>
+              <span id="spotlight-domain"></span>
             </div>
-            <h3 id="console-title"></h3>
-            <p class="console-intent" id="console-intent"></p>
-            <p id="console-summary"></p>
+            <h3 id="spotlight-title"></h3>
+            <p class="stage-intent" id="spotlight-intent"></p>
+            <p class="stage-rank" id="spotlight-rank"></p>
+            <p id="spotlight-summary"></p>
             <div class="detail-grid">
               <article class="detail-card">
                 <p class="detail-label">What It Is</p>
-                <p id="console-what"></p>
+                <p id="spotlight-what"></p>
               </article>
               <article class="detail-card">
                 <p class="detail-label">Why I Built It</p>
-                <p id="console-why"></p>
+                <p id="spotlight-why"></p>
               </article>
               <article class="detail-card detail-wide">
                 <p class="detail-label">Access / Proof</p>
-                <p id="console-access"></p>
+                <p id="spotlight-access"></p>
               </article>
             </div>
-            <div class="tags" id="console-tags"></div>
-            <div class="console-actions" id="console-actions"></div>
+            <div class="tags" id="spotlight-tags"></div>
+            <div class="stage-actions" id="spotlight-actions"></div>
           </div>
         </article>
 
-        <aside class="console-side">
-          <p class="side-title">Project Selection</p>
+        <aside class="track-panel">
           <div class="filters" id="filters"></div>
-          <div class="project-list" id="project-list"></div>
+          <div class="track-head">
+            <p id="track-count"></p>
+            <p id="track-progress-label"></p>
+          </div>
+          <div class="track-progress">
+            <span id="track-progress-fill"></span>
+          </div>
+          <div class="spotlight-track" id="spotlight-track"></div>
         </aside>
       </div>
     </section>
 
-    <section id="projects">
+    <section id="all-projects" class="atlas-section">
       <div class="section-head reveal">
-        <h2>All Projects</h2>
-        <p>Portfolio breadth view. Projects without public links still include rationale and context for review.</p>
+        <h2>Project Atlas</h2>
+        <p>Choose your navigation mode: ranked cards or an interactive graph with expanding category blooms.</p>
       </div>
-      <div class="grid" id="project-grid"></div>
+      <div class="atlas-toolbar reveal">
+        <div class="view-switch" id="view-switch">
+          <button class="view-toggle active" data-view="atlas" type="button">Atlas Cards</button>
+          <button class="view-toggle" data-view="graph" type="button">View as Graph</button>
+        </div>
+        <p class="atlas-hint">Graph mode: click a category node to bloom projects.</p>
+      </div>
+
+      <div class="atlas-view atlas-view-active" id="atlas-view-atlas">
+        <div class="atlas-lanes" id="atlas-lanes"></div>
+      </div>
+
+      <div class="atlas-view" id="atlas-view-graph">
+        <div class="graph-shell">
+          <div class="graph-stage" id="project-graph-canvas-wrap">
+            <svg id="project-graph-svg" class="graph-svg" aria-label="Project graph view"></svg>
+          </div>
+          <aside class="graph-panel">
+            <p class="graph-eyebrow">Graph Navigator</p>
+            <h3 id="graph-panel-title">Project Knowledge Graph</h3>
+            <p id="graph-panel-text">Select a domain node to bloom projects, then click a project node for details.</p>
+            <div class="graph-domain-pills" id="graph-domain-pills"></div>
+            <p class="graph-meta" id="graph-panel-meta"></p>
+            <div class="graph-actions" id="graph-panel-actions"></div>
+          </aside>
+        </div>
+      </div>
     </section>
 
     <footer class="footer reveal">
       Last refreshed: <span id="last-updated"></span>
     </footer>
+
+    <div class="modal-overlay" id="project-modal-overlay" aria-hidden="true">
+      <article class="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-top">
+          <p class="modal-kicker" id="modal-kicker">Project Detail</p>
+          <button class="modal-close" id="modal-close" type="button" aria-label="Close project details">×</button>
+        </div>
+        <div class="modal-layout">
+          <div class="modal-media">
+            <img id="modal-image" src="" alt="" loading="lazy">
+          </div>
+          <div class="modal-content">
+            <div class="modal-meta">
+              <span id="modal-id-year"></span>
+              <span id="modal-domain"></span>
+            </div>
+            <h3 id="modal-title"></h3>
+            <p class="modal-intent" id="modal-intent"></p>
+            <p class="modal-rank" id="modal-rank"></p>
+            <p id="modal-summary"></p>
+            <div class="detail-grid">
+              <article class="detail-card">
+                <p class="detail-label">What It Is</p>
+                <p id="modal-what"></p>
+              </article>
+              <article class="detail-card">
+                <p class="detail-label">Why I Built It</p>
+                <p id="modal-why"></p>
+              </article>
+              <article class="detail-card detail-wide">
+                <p class="detail-label">Access / Proof</p>
+                <p id="modal-access"></p>
+              </article>
+            </div>
+            <div class="tags" id="modal-tags"></div>
+            <div class="modal-actions" id="modal-actions"></div>
+          </div>
+        </div>
+      </article>
+    </div>
   </main>
 
   <script>
@@ -1232,23 +1887,54 @@
       }
     };
 
-    const projects = rawProjects.map((project) => {
-      const profile = projectProfiles[project.id] || {};
-      return {
-        ...project,
-        intent: profile.intent || 'Build and ship practical software with measurable value.',
-        what: profile.what || project.summary,
-        why: profile.why || 'Built to improve user and operator outcomes through better tooling.',
-        access: profile.access || (project.demoUrl
-          ? 'Public demo available through the live link.'
-          : 'No public link. Additional implementation detail available on request.')
-      };
-    });
+    const domainNarratives = {
+      'Applied AI': 'Agent workflows, multimodal prototypes, and AI operating systems.',
+      'Cloud & DevOps': 'Automation surfaces and resilient operational command workflows.',
+      'Data Engineering': 'Query acceleration, graph interfaces, and data fluency tooling.',
+      'Product Experience': 'High-interaction user journeys and narrative UI systems.',
+      'Creative Experience': 'Media-rich experiences where engineering and storytelling merge.'
+    };
+
+    const impressivenessOrder = [
+      11, 12, 14, 9, 10, 8, 15, 6, 3, 7, 1, 2, 5, 4, 13
+    ];
+
+    const impressivenessRank = Object.fromEntries(
+      impressivenessOrder.map((id, index) => [id, index + 1])
+    );
+
+    const projects = rawProjects
+      .map((project) => {
+        const profile = projectProfiles[project.id] || {};
+        return {
+          ...project,
+          impressivenessRank: impressivenessRank[project.id] || Number.MAX_SAFE_INTEGER,
+          intent: profile.intent || 'Build and ship practical software with measurable value.',
+          what: profile.what || project.summary,
+          why: profile.why || 'Built to improve user and operator outcomes through better tooling.',
+          access: profile.access || (project.demoUrl
+            ? 'Public demo available through the live link.'
+            : 'No public link. Additional implementation detail available on request.')
+        };
+      })
+      .sort((a, b) => {
+        if (a.impressivenessRank !== b.impressivenessRank) {
+          return a.impressivenessRank - b.impressivenessRank;
+        }
+        return a.id - b.id;
+      });
 
     const state = {
       activeFilter: 'All',
-      activeProjectId: projects.find((project) => project.demoUrl)?.id || projects[0].id
+      activeProjectId: projects[0].id,
+      atlasView: 'atlas',
+      graphActiveDomain: null,
+      graphSelectedProjectId: null
     };
+
+    let trackObserver = null;
+    let trackResizeTimer = null;
+    let lastFocusedElement = null;
 
     function createAction(label, url, type = 'primary', emptyLabel = `${label}: Pending`) {
       const base = type === 'secondary' ? 'btn btn-secondary' : 'btn btn-primary';
@@ -1256,6 +1942,335 @@
         return `<span class="${base} btn-disabled" aria-disabled="true">${emptyLabel}</span>`;
       }
       return `<a class="${base}" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+    }
+
+    function createSvgNode(tag, attrs = {}, text = '') {
+      const element = document.createElementNS('http://www.w3.org/2000/svg', tag);
+      Object.entries(attrs).forEach(([key, value]) => element.setAttribute(key, String(value)));
+      if (text) element.textContent = text;
+      return element;
+    }
+
+    function truncateLabel(value, max = 22) {
+      if (value.length <= max) return value;
+      return `${value.slice(0, max - 1)}…`;
+    }
+
+    function getGraphDomains() {
+      const grouped = projects.reduce((acc, project) => {
+        if (!acc[project.domain]) {
+          acc[project.domain] = {
+            domain: project.domain,
+            projects: []
+          };
+        }
+        acc[project.domain].projects.push(project);
+        return acc;
+      }, {});
+
+      return Object.values(grouped)
+        .map((entry) => ({
+          ...entry,
+          projects: entry.projects.sort((a, b) => a.impressivenessRank - b.impressivenessRank),
+          topRank: Math.min(...entry.projects.map((project) => project.impressivenessRank))
+        }))
+        .sort((a, b) => a.topRank - b.topRank);
+    }
+
+    function renderAtlasViewSwitch() {
+      const atlasView = document.getElementById('atlas-view-atlas');
+      const graphView = document.getElementById('atlas-view-graph');
+      if (!atlasView || !graphView) return;
+
+      atlasView.classList.toggle('atlas-view-active', state.atlasView === 'atlas');
+      graphView.classList.toggle('atlas-view-active', state.atlasView === 'graph');
+
+      document.querySelectorAll('.view-toggle').forEach((button) => {
+        button.classList.toggle('active', button.dataset.view === state.atlasView);
+      });
+    }
+
+    function setAtlasView(view, { scrollToSection = false } = {}) {
+      if (!['atlas', 'graph'].includes(view)) return;
+      state.atlasView = view;
+      renderAtlasViewSwitch();
+
+      if (view === 'graph') {
+        renderProjectGraph();
+      }
+
+      if (scrollToSection) {
+        const section = document.getElementById('all-projects');
+        if (section) {
+          section.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }
+    }
+
+    function renderGraphPanel(domains) {
+      const title = document.getElementById('graph-panel-title');
+      const text = document.getElementById('graph-panel-text');
+      const meta = document.getElementById('graph-panel-meta');
+      const actions = document.getElementById('graph-panel-actions');
+      const pills = document.getElementById('graph-domain-pills');
+
+      if (!title || !text || !meta || !actions || !pills) return;
+
+      const activeDomainData = domains.find((domain) => domain.domain === state.graphActiveDomain) || null;
+      const selectedProject = projects.find((project) => project.id === state.graphSelectedProjectId) || null;
+
+      pills.innerHTML = domains
+        .map((domain) => `
+          <button class="graph-domain-pill ${state.graphActiveDomain === domain.domain ? 'active' : ''}" data-domain="${domain.domain}" type="button">
+            ${domain.domain} • ${domain.projects.length}
+          </button>
+        `)
+        .join('');
+
+      pills.querySelectorAll('.graph-domain-pill').forEach((button) => {
+        button.addEventListener('click', () => {
+          const nextDomain = button.dataset.domain;
+          state.graphSelectedProjectId = null;
+          state.graphActiveDomain = state.graphActiveDomain === nextDomain ? null : nextDomain;
+          renderProjectGraph();
+        });
+      });
+
+      if (selectedProject) {
+        title.textContent = selectedProject.title;
+        text.textContent = selectedProject.summary;
+        meta.textContent = `#${selectedProject.impressivenessRank} • ${selectedProject.domain} • ${selectedProject.status}`;
+        actions.innerHTML = `
+          ${createAction('Visit Project', selectedProject.demoUrl, 'primary', 'No Public Link')}
+          <button class="btn btn-secondary" id="graph-open-modal" type="button">Open Details</button>
+          <button class="btn btn-secondary" id="graph-focus-spotlight" type="button">Focus In Spotlight</button>
+        `;
+
+        const modalButton = document.getElementById('graph-open-modal');
+        if (modalButton) {
+          modalButton.addEventListener('click', () => openProjectModal(selectedProject.id));
+        }
+
+        const spotlightButton = document.getElementById('graph-focus-spotlight');
+        if (spotlightButton) {
+          spotlightButton.addEventListener('click', () => {
+            state.activeFilter = selectedProject.domain;
+            state.activeProjectId = selectedProject.id;
+            renderFilters();
+            renderSpotlightTrack();
+            renderSpotlightProject();
+            focusSpotlight();
+          });
+        }
+        return;
+      }
+
+      if (activeDomainData) {
+        title.textContent = `${activeDomainData.domain} Cluster`;
+        text.textContent = domainNarratives[activeDomainData.domain] || 'Project cluster selected. Click a node to open details.';
+        meta.textContent = `${activeDomainData.projects.length} projects • best rank #${activeDomainData.topRank}`;
+        actions.innerHTML = `
+          <button class="btn btn-secondary" id="graph-collapse-domain" type="button">Collapse Bloom</button>
+          <button class="btn btn-primary" id="graph-open-top-project" type="button">Open Top Project</button>
+        `;
+
+        const collapseButton = document.getElementById('graph-collapse-domain');
+        if (collapseButton) {
+          collapseButton.addEventListener('click', () => {
+            state.graphActiveDomain = null;
+            state.graphSelectedProjectId = null;
+            renderProjectGraph();
+          });
+        }
+
+        const openTopProjectButton = document.getElementById('graph-open-top-project');
+        if (openTopProjectButton) {
+          openTopProjectButton.addEventListener('click', () => {
+            const topProject = activeDomainData.projects[0];
+            state.graphSelectedProjectId = topProject.id;
+            renderProjectGraph();
+            openProjectModal(topProject.id);
+          });
+        }
+        return;
+      }
+
+      title.textContent = 'Project Knowledge Graph';
+      text.textContent = 'Click a domain node to bloom its connected projects. Click a project node to open full details.';
+      meta.textContent = `${domains.length} domains • ${projects.length} projects`;
+      actions.innerHTML = `
+        <button class="btn btn-secondary" id="graph-highlight-top" type="button">Highlight Top Domain</button>
+      `;
+
+      const highlightTopButton = document.getElementById('graph-highlight-top');
+      if (highlightTopButton) {
+        highlightTopButton.addEventListener('click', () => {
+          const topDomain = domains[0];
+          if (!topDomain) return;
+          state.graphActiveDomain = topDomain.domain;
+          state.graphSelectedProjectId = null;
+          renderProjectGraph();
+        });
+      }
+    }
+
+    function renderProjectGraph() {
+      const svg = document.getElementById('project-graph-svg');
+      const wrap = document.getElementById('project-graph-canvas-wrap');
+      if (!svg || !wrap) return;
+
+      const domains = getGraphDomains();
+      if (!domains.length) return;
+
+      if (state.graphActiveDomain && !domains.some((domain) => domain.domain === state.graphActiveDomain)) {
+        state.graphActiveDomain = null;
+      }
+
+      if (state.graphSelectedProjectId) {
+        const selected = projects.find((project) => project.id === state.graphSelectedProjectId);
+        if (!selected || (state.graphActiveDomain && selected.domain !== state.graphActiveDomain)) {
+          state.graphSelectedProjectId = null;
+        }
+      }
+
+      const bounds = wrap.getBoundingClientRect();
+      const width = Math.max(620, Math.floor(bounds.width || 620));
+      const height = Math.max(430, Math.floor(bounds.height || 430));
+      svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+      svg.innerHTML = '';
+
+      const center = { x: width / 2, y: height / 2 };
+      const rootRadius = 30;
+      const domainOrbit = Math.min(width, height) * (state.graphActiveDomain ? 0.35 : 0.32);
+      const domainNodes = domains.map((domain, index) => {
+        const angle = (-Math.PI / 2) + ((Math.PI * 2 * index) / domains.length);
+        return {
+          ...domain,
+          angle,
+          x: center.x + Math.cos(angle) * domainOrbit,
+          y: center.y + Math.sin(angle) * domainOrbit
+        };
+      });
+
+      const linksGroup = createSvgNode('g');
+      const nodesGroup = createSvgNode('g');
+      const labelsGroup = createSvgNode('g');
+      svg.append(linksGroup, nodesGroup, labelsGroup);
+
+      domainNodes.forEach((domain) => {
+        const link = createSvgNode('line', {
+          class: `graph-link domain ${state.graphActiveDomain === domain.domain ? 'active' : ''}`,
+          x1: center.x,
+          y1: center.y,
+          x2: domain.x,
+          y2: domain.y
+        });
+        linksGroup.appendChild(link);
+      });
+
+      const rootNode = createSvgNode('g', {
+        class: 'graph-node root',
+        transform: `translate(${center.x} ${center.y})`
+      });
+      rootNode.appendChild(createSvgNode('circle', { r: rootRadius }));
+      rootNode.appendChild(createSvgNode('text', { y: 4 }, 'PROJECTS'));
+      rootNode.addEventListener('click', () => {
+        state.graphActiveDomain = null;
+        state.graphSelectedProjectId = null;
+        renderProjectGraph();
+      });
+      nodesGroup.appendChild(rootNode);
+
+      domainNodes.forEach((domain) => {
+        const isActive = state.graphActiveDomain === domain.domain;
+        const domainNode = createSvgNode('g', {
+          class: `graph-node domain ${isActive ? 'active' : ''}`,
+          transform: `translate(${domain.x} ${domain.y})`
+        });
+        domainNode.appendChild(createSvgNode('circle', { r: isActive ? 26 : 22 }));
+        domainNode.appendChild(createSvgNode('text', { y: -2 }, truncateLabel(domain.domain, 18)));
+        domainNode.appendChild(createSvgNode('text', { y: 11, fill: '#b2c7e8', 'font-size': 10 }, `${domain.projects.length}`));
+        domainNode.addEventListener('click', () => {
+          state.graphSelectedProjectId = null;
+          state.graphActiveDomain = isActive ? null : domain.domain;
+          renderProjectGraph();
+        });
+        nodesGroup.appendChild(domainNode);
+      });
+
+      if (state.graphActiveDomain) {
+        const activeDomain = domainNodes.find((domain) => domain.domain === state.graphActiveDomain);
+        if (activeDomain) {
+          const count = activeDomain.projects.length;
+          const projectOrbit = Math.min(210, Math.max(116, 76 + count * 12));
+
+          activeDomain.projects.forEach((project, index) => {
+            const angle = (-Math.PI / 2) + ((Math.PI * 2 * index) / Math.max(count, 1));
+            let x = activeDomain.x + Math.cos(angle) * projectOrbit;
+            let y = activeDomain.y + Math.sin(angle) * projectOrbit;
+            x = Math.min(Math.max(x, 46), width - 46);
+            y = Math.min(Math.max(y, 46), height - 46);
+
+            const edge = createSvgNode('line', {
+              class: 'graph-link project',
+              x1: activeDomain.x,
+              y1: activeDomain.y,
+              x2: x,
+              y2: y
+            });
+            linksGroup.appendChild(edge);
+
+            const selected = state.graphSelectedProjectId === project.id;
+            const projectNode = createSvgNode('g', {
+              class: `graph-node project ${selected ? 'selected' : ''}`,
+              transform: `translate(${x} ${y})`
+            });
+            projectNode.appendChild(createSvgNode('circle', { r: selected ? 15 : 13 }));
+            projectNode.appendChild(createSvgNode('text', { y: 4 }, `#${project.impressivenessRank}`));
+            projectNode.addEventListener('click', () => {
+              state.graphSelectedProjectId = project.id;
+              renderProjectGraph();
+              openProjectModal(project.id);
+            });
+            nodesGroup.appendChild(projectNode);
+
+            const label = createSvgNode(
+              'text',
+              {
+                x,
+                y: y + 25,
+                fill: selected ? '#ffd8b7' : '#d6e6ff',
+                'font-size': 10,
+                'text-anchor': 'middle',
+                'font-family': 'IBM Plex Mono, monospace',
+                'pointer-events': 'none'
+              },
+              truncateLabel(project.title, 24)
+            );
+            labelsGroup.appendChild(label);
+          });
+        }
+      }
+
+      renderGraphPanel(domains);
+    }
+
+    function setupAtlasViewControls() {
+      document.querySelectorAll('.view-toggle').forEach((button) => {
+        button.addEventListener('click', () => {
+          setAtlasView(button.dataset.view);
+        });
+      });
+
+      const graphQuickButton = document.getElementById('open-graph-view');
+      if (graphQuickButton) {
+        graphQuickButton.addEventListener('click', () => {
+          setAtlasView('graph', { scrollToSection: true });
+        });
+      }
     }
 
     function renderStats() {
@@ -1268,10 +2283,10 @@
 
       const stats = [
         { value: total, label: 'projects' },
-        { value: live, label: 'live demos' },
-        { value: privateCount, label: 'private/internal' },
+        { value: live, label: 'live' },
+        { value: privateCount, label: 'internal' },
         { value: domains, label: 'domains' },
-        { value: span, label: 'delivery span' }
+        { value: span, label: 'years' }
       ];
 
       document.getElementById('stats-strip').innerHTML = stats
@@ -1279,32 +2294,16 @@
         .join('');
     }
 
-    function renderDomainCards() {
+    function renderDomainRibbon() {
       const byDomain = projects.reduce((acc, project) => {
         acc[project.domain] = (acc[project.domain] || 0) + 1;
         return acc;
       }, {});
 
-      const blurbs = {
-        'Applied AI': 'LLM workflows, agent-based systems, and AI-first product experiments.',
-        'Data Engineering': 'Structured query systems, graph interfaces, and assessment-oriented tooling.',
-        'Cloud & DevOps': 'Automation, observability pipelines, and operational control surfaces.',
-        'Product Experience': 'Interactive interfaces focused on usability, storytelling, and adoption.',
-        'Creative Experience': 'Media-rich web experiences blending narrative and technical execution.'
-      };
-
-      const items = Object.entries(byDomain)
+      document.getElementById('domain-ribbon').innerHTML = Object.entries(byDomain)
         .sort((a, b) => b[1] - a[1])
-        .map(([domain, count]) => `
-          <article class="domain-card">
-            <p class="domain-kicker">${count} project${count === 1 ? '' : 's'}</p>
-            <h3>${domain}</h3>
-            <p>${blurbs[domain] || 'Cross-functional system delivery and product execution.'}</p>
-          </article>
-        `)
+        .map(([domain, count]) => `<span class="domain-pill">${domain} • ${count}</span>`)
         .join('');
-
-      document.getElementById('domain-grid').innerHTML = items;
     }
 
     function getVisibleProjects() {
@@ -1331,106 +2330,314 @@
             state.activeProjectId = visible[0]?.id || projects[0].id;
           }
           renderFilters();
-          renderProjectList();
-          renderConsoleProject();
-          focusConsole();
+          renderSpotlightTrack();
+          renderSpotlightProject();
+          focusSpotlight();
         });
       });
     }
 
-    function renderProjectList() {
-      const root = document.getElementById('project-list');
+    function updateTrackSelection() {
+      document.querySelectorAll('.track-card').forEach((card) => {
+        card.classList.toggle('active', Number(card.dataset.id) === state.activeProjectId);
+      });
+    }
+
+    function updateTrackProgress() {
       const visible = getVisibleProjects();
+      const countEl = document.getElementById('track-count');
+      const labelEl = document.getElementById('track-progress-label');
+      const fillEl = document.getElementById('track-progress-fill');
+
+      if (!visible.length) {
+        countEl.textContent = '0 projects';
+        labelEl.textContent = '0/0';
+        fillEl.style.width = '0%';
+        return;
+      }
+
+      const index = Math.max(visible.findIndex((project) => project.id === state.activeProjectId), 0);
+      const percent = visible.length > 1 ? (index / (visible.length - 1)) * 100 : 100;
+
+      countEl.textContent = state.activeFilter === 'All'
+        ? `${visible.length} ranked projects`
+        : `${visible.length} project${visible.length === 1 ? '' : 's'} in ${state.activeFilter}`;
+      labelEl.textContent = `${index + 1}/${visible.length}`;
+      fillEl.style.width = `${percent}%`;
+    }
+
+    function setupTrackObserver() {
+      if (trackObserver) {
+        trackObserver.disconnect();
+        trackObserver = null;
+      }
+
+      if (window.matchMedia('(max-width: 1080px)').matches) return;
+
+      const cards = Array.from(document.querySelectorAll('.track-card'));
+      if (!cards.length) return;
+
+      trackObserver = new IntersectionObserver(
+        (entries) => {
+          const activeEntry = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+          if (!activeEntry) return;
+
+          const nextId = Number(activeEntry.target.dataset.id);
+          if (nextId === state.activeProjectId) return;
+
+          state.activeProjectId = nextId;
+          renderSpotlightProject();
+          updateTrackSelection();
+          updateTrackProgress();
+        },
+        {
+          threshold: [0.35, 0.55, 0.75],
+          rootMargin: '-30% 0px -42% 0px'
+        }
+      );
+
+      cards.forEach((card) => trackObserver.observe(card));
+    }
+
+    function renderSpotlightTrack() {
+      const root = document.getElementById('spotlight-track');
+      const visible = getVisibleProjects();
+
+      if (!visible.some((project) => project.id === state.activeProjectId)) {
+        state.activeProjectId = visible[0]?.id || projects[0].id;
+      }
 
       root.innerHTML = visible
         .map((project) => `
-          <button class="project-row ${project.id === state.activeProjectId ? 'active' : ''}" data-id="${project.id}" type="button">
-            <span class="row-line">
-              <span class="row-title">${project.title}</span>
-              <span class="row-status">${project.status}</span>
+          <button class="track-card ${project.id === state.activeProjectId ? 'active' : ''}" data-id="${project.id}" type="button">
+            <span class="track-line">
+              <span class="track-label">#${project.impressivenessRank} • Project ${project.id}</span>
+              <span class="track-status">${project.status}</span>
             </span>
-            <span class="row-domain">${project.domain} • ${project.year}</span>
-            <span class="row-intent">${project.intent}</span>
+            <span class="track-title">${project.title}</span>
+            <span class="track-domain">${project.domain} • ${project.year}</span>
+            <span class="track-intent">${project.intent}</span>
           </button>
         `)
         .join('');
 
-      root.querySelectorAll('.project-row').forEach((button) => {
+      root.querySelectorAll('.track-card').forEach((button) => {
         button.addEventListener('click', () => {
           state.activeProjectId = Number(button.dataset.id);
-          renderProjectList();
-          renderConsoleProject();
-          focusConsole();
+          renderSpotlightProject();
+          updateTrackSelection();
+          updateTrackProgress();
+          button.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
       });
+
+      updateTrackSelection();
+      updateTrackProgress();
+      setupTrackObserver();
     }
 
-    function renderConsoleProject() {
+    function renderSpotlightProject() {
       const project = projects.find((item) => item.id === state.activeProjectId) || projects[0];
 
-      const image = document.getElementById('console-image');
+      const image = document.getElementById('spotlight-image');
       image.src = project.image;
       image.alt = `${project.title} preview`;
 
-      document.getElementById('console-status').textContent = project.status;
-      document.getElementById('console-id-year').textContent = `Project ${project.id} • ${project.year}`;
-      document.getElementById('console-domain').textContent = project.domain;
-      document.getElementById('console-title').textContent = project.title;
-      document.getElementById('console-intent').textContent = project.intent;
-      document.getElementById('console-summary').textContent = project.summary;
-      document.getElementById('console-what').textContent = project.what;
-      document.getElementById('console-why').textContent = project.why;
-      document.getElementById('console-access').textContent = project.access;
+      document.getElementById('spotlight-status').textContent = project.impressivenessRank === 1
+        ? `Top Pick • ${project.status}`
+        : project.status;
+      document.getElementById('spotlight-id-year').textContent = `Project ${project.id} • ${project.year}`;
+      document.getElementById('spotlight-domain').textContent = project.domain;
+      document.getElementById('spotlight-title').textContent = project.title;
+      document.getElementById('spotlight-intent').textContent = project.intent;
+      document.getElementById('spotlight-rank').textContent = project.impressivenessRank === 1
+        ? 'Ranked #1 Overall by Impressiveness'
+        : `Ranked #${project.impressivenessRank} Overall by Impressiveness`;
+      document.getElementById('spotlight-summary').textContent = project.summary;
+      document.getElementById('spotlight-what').textContent = project.what;
+      document.getElementById('spotlight-why').textContent = project.why;
+      document.getElementById('spotlight-access').textContent = project.access;
 
-      document.getElementById('console-tags').innerHTML = project.tags
+      document.getElementById('spotlight-tags').innerHTML = project.tags
         .map((tag) => `<span class="tag">${tag}</span>`)
         .join('');
 
-      document.getElementById('console-actions').innerHTML = `
+      document.getElementById('spotlight-actions').innerHTML = `
         ${createAction('Open Live', project.demoUrl, 'primary', 'No Public Link')}
         ${createAction('View Code', project.codeUrl, 'secondary', 'Code Not Public')}
       `;
     }
 
-    function renderProjectGrid() {
-      const root = document.getElementById('project-grid');
-      root.innerHTML = projects
-        .map((project, index) => {
-          const delay = `${(index % 8) * 110}ms`;
-          return `
-            <article class="card reveal" style="--delay:${delay}">
-              <div class="card-media">
-                <img src="${project.image}" alt="${project.title} preview" loading="lazy">
-              </div>
-              <div class="card-body">
-                <div class="card-meta"><span>Project ${project.id}</span><span>${project.year}</span></div>
-                <h3>${project.title}</h3>
-                <p>${project.summary}</p>
-                <p class="card-why"><strong>Why:</strong> ${project.why}</p>
-                <div class="card-actions">
-                  ${createAction('Open', project.demoUrl, 'primary', 'No Public Link')}
-                  ${createAction('Code', project.codeUrl, 'secondary', 'Code Not Public')}
-                </div>
-              </div>
-            </article>
-          `;
-        })
-        .join('');
+    function closeProjectModal() {
+      const overlay = document.getElementById('project-modal-overlay');
+      if (!overlay) return;
+
+      const active = document.activeElement;
+      if (active && overlay.contains(active) && typeof active.blur === 'function') {
+        active.blur();
+      }
+
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+
+      if (lastFocusedElement && document.contains(lastFocusedElement) && typeof lastFocusedElement.focus === 'function') {
+        lastFocusedElement.focus();
+      }
     }
 
-    function focusConsole() {
-      const section = document.getElementById('console');
+    function openProjectModal(projectId) {
+      const project = projects.find((item) => item.id === projectId);
+      const overlay = document.getElementById('project-modal-overlay');
+      if (!project || !overlay) return;
+
+      lastFocusedElement = document.activeElement;
+
+      document.getElementById('modal-kicker').textContent = `Project Detail • #${project.impressivenessRank}`;
+      document.getElementById('modal-image').src = project.image;
+      document.getElementById('modal-image').alt = `${project.title} preview`;
+      document.getElementById('modal-id-year').textContent = `Project ${project.id} • ${project.year}`;
+      document.getElementById('modal-domain').textContent = `${project.domain} • ${project.status}`;
+      document.getElementById('modal-title').textContent = project.title;
+      document.getElementById('modal-intent').textContent = project.intent;
+      document.getElementById('modal-rank').textContent = project.impressivenessRank === 1
+        ? 'Top Ranked Project'
+        : `Ranked #${project.impressivenessRank} Overall`;
+      document.getElementById('modal-summary').textContent = project.summary;
+      document.getElementById('modal-what').textContent = project.what;
+      document.getElementById('modal-why').textContent = project.why;
+      document.getElementById('modal-access').textContent = project.access;
+
+      document.getElementById('modal-tags').innerHTML = project.tags
+        .map((tag) => `<span class="tag">${tag}</span>`)
+        .join('');
+
+      document.getElementById('modal-actions').innerHTML = `
+        ${createAction('Visit Project', project.demoUrl, 'primary', 'No Public Link')}
+        <button class="btn btn-secondary" id="modal-spotlight-jump" type="button">Open In Spotlight</button>
+      `;
+
+      const jumpButton = document.getElementById('modal-spotlight-jump');
+      if (jumpButton) {
+        jumpButton.addEventListener('click', () => {
+          state.activeFilter = project.domain;
+          state.activeProjectId = project.id;
+          renderFilters();
+          renderSpotlightTrack();
+          renderSpotlightProject();
+          closeProjectModal();
+          focusSpotlight();
+        });
+      }
+
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+
+      const closeButton = document.getElementById('modal-close');
+      if (closeButton) closeButton.focus();
+    }
+
+    function setupProjectModal() {
+      const overlay = document.getElementById('project-modal-overlay');
+      const closeButton = document.getElementById('modal-close');
+      if (!overlay || !closeButton) return;
+
+      closeButton.addEventListener('click', closeProjectModal);
+
+      overlay.addEventListener('click', (event) => {
+        if (event.target === overlay) {
+          closeProjectModal();
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && overlay.classList.contains('open')) {
+          closeProjectModal();
+        }
+      });
+    }
+
+    function renderAtlasLanes() {
+      const root = document.getElementById('atlas-lanes');
+      const grouped = projects.reduce((acc, project) => {
+        if (!acc[project.domain]) acc[project.domain] = [];
+        acc[project.domain].push(project);
+        return acc;
+      }, {});
+
+      root.innerHTML = Object.entries(grouped)
+        .sort((a, b) => b[1].length - a[1].length)
+        .map(([domain, items]) => `
+          <article class="atlas-lane reveal">
+            <div class="lane-head">
+              <h3>${domain}</h3>
+              <p>${items.length} project${items.length === 1 ? '' : 's'}</p>
+            </div>
+            <div class="lane-scroll">
+              ${items.map((project) => `
+                <article class="atlas-card" data-id="${project.id}" tabindex="0">
+                  <div class="atlas-media">
+                    <img src="${project.image}" alt="${project.title} preview" loading="lazy">
+                  </div>
+                  <div class="atlas-body">
+                    <p class="atlas-meta">#${project.impressivenessRank} • Project ${project.id} • ${project.year}</p>
+                    <h4>${project.title}</h4>
+                    <p>${project.summary}</p>
+                    <div class="atlas-actions">
+                      <button class="btn btn-secondary atlas-jump" data-id="${project.id}" data-domain="${project.domain}" type="button">Spotlight</button>
+                      ${createAction('Visit', project.demoUrl, 'primary', 'No Public Link')}
+                    </div>
+                  </div>
+                </article>
+              `).join('')}
+            </div>
+          </article>
+        `)
+        .join('');
+
+      root.querySelectorAll('.atlas-jump').forEach((button) => {
+        button.addEventListener('click', () => {
+          state.activeFilter = button.dataset.domain;
+          state.activeProjectId = Number(button.dataset.id);
+          renderFilters();
+          renderSpotlightTrack();
+          renderSpotlightProject();
+          focusSpotlight();
+        });
+      });
+
+      root.querySelectorAll('.atlas-card').forEach((card) => {
+        const projectId = Number(card.dataset.id);
+
+        card.addEventListener('click', (event) => {
+          if (event.target.closest('.atlas-actions')) return;
+          openProjectModal(projectId);
+        });
+
+        card.addEventListener('keydown', (event) => {
+          if (event.target.closest('.atlas-actions')) return;
+          if (event.key !== 'Enter' && event.key !== ' ') return;
+          event.preventDefault();
+          openProjectModal(projectId);
+        });
+      });
+    }
+
+    function focusSpotlight() {
+      const section = document.getElementById('spotlight');
       if (!section) return;
 
-      const topbar = document.querySelector('.topbar');
-      const offset = (topbar?.getBoundingClientRect().height || 0) + 16;
       const rect = section.getBoundingClientRect();
-      const outOfRange = rect.top < offset || rect.top > window.innerHeight * 0.42;
+      const outOfRange = rect.top < -80 || rect.top > window.innerHeight * 0.5;
 
       if (outOfRange) {
-        window.scrollTo({
-          top: window.scrollY + rect.top - offset,
-          behavior: 'smooth'
+        section.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
         });
       }
     }
@@ -1572,14 +2779,27 @@
     }
 
     renderStats();
-    renderDomainCards();
+    renderDomainRibbon();
     renderFilters();
-    renderProjectList();
-    renderConsoleProject();
-    renderProjectGrid();
+    renderSpotlightTrack();
+    renderSpotlightProject();
+    renderAtlasLanes();
+    renderAtlasViewSwitch();
     setLastUpdated();
     setupReveal();
+    setupProjectModal();
+    setupAtlasViewControls();
     setupBackgroundAnimation();
+
+    window.addEventListener('resize', () => {
+      clearTimeout(trackResizeTimer);
+      trackResizeTimer = setTimeout(() => {
+        setupTrackObserver();
+        if (state.atlasView === 'graph') {
+          renderProjectGraph();
+        }
+      }, 180);
+    });
   </script>
 </body>
 </html>
