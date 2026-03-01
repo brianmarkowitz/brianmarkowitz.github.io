@@ -8,27 +8,25 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='4' fill='%231fb6ff'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #030814;
-      --bg-soft: #081628;
-      --panel: rgba(9, 19, 34, 0.88);
-      --panel-strong: rgba(10, 22, 39, 0.96);
-      --ink: #f3f8ff;
-      --muted: #97acc8;
-      --stroke: rgba(143, 190, 252, 0.26);
-      --accent: #3cc9ff;
-      --accent-2: #53f0a6;
+      --bg: #07101b;
+      --bg-soft: #0d1a2a;
+      --panel: rgba(11, 21, 36, 0.9);
+      --panel-strong: rgba(12, 25, 42, 0.96);
+      --ink: #edf4ff;
+      --muted: #9bb0cb;
+      --stroke: rgba(159, 193, 237, 0.24);
+      --accent: #1fb6ff;
+      --accent-2: #39d98a;
       --accent-3: #ffbc5f;
-      --spotlight-glow: #3cc9ff;
-      --spotlight-glow-soft: rgba(60, 201, 255, 0.22);
-      --radius-xl: 30px;
-      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-lg: 18px;
       --radius-md: 14px;
       --radius-sm: 10px;
-      --shadow: 0 28px 58px rgba(0, 0, 0, 0.48);
-      --max: 1180px;
+      --shadow: 0 24px 48px rgba(0, 0, 0, 0.42);
+      --max: 1120px;
       --nav-height: 56px;
       --topbar-height: 76px;
     }
@@ -45,13 +43,12 @@
 
     body {
       min-height: 100vh;
-      font-family: 'Manrope', sans-serif;
+      font-family: 'Sora', sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(1000px circle at -8% -12%, rgba(60, 201, 255, 0.28), transparent 42%),
-        radial-gradient(860px circle at 108% -10%, rgba(83, 240, 166, 0.22), transparent 38%),
-        radial-gradient(660px circle at 52% 116%, rgba(51, 121, 255, 0.16), transparent 42%),
-        linear-gradient(166deg, #040a16 0%, #061122 32%, #091a2e 66%, #081829 100%);
+        radial-gradient(circle at 8% 5%, rgba(31, 182, 255, 0.18), transparent 28%),
+        radial-gradient(circle at 84% 10%, rgba(57, 217, 138, 0.14), transparent 25%),
+        linear-gradient(170deg, #07101b 0%, #0a1422 40%, #0f1828 100%);
       line-height: 1.5;
       overflow-x: hidden;
     }
@@ -62,24 +59,12 @@
       inset: 0;
       pointer-events: none;
       z-index: -1;
-      opacity: 0.2;
+      opacity: 0.18;
       background-image:
-        linear-gradient(rgba(112, 158, 217, 0.14) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(112, 158, 217, 0.11) 1px, transparent 1px);
-      background-size: 44px 44px;
-      mask-image: radial-gradient(circle at 50% 26%, #000 14%, transparent 75%);
-    }
-
-    body::after {
-      content: '';
-      position: fixed;
-      inset: -18%;
-      pointer-events: none;
-      z-index: -2;
-      background:
-        conic-gradient(from 90deg at 50% 50%, rgba(60, 201, 255, 0.1), rgba(83, 240, 166, 0.06), rgba(60, 201, 255, 0.1));
-      filter: blur(70px);
-      animation: ambientShift 26s linear infinite;
+        linear-gradient(rgba(128, 164, 206, 0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(128, 164, 206, 0.14) 1px, transparent 1px);
+      background-size: 38px 38px;
+      mask-image: radial-gradient(circle at 50% 30%, #000 15%, transparent 72%);
     }
 
     .site {
@@ -88,7 +73,8 @@
       overflow-x: clip;
     }
 
-    #spotlight {
+    #spotlight,
+    #systems {
       scroll-margin-top: calc(var(--topbar-height) + 0.9rem);
     }
 
@@ -96,22 +82,19 @@
       position: sticky;
       top: 0;
       z-index: 40;
-      margin: 0 0 0.56rem;
+      margin: 0 0 0.48rem;
       padding-top: 0.24rem;
-      padding-bottom: 0.24rem;
-      background: rgba(3, 8, 20, 0.9);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(159, 193, 237, 0.18);
+      padding-bottom: 0.28rem;
+      background: #07101b;
+      border-bottom: 1px solid rgba(159, 193, 237, 0.14);
     }
 
     .topbar {
-      border: 1px solid rgba(152, 188, 236, 0.32);
-      border-radius: 12px;
-      background:
-        linear-gradient(145deg, rgba(12, 27, 48, 0.86), rgba(8, 18, 32, 0.9)),
-        radial-gradient(circle at 16% 30%, rgba(60, 201, 255, 0.22), transparent 55%);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.34);
-      padding: 0.32rem 0.56rem;
+      border: 1px solid rgba(159, 193, 237, 0.32);
+      border-radius: 10px;
+      background: linear-gradient(160deg, #0b192c, #0a1626);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+      padding: 0.34rem 0.56rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -121,20 +104,18 @@
     }
 
     .brand {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.16rem;
+      font-size: 1.03rem;
       font-weight: 700;
       line-height: 1.1;
-      letter-spacing: 0.01em;
     }
 
     .role {
       margin-top: 0.04rem;
       font-family: 'IBM Plex Mono', monospace;
       text-transform: uppercase;
-      letter-spacing: 0.09em;
+      letter-spacing: 0.05em;
       font-size: 0.6rem;
-      color: #57f1ab;
+      color: var(--accent-2);
     }
 
     .topnav {
@@ -170,126 +151,43 @@
       fill: currentColor;
     }
 
-    a:focus-visible,
-    button:focus-visible {
-      outline: 2px solid var(--spotlight-glow);
-      outline-offset: 2px;
-    }
-
     .panel {
       border: 1px solid var(--stroke);
       border-radius: var(--radius-xl);
-      background:
-        linear-gradient(160deg, rgba(10, 21, 36, 0.94), rgba(8, 16, 30, 0.96)),
-        radial-gradient(circle at 78% -10%, rgba(60, 201, 255, 0.18), transparent 42%);
+      background: linear-gradient(165deg, rgba(12, 24, 40, 0.95), rgba(9, 17, 30, 0.95));
       box-shadow: var(--shadow);
     }
 
     .hero {
-      padding: clamp(1rem, 2.4vw, 1.4rem);
-      display: grid;
-      gap: 1rem;
+      padding: clamp(1rem, 2.4vw, 1.5rem);
+      display: block;
       margin-bottom: 1rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(110deg, transparent 35%, rgba(60, 201, 255, 0.08) 50%, transparent 66%);
-      transform: translateX(-46%);
-      animation: heroSweep 8.6s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    .hero-grid {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.76fr);
-      gap: 0.72rem;
-      align-items: stretch;
     }
 
     .eyebrow {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.66rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.07em;
       color: var(--accent-2);
-      margin-bottom: 0.42rem;
+      margin-bottom: 0.5rem;
     }
 
     h1, h2, h3 {
-      font-family: 'Syne', sans-serif;
       letter-spacing: -0.02em;
       line-height: 1.1;
     }
 
     h1 {
-      font-size: clamp(1.8rem, 3.8vw, 2.74rem);
-      max-width: 18ch;
-      margin-bottom: 0.52rem;
-      text-wrap: balance;
+      font-size: clamp(1.7rem, 3.8vw, 2.8rem);
+      max-width: 21ch;
+      margin-bottom: 0.66rem;
     }
 
     .hero-lead {
       color: var(--muted);
       max-width: 62ch;
-      font-size: 0.95rem;
-    }
-
-    .hero-focus {
-      border: 1px solid rgba(149, 196, 250, 0.28);
-      border-radius: var(--radius-md);
-      background:
-        linear-gradient(150deg, rgba(11, 24, 42, 0.8), rgba(7, 16, 29, 0.85)),
-        radial-gradient(circle at 80% 20%, rgba(83, 240, 166, 0.18), transparent 45%);
-      padding: 0.68rem 0.72rem;
-      display: grid;
-      gap: 0.34rem;
-    }
-
-    .hero-focus-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.58rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-    }
-
-    .hero-focus-value {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.02rem;
-      line-height: 1.15;
-    }
-
-    .hero-focus-note {
-      font-size: 0.78rem;
-      color: #cbddf5;
-      line-height: 1.4;
-    }
-
-    .hero-chips {
-      display: flex;
-      gap: 0.38rem;
-      flex-wrap: wrap;
-      margin-top: 0.3rem;
-    }
-
-    .hero-chip {
-      border: 1px solid rgba(149, 196, 250, 0.28);
-      border-radius: 999px;
-      padding: 0.2rem 0.44rem;
-      font-size: 0.62rem;
-      font-family: 'IBM Plex Mono', monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #d5e7ff;
-      background: rgba(255, 255, 255, 0.02);
+      font-size: 0.94rem;
     }
 
     .btn {
@@ -330,29 +228,22 @@
     }
 
     .section-head {
-      margin: 1.1rem 0 0.78rem;
+      margin: 1.06rem 0 0.72rem;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: end;
       gap: 0.6rem;
       flex-wrap: wrap;
     }
 
     .section-head h2 {
-      font-size: clamp(1.38rem, 2.6vw, 2rem);
-      letter-spacing: -0.01em;
+      font-size: clamp(1.32rem, 2.6vw, 1.95rem);
     }
 
-    .section-note {
-      font-family: 'IBM Plex Mono', monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 0.62rem;
+    .section-head p {
       color: var(--muted);
-      border: 1px solid rgba(149, 196, 250, 0.24);
-      border-radius: 999px;
-      padding: 0.24rem 0.52rem;
-      background: rgba(255, 255, 255, 0.03);
+      max-width: 62ch;
+      font-size: 0.89rem;
     }
 
     .section-tight {
@@ -361,103 +252,46 @@
 
     .carousel-shell {
       display: grid;
-      grid-template-columns: 44px minmax(196px, 0.64fr) minmax(0, 1.34fr) minmax(196px, 0.64fr) 44px;
-      gap: 0.64rem;
+      grid-template-columns: 40px minmax(180px, 0.62fr) minmax(0, 1.34fr) minmax(180px, 0.62fr) 40px;
+      gap: 0.56rem;
       align-items: stretch;
       width: 100%;
       min-width: 0;
     }
 
     .spotlight-card {
-      border: 1px solid color-mix(in srgb, var(--spotlight-glow) 44%, rgba(149, 196, 250, 0.22));
+      border: 1px solid var(--stroke);
       border-radius: var(--radius-lg);
-      background:
-        linear-gradient(168deg, rgba(10, 22, 40, 0.94), rgba(7, 16, 29, 0.98)),
-        radial-gradient(circle at 20% -18%, color-mix(in srgb, var(--spotlight-glow) 32%, transparent), transparent 56%);
+      background: linear-gradient(172deg, rgba(12, 24, 40, 0.96), rgba(9, 17, 30, 0.98));
       overflow: hidden;
       position: relative;
       box-shadow: var(--shadow);
       width: 100%;
       min-width: 0;
       max-width: 100%;
-      transform-style: preserve-3d;
-      transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
-    }
-
-    .spotlight-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at var(--spotlight-pointer-x, 50%) var(--spotlight-pointer-y, 26%), var(--spotlight-glow-soft), transparent 48%);
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.9;
-      transition: opacity 220ms ease;
-    }
-
-    .spotlight-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(120deg, transparent 34%, rgba(255, 255, 255, 0.08) 50%, transparent 66%);
-      opacity: 0;
-      transform: translateX(-36%);
-      transition: opacity 220ms ease;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .spotlight-card:hover {
-      border-color: color-mix(in srgb, var(--spotlight-glow) 56%, #d5e9ff 44%);
-      box-shadow: 0 26px 62px rgba(0, 0, 0, 0.5), 0 0 0 1px color-mix(in srgb, var(--spotlight-glow) 24%, transparent);
-    }
-
-    .spotlight-card:hover::after {
-      opacity: 1;
-      animation: spotlightSweep 1.4s ease;
     }
 
     .spotlight-media {
       position: relative;
-      aspect-ratio: 16 / 7.8;
+      aspect-ratio: 16 / 8.6;
       border-bottom: 1px solid var(--stroke);
       background: #030a14;
       overflow: hidden;
-      z-index: 0;
-    }
-
-    .spotlight-media::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, rgba(4, 9, 18, 0.04), rgba(4, 9, 18, 0.38)),
-        repeating-linear-gradient(180deg, rgba(159, 193, 237, 0.06) 0 1px, transparent 1px 4px);
-      mix-blend-mode: screen;
-      pointer-events: none;
     }
 
     .spotlight-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: scale(1.02);
+      transform: scale(1.015);
       animation: breathe 12s ease-in-out infinite;
-      transition: transform 240ms ease;
-    }
-
-    .spotlight-card:hover .spotlight-media img {
-      transform: scale(1.05);
     }
 
     .spotlight-body {
-      padding: 0.78rem;
+      padding: 0.72rem;
       display: grid;
-      gap: 0.46rem;
+      gap: 0.42rem;
       align-content: start;
-      position: relative;
-      z-index: 2;
     }
 
     .spotlight-meta {
@@ -467,13 +301,13 @@
       flex-wrap: wrap;
       color: var(--muted);
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.62rem;
+      font-size: 0.68rem;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.05em;
     }
 
     .spotlight-body h3 {
-      font-size: clamp(1.24rem, 2vw, 1.72rem);
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
     }
 
     .spotlight-title-row {
@@ -489,10 +323,10 @@
     }
 
     .spotlight-external {
-      width: 34px;
-      height: 34px;
+      width: 32px;
+      height: 32px;
       border-radius: 999px;
-      border: 1px solid color-mix(in srgb, var(--spotlight-glow) 46%, rgba(164, 194, 236, 0.32));
+      border: 1px solid rgba(164, 194, 236, 0.34);
       background: rgba(255, 255, 255, 0.03);
       color: var(--ink);
       display: inline-flex;
@@ -504,8 +338,8 @@
     }
 
     .spotlight-external:hover {
-      border-color: var(--spotlight-glow);
-      background: color-mix(in srgb, var(--spotlight-glow) 18%, transparent);
+      border-color: rgba(31, 182, 255, 0.82);
+      background: rgba(31, 182, 255, 0.14);
       transform: translateY(-1px);
     }
 
@@ -517,25 +351,23 @@
 
     .spotlight-body p {
       color: #cfddf1;
-      font-size: 0.9rem;
-      line-height: 1.45;
+      font-size: 0.89rem;
       overflow-wrap: anywhere;
     }
 
     .insight-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.44rem;
+      gap: 0.42rem;
     }
 
     .insight {
-      border: 1px solid rgba(164, 194, 236, 0.3);
+      border: 1px solid rgba(164, 194, 236, 0.24);
       border-radius: var(--radius-sm);
-      background: linear-gradient(160deg, rgba(255, 255, 255, 0.028), rgba(255, 255, 255, 0.008));
-      backdrop-filter: blur(3px);
-      padding: 0.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 0.48rem;
       display: grid;
-      gap: 0.22rem;
+      gap: 0.2rem;
     }
 
     .insight.wide {
@@ -545,14 +377,14 @@
     .insight-label {
       font-family: 'IBM Plex Mono', monospace;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 0.58rem;
+      letter-spacing: 0.05em;
+      font-size: 0.61rem;
       color: var(--muted);
     }
 
     .insight p {
       margin: 0;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       overflow-wrap: anywhere;
     }
 
@@ -560,58 +392,52 @@
       display: flex;
       flex-wrap: wrap;
       gap: 0.34rem;
-      margin-top: 0.04rem;
     }
 
     .tag {
-      border: 1px solid rgba(164, 194, 236, 0.34);
+      border: 1px solid rgba(164, 194, 236, 0.28);
       border-radius: 999px;
-      padding: 0.18rem 0.5rem;
-      font-size: 0.64rem;
-      color: #deebff;
-      background: rgba(255, 255, 255, 0.03);
-      font-family: 'IBM Plex Mono', monospace;
+      padding: 0.2rem 0.48rem;
+      font-size: 0.67rem;
+      color: #dce9fc;
+      background: rgba(255, 255, 255, 0.02);
       overflow-wrap: anywhere;
     }
 
     .carousel-nav {
-      border: 1px solid rgba(164, 194, 236, 0.4);
+      border: 1px solid rgba(164, 194, 236, 0.34);
       border-radius: var(--radius-sm);
-      background: linear-gradient(170deg, rgba(12, 27, 47, 0.92), rgba(8, 18, 32, 0.9));
+      background: rgba(255, 255, 255, 0.03);
       color: var(--ink);
-      font-size: 1.36rem;
+      font-size: 1.3rem;
       font-weight: 700;
       cursor: pointer;
-      transition: 180ms ease;
+      transition: 160ms ease;
       min-height: 100%;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
     }
 
     .carousel-nav:hover {
-      border-color: var(--spotlight-glow);
-      background: color-mix(in srgb, var(--spotlight-glow) 14%, rgba(8, 18, 32, 0.92));
-      transform: scale(1.02);
+      border-color: rgba(31, 182, 255, 0.84);
+      background: rgba(31, 182, 255, 0.14);
     }
 
     .carousel-peek {
-      border: 1px solid rgba(164, 194, 236, 0.26);
+      border: 1px solid rgba(164, 194, 236, 0.24);
       border-radius: var(--radius-md);
-      background: linear-gradient(160deg, rgba(10, 21, 38, 0.88), rgba(7, 15, 29, 0.9));
-      padding: 0.54rem;
+      background: linear-gradient(160deg, rgba(10, 20, 34, 0.9), rgba(8, 16, 29, 0.9));
+      padding: 0.5rem;
       display: grid;
-      gap: 0.3rem;
+      gap: 0.28rem;
       align-content: start;
       min-width: 0;
       cursor: pointer;
-      transition: border-color 180ms ease, background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+      transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
     }
 
     .carousel-peek:hover {
-      border-color: color-mix(in srgb, var(--spotlight-glow) 58%, rgba(164, 194, 236, 0.42));
-      background: linear-gradient(160deg, rgba(12, 27, 48, 0.92), rgba(8, 18, 34, 0.94));
-      transform: translateY(-2px);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.38);
+      border-color: rgba(31, 182, 255, 0.58);
+      background: linear-gradient(160deg, rgba(11, 24, 42, 0.92), rgba(9, 18, 32, 0.92));
+      transform: translateY(-1px);
     }
 
     .carousel-peek-head {
@@ -637,8 +463,8 @@
     }
 
     .carousel-peek-title-link:hover {
-      border-color: var(--spotlight-glow);
-      background: color-mix(in srgb, var(--spotlight-glow) 16%, transparent);
+      border-color: rgba(31, 182, 255, 0.82);
+      background: rgba(31, 182, 255, 0.14);
       transform: translateY(-1px);
     }
 
@@ -650,27 +476,27 @@
 
     .carousel-peek-kicker {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.56rem;
+      font-size: 0.62rem;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: color-mix(in srgb, var(--spotlight-glow) 48%, #89f7bb 52%);
+      letter-spacing: 0.05em;
+      color: var(--accent-2);
     }
 
     .carousel-peek-title {
-      font-size: 1rem;
+      font-size: 0.98rem;
       line-height: 1.2;
     }
 
     .carousel-peek-meta {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.58rem;
+      font-size: 0.62rem;
       color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.05em;
     }
 
     .carousel-peek-summary {
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       color: #c5d4ea;
       display: -webkit-box;
       -webkit-line-clamp: 3;
@@ -685,69 +511,26 @@
     }
 
     .carousel-footer {
-      margin-top: 0.56rem;
+      margin-top: 0.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 0.54rem;
+      gap: 0.6rem;
       flex-wrap: wrap;
-      border: 1px solid rgba(164, 194, 236, 0.2);
-      border-radius: var(--radius-md);
-      background: rgba(8, 18, 32, 0.72);
-      padding: 0.44rem 0.54rem;
     }
 
     .carousel-counter {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.66rem;
+      font-size: 0.72rem;
       color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      min-width: 124px;
+      letter-spacing: 0.06em;
     }
 
     .carousel-footer-actions {
       display: flex;
       gap: 0.4rem;
       flex-wrap: wrap;
-      align-items: center;
-      margin-left: auto;
-    }
-
-    .carousel-rail {
-      display: flex;
-      gap: 0.28rem;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      scrollbar-width: none;
-      max-width: 100%;
-      padding: 0.08rem 0;
-    }
-
-    .carousel-rail::-webkit-scrollbar {
-      display: none;
-    }
-
-    .carousel-dot {
-      width: 16px;
-      height: 7px;
-      border-radius: 999px;
-      border: 1px solid rgba(164, 194, 236, 0.28);
-      background: rgba(255, 255, 255, 0.06);
-      cursor: pointer;
-      transition: 180ms ease;
-      flex: 0 0 auto;
-    }
-
-    .carousel-dot:hover {
-      border-color: color-mix(in srgb, var(--spotlight-glow) 60%, rgba(164, 194, 236, 0.38));
-      background: color-mix(in srgb, var(--spotlight-glow) 26%, rgba(255, 255, 255, 0.09));
-    }
-
-    .carousel-dot.is-active {
-      width: 30px;
-      border-color: color-mix(in srgb, var(--spotlight-glow) 74%, rgba(255, 255, 255, 0.3));
-      background: color-mix(in srgb, var(--spotlight-glow) 52%, rgba(255, 255, 255, 0.07));
     }
 
     .mini-btn {
@@ -755,15 +538,15 @@
       appearance: none;
       -webkit-appearance: none;
       border-radius: 999px;
-      border: 1px solid rgba(164, 194, 236, 0.42);
+      border: 1px solid rgba(164, 194, 236, 0.36);
       color: var(--ink);
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.02);
       min-height: 30px;
-      padding: 0.34rem 0.66rem;
+      padding: 0.34rem 0.58rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.69rem;
+      font-size: 0.71rem;
       font-weight: 600;
       cursor: pointer;
       transition: 160ms ease;
@@ -772,8 +555,8 @@
     }
 
     .mini-btn:hover {
-      border-color: color-mix(in srgb, var(--spotlight-glow) 72%, rgba(255, 255, 255, 0.3));
-      background: color-mix(in srgb, var(--spotlight-glow) 16%, transparent);
+      border-color: rgba(31, 182, 255, 0.84);
+      background: rgba(31, 182, 255, 0.12);
       transform: translateY(-1px);
     }
 
@@ -952,28 +735,7 @@
       50% { transform: scale(1.045); }
     }
 
-    @keyframes ambientShift {
-      0% { transform: rotate(0deg) scale(1); }
-      50% { transform: rotate(180deg) scale(1.08); }
-      100% { transform: rotate(360deg) scale(1); }
-    }
-
-    @keyframes heroSweep {
-      0%, 74% { transform: translateX(-46%); opacity: 0; }
-      84% { transform: translateX(0%); opacity: 1; }
-      100% { transform: translateX(52%); opacity: 0; }
-    }
-
-    @keyframes spotlightSweep {
-      0% { transform: translateX(-42%); }
-      100% { transform: translateX(46%); }
-    }
-
     @media (max-width: 1240px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-      }
-
       .carousel-shell {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -997,11 +759,6 @@
       .spotlight-body {
         padding: 0.84rem;
         gap: 0.5rem;
-      }
-
-      .carousel-rail {
-        order: 3;
-        width: 100%;
       }
 
       .modal-layout {
@@ -1039,10 +796,6 @@
         border-radius: 18px;
       }
 
-      .hero-grid {
-        gap: 0.56rem;
-      }
-
       h1 {
         font-size: 1.58rem;
       }
@@ -1056,9 +809,8 @@
         margin-bottom: 0.52rem;
       }
 
-      .section-note {
-        font-size: 0.56rem;
-        padding: 0.2rem 0.42rem;
+      .section-head p {
+        font-size: 0.8rem;
       }
 
       .carousel-shell {
@@ -1072,25 +824,18 @@
       .carousel-footer {
         margin-top: 0.36rem;
         align-items: stretch;
-        padding: 0.4rem;
       }
 
       .carousel-counter {
         width: 100%;
       }
 
-      .carousel-rail {
-        width: 100%;
-      }
-
       .carousel-footer-actions {
         width: 100%;
-        justify-content: space-between;
       }
 
       .carousel-footer-actions .mini-btn {
-        flex: 1 1 30%;
-        min-width: 0;
+        flex: 1 1 31%;
       }
 
       .spotlight-body {
@@ -1123,12 +868,6 @@
         scroll-behavior: auto;
       }
 
-      body::after,
-      .hero::after,
-      .spotlight-card::after {
-        animation: none !important;
-      }
-
       .reveal,
       .btn,
       .mini-btn,
@@ -1136,8 +875,7 @@
       .carousel-nav,
       .carousel-peek,
       .modal-overlay,
-      .spotlight-media img,
-      .spotlight-card {
+      .spotlight-media img {
         transition: none !important;
         animation: none !important;
       }
@@ -1163,29 +901,15 @@
     </div>
 
     <section class="hero panel reveal" id="intro">
-      <div class="hero-grid">
-        <div>
-          <p class="eyebrow">Data Platform Portfolio</p>
-          <h1>Architecting data systems people trust under real-world pressure.</h1>
-          <p class="hero-lead">Production-minded data architecture, intelligent product systems, and operational interfaces built end-to-end.</p>
-          <div class="hero-chips" aria-label="Specialties">
-            <span class="hero-chip">Data Architecture</span>
-            <span class="hero-chip">Data Engineering</span>
-            <span class="hero-chip">AI Product Systems</span>
-          </div>
-        </div>
-        <aside class="hero-focus" aria-label="Current focus">
-          <p class="hero-focus-label">Active Focus</p>
-          <p class="hero-focus-value" id="hero-focus-system"></p>
-          <p class="hero-focus-note" id="hero-focus-title"></p>
-        </aside>
+      <div>
+        <p class="eyebrow">Portfolio Narrative</p>
+        <h1>I design data architecture that makes decisions faster and operations safer.</h1>
       </div>
     </section>
 
     <section id="spotlight">
       <div class="section-head reveal">
         <h2>Project Carousel</h2>
-        <p class="section-note">Cinematic browse mode</p>
       </div>
 
       <div class="carousel-shell reveal">
@@ -1240,7 +964,6 @@
 
       <div class="carousel-footer reveal">
         <p class="carousel-counter" id="carousel-counter"></p>
-        <div class="carousel-rail" id="carousel-rail" aria-label="Project position"></div>
         <div class="carousel-footer-actions">
           <button class="mini-btn" id="carousel-prev-btn" type="button">Previous</button>
           <button class="mini-btn" id="carousel-details-btn" type="button">Details</button>
@@ -1573,12 +1296,6 @@
       activeProjectId: projects[0]?.id || null
     };
 
-    const systemThemes = {
-      'core-data': { glow: '#41cfff', soft: 'rgba(65, 207, 255, 0.24)' },
-      'intelligent-products': { glow: '#58f2ad', soft: 'rgba(88, 242, 173, 0.22)' },
-      'interface-labs': { glow: '#a58cff', soft: 'rgba(165, 140, 255, 0.22)' }
-    };
-
     let lastFocused = null;
     let resizeTimer = null;
     let topbarResizeObserver = null;
@@ -1657,12 +1374,7 @@
         nextCard.setAttribute('role', 'button');
       }
 
-      if (counter) {
-        const position = String(currentIndex + 1).padStart(2, '0');
-        const totalLabel = String(total).padStart(2, '0');
-        counter.textContent = `Project ${position} · ${totalLabel}`;
-      }
-      renderCarouselRail(currentIndex, total);
+      if (counter) counter.textContent = `${currentIndex + 1} / ${total}`;
 
       document.querySelectorAll('.carousel-peek').forEach((card) => {
         card.onclick = (event) => {
@@ -1692,33 +1404,6 @@
           openProjectModal(projectId);
         };
       });
-    }
-
-    function renderCarouselRail(activeIndex, total) {
-      const rail = document.getElementById('carousel-rail');
-      if (!rail) return;
-
-      rail.innerHTML = projects
-        .map((project, index) => {
-          const isActive = index === activeIndex ? ' is-active' : '';
-          return `<button class="carousel-dot${isActive}" type="button" data-id="${project.id}" aria-label="Go to ${project.title}"></button>`;
-        })
-        .join('');
-
-      rail.querySelectorAll('.carousel-dot').forEach((dot) => {
-        dot.onclick = () => {
-          const projectId = Number(dot.dataset.id);
-          if (!Number.isFinite(projectId)) return;
-          state.activeProjectId = projectId;
-          renderSpotlight();
-          renderCarouselCards();
-        };
-      });
-
-      const activeDot = rail.querySelector('.carousel-dot.is-active');
-      if (activeDot && typeof activeDot.scrollIntoView === 'function') {
-        activeDot.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-      }
     }
 
     function shiftProject(step) {
@@ -1765,16 +1450,6 @@
       document.getElementById('spotlight-architecture').textContent = project.architecture;
       document.getElementById('spotlight-impact').textContent = project.impact;
       document.getElementById('spotlight-stack').textContent = project.stack;
-
-      const heroFocusSystem = document.getElementById('hero-focus-system');
-      const heroFocusTitle = document.getElementById('hero-focus-title');
-      if (heroFocusSystem) heroFocusSystem.textContent = project.systemLabel;
-      if (heroFocusTitle) heroFocusTitle.textContent = project.title;
-
-      const theme = systemThemes[project.systemId] || systemThemes['core-data'];
-      document.documentElement.style.setProperty('--spotlight-glow', theme.glow);
-      document.documentElement.style.setProperty('--spotlight-glow-soft', theme.soft);
-
       const externalLink = document.getElementById('spotlight-external');
       if (externalLink) {
         if (project.demoUrl) {
@@ -1887,39 +1562,6 @@
       }
     }
 
-    function setupSpotlightMotion() {
-      const card = document.getElementById('spotlight-card');
-      if (!card) return;
-
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const allowTilt = window.matchMedia('(hover: hover) and (pointer: fine)').matches && !reduceMotion;
-      if (!allowTilt) {
-        card.style.transform = '';
-        card.onmousemove = null;
-        card.onmouseleave = null;
-        return;
-      }
-
-      const limit = 6;
-      card.onmousemove = (event) => {
-        const rect = card.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-        const xRatio = (x / rect.width) * 2 - 1;
-        const yRatio = (y / rect.height) * 2 - 1;
-
-        card.style.setProperty('--spotlight-pointer-x', `${(x / rect.width) * 100}%`);
-        card.style.setProperty('--spotlight-pointer-y', `${(y / rect.height) * 100}%`);
-        card.style.transform = `perspective(1200px) rotateY(${(xRatio * limit).toFixed(2)}deg) rotateX(${(-yRatio * (limit * 0.7)).toFixed(2)}deg)`;
-      };
-
-      card.onmouseleave = () => {
-        card.style.transform = '';
-        card.style.removeProperty('--spotlight-pointer-x');
-        card.style.removeProperty('--spotlight-pointer-y');
-      };
-    }
-
     function setupReveal() {
       const targets = Array.from(document.querySelectorAll('.reveal')).filter((item) => !item.classList.contains('on'));
       if (!targets.length) return;
@@ -1980,7 +1622,6 @@
     renderSpotlight();
     renderCarouselCards();
     setupCarouselControls();
-    setupSpotlightMotion();
     setupProjectModal();
     setupReveal();
     setLastUpdated();
@@ -1990,7 +1631,6 @@
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
         syncTopbarHeight();
-        setupSpotlightMotion();
         renderCarouselCards();
       }, 180);
     });
