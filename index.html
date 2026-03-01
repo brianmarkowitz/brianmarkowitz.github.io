@@ -282,21 +282,6 @@
       animation: breathe 12s ease-in-out infinite;
     }
 
-    .spotlight-rank {
-      position: absolute;
-      top: 0.62rem;
-      left: 0.62rem;
-      border-radius: 999px;
-      border: 1px solid rgba(173, 206, 245, 0.48);
-      background: rgba(8, 15, 27, 0.84);
-      padding: 0.28rem 0.56rem;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: #e5f0ff;
-    }
-
     .spotlight-body {
       padding: 0.84rem;
       display: grid;
@@ -427,14 +412,6 @@
       width: 100%;
       padding: 0;
       min-width: 0;
-    }
-
-    .project-rank {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.63rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #ffcc81;
     }
 
     .project-title {
@@ -823,7 +800,7 @@
         <h1>I design data architecture that makes decisions faster and operations safer.</h1>
         <p class="hero-lead">
           This portfolio is organized like a data platform: core foundations first, intelligent products second, and interface experiments last.
-          Every project is ranked by overall impressiveness through a principle data architect lens.
+          Every project is ordered by overall impressiveness through a principle data architect lens.
         </p>
       </div>
     </section>
@@ -837,7 +814,6 @@
       <div class="systems-shell">
         <article class="spotlight-card reveal" id="spotlight-card">
           <div class="spotlight-media">
-            <span class="spotlight-rank" id="spotlight-rank">Rank #1</span>
             <img id="spotlight-image" src="" alt="Project preview" loading="lazy">
           </div>
 
@@ -872,7 +848,7 @@
         <div class="systems-column" id="systems">
           <div class="section-head section-tight reveal">
             <h2>Project Systems</h2>
-            <p>Single ranked stream across all systems. Scroll the list and the spotlight adapts to what is in view.</p>
+            <p>Single project stream across all systems. Scroll the list and the spotlight adapts to what is in view.</p>
           </div>
           <p class="systems-note reveal">Tap any project row to open a full modal. Visit actions stay available in both row and modal.</p>
           <div class="systems-grid" id="systems-grid"></div>
@@ -1236,7 +1212,6 @@
       image.src = project.image;
       image.alt = `${project.title} preview`;
 
-      document.getElementById('spotlight-rank').textContent = `Rank #${project.rank}`;
       document.getElementById('spotlight-system').textContent = `${project.systemLabel} • Project ${project.id}`;
       document.getElementById('spotlight-status').textContent = `${project.year} • ${project.status}`;
       document.getElementById('spotlight-title').textContent = project.title;
@@ -1270,7 +1245,6 @@
         .map((project) => `
           <article class="project-row reveal ${project.id === state.activeProjectId ? 'is-active' : ''}" data-id="${project.id}">
             <button class="project-main js-open-project" type="button" data-id="${project.id}">
-              <span class="project-rank">Rank #${project.rank}</span>
               <span class="project-title">${project.title}</span>
               <span class="project-meta">${project.systemLabel} • ${project.year} • ${project.status}</span>
               <span class="project-summary">${project.summary}</span>
@@ -1314,7 +1288,7 @@
 
       lastFocused = document.activeElement;
 
-      document.getElementById('modal-kicker').textContent = `Project Detail • Rank #${project.rank}`;
+      document.getElementById('modal-kicker').textContent = 'Project Detail';
       document.getElementById('modal-image').src = project.image;
       document.getElementById('modal-image').alt = `${project.title} preview`;
       document.getElementById('modal-id-year').textContent = `Project ${project.id} • ${project.year}`;
