@@ -270,9 +270,12 @@
       width: 100%;
       min-width: 0;
       max-width: 100%;
+      height: calc(100vh - var(--topbar-height) - 1.1rem);
+      max-height: calc(100vh - var(--topbar-height) - 1.1rem);
       height: calc(100dvh - var(--topbar-height) - 1.1rem);
       max-height: calc(100dvh - var(--topbar-height) - 1.1rem);
       display: grid;
+      grid-template-rows: minmax(168px, 32vh) 1fr;
       grid-template-rows: minmax(168px, 32dvh) 1fr;
     }
 
