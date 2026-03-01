@@ -250,11 +250,11 @@
       margin-top: 0;
     }
 
-    .carousel-shell {
+    .systems-shell {
       display: grid;
-      grid-template-columns: 40px minmax(180px, 0.62fr) minmax(0, 1.34fr) minmax(180px, 0.62fr) 40px;
-      gap: 0.56rem;
-      align-items: stretch;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.84fr);
+      gap: 0.76rem;
+      align-items: start;
       width: 100%;
       min-width: 0;
     }
@@ -264,11 +264,52 @@
       border-radius: var(--radius-lg);
       background: linear-gradient(172deg, rgba(12, 24, 40, 0.96), rgba(9, 17, 30, 0.98));
       overflow: hidden;
-      position: relative;
+      position: sticky;
+      top: calc(var(--topbar-height) + 0.56rem);
       box-shadow: var(--shadow);
       width: 100%;
       min-width: 0;
       max-width: 100%;
+    }
+
+    .spotlight-card.is-fit .spotlight-media {
+      aspect-ratio: 16 / 8.2;
+    }
+
+    .spotlight-card.is-fit .spotlight-body {
+      padding: 0.66rem;
+      gap: 0.36rem;
+    }
+
+    .spotlight-card.is-fit #spotlight-summary {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .spotlight-card.is-fit .insight {
+      padding: 0.38rem;
+      gap: 0.16rem;
+    }
+
+    .spotlight-card.is-fit .insight p {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .spotlight-card.is-fit .spotlight-tags {
+      display: none;
+    }
+
+    .spotlight-card.is-fit-hard .spotlight-media {
+      aspect-ratio: 16 / 7.6;
+    }
+
+    .spotlight-card.is-fit-hard .insight.wide {
+      display: none;
     }
 
     .spotlight-media {
@@ -404,90 +445,73 @@
       overflow-wrap: anywhere;
     }
 
-    .carousel-nav {
-      border: 1px solid rgba(164, 194, 236, 0.34);
+    .systems-column {
+      min-width: 0;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .systems-note {
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+      font-size: 0.84rem;
+      border-left: 2px solid rgba(31, 182, 255, 0.4);
+      padding-left: 0.58rem;
+    }
+
+    .systems-grid {
+      display: grid;
+      gap: 0.58rem;
+      min-width: 0;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .project-row {
+      border: 1px solid rgba(164, 194, 236, 0.22);
       border-radius: var(--radius-sm);
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--ink);
-      font-size: 1.3rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 160ms ease;
-      min-height: 100%;
-    }
-
-    .carousel-nav:hover {
-      border-color: rgba(31, 182, 255, 0.84);
-      background: rgba(31, 182, 255, 0.14);
-    }
-
-    .carousel-peek {
-      border: 1px solid rgba(164, 194, 236, 0.24);
-      border-radius: var(--radius-md);
-      background: linear-gradient(160deg, rgba(10, 20, 34, 0.9), rgba(8, 16, 29, 0.9));
+      background: rgba(255, 255, 255, 0.02);
       padding: 0.5rem;
       display: grid;
-      gap: 0.28rem;
-      align-content: start;
-      min-width: 0;
-      cursor: pointer;
-      transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
-    }
-
-    .carousel-peek:hover {
-      border-color: rgba(31, 182, 255, 0.58);
-      background: linear-gradient(160deg, rgba(11, 24, 42, 0.92), rgba(9, 18, 32, 0.92));
-      transform: translateY(-1px);
-    }
-
-    .carousel-peek-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 0.42rem;
-    }
-
-    .carousel-peek-title-link {
-      width: 26px;
-      height: 26px;
-      border-radius: 999px;
-      border: 1px solid rgba(164, 194, 236, 0.34);
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--ink);
-      display: inline-flex;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.5rem;
       align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      flex-shrink: 0;
-      transition: 160ms ease;
+      transition: border-color 170ms ease, background 170ms ease, transform 170ms ease;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
     }
 
-    .carousel-peek-title-link:hover {
+    .project-row.is-active {
       border-color: rgba(31, 182, 255, 0.82);
-      background: rgba(31, 182, 255, 0.14);
-      transform: translateY(-1px);
+      background: rgba(31, 182, 255, 0.08);
+      transform: translateX(2px);
     }
 
-    .carousel-peek-title-link svg {
-      width: 12px;
-      height: 12px;
-      fill: currentColor;
+    .project-main {
+      appearance: none;
+      -webkit-appearance: none;
+      background: none;
+      border: none;
+      color: inherit;
+      text-align: left;
+      cursor: pointer;
+      display: grid;
+      gap: 0.24rem;
+      width: 100%;
+      padding: 0;
+      min-width: 0;
     }
 
-    .carousel-peek-kicker {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.62rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--accent-2);
+    .project-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #eef5ff;
+      line-height: 1.3;
+      overflow-wrap: anywhere;
     }
 
-    .carousel-peek-title {
-      font-size: 0.98rem;
-      line-height: 1.2;
-    }
-
-    .carousel-peek-meta {
+    .project-meta {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.62rem;
       color: var(--muted);
@@ -495,42 +519,23 @@
       letter-spacing: 0.05em;
     }
 
-    .carousel-peek-summary {
-      font-size: 0.78rem;
-      color: #c5d4ea;
+    .project-summary {
+      font-size: 0.76rem;
+      color: #c2d2ea;
       display: -webkit-box;
-      -webkit-line-clamp: 3;
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
       overflow-wrap: anywhere;
     }
 
-    .carousel-peek-actions {
+    .project-actions {
       display: flex;
-      justify-content: flex-end;
-    }
-
-    .carousel-footer {
-      margin-top: 0.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-    }
-
-    .carousel-counter {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .carousel-footer-actions {
-      display: flex;
-      gap: 0.4rem;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 0.34rem;
+      justify-content: center;
+      align-items: stretch;
+      min-width: 112px;
     }
 
     .mini-btn {
@@ -736,20 +741,12 @@
     }
 
     @media (max-width: 1240px) {
-      .carousel-shell {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .carousel-nav {
-        display: none;
+      .systems-shell {
+        grid-template-columns: 1fr;
       }
 
       .spotlight-card {
-        grid-column: 1 / -1;
-      }
-
-      .carousel-peek {
-        min-height: 0;
+        position: static;
       }
 
       .spotlight-media {
@@ -759,6 +756,14 @@
       .spotlight-body {
         padding: 0.84rem;
         gap: 0.5rem;
+      }
+
+      .spotlight-card.is-fit .spotlight-tags {
+        display: flex;
+      }
+
+      .spotlight-card.is-fit-hard .insight.wide {
+        display: grid;
       }
 
       .modal-layout {
@@ -809,33 +814,9 @@
         margin-bottom: 0.52rem;
       }
 
-      .section-head p {
+      .section-head p,
+      .systems-note {
         font-size: 0.8rem;
-      }
-
-      .carousel-shell {
-        grid-template-columns: 1fr;
-      }
-
-      .carousel-peek {
-        display: none;
-      }
-
-      .carousel-footer {
-        margin-top: 0.36rem;
-        align-items: stretch;
-      }
-
-      .carousel-counter {
-        width: 100%;
-      }
-
-      .carousel-footer-actions {
-        width: 100%;
-      }
-
-      .carousel-footer-actions .mini-btn {
-        flex: 1 1 31%;
       }
 
       .spotlight-body {
@@ -848,6 +829,30 @@
 
       .insight.wide {
         grid-column: auto;
+      }
+
+      .project-row {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+        padding: 0.44rem;
+      }
+
+      .project-title {
+        font-size: 0.84rem;
+      }
+
+      .project-summary {
+        font-size: 0.72rem;
+      }
+
+      .project-actions {
+        min-width: 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .mini-btn {
+        flex: 1 1 48%;
       }
 
       .modal {
@@ -872,8 +877,7 @@
       .btn,
       .mini-btn,
       .topnav-github,
-      .carousel-nav,
-      .carousel-peek,
+      .project-row,
       .modal-overlay,
       .spotlight-media img {
         transition: none !important;
@@ -909,14 +913,11 @@
 
     <section id="spotlight">
       <div class="section-head reveal">
-        <h2>Project Carousel</h2>
+        <h2>Flagship Project</h2>
+        <p>Most impressive project first, with deep context and direct access to live artifacts.</p>
       </div>
 
-      <div class="carousel-shell reveal">
-        <button class="carousel-nav" id="carousel-prev" type="button" aria-label="Previous project">‹</button>
-
-        <article class="carousel-peek" id="carousel-prev-card" aria-label="Previous project"></article>
-
+      <div class="systems-shell">
         <article class="spotlight-card reveal" id="spotlight-card">
           <div class="spotlight-media">
             <img id="spotlight-image" src="" alt="Project preview" loading="lazy">
@@ -957,17 +958,11 @@
           </div>
         </article>
 
-        <article class="carousel-peek" id="carousel-next-card" aria-label="Next project"></article>
-
-        <button class="carousel-nav" id="carousel-next" type="button" aria-label="Next project">›</button>
-      </div>
-
-      <div class="carousel-footer reveal">
-        <p class="carousel-counter" id="carousel-counter"></p>
-        <div class="carousel-footer-actions">
-          <button class="mini-btn" id="carousel-prev-btn" type="button">Previous</button>
-          <button class="mini-btn" id="carousel-details-btn" type="button">Details</button>
-          <button class="mini-btn primary" id="carousel-next-btn" type="button">Next</button>
+        <div class="systems-column" id="systems">
+          <div class="section-head section-tight reveal">
+            <h2>Project Systems</h2>
+          </div>
+          <div class="systems-grid" id="systems-grid"></div>
         </div>
       </div>
     </section>
@@ -1297,6 +1292,8 @@
     };
 
     let lastFocused = null;
+    let spotlightSyncAttached = false;
+    let spotlightSyncRaf = 0;
     let resizeTimer = null;
     let topbarResizeObserver = null;
 
@@ -1312,127 +1309,12 @@
       return `<a class="${className}" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
     }
 
-    function getProjectIndex(projectId) {
-      const index = projects.findIndex((project) => project.id === projectId);
-      return index >= 0 ? index : 0;
-    }
-
-    function wrapProjectIndex(index) {
-      const total = projects.length;
-      return ((index % total) + total) % total;
-    }
-
-    function createPeekCard(project, positionLabel) {
-      const externalIcon = project.demoUrl
-        ? `
-          <a class="carousel-peek-title-link" href="${project.demoUrl}" target="_blank" rel="noopener noreferrer" aria-label="Open ${project.title}">
-            <svg viewBox="0 0 16 16" aria-hidden="true">
-              <path d="M11.5 1a.5.5 0 0 0 0 1h1.793L8.146 7.146a.5.5 0 1 0 .708.708L14 2.707V4.5a.5.5 0 0 0 1 0v-3a.5.5 0 0 0-.5-.5h-3z"></path>
-              <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v9A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V8a.5.5 0 0 0-1 0v4.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5H8a.5.5 0 0 0 0-1H3.5z"></path>
-            </svg>
-          </a>
-        `
-        : '';
-
-      return `
-        <p class="carousel-peek-kicker">${positionLabel}</p>
-        <div class="carousel-peek-head">
-          <h3 class="carousel-peek-title">${project.title}</h3>
-          ${externalIcon}
-        </div>
-        <p class="carousel-peek-meta">${project.systemLabel} • ${project.year} • ${project.status}</p>
-        <p class="carousel-peek-summary">${project.summary}</p>
-        <div class="carousel-peek-actions">
-          <button class="mini-btn js-peek-details" type="button" data-id="${project.id}">Details</button>
-        </div>
-      `;
-    }
-
-    function renderCarouselCards() {
-      const total = projects.length;
-      if (!total) return;
-
-      const currentIndex = getProjectIndex(state.activeProjectId);
-      const prevProject = projects[wrapProjectIndex(currentIndex - 1)];
-      const nextProject = projects[wrapProjectIndex(currentIndex + 1)];
-
-      const prevCard = document.getElementById('carousel-prev-card');
-      const nextCard = document.getElementById('carousel-next-card');
-      const counter = document.getElementById('carousel-counter');
-
-      if (prevCard) {
-        prevCard.innerHTML = createPeekCard(prevProject, 'Previous');
-        prevCard.dataset.id = String(prevProject.id);
-        prevCard.tabIndex = 0;
-        prevCard.setAttribute('role', 'button');
+    function createMiniAction(label, url, variant = '', emptyLabel = 'No Link') {
+      const className = ['mini-btn', variant].filter(Boolean).join(' ');
+      if (!url) {
+        return `<span class="${className} disabled" aria-disabled="true">${emptyLabel}</span>`;
       }
-
-      if (nextCard) {
-        nextCard.innerHTML = createPeekCard(nextProject, 'Next');
-        nextCard.dataset.id = String(nextProject.id);
-        nextCard.tabIndex = 0;
-        nextCard.setAttribute('role', 'button');
-      }
-
-      if (counter) counter.textContent = `${currentIndex + 1} / ${total}`;
-
-      document.querySelectorAll('.carousel-peek').forEach((card) => {
-        card.onclick = (event) => {
-          if (event.target.closest('.js-peek-details') || event.target.closest('a')) return;
-          const projectId = Number(card.dataset.id);
-          if (!Number.isFinite(projectId)) return;
-          state.activeProjectId = projectId;
-          renderSpotlight();
-          renderCarouselCards();
-        };
-
-        card.onkeydown = (event) => {
-          if (event.key !== 'Enter' && event.key !== ' ') return;
-          event.preventDefault();
-          const projectId = Number(card.dataset.id);
-          if (!Number.isFinite(projectId)) return;
-          state.activeProjectId = projectId;
-          renderSpotlight();
-          renderCarouselCards();
-        };
-      });
-
-      document.querySelectorAll('.js-peek-details').forEach((button) => {
-        button.onclick = () => {
-          const projectId = Number(button.dataset.id);
-          if (!Number.isFinite(projectId)) return;
-          openProjectModal(projectId);
-        };
-      });
-    }
-
-    function shiftProject(step) {
-      const currentIndex = getProjectIndex(state.activeProjectId);
-      const nextIndex = wrapProjectIndex(currentIndex + step);
-      state.activeProjectId = projects[nextIndex].id;
-      renderSpotlight();
-      renderCarouselCards();
-    }
-
-    function setupCarouselControls() {
-      const prevButton = document.getElementById('carousel-prev');
-      const nextButton = document.getElementById('carousel-next');
-      const prevFooterButton = document.getElementById('carousel-prev-btn');
-      const detailsFooterButton = document.getElementById('carousel-details-btn');
-      const nextFooterButton = document.getElementById('carousel-next-btn');
-
-      if (prevButton) prevButton.onclick = () => shiftProject(-1);
-      if (nextButton) nextButton.onclick = () => shiftProject(1);
-      if (prevFooterButton) prevFooterButton.onclick = () => shiftProject(-1);
-      if (detailsFooterButton) detailsFooterButton.onclick = () => openProjectModal(state.activeProjectId);
-      if (nextFooterButton) nextFooterButton.onclick = () => shiftProject(1);
-
-      document.addEventListener('keydown', (event) => {
-        const modalOpen = document.getElementById('project-modal-overlay')?.classList.contains('open');
-        if (modalOpen) return;
-        if (event.key === 'ArrowLeft') shiftProject(-1);
-        if (event.key === 'ArrowRight') shiftProject(1);
-      });
+      return `<a class="${className}" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
     }
 
     function renderSpotlight() {
@@ -1442,6 +1324,7 @@
       const image = document.getElementById('spotlight-image');
       image.src = project.image;
       image.alt = `${project.title} preview`;
+      image.onload = () => fitSpotlightCard();
 
       document.getElementById('spotlight-system').textContent = `${project.systemLabel} • Project ${project.id}`;
       document.getElementById('spotlight-status').textContent = `${project.year} • ${project.status}`;
@@ -1465,6 +1348,50 @@
       document.getElementById('spotlight-tags').innerHTML = project.tags
         .map((tag) => `<span class="tag">${tag}</span>`)
         .join('');
+
+      markActiveRows();
+      fitSpotlightCard();
+    }
+
+    function renderSystems() {
+      const root = document.getElementById('systems-grid');
+      if (!root) return;
+
+      root.innerHTML = projects
+        .map((project) => `
+          <article class="project-row reveal ${project.id === state.activeProjectId ? 'is-active' : ''}" data-id="${project.id}">
+            <button class="project-main js-open-project" type="button" data-id="${project.id}">
+              <span class="project-title">${project.title}</span>
+              <span class="project-meta">${project.systemLabel} • ${project.year} • ${project.status}</span>
+              <span class="project-summary">${project.summary}</span>
+            </button>
+            <div class="project-actions">
+              <button class="mini-btn js-open-project" type="button" data-id="${project.id}">Details</button>
+              ${createMiniAction('Visit', project.demoUrl, 'primary', 'No Link')}
+            </div>
+          </article>
+        `)
+        .join('');
+
+      root.querySelectorAll('.js-open-project').forEach((button) => {
+        button.addEventListener('click', () => {
+          const projectId = Number(button.dataset.id);
+          if (!Number.isFinite(projectId)) return;
+
+          state.activeProjectId = projectId;
+          renderSpotlight();
+          openProjectModal(projectId);
+        });
+      });
+
+      setupAdaptiveSpotlight();
+      setupReveal();
+    }
+
+    function markActiveRows() {
+      document.querySelectorAll('.project-row').forEach((row) => {
+        row.classList.toggle('is-active', Number(row.dataset.id) === state.activeProjectId);
+      });
     }
 
     function openProjectModal(projectId) {
@@ -1474,7 +1401,6 @@
 
       state.activeProjectId = project.id;
       renderSpotlight();
-      renderCarouselCards();
 
       lastFocused = document.activeElement;
 
@@ -1505,7 +1431,6 @@
         focusButton.addEventListener('click', () => {
           state.activeProjectId = project.id;
           renderSpotlight();
-          renderCarouselCards();
           closeProjectModal();
           focusSpotlight();
         });
@@ -1559,6 +1484,82 @@
       const rect = section.getBoundingClientRect();
       if (rect.top < -80 || rect.top > window.innerHeight * 0.45) {
         section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function syncSpotlightFromRows() {
+      if (window.matchMedia('(max-width: 1240px)').matches) return;
+
+      const rows = Array.from(document.querySelectorAll('.project-row'));
+      if (!rows.length) return;
+
+      const topbar = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--topbar-height')) || 0;
+      const anchor = topbar + 132;
+      let containingRow = null;
+      let firstBelowRow = null;
+
+      for (const row of rows) {
+        const rect = row.getBoundingClientRect();
+
+        if (rect.bottom < topbar + 8) continue;
+
+        if (!firstBelowRow && rect.top >= anchor) {
+          firstBelowRow = row;
+        }
+
+        if (rect.top <= anchor && rect.bottom >= anchor) {
+          containingRow = row;
+          break;
+        }
+      }
+
+      const candidate = containingRow || firstBelowRow || rows[rows.length - 1];
+      if (!candidate) return;
+
+      const nextId = Number(candidate.dataset.id);
+      if (!Number.isFinite(nextId) || nextId === state.activeProjectId) return;
+
+      state.activeProjectId = nextId;
+      renderSpotlight();
+    }
+
+    function requestSpotlightSync() {
+      if (spotlightSyncRaf) return;
+      spotlightSyncRaf = requestAnimationFrame(() => {
+        spotlightSyncRaf = 0;
+        syncSpotlightFromRows();
+      });
+    }
+
+    function setupAdaptiveSpotlight() {
+      if (!spotlightSyncAttached) {
+        window.addEventListener('scroll', requestSpotlightSync, { passive: true });
+        spotlightSyncAttached = true;
+      }
+
+      requestSpotlightSync();
+    }
+
+    function fitSpotlightCard() {
+      const card = document.getElementById('spotlight-card');
+      if (!card) return;
+
+      card.classList.remove('is-fit', 'is-fit-hard');
+
+      if (window.matchMedia('(max-width: 1240px)').matches) {
+        return;
+      }
+
+      const topbar = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--topbar-height')) || 0;
+      const available = window.innerHeight - topbar - 12;
+
+      if (card.getBoundingClientRect().height <= available) {
+        return;
+      }
+
+      card.classList.add('is-fit');
+      if (card.getBoundingClientRect().height > available) {
+        card.classList.add('is-fit-hard');
       }
     }
 
@@ -1620,8 +1621,7 @@
 
     setupTopbarHeightSync();
     renderSpotlight();
-    renderCarouselCards();
-    setupCarouselControls();
+    renderSystems();
     setupProjectModal();
     setupReveal();
     setLastUpdated();
@@ -1631,7 +1631,8 @@
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
         syncTopbarHeight();
-        renderCarouselCards();
+        setupAdaptiveSpotlight();
+        fitSpotlightCard();
       }, 180);
     });
   </script>
