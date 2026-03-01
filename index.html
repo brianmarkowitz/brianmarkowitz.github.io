@@ -28,6 +28,7 @@
       --shadow: 0 24px 48px rgba(0, 0, 0, 0.42);
       --max: 1120px;
       --nav-height: 56px;
+      --topbar-height: 76px;
     }
 
     * {
@@ -73,7 +74,7 @@
 
     #spotlight,
     #systems {
-      scroll-margin-top: calc(var(--nav-height) + 0.9rem);
+      scroll-margin-top: calc(var(--topbar-height) + 0.9rem);
     }
 
     .topbar-wrap {
@@ -83,7 +84,8 @@
       margin: 0 0 0.48rem;
       padding-top: 0.24rem;
       padding-bottom: 0.28rem;
-      background: linear-gradient(180deg, rgba(7, 16, 27, 0.96) 0%, rgba(7, 16, 27, 0.88) 72%, rgba(7, 16, 27, 0) 100%);
+      background: #07101b;
+      border-bottom: 1px solid rgba(159, 193, 237, 0.14);
     }
 
     .topbar {
@@ -260,7 +262,7 @@
       background: linear-gradient(172deg, rgba(12, 24, 40, 0.96), rgba(9, 17, 30, 0.98));
       overflow: hidden;
       position: sticky;
-      top: calc(var(--nav-height) + 1rem);
+      top: calc(var(--topbar-height) + 0.8rem);
       box-shadow: var(--shadow);
     }
 
@@ -1458,15 +1460,25 @@
       });
     }
 
+    function syncTopbarHeight() {
+      const topbarWrap = document.querySelector('.topbar-wrap');
+      if (!topbarWrap) return;
+      const height = Math.ceil(topbarWrap.getBoundingClientRect().height);
+      document.documentElement.style.setProperty('--topbar-height', `${height}px`);
+    }
+
+    syncTopbarHeight();
     renderSpotlight();
     renderSystems();
     setupProjectModal();
     setupReveal();
     setLastUpdated();
+    window.addEventListener('load', syncTopbarHeight);
 
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
+        syncTopbarHeight();
         setupAdaptiveSpotlight();
       }, 180);
     });
