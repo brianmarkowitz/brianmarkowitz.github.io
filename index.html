@@ -304,11 +304,6 @@
       display: none;
     }
 
-    .spotlight-card.is-fit .spotlight-actions .btn {
-      min-height: 36px;
-      padding: 0.46rem 0.76rem;
-    }
-
     .spotlight-card.is-fit-hard .spotlight-media {
       aspect-ratio: 16 / 7.6;
     }
@@ -354,6 +349,45 @@
 
     .spotlight-body h3 {
       font-size: clamp(1.2rem, 2vw, 1.6rem);
+    }
+
+    .spotlight-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.52rem;
+    }
+
+    .spotlight-title-row h3 {
+      margin: 0;
+      min-width: 0;
+    }
+
+    .spotlight-external {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(164, 194, 236, 0.34);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: 160ms ease;
+    }
+
+    .spotlight-external:hover {
+      border-color: rgba(31, 182, 255, 0.82);
+      background: rgba(31, 182, 255, 0.14);
+      transform: translateY(-1px);
+    }
+
+    .spotlight-external svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
     }
 
     .spotlight-body p {
@@ -409,13 +443,6 @@
       color: #dce9fc;
       background: rgba(255, 255, 255, 0.02);
       overflow-wrap: anywhere;
-    }
-
-    .spotlight-actions {
-      margin-top: 0.02rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.44rem;
     }
 
     .systems-column {
@@ -901,7 +928,15 @@
               <span id="spotlight-system"></span>
               <span id="spotlight-status"></span>
             </p>
-            <h3 id="spotlight-title"></h3>
+            <div class="spotlight-title-row">
+              <h3 id="spotlight-title"></h3>
+              <a id="spotlight-external" class="spotlight-external" href="" target="_blank" rel="noopener noreferrer" aria-label="Open project link" hidden>
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path d="M11.5 1a.5.5 0 0 0 0 1h1.793L8.146 7.146a.5.5 0 1 0 .708.708L14 2.707V4.5a.5.5 0 0 0 1 0v-3a.5.5 0 0 0-.5-.5h-3z"></path>
+                  <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v9A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V8a.5.5 0 0 0-1 0v4.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5H8a.5.5 0 0 0 0-1H3.5z"></path>
+                </svg>
+              </a>
+            </div>
             <p id="spotlight-summary"></p>
 
             <div class="insight-grid">
@@ -920,7 +955,6 @@
             </div>
 
             <div class="spotlight-tags" id="spotlight-tags"></div>
-            <div class="spotlight-actions" id="spotlight-actions"></div>
           </div>
         </article>
 
@@ -1301,20 +1335,21 @@
       document.getElementById('spotlight-architecture').textContent = project.architecture;
       document.getElementById('spotlight-impact').textContent = project.impact;
       document.getElementById('spotlight-stack').textContent = project.stack;
+      const externalLink = document.getElementById('spotlight-external');
+      if (externalLink) {
+        if (project.demoUrl) {
+          externalLink.href = project.demoUrl;
+          externalLink.hidden = false;
+          externalLink.setAttribute('aria-label', `Open ${project.title}`);
+        } else {
+          externalLink.removeAttribute('href');
+          externalLink.hidden = true;
+        }
+      }
 
       document.getElementById('spotlight-tags').innerHTML = project.tags
         .map((tag) => `<span class="tag">${tag}</span>`)
         .join('');
-
-      document.getElementById('spotlight-actions').innerHTML = `
-        <button class="btn btn-secondary" id="spotlight-open-details" type="button">Open Details</button>
-        ${createMainAction('Visit Project', project.demoUrl, 'primary', 'No Public Link')}
-      `;
-
-      const openDetails = document.getElementById('spotlight-open-details');
-      if (openDetails) {
-        openDetails.addEventListener('click', () => openProjectModal(project.id));
-      }
 
       markActiveRows();
       fitSpotlightCard();
