@@ -70,6 +70,7 @@
     .site {
       width: min(var(--max), 100% - 1.4rem);
       margin: 0 auto 2.6rem;
+      overflow-x: clip;
     }
 
     #spotlight,
@@ -251,9 +252,11 @@
 
     .systems-shell {
       display: grid;
-      grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.84fr);
       gap: 0.76rem;
       align-items: start;
+      width: 100%;
+      min-width: 0;
     }
 
     .spotlight-card {
@@ -264,6 +267,9 @@
       position: sticky;
       top: calc(var(--topbar-height) + 0.8rem);
       box-shadow: var(--shadow);
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
     }
 
     .spotlight-media {
@@ -366,6 +372,8 @@
 
     .systems-column {
       min-width: 0;
+      width: 100%;
+      max-width: 100%;
     }
 
     .systems-note {
@@ -379,6 +387,9 @@
     .systems-grid {
       display: grid;
       gap: 0.58rem;
+      min-width: 0;
+      width: 100%;
+      max-width: 100%;
     }
 
     .project-row {
@@ -391,6 +402,9 @@
       gap: 0.5rem;
       align-items: center;
       transition: border-color 170ms ease, background 170ms ease, transform 170ms ease;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
     }
 
     .project-row.is-active {
@@ -647,7 +661,7 @@
       50% { transform: scale(1.045); }
     }
 
-    @media (max-width: 1020px) {
+    @media (max-width: 1240px) {
       .systems-shell {
         grid-template-columns: 1fr;
       }
