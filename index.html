@@ -1264,7 +1264,8 @@
     };
 
     let lastFocused = null;
-    let scrollSyncObserver = null;
+    let spotlightSyncAttached = false;
+    let spotlightSyncRaf = 0;
     let resizeTimer = null;
     let topbarResizeObserver = null;
 
@@ -1457,38 +1458,57 @@
       }
     }
 
-    function setupAdaptiveSpotlight() {
-      if (scrollSyncObserver) {
-        scrollSyncObserver.disconnect();
-        scrollSyncObserver = null;
-      }
-
+    function syncSpotlightFromRows() {
       if (window.matchMedia('(max-width: 1240px)').matches) return;
 
       const rows = Array.from(document.querySelectorAll('.project-row'));
       if (!rows.length) return;
 
-      scrollSyncObserver = new IntersectionObserver(
-        (entries) => {
-          const candidate = entries
-            .filter((entry) => entry.isIntersecting)
-            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      const topbar = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--topbar-height')) || 0;
+      const anchor = topbar + 132;
+      let containingRow = null;
+      let firstBelowRow = null;
 
-          if (!candidate) return;
+      for (const row of rows) {
+        const rect = row.getBoundingClientRect();
 
-          const nextId = Number(candidate.target.dataset.id);
-          if (!Number.isFinite(nextId) || nextId === state.activeProjectId) return;
+        if (rect.bottom < topbar + 8) continue;
 
-          state.activeProjectId = nextId;
-          renderSpotlight();
-        },
-        {
-          threshold: [0.52, 0.72],
-          rootMargin: '-12% 0px -22% 0px'
+        if (!firstBelowRow && rect.top >= anchor) {
+          firstBelowRow = row;
         }
-      );
 
-      rows.forEach((row) => scrollSyncObserver.observe(row));
+        if (rect.top <= anchor && rect.bottom >= anchor) {
+          containingRow = row;
+          break;
+        }
+      }
+
+      const candidate = containingRow || firstBelowRow || rows[rows.length - 1];
+      if (!candidate) return;
+
+      const nextId = Number(candidate.dataset.id);
+      if (!Number.isFinite(nextId) || nextId === state.activeProjectId) return;
+
+      state.activeProjectId = nextId;
+      renderSpotlight();
+    }
+
+    function requestSpotlightSync() {
+      if (spotlightSyncRaf) return;
+      spotlightSyncRaf = requestAnimationFrame(() => {
+        spotlightSyncRaf = 0;
+        syncSpotlightFromRows();
+      });
+    }
+
+    function setupAdaptiveSpotlight() {
+      if (!spotlightSyncAttached) {
+        window.addEventListener('scroll', requestSpotlightSync, { passive: true });
+        spotlightSyncAttached = true;
+      }
+
+      requestSpotlightSync();
     }
 
     function fitSpotlightCard() {
