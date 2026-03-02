@@ -486,6 +486,32 @@
       padding: 0.32rem 0.2rem;
     }
 
+    .stream-failsafe {
+      display: grid;
+      gap: 0.48rem;
+    }
+
+    .stream-failsafe-card {
+      border: 1px solid rgba(164, 194, 236, 0.24);
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.02);
+      padding: 0.58rem;
+      display: grid;
+      gap: 0.28rem;
+    }
+
+    .stream-failsafe-card h3 {
+      margin: 0;
+      font-size: 0.98rem;
+      line-height: 1.18;
+    }
+
+    .stream-failsafe-card p {
+      margin: 0;
+      color: #cbd9ee;
+      font-size: 0.78rem;
+    }
+
     .stream-step {
       min-height: clamp(70vh, 78vh, 820px);
     }
@@ -1526,6 +1552,26 @@
       setupReveal();
     }
 
+    function renderFailSafeProjectList() {
+      const root = document.getElementById('project-stream');
+      if (!root) return;
+
+      root.innerHTML = `
+        <div class="stream-failsafe">
+          ${projects.map((project) => `
+            <article class="stream-failsafe-card">
+              <p>${project.systemLabel} • ${project.year} • ${project.status}</p>
+              <h3>${project.title}</h3>
+              <p>${project.summary}</p>
+            </article>
+          `).join('')}
+        </div>
+      `;
+
+      setActiveProject(projects[0]?.id || null);
+      setupReveal();
+    }
+
     function updateStreamVisualState() {
       if (!streamCards.length) return;
 
@@ -1708,24 +1754,30 @@
       }
     }
 
-    setupTopbarHeightSync();
-    renderProjectStream();
-    setupProjectModal();
-    setupReveal();
-    setLastUpdated();
-    window.addEventListener('load', () => {
-      syncTopbarHeight();
-      requestStreamFrame();
-    });
-    window.addEventListener('scroll', requestStreamFrame, { passive: true });
-
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
+    try {
+      setupTopbarHeightSync();
+      renderProjectStream();
+      setupProjectModal();
+      setupReveal();
+      setLastUpdated();
+      window.addEventListener('load', () => {
         syncTopbarHeight();
         requestStreamFrame();
-      }, 180);
-    });
+      });
+      window.addEventListener('scroll', requestStreamFrame, { passive: true });
+
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          syncTopbarHeight();
+          requestStreamFrame();
+        }, 180);
+      });
+    } catch (error) {
+      console.error('Project stream failed to initialize, using fail-safe list.', error);
+      renderFailSafeProjectList();
+      setLastUpdated();
+    }
   </script>
 </body>
 </html>
