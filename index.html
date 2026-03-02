@@ -415,55 +415,10 @@
       gap: 0.62rem;
     }
 
-    .atlas-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 0.56rem;
-      align-items: baseline;
-      flex-wrap: wrap;
-    }
-
-    .atlas-head h3 {
-      font-size: clamp(1.1rem, 2vw, 1.36rem);
-    }
-
-    .atlas-head p {
+    .atlas-intro {
       color: var(--muted);
       font-size: 0.82rem;
       max-width: 62ch;
-    }
-
-    .atlas-toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .atlas-filter {
-      appearance: none;
-      -webkit-appearance: none;
-      border: 1px solid rgba(164, 194, 236, 0.34);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--ink);
-      padding: 0.3rem 0.58rem;
-      font-size: 0.67rem;
-      font-family: 'IBM Plex Mono', monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      cursor: pointer;
-      transition: 150ms ease;
-    }
-
-    .atlas-filter:hover {
-      border-color: rgba(31, 182, 255, 0.74);
-      background: rgba(31, 182, 255, 0.12);
-    }
-
-    .atlas-filter.is-active {
-      border-color: rgba(31, 182, 255, 0.84);
-      background: rgba(31, 182, 255, 0.18);
-      color: #f2f8ff;
     }
 
     .atlas-grid {
@@ -560,11 +515,6 @@
       gap: 0.34rem;
       align-items: center;
       flex-wrap: wrap;
-    }
-
-    .atlas-toggle {
-      justify-self: start;
-      margin-top: -0.08rem;
     }
 
     .mini-btn {
@@ -836,7 +786,7 @@
       }
 
       .section-head p,
-      .atlas-head p {
+      .atlas-intro {
         font-size: 0.8rem;
       }
 
@@ -925,7 +875,7 @@
     <section class="hero panel reveal" id="intro">
       <div>
         <p class="eyebrow">Portfolio Narrative</p>
-        <h1>I design data architecture that makes decisions faster and operations safer.</h1>
+        <h1>I architect data systems that speed decisions and strengthen operations.</h1>
       </div>
     </section>
 
@@ -936,18 +886,8 @@
 
       <div class="showcase-shell">
         <section class="atlas-panel reveal" id="atlas">
-          <div class="atlas-head">
-            <h3>Project Atlas</h3>
-            <p>Click any project card to open the full modal details.</p>
-          </div>
-          <div class="atlas-toolbar" aria-label="Project filters">
-            <button class="atlas-filter is-active" type="button" data-filter="all">All Projects</button>
-            <button class="atlas-filter" type="button" data-filter="core-data">Core Data</button>
-            <button class="atlas-filter" type="button" data-filter="intelligent-products">Intelligent Products</button>
-            <button class="atlas-filter" type="button" data-filter="interface-labs">Interfaces</button>
-          </div>
+          <p class="atlas-intro">Click any project card to open the full modal details.</p>
           <div class="atlas-grid" id="atlas-grid"></div>
-          <button class="mini-btn atlas-toggle" id="atlas-toggle" type="button" hidden></button>
         </section>
       </div>
     </section>
@@ -1273,13 +1213,10 @@
       .sort((a, b) => a.rank - b.rank);
 
     const state = {
-      activeProjectId: projects[0]?.id || null,
-      activeFilter: 'all',
-      atlasExpanded: false
+      activeProjectId: projects[0]?.id || null
     };
 
     let lastFocused = null;
-    let atlasFiltersBound = false;
     let resizeTimer = null;
     let topbarResizeObserver = null;
 
@@ -1300,54 +1237,24 @@
       return `<a class="mini-btn primary" href="${url}" target="_blank" rel="noopener noreferrer">Visit</a>`;
     }
 
-    function getFilteredProjects() {
-      if (state.activeFilter === 'all') return projects;
-      return projects.filter((project) => project.systemId === state.activeFilter);
-    }
-
     function renderSpotlight() {
       markActiveCards();
-    }
-
-    function setupAtlasFilters() {
-      if (atlasFiltersBound) return;
-
-      document.querySelectorAll('.atlas-filter').forEach((button) => {
-        button.addEventListener('click', () => {
-          const filter = button.dataset.filter || 'all';
-          if (filter === state.activeFilter) return;
-
-          state.activeFilter = filter;
-          state.atlasExpanded = false;
-          document.querySelectorAll('.atlas-filter').forEach((item) => {
-            item.classList.toggle('is-active', item.dataset.filter === filter);
-          });
-
-          renderAtlas();
-        });
-      });
-
-      atlasFiltersBound = true;
     }
 
     function renderAtlas() {
       const root = document.getElementById('atlas-grid');
       if (!root) return;
 
-      const filteredProjects = getFilteredProjects();
-      if (!filteredProjects.length) {
+      if (!projects.length) {
         root.innerHTML = '<p class="atlas-empty">No projects in this lane yet.</p>';
-        updateAtlasToggle(0);
         return;
       }
 
-      if (!filteredProjects.some((project) => project.id === state.activeProjectId)) {
-        state.activeProjectId = filteredProjects[0].id;
+      if (!projects.some((project) => project.id === state.activeProjectId)) {
+        state.activeProjectId = projects[0].id;
       }
 
-      const visibleProjects = state.atlasExpanded ? filteredProjects : filteredProjects.slice(0, 6);
-
-      root.innerHTML = visibleProjects
+      root.innerHTML = projects
         .map((project) => {
           const visitAction = createVisitAction(project.demoUrl);
           return `
@@ -1374,7 +1281,6 @@
         });
       });
 
-      updateAtlasToggle(filteredProjects.length);
       markActiveCards();
       setupReveal();
     }
@@ -1383,31 +1289,6 @@
       document.querySelectorAll('.atlas-card').forEach((card) => {
         card.classList.toggle('is-active', Number(card.dataset.id) === state.activeProjectId);
       });
-    }
-
-    function setupAtlasToggle() {
-      const button = document.getElementById('atlas-toggle');
-      if (!button) return;
-
-      button.addEventListener('click', () => {
-        state.atlasExpanded = !state.atlasExpanded;
-        renderAtlas();
-      });
-    }
-
-    function updateAtlasToggle(totalProjects) {
-      const button = document.getElementById('atlas-toggle');
-      if (!button) return;
-
-      if (totalProjects <= 6) {
-        button.hidden = true;
-        return;
-      }
-
-      button.hidden = false;
-      button.textContent = state.atlasExpanded
-        ? 'Show Fewer Projects'
-        : `Show ${totalProjects - 6} More Projects`;
     }
 
     function openProjectModal(projectId) {
@@ -1539,8 +1420,6 @@
     }
 
     setupTopbarHeightSync();
-    setupAtlasFilters();
-    setupAtlasToggle();
     renderSpotlight();
     renderAtlas();
     setupProjectModal();
