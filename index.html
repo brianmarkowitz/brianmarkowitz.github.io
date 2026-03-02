@@ -1586,26 +1586,60 @@
         codeUrl: '',
         image: 'static/project_14_dmbrian.png'
       },
-      {
-        id: 15,
-        title: 'Clawbot Patch Blog',
-        year: '2026',
-        status: 'Live Blog',
-        systemId: 'intelligent-products',
-        systemLabel: 'Intelligent Data Products',
-        summary: 'Operational patch log documenting AI workflow behavior, fixes, and reliability improvements.',
-        architecture: 'Created engineering knowledge stream for change transparency and operational learning loops.',
-        impact: 'Captured repeatable lessons and reduced ambiguity in AI-assistant operations.',
-        stack: 'Documentation pipeline, AI operations reporting, public engineering notes',
-        proof: 'Public blog available.',
-        tags: ['Knowledge Ops', 'AI Reliability', 'Engineering Notes'],
-        demoUrl: 'https://brianmarkowitz.github.io/patch-blog/',
-        codeUrl: '',
-        image: 'static/project_15_patch_blog.png'
-      }
-    ];
+{
+    id: 15,
+    title: 'Clawbot Patch Blog',
+    year: '2026',
+    status: 'Live Blog',
+    systemId: 'intelligent-products',
+    systemLabel: 'Intelligent Data Products',
+    summary: 'Operational patch log documenting AI workflow behavior, fixes, and reliability improvements.',
+    architecture: 'Created engineering knowledge stream for change transparency and operational learning loops.',
+    impact: 'Captured repeatable lessons and reduced ambiguity in AI-assistant operations.',
+    stack: 'Documentation pipeline, AI operations reporting, public engineering notes',
+    proof: 'Public blog available.',
+    tags: ['Knowledge Ops', 'AI Reliability', 'Engineering Notes'],
+    demoUrl: 'https://brianmarkowitz.github.io/patch-blog/',
+    codeUrl: '',
+    image: 'static/project_15_patch_blog.png'
+  },
+  {
+    id: 16,
+    title: 'Brian Resume',
+    year: '2026',
+    status: 'Live Site',
+    systemId: 'interface-labs',
+    systemLabel: 'Applied Product Interfaces',
+    summary: 'Professional resume showcase with clean, modern design optimized for readability and impact.',
+    architecture: 'Designed structured content presentation with responsive layout and clear information hierarchy.',
+    impact: 'Delivers professional first impression with accessible, well-organized career narrative.',
+    stack: 'Frontend architecture, responsive design, content systems',
+    proof: 'Public site available.',
+    tags: ['Resume', 'Personal Branding', 'UX'],
+    demoUrl: 'https://brianresume.vercel.app/',
+    codeUrl: '',
+    image: 'static/project_16_brian_resume.png'
+  },
+  {
+    id: 17,
+    title: 'ResumeDB',
+    year: '2026',
+    status: 'Live Site',
+    systemId: 'intelligent-products',
+    systemLabel: 'Intelligent Data Products',
+    summary: 'Resume database platform for managing and showcasing professional profiles at scale.',
+    architecture: 'Built data-driven resume storage and retrieval system with searchable profile interfaces.',
+    impact: 'Streamlines resume management and discovery for recruitment and professional networking workflows.',
+    stack: 'Data storage, search interfaces, profile management',
+    proof: 'Public site available.',
+    tags: ['Data Products', 'Search', 'Profile Management'],
+    demoUrl: 'https://resumedb.vercel.app/',
+    codeUrl: '',
+    image: 'static/project_17_resumedb.png'
+  }
+];
 
-    const impressivenessOrder = [8, 2, 4, 5, 11, 1, 12, 3, 7, 15, 6, 9, 10, 13, 14];
+    const impressivenessOrder = [8, 2, 4, 5, 11, 1, 12, 3, 7, 15, 16, 17, 6, 9, 10, 13, 14];
     const rankById = Object.fromEntries(impressivenessOrder.map((id, index) => [id, index + 1]));
 
     const projects = rawProjects
