@@ -931,55 +931,14 @@
 
     <section id="spotlight">
       <div class="section-head reveal">
-        <h2>Project Showcase</h2>
-        <p>Select any project from the atlas for full context and details.</p>
+        <h2>Projects</h2>
       </div>
 
       <div class="showcase-shell">
-        <article class="spotlight-card reveal" id="spotlight-card">
-          <div class="spotlight-media">
-            <img id="spotlight-image" src="" alt="Project preview" loading="lazy">
-          </div>
-
-          <div class="spotlight-body">
-            <p class="spotlight-meta">
-              <span id="spotlight-system"></span>
-              <span id="spotlight-status"></span>
-            </p>
-            <div class="spotlight-title-row">
-              <h3 id="spotlight-title"></h3>
-              <a id="spotlight-external" class="spotlight-external" href="" target="_blank" rel="noopener noreferrer" aria-label="Open project link" hidden>
-                <svg viewBox="0 0 16 16" aria-hidden="true">
-                  <path d="M11.5 1a.5.5 0 0 0 0 1h1.793L8.146 7.146a.5.5 0 1 0 .708.708L14 2.707V4.5a.5.5 0 0 0 1 0v-3a.5.5 0 0 0-.5-.5h-3z"></path>
-                  <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v9A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V8a.5.5 0 0 0-1 0v4.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5H8a.5.5 0 0 0 0-1H3.5z"></path>
-                </svg>
-              </a>
-            </div>
-            <p id="spotlight-summary"></p>
-
-            <div class="insight-grid">
-              <article class="insight">
-                <p class="insight-label">Architecture Role</p>
-                <p id="spotlight-architecture"></p>
-              </article>
-              <article class="insight">
-                <p class="insight-label">Impact</p>
-                <p id="spotlight-impact"></p>
-              </article>
-              <article class="insight wide">
-                <p class="insight-label">Stack</p>
-                <p id="spotlight-stack"></p>
-              </article>
-            </div>
-
-            <div class="spotlight-tags" id="spotlight-tags"></div>
-          </div>
-        </article>
-
         <section class="atlas-panel reveal" id="atlas">
           <div class="atlas-head">
             <h3>Project Atlas</h3>
-            <p>Browse by domain and open details only when you want depth.</p>
+            <p>Click any project card to open the full modal details.</p>
           </div>
           <div class="atlas-toolbar" aria-label="Project filters">
             <button class="atlas-filter is-active" type="button" data-filter="all">All Projects</button>
@@ -1347,36 +1306,6 @@
     }
 
     function renderSpotlight() {
-      const project = getProject(state.activeProjectId);
-      if (!project) return;
-
-      const image = document.getElementById('spotlight-image');
-      image.src = project.image;
-      image.alt = `${project.title} preview`;
-
-      document.getElementById('spotlight-system').textContent = `${project.systemLabel} • Project ${project.id}`;
-      document.getElementById('spotlight-status').textContent = `${project.year} • ${project.status}`;
-      document.getElementById('spotlight-title').textContent = project.title;
-      document.getElementById('spotlight-summary').textContent = project.summary;
-      document.getElementById('spotlight-architecture').textContent = project.architecture;
-      document.getElementById('spotlight-impact').textContent = project.impact;
-      document.getElementById('spotlight-stack').textContent = project.stack;
-      const externalLink = document.getElementById('spotlight-external');
-      if (externalLink) {
-        if (project.demoUrl) {
-          externalLink.href = project.demoUrl;
-          externalLink.hidden = false;
-          externalLink.setAttribute('aria-label', `Open ${project.title}`);
-        } else {
-          externalLink.removeAttribute('href');
-          externalLink.hidden = true;
-        }
-      }
-
-      document.getElementById('spotlight-tags').innerHTML = project.tags
-        .map((tag) => `<span class="tag">${tag}</span>`)
-        .join('');
-
       markActiveCards();
     }
 
@@ -1395,7 +1324,6 @@
           });
 
           renderAtlas();
-          renderSpotlight();
         });
       });
 
@@ -1420,20 +1348,20 @@
       const visibleProjects = state.atlasExpanded ? filteredProjects : filteredProjects.slice(0, 6);
 
       root.innerHTML = visibleProjects
-        .map((project) => `
-          <article class="atlas-card reveal ${project.id === state.activeProjectId ? 'is-active' : ''}" data-id="${project.id}">
-            <button class="atlas-main js-focus-project" type="button" data-id="${project.id}">
-              <span class="atlas-thumb"><img src="${project.image}" alt="${project.title} preview" loading="lazy"></span>
-              <span class="atlas-meta">${project.systemLabel} • ${project.year} • ${project.status}</span>
-              <span class="atlas-title">${project.title}</span>
-              <span class="atlas-summary">${project.summary}</span>
-            </button>
-            <div class="atlas-actions">
-              <button class="mini-btn js-open-project" type="button" data-id="${project.id}">Details</button>
-              ${createVisitAction(project.demoUrl)}
-            </div>
-          </article>
-        `)
+        .map((project) => {
+          const visitAction = createVisitAction(project.demoUrl);
+          return `
+            <article class="atlas-card reveal ${project.id === state.activeProjectId ? 'is-active' : ''}" data-id="${project.id}">
+              <button class="atlas-main js-focus-project" type="button" data-id="${project.id}">
+                <span class="atlas-thumb"><img src="${project.image}" alt="${project.title} preview" loading="lazy"></span>
+                <span class="atlas-meta">${project.systemLabel} • ${project.year} • ${project.status}</span>
+                <span class="atlas-title">${project.title}</span>
+                <span class="atlas-summary">${project.summary}</span>
+              </button>
+              ${visitAction ? `<div class="atlas-actions">${visitAction}</div>` : ''}
+            </article>
+          `;
+        })
         .join('');
 
       root.querySelectorAll('.js-focus-project').forEach((button) => {
@@ -1442,22 +1370,12 @@
           if (!Number.isFinite(projectId)) return;
 
           state.activeProjectId = projectId;
-          renderSpotlight();
-        });
-      });
-
-      root.querySelectorAll('.js-open-project').forEach((button) => {
-        button.addEventListener('click', () => {
-          const projectId = Number(button.dataset.id);
-          if (!Number.isFinite(projectId)) return;
-
-          state.activeProjectId = projectId;
-          renderSpotlight();
           openProjectModal(projectId);
         });
       });
 
       updateAtlasToggle(filteredProjects.length);
+      markActiveCards();
       setupReveal();
     }
 
@@ -1521,18 +1439,7 @@
       document.getElementById('modal-actions').innerHTML = `
         ${createMainAction('Visit Project', project.demoUrl, 'primary', 'No Public Link')}
         ${createMainAction('View Code', project.codeUrl, 'secondary', 'Code Not Public')}
-        <button class="btn btn-secondary" id="modal-focus-spotlight" type="button">Back To Showcase</button>
       `;
-
-      const focusButton = document.getElementById('modal-focus-spotlight');
-      if (focusButton) {
-        focusButton.addEventListener('click', () => {
-          state.activeProjectId = project.id;
-          renderSpotlight();
-          closeProjectModal();
-          focusSpotlight();
-        });
-      }
 
       overlay.classList.add('open');
       overlay.setAttribute('aria-hidden', 'false');
@@ -1573,16 +1480,6 @@
           closeProjectModal();
         }
       });
-    }
-
-    function focusSpotlight() {
-      const section = document.getElementById('spotlight');
-      if (!section) return;
-
-      const rect = section.getBoundingClientRect();
-      if (rect.top < -80 || rect.top > window.innerHeight * 0.45) {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
     }
 
     function setupReveal() {
