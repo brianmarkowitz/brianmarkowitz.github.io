@@ -375,33 +375,6 @@
       min-width: 0;
     }
 
-    .spotlight-external {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      border: 1px solid rgba(164, 194, 236, 0.34);
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--ink);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      flex-shrink: 0;
-      transition: 160ms ease;
-    }
-
-    .spotlight-external:hover {
-      border-color: rgba(31, 182, 255, 0.82);
-      background: rgba(31, 182, 255, 0.14);
-      transform: translateY(-1px);
-    }
-
-    .spotlight-external svg {
-      width: 16px;
-      height: 16px;
-      fill: currentColor;
-    }
-
     .spotlight-body p {
       color: #cfddf1;
       font-size: 0.89rem;
@@ -669,6 +642,14 @@
       margin-top: auto;
     }
 
+    .stream-actions {
+      display: flex;
+      gap: 0.36rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
     .mini-btn {
       text-decoration: none;
       appearance: none;
@@ -700,6 +681,12 @@
       border-color: rgba(57, 217, 138, 0.52);
       background: rgba(57, 217, 138, 0.14);
       color: #ddffe9;
+    }
+
+    .mini-btn.secondary {
+      border-color: rgba(122, 177, 237, 0.46);
+      background: rgba(65, 111, 190, 0.16);
+      color: #dbe9ff;
     }
 
     .mini-btn.disabled {
@@ -831,34 +818,6 @@
       background: rgba(31, 182, 255, 0.12);
     }
 
-    .modal-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-      gap: 0.76rem;
-      align-items: start;
-    }
-
-    .modal-media {
-      border: 1px solid rgba(133, 188, 246, 0.32);
-      border-radius: 16px;
-      overflow: hidden;
-      background: linear-gradient(145deg, rgba(7, 15, 27, 0.96), rgba(4, 10, 18, 0.98));
-      aspect-ratio: 16 / 10;
-      box-shadow: 0 18px 30px rgba(0, 0, 0, 0.34);
-    }
-
-    .modal-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .modal-body {
-      display: grid;
-      gap: 0.46rem;
-      align-content: start;
-    }
-
     .modal-meta {
       display: flex;
       justify-content: space-between;
@@ -871,38 +830,154 @@
       flex-wrap: wrap;
     }
 
-    .modal-body h3 {
+    .modal h3 {
       font-size: 1.42rem;
       line-height: 1.2;
       text-shadow: 0 0 22px rgba(35, 163, 244, 0.2);
     }
 
-    .modal-body p {
+    .modal-summary {
       color: #c8d7ef;
       font-size: 0.86rem;
+      margin-top: 0.38rem;
+      margin-bottom: 0.52rem;
+      max-width: 68ch;
       overflow-wrap: anywhere;
     }
 
-    .modal-grid {
+    .modal-hero {
+      border: 1px solid rgba(133, 188, 246, 0.32);
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(145deg, rgba(7, 15, 27, 0.96), rgba(4, 10, 18, 0.98));
+      aspect-ratio: 16 / 8.6;
+      box-shadow: 0 18px 30px rgba(0, 0, 0, 0.34);
+      margin-top: 0.22rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-gallery {
       display: grid;
-      gap: 0.4rem;
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.42rem;
+      margin-bottom: 0.56rem;
     }
 
-    .modal-grid .insight {
-      min-height: 100%;
+    .modal-shot {
+      border: 1px solid rgba(126, 181, 240, 0.26);
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(6, 14, 26, 0.86);
+      aspect-ratio: 16 / 9;
+      position: relative;
+    }
+
+    .modal-shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.05);
+    }
+
+    .modal-shot.focus-left img {
+      object-position: left center;
+      transform: scale(1.09);
+    }
+
+    .modal-shot.focus-center img {
+      object-position: center center;
+      transform: scale(1.1);
+    }
+
+    .modal-shot.focus-right img {
+      object-position: right center;
+      transform: scale(1.09);
+    }
+
+    .modal-shot figcaption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 0.16rem 0.44rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #d4e7ff;
+      background: linear-gradient(180deg, transparent, rgba(2, 6, 12, 0.8));
+    }
+
+    .modal-dossier-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.42rem;
+    }
+
+    .dossier-panel {
+      border: 1px solid rgba(122, 177, 237, 0.28);
+      border-radius: 12px;
       background: linear-gradient(155deg, rgba(11, 22, 37, 0.9), rgba(7, 15, 27, 0.92));
-      border-color: rgba(122, 177, 237, 0.28);
+      padding: 0.52rem;
+      display: grid;
+      gap: 0.28rem;
+      align-content: start;
     }
 
-    .modal-grid .insight.wide {
+    .dossier-panel.wide {
       grid-column: 1 / -1;
     }
 
-    .modal-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.44rem;
+    .dossier-title {
+      font-family: 'IBM Plex Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 0.62rem;
+      color: #9fc6f2;
+    }
+
+    .dossier-copy {
+      color: #d1e1f5;
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .dossier-list {
+      list-style: none;
+      display: grid;
+      gap: 0.28rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .dossier-list li {
+      font-size: 0.8rem;
+      color: #d1e1f6;
+      line-height: 1.42;
+      padding-left: 0.58rem;
+      position: relative;
+      overflow-wrap: anywhere;
+    }
+
+    .dossier-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.46rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(145deg, #37c9ff, #39d98a);
+    }
+
+    .modal-tags {
+      margin-top: 0.56rem;
     }
 
     .modal-overlay.open .modal {
@@ -1017,7 +1092,7 @@
         gap: 0.5rem;
       }
 
-      .modal-layout {
+      .modal-dossier-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -1112,6 +1187,10 @@
         grid-template-columns: 1fr;
       }
 
+      .stream-actions {
+        justify-content: flex-start;
+      }
+
       .spotlight-body {
         padding: 0.68rem;
       }
@@ -1128,11 +1207,12 @@
         padding: 0.66rem;
       }
 
-      .modal-body h3 {
+      .modal h3 {
         font-size: 1.12rem;
       }
 
-      .modal-grid {
+      .modal-gallery,
+      .modal-dossier-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1229,42 +1309,39 @@
           <button class="modal-close" id="modal-close" type="button" aria-label="Close project details">×</button>
         </div>
 
-        <div class="modal-layout">
-          <div class="modal-media">
-            <img id="modal-image" src="" alt="" loading="lazy">
-          </div>
+        <p class="modal-meta">
+          <span id="modal-id-year"></span>
+          <span id="modal-system-status"></span>
+        </p>
+        <h3 id="modal-title"></h3>
+        <p class="modal-summary" id="modal-summary"></p>
 
-          <div class="modal-body">
-            <p class="modal-meta">
-              <span id="modal-id-year"></span>
-              <span id="modal-system-status"></span>
-            </p>
-            <h3 id="modal-title"></h3>
-            <p id="modal-summary"></p>
-
-            <div class="modal-grid">
-              <article class="insight">
-                <p class="insight-label">Architecture Role</p>
-                <p id="modal-architecture"></p>
-              </article>
-              <article class="insight">
-                <p class="insight-label">Impact</p>
-                <p id="modal-impact"></p>
-              </article>
-              <article class="insight wide">
-                <p class="insight-label">Stack</p>
-                <p id="modal-stack"></p>
-              </article>
-              <article class="insight wide">
-                <p class="insight-label">Access / Proof</p>
-                <p id="modal-proof"></p>
-              </article>
-            </div>
-
-            <div class="spotlight-tags" id="modal-tags"></div>
-            <div class="modal-actions" id="modal-actions"></div>
-          </div>
+        <div class="modal-hero">
+          <img id="modal-image" src="" alt="" loading="lazy">
         </div>
+
+        <div class="modal-gallery" id="modal-gallery"></div>
+
+        <div class="modal-dossier-grid">
+          <article class="dossier-panel">
+            <p class="dossier-title">System Challenge</p>
+            <p class="dossier-copy" id="modal-challenge"></p>
+          </article>
+          <article class="dossier-panel">
+            <p class="dossier-title">Architecture Decisions</p>
+            <ul class="dossier-list" id="modal-architecture-list"></ul>
+          </article>
+          <article class="dossier-panel">
+            <p class="dossier-title">Impact Signals</p>
+            <ul class="dossier-list" id="modal-impact-list"></ul>
+          </article>
+          <article class="dossier-panel wide">
+            <p class="dossier-title">Stack + Delivery Notes</p>
+            <ul class="dossier-list" id="modal-stack-list"></ul>
+          </article>
+        </div>
+
+        <div class="spotlight-tags modal-tags" id="modal-tags"></div>
       </article>
     </div>
   </main>
@@ -1553,24 +1630,79 @@
       return projects.find((project) => project.id === projectId) || projects[0];
     }
 
-    function createMainAction(label, url, type = 'primary', emptyLabel = 'Not Public') {
-      const className = type === 'secondary' ? 'btn btn-secondary' : 'btn btn-primary';
-      if (!url) {
-        return `<span class="${className} btn-disabled" aria-disabled="true">${emptyLabel}</span>`;
-      }
-      return `<a class="${className}" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+    const galleryExtrasById = {
+      3: ['static/getting_started_with_ai_prototyping.png'],
+      7: ['static/project_7_resumeai.svg']
+    };
+
+    function createCardAction(label, url, variant = '') {
+      if (!url) return '';
+      const variantClass = variant ? ` ${variant}` : '';
+      return `<a class="mini-btn${variantClass}" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
     }
 
-    function createExternalAction(url, title) {
-      if (!url) return '';
-      return `
-        <a class="spotlight-external" href="${url}" target="_blank" rel="noopener noreferrer" aria-label="Visit ${title}">
-          <svg viewBox="0 0 20 20" aria-hidden="true">
-            <path d="M11.5 3h5.5v5.5h-1.8V6.1l-5.8 5.8-1.3-1.3 5.8-5.8h-2.4V3Z"></path>
-            <path d="M4 4h5v1.8H5.8v8.4h8.4V11H16v5H4V4Z"></path>
-          </svg>
-        </a>
-      `;
+    function stackToList(stackText) {
+      return stackText
+        .split(',')
+        .map((item) => item.trim())
+        .filter(Boolean);
+    }
+
+    function listToMarkup(items) {
+      return items
+        .filter(Boolean)
+        .map((item) => `<li>${item}</li>`)
+        .join('');
+    }
+
+    function buildModalGallery(project) {
+      const baseSources = [project.image, ...(galleryExtrasById[project.id] || [])];
+      while (baseSources.length < 4) {
+        baseSources.push(project.image);
+      }
+
+      const frames = [
+        { cls: '', label: 'Overview' },
+        { cls: 'focus-left', label: 'Workflow' },
+        { cls: 'focus-center', label: 'Interface' },
+        { cls: 'focus-right', label: 'Output' }
+      ];
+
+      return frames
+        .map((frame, index) => `
+          <figure class="modal-shot ${frame.cls}">
+            <img src="${baseSources[index]}" alt="${project.title} ${frame.label}" loading="lazy">
+            <figcaption>${frame.label}</figcaption>
+          </figure>
+        `)
+        .join('');
+    }
+
+    function buildDossierChallenge(project) {
+      const summary = project.summary.replace(/\.$/, '');
+      return `${summary}. Built in the ${project.systemLabel.toLowerCase()} lane with ${project.status.toLowerCase()} maturity.`;
+    }
+
+    function buildArchitectureDecisions(project) {
+      return [
+        project.architecture,
+        `System lane: ${project.systemLabel}`,
+        `Project phase: ${project.status}`
+      ];
+    }
+
+    function buildImpactSignals(project) {
+      const signals = [project.impact, project.proof];
+      if (project.demoUrl) {
+        signals.push('Live external experience is available from the main card.');
+      }
+      return signals;
+    }
+
+    function buildStackNotes(project) {
+      const stackItems = stackToList(project.stack);
+      const focusItems = project.tags.slice(0, 3).map((tag) => `Focus area: ${tag}`);
+      return [...stackItems, ...focusItems];
     }
 
     function setActiveProject(projectId) {
@@ -1620,7 +1752,6 @@
                   </p>
                   <div class="stream-title-row">
                     <h3>${project.title}</h3>
-                    ${createExternalAction(project.demoUrl, project.title)}
                   </div>
                   <p class="stream-summary">${project.summary}</p>
                   <div class="stream-insights">
@@ -1641,7 +1772,11 @@
                     <div class="spotlight-tags">
                       ${project.tags.slice(0, 4).map((tag) => `<span class="tag">${tag}</span>`).join('')}
                     </div>
-                    <button class="mini-btn js-open-project" type="button" data-id="${project.id}">Details</button>
+                    <div class="stream-actions">
+                      ${createCardAction('Visit', project.demoUrl, 'primary')}
+                      ${createCardAction('Code', project.codeUrl, 'secondary')}
+                      <button class="mini-btn js-open-project" type="button" data-id="${project.id}">Dossier</button>
+                    </div>
                   </div>
                 </div>
               </article>
@@ -1758,26 +1893,22 @@
 
       lastFocused = document.activeElement;
 
-      document.getElementById('modal-kicker').textContent = 'Project Detail';
+      document.getElementById('modal-kicker').textContent = `Project ${project.id} Dossier`;
       document.getElementById('modal-image').src = project.image;
       document.getElementById('modal-image').alt = `${project.title} preview`;
-      document.getElementById('modal-id-year').textContent = `Project ${project.id} • ${project.year}`;
-      document.getElementById('modal-system-status').textContent = `${project.systemLabel} • ${project.status}`;
+      document.getElementById('modal-id-year').textContent = `${project.systemLabel} • ${project.year}`;
+      document.getElementById('modal-system-status').textContent = project.status;
       document.getElementById('modal-title').textContent = project.title;
       document.getElementById('modal-summary').textContent = project.summary;
-      document.getElementById('modal-architecture').textContent = project.architecture;
-      document.getElementById('modal-impact').textContent = project.impact;
-      document.getElementById('modal-stack').textContent = project.stack;
-      document.getElementById('modal-proof').textContent = project.proof;
+      document.getElementById('modal-gallery').innerHTML = buildModalGallery(project);
+      document.getElementById('modal-challenge').textContent = buildDossierChallenge(project);
+      document.getElementById('modal-architecture-list').innerHTML = listToMarkup(buildArchitectureDecisions(project));
+      document.getElementById('modal-impact-list').innerHTML = listToMarkup(buildImpactSignals(project));
+      document.getElementById('modal-stack-list').innerHTML = listToMarkup(buildStackNotes(project));
 
       document.getElementById('modal-tags').innerHTML = project.tags
         .map((tag) => `<span class="tag">${tag}</span>`)
         .join('');
-
-      document.getElementById('modal-actions').innerHTML = `
-        ${createMainAction('Visit Project', project.demoUrl, 'primary', 'No Public Link')}
-        ${createMainAction('View Code', project.codeUrl, 'secondary', 'Code Not Public')}
-      `;
 
       overlay.classList.add('open');
       overlay.setAttribute('aria-hidden', 'false');
