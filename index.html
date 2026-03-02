@@ -1480,7 +1480,7 @@
       root.innerHTML = projects
         .map((project) => {
           return `
-            <div class="stream-step reveal">
+            <div class="stream-step">
               <article class="stream-card ${project.id === state.activeProjectId ? 'is-active' : ''}" data-id="${project.id}">
                 <div class="stream-media">
                   <img src="${project.image}" alt="${project.title} preview" loading="lazy">
