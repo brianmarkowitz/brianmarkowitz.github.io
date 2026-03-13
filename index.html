@@ -1427,28 +1427,24 @@
         let currentReturnSpeed = returnSpeed;
 
         if (d < influenceRadius) {
-          // SPACE-TIME FOLDING: Non-linear push + Vortex swirl
+          // NATURAL DISRUPTION PHYSICS: Non-linear push + Vortex swirl
           const angle = atan2(dy, dx);
           
           // Vortex force: stronger near the center
           const swirl = map(d, 0, influenceRadius, PI / 2.5, 0);
           
-          // Accretion Disk Positioning (Event Horizon)
-          const distShift = map(d, 0, influenceRadius, repelRadius, d); 
+          // EMERGENT REPULSION: No clamping. 
+          // Dots are pushed out non-linearly, creating a natural "density ring" at the repelRadius
+          const pushForce = Math.pow(map(d, 0, influenceRadius, 1, 0), 2) * (influenceRadius - d);
           
-          tx = smx + cos(angle + swirl) * distShift;
-          ty = smy + sin(angle + swirl) * distShift;
+          tx = dot.bx + cos(angle + swirl) * pushForce;
+          ty = dot.by + sin(angle + swirl) * pushForce;
           
           // INCREASE SPEED INSIDE VOID
           currentReturnSpeed = 0.3;
           
-          // Event Horizon Brightness
-          if (d < repelRadius + 10) {
-            opacity = map(d, 0, repelRadius, 255, 180);
-          }
-          
-          // PRISTINE CENTER: High-speed evacuation and hard cutoff
-          if (d < repelRadius * 0.4) opacity = 0;
+          // PRISTINE CENTER CUTOFF: High-speed evacuation and hard cutoff for the inner void
+          if (d < repelRadius * 0.45) opacity = 0;
         }
         
         // Smooth interpolation
