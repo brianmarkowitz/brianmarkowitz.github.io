@@ -1351,9 +1351,8 @@
   
   <script>
     let dots = [];
-    const spacing = 30;
-    const repelRadius = 150;
-    const maxForce = 60;
+    const spacing = 28;
+    const repelRadius = 140; 
     const returnSpeed = 0.08;
 
     function setup() {
@@ -1361,7 +1360,6 @@
       canvas.parent('p5-bg');
       noFill();
       strokeWeight(2);
-      stroke(31, 182, 255, 120);
       initGrid();
     }
 
@@ -1386,17 +1384,22 @@
       for (let dot of dots) {
         const d = p5.Vector.dist(mouseV, dot.baseP);
         
-        // Calculate target position
         let target = dot.baseP.copy();
-        
+        let opacity = 80;
+
         if (d < repelRadius) {
-          // Push away from mouse
-          const force = map(d, 0, repelRadius, maxForce, 0);
+          // The "Black Hole" Logic: 
+          // Dots inside the radius are pushed exactly to the edge of the circle
           const dir = p5.Vector.sub(dot.baseP, mouseV).normalize();
-          target.add(dir.mult(force));
+          target = p5.Vector.add(mouseV, dir.mult(repelRadius));
+          
+          // Increase opacity for dots at the "event horizon" to make the ring glow
+          opacity = map(d, 0, repelRadius, 255, 120);
         }
         
-        // Smoothly interpolate current position toward target
+        stroke(31, 182, 255, opacity);
+        
+        // Smoothly move toward target
         dot.currentP.x = lerp(dot.currentP.x, target.x, returnSpeed);
         dot.currentP.y = lerp(dot.currentP.y, target.y, returnSpeed);
         
