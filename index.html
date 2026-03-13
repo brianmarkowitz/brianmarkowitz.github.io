@@ -1351,41 +1351,56 @@
   
   <script>
     let dots = [];
-    const spacing = 25; // Closer dots
-    const noiseScale = 0.005;
-    const intensity = 50; // More movement
+    const spacing = 30;
+    const repelRadius = 150;
+    const maxForce = 60;
+    const returnSpeed = 0.08;
 
     function setup() {
-      console.log('p5.js background initializing...');
       const canvas = createCanvas(windowWidth, windowHeight);
       canvas.parent('p5-bg');
       noFill();
-      strokeWeight(2.5); // Thicker dots
-      stroke(31, 182, 255, 180); // Higher opacity
+      strokeWeight(2);
+      stroke(31, 182, 255, 120);
       initGrid();
     }
 
     function initGrid() {
       dots = [];
-      for (let x = -spacing; x < width + spacing; x += spacing) {
-        for (let y = -spacing; y < height + spacing; y += spacing) {
-          dots.push({ baseP: createVector(x, y) });
+      for (let x = 0; x < width + spacing; x += spacing) {
+        for (let y = 0; y < height + spacing; y += spacing) {
+          dots.push({ 
+            baseP: createVector(x, y),
+            currentP: createVector(x, y)
+          });
         }
       }
     }
 
     function draw() {
-      background(0); // Explicitly fill black
-      const time = frameCount * 0.005;
+      clear();
+      background(0);
+      
+      const mouseV = createVector(mouseX, mouseY);
       
       for (let dot of dots) {
-        const nx = noise(dot.baseP.x * noiseScale, dot.baseP.y * noiseScale, time);
-        const ny = noise(dot.baseP.x * noiseScale + 100, dot.baseP.y * noiseScale + 100, time);
+        const d = p5.Vector.dist(mouseV, dot.baseP);
         
-        const dx = (nx - 0.5) * intensity;
-        const dy = (ny - 0.5) * intensity;
+        // Calculate target position
+        let target = dot.baseP.copy();
         
-        point(dot.baseP.x + dx, dot.baseP.y + dy);
+        if (d < repelRadius) {
+          // Push away from mouse
+          const force = map(d, 0, repelRadius, maxForce, 0);
+          const dir = p5.Vector.sub(dot.baseP, mouseV).normalize();
+          target.add(dir.mult(force));
+        }
+        
+        // Smoothly interpolate current position toward target
+        dot.currentP.x = lerp(dot.currentP.x, target.x, returnSpeed);
+        dot.currentP.y = lerp(dot.currentP.y, target.y, returnSpeed);
+        
+        point(dot.currentP.x, dot.currentP.y);
       }
     }
 
