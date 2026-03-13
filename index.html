@@ -1364,12 +1364,16 @@
     const spacing = 15; // High density (~8,000 - 10,000 dots)
     const repelRadius = 140; 
     const returnSpeed = 0.12; // Snappier recovery
-    const noiseScale = 0.004;
+    const noiseScale = 0.005;
     const jitterAmount = 4;
-
+    let smx = 0;
+    let smy = 0;
+    
     function setup() {
       const canvas = createCanvas(windowWidth, windowHeight);
       canvas.parent('p5-bg');
+      smx = width / 2;
+      smy = height / 2;
       noFill();
       strokeWeight(1.5);
       initGrid();
@@ -1396,54 +1400,61 @@
       clear();
       background(0);
       
-      const mx = mouseX;
-      const my = mouseY;
+      // MOUSE MOMENTUM: Smoothly trail the actual mouse
+      smx = lerp(smx, mouseX, 0.08);
+      smy = lerp(smy, mouseY, 0.08);
+      
       const time = frameCount * 0.01;
+      const influenceRadius = repelRadius * 1.5; // Wider area for "folding" look
       
       for (let i = 0; i < dots.length; i++) {
         const dot = dots[i];
         
-        // Calculate noise-based variations (idle ripple and opacity)
+        // Noise variations
         const n = noise(dot.bx * noiseScale, dot.by * noiseScale, time);
         const idleX = (noise(dot.bx * noiseScale + 100, time) - 0.5) * 5;
         const idleY = (noise(dot.by * noiseScale + 100, time) - 0.5) * 5;
         
-        // Target calculation
         let tx = dot.bx + idleX;
         let ty = dot.by + idleY;
         
-        // Distance to mouse from current dot position (cx, cy) for smoother interaction
-        const mdx = mx - dot.cx;
-        const mdy = my - dot.cy;
-        const md = sqrt(mdx * mdx + mdy * mdy);
-        
-        // Distance to mouse
-        const dx = mx - dot.bx;
-        const dy = my - dot.by;
+        // Distance to the SMOOTHED mouse (momentum)
+        const dx = dot.bx - smx;
+        const dy = dot.by - smy;
         const d = sqrt(dx * dx + dy * dy);
         
         let opacity = map(n, 0, 1, 40, 120);
         let currentReturnSpeed = returnSpeed;
 
-        if (d < repelRadius) {
-          // STRICT OUTWARD REPULSION: Fix atan2 for outward push
-          const angle = atan2(dot.by - my, dot.bx - mx);
-          tx = mx + cos(angle) * repelRadius;
-          ty = my + sin(angle) * repelRadius;
+        if (d < influenceRadius) {
+          // SPACE-TIME FOLDING: Non-linear push + Vortex swirl
+          const angle = atan2(dy, dx);
           
-          // INCREASE SPEED INSIDE VOID: Ensure rapid evacuation
-          currentReturnSpeed = 0.35;
+          // Vortex force: stronger near the center
+          const swirl = map(d, 0, influenceRadius, PI / 2.5, 0);
           
-          // Luminous Ring (Event Horizon) Brightness
-          opacity = map(d, 0, repelRadius, 255, 150);
+          // Accretion Disk Positioning (Event Horizon)
+          const distShift = map(d, 0, influenceRadius, repelRadius, d); 
           
-          // PRISTINE CENTER: Fade dots that managed to get close to the mouse
-          if (md < repelRadius * 0.5) opacity = 0;
+          tx = smx + cos(angle + swirl) * distShift;
+          ty = smy + sin(angle + swirl) * distShift;
+          
+          // INCREASE SPEED INSIDE VOID
+          currentReturnSpeed = 0.3;
+          
+          // Event Horizon Brightness
+          if (d < repelRadius + 10) {
+            opacity = map(d, 0, repelRadius, 255, 180);
+          }
+          
+          // PRISTINE CENTER: High-speed evacuation and hard cutoff
+          if (d < repelRadius * 0.4) opacity = 0;
         }
         
         // Smooth interpolation
         dot.cx += (tx - dot.cx) * currentReturnSpeed;
         dot.cy += (ty - dot.cy) * currentReturnSpeed;
+        
         strokeWeight(3.5);
         stroke(31, 182, 255, opacity);
         point(dot.cx, dot.cy);
