@@ -10,26 +10,33 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #07101b;
-      --bg-soft: #0d1a2a;
-      --panel: rgba(11, 21, 36, 0.9);
-      --panel-strong: rgba(12, 25, 42, 0.96);
-      --ink: #edf4ff;
-      --muted: #9bb0cb;
-      --stroke: rgba(159, 193, 237, 0.24);
-      --accent: #1fb6ff;
-      --accent-2: #39d98a;
-      --accent-3: #ffbc5f;
-      --radius-xl: 28px;
-      --radius-lg: 18px;
-      --radius-md: 14px;
-      --radius-sm: 10px;
-      --shadow: 0 24px 48px rgba(0, 0, 0, 0.42);
-      --max: 1120px;
-      --nav-height: 56px;
-      --topbar-height: 76px;
-    }
+     :root {
+       --bg: #07101b;
+       --bg-soft: #0d1a2a;
+       --panel: rgba(11, 21, 36, 0.9);
+       --panel-strong: rgba(12, 25, 42, 0.96);
+       --ink: #edf4ff;
+       --muted: #9bb0cb;
+       --stroke: rgba(159, 193, 237, 0.24);
+       --accent: #1fb6ff;
+       --accent-2: #39d98a;
+       --accent-3: #ffbc5f;
+       --radius-xl: 28px;
+       --radius-lg: 18px;
+       --radius-md: 14px;
+       --radius-sm: 10px;
+       --shadow: 0 24px 48px rgba(0, 0, 0, 0.42);
+       --max: 1120px;
+       --nav-height: 56px;
+       --topbar-height: 76px;
+       --particle-count: 100;
+       --particle-size: 2px;
+       --particle-speed: 0.5;
+       --particle-line-distance: 150px;
+       --particle-line-width: 1px;
+       --particle-color: rgba(31, 182, 255, 0.1);
+       --particle-line-color: rgba(31, 182, 255, 0.05);
+     }
 
     * {
       box-sizing: border-box;
@@ -45,16 +52,16 @@
       scroll-behavior: smooth;
     }
 
-    body {
-      min-height: 100vh;
-      font-family: 'Sora', sans-serif;
-      color: var(--ink);
-      background: linear-gradient(158deg, #030a14 0%, #071121 44%, #0b1a30 100%);
-      line-height: 1.5;
-      overflow-x: hidden;
-      position: relative;
-      isolation: isolate;
-    }
+     body {
+       min-height: 100vh;
+       font-family: 'Sora', sans-serif;
+       color: var(--ink);
+       background: #000;
+       line-height: 1.5;
+       overflow-x: hidden;
+       position: relative;
+       isolation: isolate;
+     }
 
     .bg-network,
     .bg-network-lines {
@@ -2329,11 +2336,134 @@
           requestStreamFrame();
         }, 180);
       });
-    } catch (error) {
-      console.error('Project stream failed to initialize, using fail-safe list.', error);
-      renderFailSafeProjectList();
-      setLastUpdated();
-    }
-  </script>
-</body>
+     } catch (error) {
+       console.error('Project stream failed to initialize, using fail-safe list.', error);
+       renderFailSafeProjectList();
+       setLastUpdated();
+     }
+   </script>
+    <canvas class="bg-particles" aria-hidden="true"></canvas>
+    <script>
+      // Particle background animation inspired by OpenViking
+      class ParticleBackground {
+        constructor() {
+          this.canvas = document.querySelector('.bg-particles');
+          this.ctx = this.canvas.getContext('2d');
+          this.particles = [];
+          this.mouse = { x: null, y: null, radius: 150 };
+          
+          this.init();
+          this.animate();
+          
+          window.addEventListener('resize', () => this.init());
+          window.addEventListener('mousemove', (e) => {
+            this.mouse.x = e.x;
+            this.mouse.y = e.y;
+          });
+          window.addEventListener('mouseout', () => {
+            this.mouse.x = null;
+            this.mouse.y = null;
+          });
+        }
+        
+        init() {
+          this.canvas.width = window.innerWidth;
+          this.canvas.height = window.innerHeight;
+          
+          this.particles = [];
+          const particleCount = Math.ceil((this.canvas.width * this.canvas.height) / 10000);
+          
+          for (let i = 0; i < particleCount; i++) {
+            this.particles.push(new Particle(
+              Math.random() * this.canvas.width,
+              Math.random() * this.canvas.height,
+              Math.random() * 3 + 1,
+              `rgba(31, 182, 255, ${Math.random() * 0.6})`
+            ));
+          }
+        }
+        
+        animate() {
+          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+          
+          for (let i = 0; i < this.particles.length; i++) {
+            this.particles[i].update();
+            
+            for (let j = i + 1; j < this.particles.length; j++) {
+              const distance = this.particles[i].distanceTo(this.particles[j]);
+              if (distance < 150) {
+                this.ctx.beginPath();
+                this.ctx.strokeStyle = `rgba(31, 182, 255, ${0.8 - distance/200})`;
+                this.ctx.lineWidth = 0.5;
+                this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
+                this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
+                this.ctx.stroke();
+              }
+            }
+            
+            // Mouse interaction
+            if (this.mouse.x && this.mouse.y) {
+              const dx = this.particles[i].x - this.mouse.x;
+              const dy = this.particles[i].y - this.mouse.y;
+              const distance = Math.sqrt(dx * dx + dy * dy);
+              if (distance < this.mouse.radius) {
+                const force = (this.mouse.radius - distance) / this.mouse.radius;
+                const angle = Math.atan2(dy, dx);
+                const x = Math.cos(angle) * force * 2;
+                const y = Math.sin(angle) * force * 2;
+                this.particles[i].vx -= x;
+                this.particles[i].vy -= y;
+              }
+            }
+          }
+          
+          requestAnimationFrame(() => this.animate());
+        }
+      }
+      
+      class Particle {
+        constructor(x, y, radius, color) {
+          this.x = x;
+          this.y = y;
+          this.vx = (Math.random() - 0.5) * 0.5;
+          this.vy = (Math.random() - 0.5) * 0.5;
+          this.radius = radius;
+          this.color = color;
+          this.originalRadius = radius;
+        }
+        
+        draw() {
+          this.ctx.beginPath();
+          this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          this.ctx.fillStyle = this.color;
+          this.ctx.fill();
+        }
+        
+        update() {
+          if (this.x + this.radius > this.canvas.width || this.x - this.radius < 0) {
+            this.vx = -this.vx;
+          }
+          if (this.y + this.radius > this.canvas.height || this.y - this.radius < 0) {
+            this.vy = -this.vy;
+          }
+          
+          this.x += this.vx;
+          this.y += this.vy;
+          
+          this.draw();
+        }
+        
+        distanceTo(particle) {
+          const dx = this.x - particle.x;
+          const dy = this.y - particle.y;
+          return Math.sqrt(dx * dx + dy * dy);
+        }
+      }
+      
+      // Initialize particle background when DOM is loaded
+      document.addEventListener('DOMContentLoaded', () => {
+        new ParticleBackground();
+      });
+    </script>
+  </body>
 </html>
