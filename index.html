@@ -1412,26 +1412,38 @@
         let tx = dot.bx + idleX;
         let ty = dot.by + idleY;
         
+        // Distance to mouse from current dot position (cx, cy) for smoother interaction
+        const mdx = mx - dot.cx;
+        const mdy = my - dot.cy;
+        const md = sqrt(mdx * mdx + mdy * mdy);
+        
         // Distance to mouse
         const dx = mx - dot.bx;
         const dy = my - dot.by;
         const d = sqrt(dx * dx + dy * dy);
         
         let opacity = map(n, 0, 1, 40, 120);
+        let currentReturnSpeed = returnSpeed;
 
         if (d < repelRadius) {
-          // Event Horizon Logic: concentrate dots at the edge
-          const angle = atan2(dy, dx);
+          // STRICT OUTWARD REPULSION: Fix atan2 for outward push
+          const angle = atan2(dot.by - my, dot.bx - mx);
           tx = mx + cos(angle) * repelRadius;
           ty = my + sin(angle) * repelRadius;
           
-          // Enhanced brightness at the "ring"
+          // INCREASE SPEED INSIDE VOID: Ensure rapid evacuation
+          currentReturnSpeed = 0.35;
+          
+          // Luminous Ring (Event Horizon) Brightness
           opacity = map(d, 0, repelRadius, 255, 150);
+          
+          // PRISTINE CENTER: Fade dots that managed to get close to the mouse
+          if (md < repelRadius * 0.5) opacity = 0;
         }
         
         // Smooth interpolation
-        dot.cx += (tx - dot.cx) * returnSpeed;
-        dot.cy += (ty - dot.cy) * returnSpeed;
+        dot.cx += (tx - dot.cx) * currentReturnSpeed;
+        dot.cy += (ty - dot.cy) * currentReturnSpeed;
         strokeWeight(3.5);
         stroke(31, 182, 255, opacity);
         point(dot.cx, dot.cy);
