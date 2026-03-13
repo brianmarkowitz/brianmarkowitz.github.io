@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
   <style>
      :root {
        --bg: #07101b;
@@ -38,6 +39,17 @@
        --particle-line-color: rgba(31, 182, 255, 0.05);
      }
      
+     #p5-bg {
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100vw;
+       height: 100vh;
+       z-index: -5;
+       pointer-events: none;
+       background: #000;
+     }
+
      .bg-particles {
        position: fixed;
        top: 0;
@@ -75,113 +87,11 @@
 
     .bg-network,
     .bg-network-lines {
-      position: fixed;
-      pointer-events: none;
-      inset: 0;
+      display: none;
     }
 
-    .bg-network {
-      z-index: -4;
-      background:
-        radial-gradient(1100px 720px at 12% 14%, rgba(31, 182, 255, 0.24), transparent 74%),
-        radial-gradient(940px 620px at 85% 16%, rgba(57, 217, 138, 0.2), transparent 72%),
-        radial-gradient(860px 620px at 54% 88%, rgba(108, 136, 255, 0.18), transparent 70%),
-        radial-gradient(circle at 8% 18%, rgba(156, 206, 255, 0.52) 0 2px, transparent 4px),
-        radial-gradient(circle at 28% 34%, rgba(71, 208, 255, 0.52) 0 2px, transparent 4px),
-        radial-gradient(circle at 38% 62%, rgba(159, 208, 255, 0.42) 0 2px, transparent 4px),
-        radial-gradient(circle at 58% 22%, rgba(57, 217, 138, 0.42) 0 2px, transparent 4px),
-        radial-gradient(circle at 72% 48%, rgba(128, 168, 255, 0.45) 0 2px, transparent 4px),
-        radial-gradient(circle at 86% 72%, rgba(90, 205, 255, 0.44) 0 2px, transparent 4px),
-        radial-gradient(circle at 44% 86%, rgba(57, 217, 138, 0.4) 0 2px, transparent 4px);
-      opacity: 0.96;
-      transform-origin: center;
-      filter: saturate(126%);
-      animation: nodeFieldDrift 30s ease-in-out infinite alternate;
-    }
 
-    .bg-network::before,
-    .bg-network::after {
-      content: '';
-      position: absolute;
-      inset: -6%;
-      pointer-events: none;
-    }
 
-    .bg-network::before {
-      background:
-        radial-gradient(circle at 14% 42%, rgba(31, 182, 255, 0.26) 0 3px, transparent 5px),
-        radial-gradient(circle at 22% 70%, rgba(163, 206, 255, 0.24) 0 3px, transparent 5px),
-        radial-gradient(circle at 47% 30%, rgba(57, 217, 138, 0.22) 0 3px, transparent 5px),
-        radial-gradient(circle at 67% 56%, rgba(105, 166, 255, 0.24) 0 3px, transparent 5px),
-        radial-gradient(circle at 86% 34%, rgba(31, 182, 255, 0.22) 0 3px, transparent 5px),
-        radial-gradient(circle at 78% 84%, rgba(57, 217, 138, 0.2) 0 3px, transparent 5px);
-      opacity: 0.64;
-      filter: blur(0.35px);
-      animation: nodeConstellation 22s ease-in-out infinite alternate;
-    }
-
-    .bg-network::after {
-      background:
-        repeating-radial-gradient(circle at 22% 112%, rgba(31, 182, 255, 0.2) 0 1px, transparent 1px 90px),
-        repeating-radial-gradient(circle at 84% -16%, rgba(57, 217, 138, 0.16) 0 1px, transparent 1px 98px);
-      opacity: 0.2;
-      mix-blend-mode: screen;
-      mask-image: radial-gradient(circle at 50% 52%, #000 24%, transparent 82%);
-      animation: nodePulse 34s linear infinite;
-    }
-
-    .bg-network-lines {
-      z-index: -3;
-      inset: -10%;
-      mix-blend-mode: screen;
-      opacity: 0.46;
-      filter: drop-shadow(0 0 12px rgba(31, 182, 255, 0.18));
-      background:
-        linear-gradient(118deg, transparent 0 21%, rgba(153, 196, 238, 0.34) 21.05% 21.2%, transparent 21.34% 100%),
-        linear-gradient(136deg, transparent 0 35%, rgba(133, 178, 224, 0.3) 35.04% 35.2%, transparent 35.36% 100%),
-        linear-gradient(145deg, transparent 0 62%, rgba(109, 148, 198, 0.26) 62.06% 62.2%, transparent 62.38% 100%),
-        linear-gradient(79deg, transparent 0 42%, rgba(57, 217, 138, 0.24) 42.04% 42.16%, transparent 42.3% 100%),
-        linear-gradient(92deg, transparent 0 67%, rgba(31, 182, 255, 0.28) 67.04% 67.18%, transparent 67.34% 100%),
-        linear-gradient(38deg, transparent 0 74%, rgba(31, 182, 255, 0.2) 74.04% 74.15%, transparent 74.3% 100%),
-        radial-gradient(circle at 18% 24%, rgba(31, 182, 255, 0.9) 0 2px, transparent 4px),
-        radial-gradient(circle at 31% 45%, rgba(168, 212, 255, 0.9) 0 2px, transparent 4px),
-        radial-gradient(circle at 54% 34%, rgba(57, 217, 138, 0.82) 0 2px, transparent 4px),
-        radial-gradient(circle at 72% 58%, rgba(122, 170, 255, 0.9) 0 2px, transparent 4px),
-        radial-gradient(circle at 84% 38%, rgba(31, 182, 255, 0.9) 0 2px, transparent 4px),
-        radial-gradient(circle at 66% 82%, rgba(57, 217, 138, 0.8) 0 2px, transparent 4px),
-        radial-gradient(circle at 38% 72%, rgba(169, 214, 255, 0.85) 0 2px, transparent 4px);
-      transform-origin: center;
-      animation: meshDrift 34s linear infinite;
-    }
-
-    .bg-network-lines::before,
-    .bg-network-lines::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    .bg-network-lines::before {
-      background:
-        linear-gradient(126deg, transparent 0 28%, rgba(144, 190, 236, 0.24) 28.06% 28.19%, transparent 28.34% 100%),
-        linear-gradient(58deg, transparent 0 48%, rgba(66, 201, 255, 0.22) 48.05% 48.18%, transparent 48.33% 100%),
-        linear-gradient(154deg, transparent 0 58%, rgba(57, 217, 138, 0.2) 58.04% 58.17%, transparent 58.32% 100%),
-        radial-gradient(circle at 24% 30%, rgba(31, 182, 255, 0.6) 0 1.6px, transparent 3.5px),
-        radial-gradient(circle at 46% 56%, rgba(165, 210, 255, 0.56) 0 1.6px, transparent 3.5px),
-        radial-gradient(circle at 76% 44%, rgba(57, 217, 138, 0.52) 0 1.6px, transparent 3.5px);
-      opacity: 0.54;
-      transform: scale(1.06) rotate(-4deg);
-      animation: meshCounterDrift 38s linear infinite;
-    }
-
-    .bg-network-lines::after {
-      inset: -20%;
-      background: linear-gradient(104deg, transparent 41%, rgba(31, 182, 255, 0.08) 48%, rgba(31, 182, 255, 0.18) 50%, rgba(57, 217, 138, 0.14) 52%, transparent 58%);
-      opacity: 0.7;
-      filter: blur(6px);
-      animation: meshSweep 12s ease-in-out infinite;
-    }
 
     .site {
       width: min(var(--max), 100% - 1.4rem);
@@ -1151,67 +1061,52 @@
       }
     }
 
-@keyframes nodeConstellation {
-  0% {
-    transform: translate3d(0, 0, 0) scale(0.95);
-    opacity: 0.8;
-  }
-  25% {
-    transform: translate3d(1%, -0.5%, 0) scale(1.02) rotate(1deg);
-    opacity: 0.9;
-  }
-  50% {
-    transform: translate3d(-0.5%, 1.5%, 0) scale(0.98) rotate(-1deg);
-    opacity: 0.85;
-  }
-  75% {
-    transform: translate3d(0.5%, -1%, 0) scale(1.01) rotate(0.5deg);
-    opacity: 0.9;
-  }
-  100% {
-    transform: translate3d(0, 0, 0) scale(0.95);
-    opacity: 0.8;
-  }
-}
+    @keyframes nodeConstellation {
+      0% {
+        transform: translate3d(0, 0, 0) scale(0.95);
+        opacity: 0.8;
+      }
+      25% {
+        transform: translate3d(1%, -0.5%, 0) scale(1.02) rotate(1deg);
+        opacity: 0.9;
+      }
       50% {
-        transform: translate3d(1.8%, -1.4%, 0) scale(1.04);
+        transform: translate3d(-0.5%, 1.5%, 0) scale(0.98) rotate(-1deg);
+        opacity: 0.85;
+      }
+      75% {
+        transform: translate3d(0.5%, -1%, 0) scale(1.01) rotate(0.5deg);
+        opacity: 0.9;
       }
       100% {
-        transform: translate3d(-1.4%, 1.3%, 0) scale(1.02);
+        transform: translate3d(0, 0, 0) scale(0.95);
+        opacity: 0.8;
       }
     }
 
-@keyframes nodePulse {
-  0%, 100% {
-    opacity: 0.2;
-    transform: scale(0.8);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.3);
-  }
-}
-      to {
-        transform: rotate(8deg) scale(1.04);
+    @keyframes nodePulse {
+      0%, 100% {
+        opacity: 0.2;
+        transform: scale(0.8);
+      }
+      50% {
+        opacity: 0.8;
+        transform: scale(1.3);
       }
     }
 
-@keyframes meshDrift {
-  0% {
-    background-position: 0 0, 0 0, 0 0;
-  }
-  33% {
-    background-position: 200px 100px, 150px 200px, 100px 300px;
-  }
-  66% {
-    background-position: 400px 300px, 300px 100px, 200px 200px;
-  }
-  100% {
-    background-position: 500px 400px, 400px 200px, 300px 300px;
-  }
-}
-      to {
-        transform: translate3d(-2.5%, 2%, 0);
+    @keyframes meshDrift {
+      0% {
+        background-position: 0 0, 0 0, 0 0;
+      }
+      33% {
+        background-position: 200px 100px, 150px 200px, 100px 300px;
+      }
+      66% {
+        background-position: 400px 300px, 300px 100px, 200px 200px;
+      }
+      100% {
+        background-position: 500px 400px, 400px 200px, 300px 300px;
       }
     }
 
@@ -1456,8 +1351,53 @@
   </style>
 </head>
 <body>
-  <div class="bg-network" aria-hidden="true"></div>
-  <div class="bg-network-lines" aria-hidden="true"></div>
+  <div id="p5-bg"></div>
+  
+  <script>
+    let dots = [];
+    const spacing = 35;
+    const noiseScale = 0.005;
+    const intensity = 40;
+
+    function setup() {
+      const canvas = createCanvas(windowWidth, windowHeight);
+      canvas.parent('p5-bg');
+      noFill();
+      strokeWeight(1.5);
+      stroke(31, 182, 255, 60); // Subtle blue
+      initGrid();
+    }
+
+    function initGrid() {
+      dots = [];
+      for (let x = 0; x < width + spacing; x += spacing) {
+        for (let y = 0; y < height + spacing; y += spacing) {
+          dots.push({ x, y, baseP: createVector(x, y) });
+        }
+      }
+    }
+
+    function draw() {
+      clear();
+      const time = frameCount * 0.005;
+      
+      for (let dot of dots) {
+        // Use Perlin noise to calculate displacement
+        const nx = noise(dot.baseP.x * noiseScale, dot.baseP.y * noiseScale, time);
+        const ny = noise(dot.baseP.x * noiseScale + 100, dot.baseP.y * noiseScale + 100, time);
+        
+        const dx = (nx - 0.5) * intensity;
+        const dy = (ny - 0.5) * intensity;
+        
+        point(dot.baseP.x + dx, dot.baseP.y + dy);
+      }
+    }
+
+    function windowResized() {
+      resizeCanvas(windowWidth, windowHeight);
+      initGrid();
+    }
+  </script>
   <main class="site">
     <div class="topbar-wrap reveal">
       <header class="topbar">
