@@ -1103,10 +1103,24 @@
       50% { transform: scale(1.045); }
     }
 
-    @keyframes nodeFieldDrift {
-      0% {
-        transform: translate3d(-1.5%, -1%, 0) scale(1);
-      }
+@keyframes nodeFieldDrift {
+  0% {
+    transform: translate3d(-2%, -1.5%, 0) scale(0.95) rotate(-2deg);
+    opacity: 0.8;
+  }
+  33% {
+    transform: translate3d(1%, 2%, 0) scale(1.02) rotate(1deg);
+    opacity: 0.9;
+  }
+  66% {
+    transform: translate3d(-1.5%, 1%, 0) scale(1.04) rotate(-1deg);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate3d(2%, -0.5%, 0) scale(1.08) rotate(2deg);
+    opacity: 0.9;
+  }
+}
       100% {
         transform: translate3d(1.5%, 1.2%, 0) scale(1.06);
       }
@@ -1124,19 +1138,35 @@
       }
     }
 
-    @keyframes nodePulse {
-      from {
-        transform: rotate(0deg) scale(1);
-      }
+@keyframes nodePulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.2);
+  }
+}
       to {
         transform: rotate(8deg) scale(1.04);
       }
     }
 
-    @keyframes meshDrift {
-      from {
-        transform: translate3d(0, 0, 0);
-      }
+@keyframes meshDrift {
+  0% {
+    background-position: 0 0, 0 0, 0 0;
+  }
+  33% {
+    background-position: 200px 100px, 150px 200px, 100px 300px;
+  }
+  66% {
+    background-position: 400px 300px, 300px 100px, 200px 200px;
+  }
+  100% {
+    background-position: 500px 400px, 400px 200px, 300px 300px;
+  }
+}
       to {
         transform: translate3d(-2.5%, 2%, 0);
       }
