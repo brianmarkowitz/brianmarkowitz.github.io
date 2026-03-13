@@ -1055,10 +1055,6 @@
     transform: translate3d(3%, -2%, 0) scale(1.07) rotate(3deg);
     opacity: 0.8;
   }
-}
-      100% {
-        transform: translate3d(1.5%, 1.2%, 0) scale(1.06);
-      }
     }
 
     @keyframes nodeConstellation {
@@ -1355,34 +1351,34 @@
   
   <script>
     let dots = [];
-    const spacing = 35;
+    const spacing = 25; // Closer dots
     const noiseScale = 0.005;
-    const intensity = 40;
+    const intensity = 50; // More movement
 
     function setup() {
+      console.log('p5.js background initializing...');
       const canvas = createCanvas(windowWidth, windowHeight);
       canvas.parent('p5-bg');
       noFill();
-      strokeWeight(1.5);
-      stroke(31, 182, 255, 60); // Subtle blue
+      strokeWeight(2.5); // Thicker dots
+      stroke(31, 182, 255, 180); // Higher opacity
       initGrid();
     }
 
     function initGrid() {
       dots = [];
-      for (let x = 0; x < width + spacing; x += spacing) {
-        for (let y = 0; y < height + spacing; y += spacing) {
-          dots.push({ x, y, baseP: createVector(x, y) });
+      for (let x = -spacing; x < width + spacing; x += spacing) {
+        for (let y = -spacing; y < height + spacing; y += spacing) {
+          dots.push({ baseP: createVector(x, y) });
         }
       }
     }
 
     function draw() {
-      clear();
+      background(0); // Explicitly fill black
       const time = frameCount * 0.005;
       
       for (let dot of dots) {
-        // Use Perlin noise to calculate displacement
         const nx = noise(dot.baseP.x * noiseScale, dot.baseP.y * noiseScale, time);
         const ny = noise(dot.baseP.x * noiseScale + 100, dot.baseP.y * noiseScale + 100, time);
         
