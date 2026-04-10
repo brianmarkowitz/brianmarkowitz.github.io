@@ -599,6 +599,16 @@
       background: linear-gradient(145deg, rgba(8, 18, 31, 0.92), rgba(6, 14, 24, 0.82));
     }
 
+    .stream-media-badge.is-login {
+      border-color: rgba(255, 195, 86, 0.38);
+      background: linear-gradient(145deg, rgba(37, 25, 10, 0.92), rgba(26, 16, 8, 0.84));
+    }
+
+    .stream-media-badge.is-source {
+      border-color: rgba(31, 182, 255, 0.34);
+      background: linear-gradient(145deg, rgba(7, 20, 34, 0.92), rgba(6, 15, 24, 0.84));
+    }
+
     .stream-media-badge strong {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.62rem;
@@ -611,6 +621,14 @@
       color: #d9e8fb;
     }
 
+    .stream-media-badge.is-login strong {
+      color: #ffe6b6;
+    }
+
+    .stream-media-badge.is-source strong {
+      color: #d9e8fb;
+    }
+
     .stream-media-badge span {
       font-size: 0.72rem;
       color: #b9d7c7;
@@ -618,6 +636,14 @@
     }
 
     .stream-media-badge.is-private span {
+      color: #b9cae0;
+    }
+
+    .stream-media-badge.is-login span {
+      color: #f5d4a0;
+    }
+
+    .stream-media-badge.is-source span {
       color: #b9cae0;
     }
 
@@ -645,6 +671,7 @@
       justify-content: space-between;
       align-items: flex-start;
       gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
     .stream-title-row h3 {
@@ -654,10 +681,94 @@
       max-width: 18ch;
     }
 
+    .access-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.34rem 0.68rem;
+      border-radius: 999px;
+      border: 1px solid rgba(164, 194, 236, 0.28);
+      background: rgba(255, 255, 255, 0.03);
+      color: #dce9fb;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.61rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .access-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: currentColor;
+      box-shadow: 0 0 12px currentColor;
+      opacity: 0.9;
+    }
+
+    .access-badge-live {
+      border-color: rgba(57, 217, 138, 0.42);
+      background: rgba(57, 217, 138, 0.12);
+      color: #b7ffd5;
+    }
+
+    .access-badge-login {
+      border-color: rgba(255, 195, 86, 0.42);
+      background: rgba(255, 184, 77, 0.12);
+      color: #ffe5a9;
+    }
+
+    .access-badge-source {
+      border-color: rgba(31, 182, 255, 0.4);
+      background: rgba(31, 182, 255, 0.12);
+      color: #a9eeff;
+    }
+
+    .access-badge-local {
+      border-color: rgba(164, 194, 236, 0.28);
+      background: rgba(255, 255, 255, 0.03);
+      color: #d9e8fb;
+    }
+
     .stream-summary {
       font-size: 0.9rem;
       color: #d3e1f3;
       max-width: 52ch;
+    }
+
+    .stream-outcome {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.42rem;
+      margin-top: 0.02rem;
+      padding: 0.5rem 0.66rem;
+      border-radius: 14px;
+      border: 1px solid rgba(31, 182, 255, 0.22);
+      background: linear-gradient(145deg, rgba(12, 25, 39, 0.88), rgba(7, 17, 28, 0.78));
+      color: #e6f2ff;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      max-width: 56ch;
+    }
+
+    .stream-outcome span,
+    .modal-outcome span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 22px;
+      padding: 0.18rem 0.46rem;
+      border-radius: 999px;
+      background: rgba(31, 182, 255, 0.14);
+      color: #a9eeff;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
 
     .stream-visit-band {
@@ -674,6 +785,16 @@
     .stream-visit-band.is-live {
       border-color: rgba(57, 217, 138, 0.42);
       background: linear-gradient(145deg, rgba(11, 30, 33, 0.88), rgba(8, 19, 31, 0.84));
+    }
+
+    .stream-visit-band.is-login {
+      border-color: rgba(255, 195, 86, 0.42);
+      background: linear-gradient(145deg, rgba(43, 28, 10, 0.88), rgba(25, 17, 8, 0.86));
+    }
+
+    .stream-visit-band.is-source {
+      border-color: rgba(31, 182, 255, 0.34);
+      background: linear-gradient(145deg, rgba(7, 24, 41, 0.9), rgba(8, 19, 31, 0.86));
     }
 
     .stream-visit-copy {
@@ -997,6 +1118,14 @@
       text-shadow: 0 0 22px rgba(35, 163, 244, 0.2);
     }
 
+    .modal-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
     .modal-summary {
       color: #c8d7ef;
       font-size: 0.86rem;
@@ -1004,6 +1133,23 @@
       margin-bottom: 0.52rem;
       max-width: 68ch;
       overflow-wrap: anywhere;
+    }
+
+    .modal-outcome {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.42rem;
+      margin-top: -0.04rem;
+      margin-bottom: 0.54rem;
+      padding: 0.52rem 0.68rem;
+      border-radius: 14px;
+      border: 1px solid rgba(31, 182, 255, 0.2);
+      background: linear-gradient(145deg, rgba(11, 22, 37, 0.9), rgba(7, 15, 27, 0.92));
+      color: #e5f2ff;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      max-width: 72ch;
     }
 
     .modal-actions {
@@ -1021,6 +1167,45 @@
       border: 1px solid rgba(122, 177, 237, 0.22);
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.025);
+      display: grid;
+      gap: 0.18rem;
+    }
+
+    .modal-access-note strong {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .modal-access-note.is-live {
+      border-color: rgba(57, 217, 138, 0.28);
+      background: rgba(57, 217, 138, 0.08);
+      color: #d7fbe6;
+    }
+
+    .modal-access-note.is-live strong {
+      color: #9ef6bf;
+    }
+
+    .modal-access-note.is-login {
+      border-color: rgba(255, 195, 86, 0.28);
+      background: rgba(255, 184, 77, 0.08);
+      color: #f7e2bd;
+    }
+
+    .modal-access-note.is-login strong {
+      color: #ffd785;
+    }
+
+    .modal-access-note.is-source {
+      border-color: rgba(31, 182, 255, 0.26);
+      background: rgba(31, 182, 255, 0.08);
+      color: #d2ecff;
+    }
+
+    .modal-access-note.is-source strong {
+      color: #95e7ff;
     }
 
     .modal-hero {
@@ -1419,8 +1604,18 @@
         font-size: 1.32rem;
       }
 
+      .access-badge {
+        padding: 0.3rem 0.58rem;
+        font-size: 0.57rem;
+      }
+
       .stream-summary {
         font-size: 0.84rem;
+      }
+
+      .stream-outcome,
+      .modal-outcome {
+        font-size: 0.78rem;
       }
 
       .stream-visit-band {
@@ -1665,8 +1860,12 @@
           <span id="modal-id-year"></span>
           <span id="modal-system-status"></span>
         </p>
-        <h3 id="modal-title"></h3>
+        <div class="modal-title-row">
+          <h3 id="modal-title"></h3>
+          <div id="modal-access-badge-wrap"></div>
+        </div>
         <p class="modal-summary" id="modal-summary"></p>
+        <div id="modal-outcome"></div>
         <div class="modal-actions" id="modal-actions"></div>
 
         <div class="modal-hero">
@@ -1685,7 +1884,7 @@
             <ul class="dossier-list" id="modal-architecture-list"></ul>
           </article>
           <article class="dossier-panel">
-            <p class="dossier-title">Impact Signals</p>
+            <p class="dossier-title">Outcome + Access</p>
             <ul class="dossier-list" id="modal-impact-list"></ul>
           </article>
           <article class="dossier-panel wide">
@@ -2015,6 +2214,7 @@
     const projects = rawProjects
       .map((project) => ({
         ...project,
+        access: getProjectAccess(project),
         rank: rankById[project.id] || Number.MAX_SAFE_INTEGER
       }))
       .sort((a, b) => a.rank - b.rank);
@@ -2108,29 +2308,87 @@
       return `<a class="mini-btn${variantClass}" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
     }
 
+    function getProjectAccess(project) {
+      if (project.demoUrl) {
+        const isProtected = /login|protected/i.test(project.proof);
+        const isSite = project.status.includes('Site');
+        const isBlog = project.status.includes('Blog');
+
+        if (isProtected) {
+          return {
+            key: 'login',
+            label: 'Login Required',
+            headline: isSite ? 'Protected live site available' : 'Protected live demo available',
+            note: 'Use the live link or the preview image to open this project. A sign-in step is required before you can explore it.',
+            mediaTitle: 'Protected Access',
+            mediaHint: 'Click the screenshot to open the experience, then sign in to continue.'
+          };
+        }
+
+        return {
+          key: 'live',
+          label: 'Live',
+          headline: isBlog ? 'Public live blog available' : isSite ? 'Public live site available' : 'Public live demo available',
+          note: 'Use the live link or the preview image to open the project in a new tab.',
+          mediaTitle: isBlog ? 'Live Blog' : isSite ? 'Live Site' : 'Live Demo',
+          mediaHint: 'Click the screenshot to open the live experience.'
+        };
+      }
+
+      if (project.codeUrl) {
+        return {
+          key: 'source',
+          label: 'Source Only',
+          headline: 'Source available, no public deployment',
+          note: 'This project does not have a public deployment, but the source code is available to review.',
+          mediaTitle: 'Source Only',
+          mediaHint: 'Preview only. Use the code link for access.'
+        };
+      }
+
+      return {
+        key: 'local',
+        label: 'Local Only',
+        headline: 'Local or internal preview only',
+        note: 'This one runs locally or inside internal workflows, so the portfolio shows a preview instead of a public link.',
+        mediaTitle: 'Local Only',
+        mediaHint: 'Preview only. No public URL for this project.'
+      };
+    }
+
     function getVisitActionLabel(project) {
+      if (project.access.key === 'source') return 'View Code';
       if (!project.demoUrl) return 'No Public Link';
+      if (project.access.key === 'login') {
+        return project.status.includes('Site') ? 'Open Protected Site' : 'Open Protected Demo';
+      }
+      if (project.status.includes('Blog')) return 'Visit Live Blog';
       return project.status.includes('Site') ? 'Visit Live Site' : 'Open Live Demo';
     }
 
-    function getVisitSupportText(project) {
-      if (project.demoUrl) {
-        return 'Use this button or click the preview image to open the live project in a new tab.';
-      }
+    function buildAccessBadge(project) {
+      return `<span class="access-badge access-badge-${project.access.key}">${project.access.label}</span>`;
+    }
 
-      if (project.status.toLowerCase().includes('internal')) {
-        return 'This one is tied to internal workflows, so the portfolio shows a preview instead of a public URL.';
-      }
+    function buildOutcomeLine(project, className = 'stream-outcome') {
+      return `<p class="${className}"><span>Outcome</span>${project.impact}</p>`;
+    }
 
-      return 'This project is currently private, so the portfolio includes a preview rather than a public link.';
+    function buildModalAccessNote(project) {
+      return `
+        <div class="modal-access-note is-${project.access.key}">
+          <strong>${project.access.label}</strong>
+          <span>${project.access.headline}. ${project.access.note}</span>
+        </div>
+      `;
     }
 
     function buildStreamMedia(project) {
       const imageMarkup = `<img src="${project.image}" alt="${project.title} preview" loading="lazy">`;
       const badgeMarkup = `
-        <div class="stream-media-badge${project.demoUrl ? '' : ' is-private'}">
-          <strong>${project.demoUrl ? getVisitActionLabel(project) : 'Private Preview'}</strong>
-          <span>${project.demoUrl ? 'Click the screenshot to open the live experience.' : 'Preview only. No public URL for this project.'}</span>
+        <div class="stream-media-badge is-${project.access.key}${project.access.key === 'local' ? ' is-private' : ''}">
+          <strong>${project.access.mediaTitle}</strong>
+          <span>${project.access.mediaHint}</span>
         </div>
       `;
 
@@ -2152,16 +2410,20 @@
     }
 
     function buildVisitBand(project) {
-      const actionMarkup = project.demoUrl
-        ? createCardAction(getVisitActionLabel(project), project.demoUrl, 'primary strong')
-        : '<span class="mini-pill">No Public URL</span>';
+      let actionMarkup = '<span class="mini-pill">Local Preview Only</span>';
+
+      if (project.demoUrl) {
+        actionMarkup = createCardAction(getVisitActionLabel(project), project.demoUrl, 'primary strong');
+      } else if (project.access.key === 'source') {
+        actionMarkup = createCardAction('View Code', project.codeUrl, 'secondary');
+      }
 
       return `
-        <div class="stream-visit-band ${project.demoUrl ? 'is-live' : 'is-private'}">
+        <div class="stream-visit-band is-${project.access.key}">
           <div class="stream-visit-copy">
-            <p class="stream-visit-label">How to Visit</p>
-            <p class="stream-visit-text">${project.demoUrl ? 'Live public experience available' : 'Private or internal project'}</p>
-            <p class="stream-visit-note">${getVisitSupportText(project)}</p>
+            <p class="stream-visit-label">How to Access</p>
+            <p class="stream-visit-text">${project.access.headline}</p>
+            <p class="stream-visit-note">${project.access.note}</p>
           </div>
           ${actionMarkup}
         </div>
@@ -2169,7 +2431,7 @@
     }
 
     function buildModalActions(project) {
-      const actions = [];
+      const actions = [buildModalAccessNote(project)];
 
       if (project.demoUrl) {
         actions.push(createCardAction(getVisitActionLabel(project), project.demoUrl, 'primary strong'));
@@ -2177,10 +2439,6 @@
 
       if (project.codeUrl) {
         actions.push(createCardAction('View Code', project.codeUrl, 'secondary'));
-      }
-
-      if (!project.demoUrl) {
-        actions.unshift(`<p class="modal-access-note">${getVisitSupportText(project)}</p>`);
       }
 
       return actions.join('');
@@ -2237,11 +2495,11 @@
     }
 
     function buildImpactSignals(project) {
-      const signals = [project.impact, project.proof];
-      if (project.demoUrl) {
-        signals.push('Live external experience is available from the main card.');
-      }
-      return signals;
+      return [
+        project.impact,
+        project.proof,
+        `Access: ${project.access.headline}.`
+      ];
     }
 
     function buildStackNotes(project) {
@@ -2354,7 +2612,9 @@
                   </p>
                   <div class="stream-title-row">
                     <h3>${project.title}</h3>
+                    ${buildAccessBadge(project)}
                   </div>
+                  ${buildOutcomeLine(project)}
                   <p class="stream-summary">${project.summary}</p>
                   ${buildVisitBand(project)}
                   <div class="stream-insights">
@@ -2363,8 +2623,8 @@
                       <p>${project.architecture}</p>
                     </article>
                     <article class="insight">
-                      <p class="insight-label">Impact</p>
-                      <p>${project.impact}</p>
+                      <p class="insight-label">Delivery Signal</p>
+                      <p>${project.proof}</p>
                     </article>
                   </div>
                   <article class="insight stream-stack">
@@ -2426,7 +2686,11 @@
           ${projects.map((project) => `
             <article class="stream-failsafe-card">
               <p>${project.systemLabel} • ${project.year} • ${project.status}</p>
-              <h3>${project.title}</h3>
+              <div class="stream-title-row">
+                <h3>${project.title}</h3>
+                ${buildAccessBadge(project)}
+              </div>
+              ${buildOutcomeLine(project)}
               <p>${project.summary}</p>
             </article>
           `).join('')}
@@ -2501,7 +2765,9 @@
       document.getElementById('modal-id-year').textContent = `${project.systemLabel} • ${project.year}`;
       document.getElementById('modal-system-status').textContent = project.status;
       document.getElementById('modal-title').textContent = project.title;
+      document.getElementById('modal-access-badge-wrap').innerHTML = buildAccessBadge(project);
       document.getElementById('modal-summary').textContent = project.summary;
+      document.getElementById('modal-outcome').innerHTML = buildOutcomeLine(project, 'modal-outcome');
       document.getElementById('modal-actions').innerHTML = buildModalActions(project);
       document.getElementById('modal-gallery').innerHTML = buildModalGallery(project);
       document.getElementById('modal-challenge').textContent = buildDossierChallenge(project);
