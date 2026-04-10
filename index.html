@@ -558,12 +558,67 @@
       min-height: 100%;
     }
 
+    .stream-media-frame,
+    .stream-media-link {
+      display: block;
+      height: 100%;
+      position: relative;
+      color: inherit;
+      text-decoration: none;
+    }
+
     .stream-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transform: translateY(var(--media-shift)) scale(1.05);
       transition: transform 220ms ease;
+    }
+
+    .stream-media-link:hover img {
+      transform: translateY(var(--media-shift)) scale(1.08);
+    }
+
+    .stream-media-badge {
+      position: absolute;
+      left: 0.82rem;
+      right: 0.82rem;
+      bottom: 0.82rem;
+      padding: 0.56rem 0.66rem;
+      border: 1px solid rgba(94, 225, 164, 0.42);
+      border-radius: 14px;
+      background: linear-gradient(145deg, rgba(6, 18, 28, 0.92), rgba(7, 20, 32, 0.84));
+      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.34);
+      display: grid;
+      gap: 0.12rem;
+      pointer-events: none;
+    }
+
+    .stream-media-badge.is-private {
+      border-color: rgba(164, 194, 236, 0.24);
+      background: linear-gradient(145deg, rgba(8, 18, 31, 0.92), rgba(6, 14, 24, 0.82));
+    }
+
+    .stream-media-badge strong {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #dfffee;
+    }
+
+    .stream-media-badge.is-private strong {
+      color: #d9e8fb;
+    }
+
+    .stream-media-badge span {
+      font-size: 0.72rem;
+      color: #b9d7c7;
+      max-width: 30ch;
+    }
+
+    .stream-media-badge.is-private span {
+      color: #b9cae0;
     }
 
     .stream-body {
@@ -603,6 +658,48 @@
       font-size: 0.9rem;
       color: #d3e1f3;
       max-width: 52ch;
+    }
+
+    .stream-visit-band {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.68rem;
+      border: 1px solid rgba(164, 194, 236, 0.24);
+      border-radius: 14px;
+      padding: 0.66rem 0.72rem;
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .stream-visit-band.is-live {
+      border-color: rgba(57, 217, 138, 0.42);
+      background: linear-gradient(145deg, rgba(11, 30, 33, 0.88), rgba(8, 19, 31, 0.84));
+    }
+
+    .stream-visit-copy {
+      display: grid;
+      gap: 0.12rem;
+      min-width: 0;
+    }
+
+    .stream-visit-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .stream-visit-text {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #edf6ff;
+    }
+
+    .stream-visit-note {
+      font-size: 0.75rem;
+      color: #b8cbe0;
+      max-width: 40ch;
     }
 
     .stream-insights {
@@ -665,10 +762,34 @@
       color: #ddffe9;
     }
 
+    .mini-btn.strong {
+      min-height: 38px;
+      padding: 0.48rem 0.92rem;
+      font-size: 0.76rem;
+      box-shadow: 0 12px 22px rgba(0, 0, 0, 0.22);
+    }
+
     .mini-btn.secondary {
       border-color: rgba(122, 177, 237, 0.46);
       background: rgba(65, 111, 190, 0.16);
       color: #dbe9ff;
+    }
+
+    .mini-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0.42rem 0.78rem;
+      border-radius: 999px;
+      border: 1px solid rgba(164, 194, 236, 0.28);
+      background: rgba(255, 255, 255, 0.03);
+      color: #d9e8fb;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.64rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
 
     .mini-btn.disabled {
@@ -883,6 +1004,23 @@
       margin-bottom: 0.52rem;
       max-width: 68ch;
       overflow-wrap: anywhere;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.42rem;
+      margin-top: -0.18rem;
+    }
+
+    .modal-access-note {
+      flex-basis: 100%;
+      font-size: 0.76rem;
+      color: #b9cee6;
+      padding: 0.56rem 0.66rem;
+      border: 1px solid rgba(122, 177, 237, 0.22);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.025);
     }
 
     .modal-hero {
@@ -1285,6 +1423,11 @@
         font-size: 0.84rem;
       }
 
+      .stream-visit-band {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
       .stream-insights {
         grid-template-columns: 1fr;
       }
@@ -1524,6 +1667,7 @@
         </p>
         <h3 id="modal-title"></h3>
         <p class="modal-summary" id="modal-summary"></p>
+        <div class="modal-actions" id="modal-actions"></div>
 
         <div class="modal-hero">
           <img id="modal-image" src="" alt="" loading="lazy">
@@ -1865,7 +2009,7 @@
   }
 ];
 
-    const impressivenessOrder = [8, 2, 4, 5, 11, 1, 12, 3, 7, 15, 16, 17, 6, 18, 9, 10, 13, 14];
+    const impressivenessOrder = [8, 2, 4, 5, 11, 18, 10, 1, 12, 3, 7, 15, 16, 17, 6, 9, 13, 14];
     const rankById = Object.fromEntries(impressivenessOrder.map((id, index) => [id, index + 1]));
 
     const projects = rawProjects
@@ -1891,14 +2035,151 @@
     }
 
     const galleryExtrasById = {
-      3: ['static/getting_started_with_ai_prototyping.png'],
-      7: ['static/project_7_resumeai.svg']
+      3: [
+        'static/project_3_ai_prototyping_extra_1.png',
+        'static/project_3_ai_prototyping_extra_2.png',
+        'static/project_3_ai_prototyping_extra_3.png'
+      ],
+      7: ['static/project_7_resumeai.svg'],
+      8: [
+        'static/project_8_data_engineer_assessment_extra_1.png',
+        'static/project_8_data_engineer_assessment_extra_2.png',
+        'static/project_8_data_engineer_assessment_extra_3.png'
+      ],
+      9: [
+        'static/project_9_aerospace_orbital_command_extra_1.png',
+        'static/project_9_aerospace_orbital_command_extra_2.png',
+        'static/project_9_aerospace_orbital_command_extra_3.png'
+      ],
+      10: [
+        'static/project_10_vibe_coding_journey_extra_1.png',
+        'static/project_10_vibe_coding_journey_extra_2.png',
+        'static/project_10_vibe_coding_journey_extra_3.png'
+      ],
+      11: [
+        'static/project_11_clawdmarks_extra_1.png',
+        'static/project_11_clawdmarks_extra_2.png',
+        'static/project_11_clawdmarks_extra_3.png'
+      ],
+      12: [
+        'static/project_12_mission_control_extra_1.png',
+        'static/project_12_mission_control_extra_2.png',
+        'static/project_12_mission_control_extra_3.png'
+      ],
+      13: [
+        'static/project_13_vanessa_markowitz_extra_1.png',
+        'static/project_13_vanessa_markowitz_extra_2.png',
+        'static/project_13_vanessa_markowitz_extra_3.png'
+      ],
+      14: [
+        'static/project_14_dmbrian_extra_1.png',
+        'static/project_14_dmbrian_extra_2.png',
+        'static/project_14_dmbrian_extra_3.png'
+      ],
+      15: [
+        'static/project_15_patch_blog_extra_1.png',
+        'static/project_15_patch_blog_extra_2.png',
+        'static/project_15_patch_blog_extra_3.png'
+      ],
+      16: [
+        'static/project_16_brian_resume_extra_1.png',
+        'static/project_16_brian_resume_extra_2.png',
+        'static/project_16_brian_resume_extra_3.png'
+      ],
+      17: [
+        'static/project_17_resumedb_extra_1.png',
+        'static/project_17_resumedb_extra_2.png',
+        'static/project_17_resumedb_extra_3.png'
+      ],
+      18: [
+        'static/project_18_fluglobe_extra_1.png',
+        'static/project_18_fluglobe_extra_2.png',
+        'static/project_18_fluglobe_extra_3.png'
+      ]
     };
 
     function createCardAction(label, url, variant = '') {
       if (!url) return '';
       const variantClass = variant ? ` ${variant}` : '';
       return `<a class="mini-btn${variantClass}" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+    }
+
+    function getVisitActionLabel(project) {
+      if (!project.demoUrl) return 'No Public Link';
+      return project.status.includes('Site') ? 'Visit Live Site' : 'Open Live Demo';
+    }
+
+    function getVisitSupportText(project) {
+      if (project.demoUrl) {
+        return 'Use this button or click the preview image to open the live project in a new tab.';
+      }
+
+      if (project.status.toLowerCase().includes('internal')) {
+        return 'This one is tied to internal workflows, so the portfolio shows a preview instead of a public URL.';
+      }
+
+      return 'This project is currently private, so the portfolio includes a preview rather than a public link.';
+    }
+
+    function buildStreamMedia(project) {
+      const imageMarkup = `<img src="${project.image}" alt="${project.title} preview" loading="lazy">`;
+      const badgeMarkup = `
+        <div class="stream-media-badge${project.demoUrl ? '' : ' is-private'}">
+          <strong>${project.demoUrl ? getVisitActionLabel(project) : 'Private Preview'}</strong>
+          <span>${project.demoUrl ? 'Click the screenshot to open the live experience.' : 'Preview only. No public URL for this project.'}</span>
+        </div>
+      `;
+
+      if (project.demoUrl) {
+        return `
+          <a class="stream-media-link" href="${project.demoUrl}" target="_blank" rel="noopener noreferrer" aria-label="${getVisitActionLabel(project)} for ${project.title}">
+            ${imageMarkup}
+            ${badgeMarkup}
+          </a>
+        `;
+      }
+
+      return `
+        <div class="stream-media-frame">
+          ${imageMarkup}
+          ${badgeMarkup}
+        </div>
+      `;
+    }
+
+    function buildVisitBand(project) {
+      const actionMarkup = project.demoUrl
+        ? createCardAction(getVisitActionLabel(project), project.demoUrl, 'primary strong')
+        : '<span class="mini-pill">No Public URL</span>';
+
+      return `
+        <div class="stream-visit-band ${project.demoUrl ? 'is-live' : 'is-private'}">
+          <div class="stream-visit-copy">
+            <p class="stream-visit-label">How to Visit</p>
+            <p class="stream-visit-text">${project.demoUrl ? 'Live public experience available' : 'Private or internal project'}</p>
+            <p class="stream-visit-note">${getVisitSupportText(project)}</p>
+          </div>
+          ${actionMarkup}
+        </div>
+      `;
+    }
+
+    function buildModalActions(project) {
+      const actions = [];
+
+      if (project.demoUrl) {
+        actions.push(createCardAction(getVisitActionLabel(project), project.demoUrl, 'primary strong'));
+      }
+
+      if (project.codeUrl) {
+        actions.push(createCardAction('View Code', project.codeUrl, 'secondary'));
+      }
+
+      if (!project.demoUrl) {
+        actions.unshift(`<p class="modal-access-note">${getVisitSupportText(project)}</p>`);
+      }
+
+      return actions.join('');
     }
 
     function stackToList(stackText) {
@@ -2060,7 +2341,7 @@
             <div class="stream-step">
               <article class="stream-card ${project.id === state.activeProjectId ? 'is-active' : ''}" data-id="${project.id}">
                 <div class="stream-media">
-                  <img src="${project.image}" alt="${project.title} preview" loading="lazy">
+                  ${buildStreamMedia(project)}
                 </div>
                 <div class="stream-body">
                   <p class="stream-meta">
@@ -2071,6 +2352,7 @@
                     <h3>${project.title}</h3>
                   </div>
                   <p class="stream-summary">${project.summary}</p>
+                  ${buildVisitBand(project)}
                   <div class="stream-insights">
                     <article class="insight">
                       <p class="insight-label">Architecture Role</p>
@@ -2090,9 +2372,8 @@
                       ${project.tags.slice(0, 4).map((tag) => `<span class="tag">${tag}</span>`).join('')}
                     </div>
                     <div class="stream-actions">
-                      ${createCardAction('Visit', project.demoUrl, 'primary')}
-                      ${createCardAction('Code', project.codeUrl, 'secondary')}
-                      <button class="mini-btn js-open-project" type="button" data-id="${project.id}">Dossier</button>
+                      ${createCardAction('View Code', project.codeUrl, 'secondary')}
+                      <button class="mini-btn js-open-project" type="button" data-id="${project.id}">Open Dossier</button>
                     </div>
                   </div>
                 </div>
@@ -2217,6 +2498,7 @@
       document.getElementById('modal-system-status').textContent = project.status;
       document.getElementById('modal-title').textContent = project.title;
       document.getElementById('modal-summary').textContent = project.summary;
+      document.getElementById('modal-actions').innerHTML = buildModalActions(project);
       document.getElementById('modal-gallery').innerHTML = buildModalGallery(project);
       document.getElementById('modal-challenge').textContent = buildDossierChallenge(project);
       document.getElementById('modal-architecture-list').innerHTML = listToMarkup(buildArchitectureDecisions(project));
