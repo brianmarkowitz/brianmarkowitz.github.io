@@ -30,15 +30,8 @@
        --max: 1120px;
        --nav-height: 56px;
        --topbar-height: 76px;
-       --particle-count: 100;
-       --particle-size: 2px;
-       --particle-speed: 0.5;
-       --particle-line-distance: 150px;
-       --particle-line-width: 1px;
-       --particle-color: rgba(31, 182, 255, 0.1);
-       --particle-line-color: rgba(31, 182, 255, 0.05);
      }
-     
+
      #p5-bg {
        position: fixed;
        top: 0;
@@ -48,16 +41,6 @@
        z-index: -5;
        pointer-events: none;
        background: #000;
-     }
-
-     .bg-particles {
-       position: fixed;
-       top: 0;
-       left: 0;
-       width: 100vw;
-       height: 100vh;
-       pointer-events: none;
-       z-index: -5;
      }
 
     * {
@@ -1790,25 +1773,31 @@
 </head>
 <body>
   <div id="p5-bg"></div>
-  
+
   <script>
     let dots = [];
     const spacing = 15; // High density (~8,000 - 10,000 dots)
-    const repelRadius = 140; 
+    const repelRadius = 140;
     const returnSpeed = 0.12; // Snappier recovery
     const noiseScale = 0.005;
     const jitterAmount = 4;
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     let smx = 0;
     let smy = 0;
-    
+    let reducedMotion = reducedMotionQuery.matches;
+    let canvasReady = false;
+
     function setup() {
       const canvas = createCanvas(windowWidth, windowHeight);
       canvas.parent('p5-bg');
+      canvasReady = true;
       smx = width / 2;
       smy = height / 2;
       noFill();
       strokeWeight(1.5);
       initGrid();
+      renderBackgroundFrame();
+      syncMotionPreference();
     }
 
     function initGrid() {
@@ -1818,8 +1807,8 @@
         for (let y = -spacing; y < height + spacing; y += spacing) {
           const jx = random(-jitterAmount, jitterAmount);
           const jy = random(-jitterAmount, jitterAmount);
-          dots.push({ 
-            bx: x + jx, 
+          dots.push({
+            bx: x + jx,
             by: y + jy,
             cx: x + jx,
             cy: y + jy
@@ -1829,69 +1818,98 @@
     }
 
     function draw() {
+      if (reducedMotion) {
+        renderBackgroundFrame();
+        noLoop();
+        return;
+      }
+
+      renderBackgroundFrame();
+    }
+
+    function renderBackgroundFrame() {
       clear();
       background(0);
-      
+
       // MOUSE MOMENTUM: Smoothly trail the actual mouse
       smx = lerp(smx, mouseX, 0.08);
       smy = lerp(smy, mouseY, 0.08);
-      
+
       const time = frameCount * 0.01;
       const influenceRadius = repelRadius * 1.5; // Wider area for "folding" look
-      
+
       for (let i = 0; i < dots.length; i++) {
         const dot = dots[i];
-        
+
         // Noise variations
         const n = noise(dot.bx * noiseScale, dot.by * noiseScale, time);
         const idleX = (noise(dot.bx * noiseScale + 100, time) - 0.5) * 5;
         const idleY = (noise(dot.by * noiseScale + 100, time) - 0.5) * 5;
-        
+
         let tx = dot.bx + idleX;
         let ty = dot.by + idleY;
-        
+
         // Distance to the SMOOTHED mouse (momentum)
         const dx = dot.bx - smx;
         const dy = dot.by - smy;
         const d = sqrt(dx * dx + dy * dy);
-        
+
         let opacity = map(n, 0, 1, 40, 120);
         let currentReturnSpeed = returnSpeed;
 
         if (d < influenceRadius) {
           // NATURAL DISRUPTION PHYSICS: Non-linear push + Vortex swirl
           const angle = atan2(dy, dx);
-          
+
           // Vortex force: stronger near the center
           const swirl = map(d, 0, influenceRadius, PI / 2.5, 0);
-          
-          // EMERGENT REPULSION: No clamping. 
+
+          // EMERGENT REPULSION: No clamping.
           // Dots are pushed out non-linearly, creating a natural "density ring" at the repelRadius
           const pushForce = Math.pow(map(d, 0, influenceRadius, 1, 0), 2) * (influenceRadius - d);
-          
+
           tx = dot.bx + cos(angle + swirl) * pushForce;
           ty = dot.by + sin(angle + swirl) * pushForce;
-          
+
           // INCREASE SPEED INSIDE VOID
           currentReturnSpeed = 0.3;
-          
+
           // PRISTINE CENTER CUTOFF: High-speed evacuation and hard cutoff for the inner void
           if (d < repelRadius * 0.45) opacity = 0;
         }
-        
+
         // Smooth interpolation
         dot.cx += (tx - dot.cx) * currentReturnSpeed;
         dot.cy += (ty - dot.cy) * currentReturnSpeed;
-        
+
         strokeWeight(3.5);
         stroke(31, 182, 255, opacity);
         point(dot.cx, dot.cy);
       }
     }
 
+    function syncMotionPreference() {
+      reducedMotion = reducedMotionQuery.matches;
+      if (!canvasReady) return;
+
+      renderBackgroundFrame();
+      if (reducedMotion) {
+        noLoop();
+      } else {
+        loop();
+      }
+    }
+
+    if (typeof reducedMotionQuery.addEventListener === 'function') {
+      reducedMotionQuery.addEventListener('change', syncMotionPreference);
+    } else if (typeof reducedMotionQuery.addListener === 'function') {
+      reducedMotionQuery.addListener(syncMotionPreference);
+    }
+
     function windowResized() {
       resizeCanvas(windowWidth, windowHeight);
       initGrid();
+      syncMotionPreference();
     }
   </script>
   <main class="site">
@@ -1911,7 +1929,7 @@
       </header>
     </div>
 
-    <section class="hero reveal" id="intro" style="border:none; background:transparent; box-shadow:none;">
+    <section class="hero reveal" id="intro">
       <div>
         <p class="eyebrow">Portfolio Narrative</p>
         <h1>I architect data systems that speed decisions and strengthen operations.</h1>
@@ -1939,9 +1957,10 @@
     <footer class="footer reveal">
       Last refreshed: <span id="last-updated"></span>
     </footer>
+  </main>
 
-    <div class="modal-overlay" id="project-modal-overlay" aria-hidden="true">
-      <article class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-overlay" id="project-modal-overlay" hidden>
+    <article class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-head">
           <div>
             <p class="modal-kicker" id="modal-kicker">Project Dossier</p>
@@ -1955,7 +1974,7 @@
           <span id="modal-system-status"></span>
         </p>
         <div class="modal-title-row">
-          <h3 id="modal-title"></h3>
+          <h3 id="modal-title">Project details</h3>
           <div id="modal-access-badge-wrap"></div>
         </div>
         <p class="modal-summary" id="modal-summary"></p>
@@ -1963,7 +1982,7 @@
         <div class="modal-actions" id="modal-actions"></div>
 
         <div class="modal-hero">
-          <img id="modal-image" src="" alt="" loading="lazy">
+          <img id="modal-image" src="static/project_8_data_engineer_assessment.png" alt="Project preview" loading="lazy">
         </div>
 
         <div class="modal-gallery" id="modal-gallery"></div>
@@ -1988,9 +2007,8 @@
         </div>
 
         <div class="spotlight-tags modal-tags" id="modal-tags"></div>
-      </article>
-    </div>
-  </main>
+    </article>
+  </div>
 
   <script>
     const rawProjects = [
@@ -2110,7 +2128,7 @@
         proof: 'Login-protected live demo available.',
         tags: ['Data Normalization', 'LLM', 'Workflow Automation'],
         demoUrl: 'https://resume-ai-sigma-eight.vercel.app/',
-        codeUrl: 'https://github.com/brianmarkowitz/resumeAI',
+        codeUrl: '',
         image: 'static/project_7_resumeai.png'
       },
       {
@@ -2608,6 +2626,37 @@
       return [...stackItems, ...focusItems];
     }
 
+    function projectMatchesActiveFilter(project) {
+      return activeFilter === 'all' || project.systemId === activeFilter;
+    }
+
+    function getVisibleProjects() {
+      return projects.filter(projectMatchesActiveFilter);
+    }
+
+    function updateStreamProgress(projectId = state.activeProjectId) {
+      const progress = document.getElementById('stream-progress');
+      if (!progress) return;
+
+      const visibleProjects = getVisibleProjects();
+      if (!visibleProjects.length) {
+        progress.textContent = '00 / 00';
+        return;
+      }
+
+      const visibleIndex = Math.max(
+        0,
+        visibleProjects.findIndex((project) => project.id === projectId)
+      );
+      const current = String(visibleIndex + 1).padStart(2, '0');
+      const total = String(visibleProjects.length).padStart(2, '0');
+      progress.textContent = `${current} / ${total}`;
+    }
+
+    function isStepVisible(step) {
+      return step.style.display !== 'none';
+    }
+
     function setActiveProject(projectId) {
       if (!Number.isFinite(projectId)) return;
 
@@ -2616,13 +2665,7 @@
         card.classList.toggle('is-active', Number(card.dataset.id) === projectId);
       });
 
-      const progress = document.getElementById('stream-progress');
-      if (!progress) return;
-
-      const index = projects.findIndex((project) => project.id === projectId);
-      const current = String(index >= 0 ? index + 1 : 1).padStart(2, '0');
-      const total = String(projects.length).padStart(2, '0');
-      progress.textContent = `${current} / ${total}`;
+      updateStreamProgress(projectId);
     }
 
     let activeFilter = 'all';
@@ -2661,24 +2704,19 @@
 
     function applyFilter() {
       const steps = document.querySelectorAll('#project-stream .stream-step');
-      let visibleCount = 0;
+      let firstVisibleId = null;
 
       steps.forEach((step) => {
         const card = step.querySelector('.stream-card');
         if (!card) return;
         const projectId = Number(card.dataset.id);
         const project = getProject(projectId);
-        const show = activeFilter === 'all' || project.systemId === activeFilter;
+        const show = projectMatchesActiveFilter(project);
         step.style.display = show ? '' : 'none';
-        if (show) visibleCount++;
+        if (show && firstVisibleId === null) firstVisibleId = projectId;
       });
 
-      const progress = document.getElementById('stream-progress');
-      if (progress) {
-        const total = String(visibleCount).padStart(2, '0');
-        progress.textContent = `${total} visible`;
-      }
-
+      setActiveProject(firstVisibleId || projects[0]?.id || null);
       requestStreamFrame();
     }
 
@@ -2802,6 +2840,8 @@
       let closestDistance = Number.POSITIVE_INFINITY;
 
       streamSteps.forEach(({ step, card }) => {
+        if (!isStepVisible(step)) return;
+
         const rect = step.getBoundingClientRect();
         const center = rect.top + rect.height / 2;
         const delta = (center - focusLine) / viewportSpan;
@@ -2838,6 +2878,63 @@
       });
     }
 
+    function setPageInert(isInert) {
+      const site = document.querySelector('.site');
+      if (!site) return;
+
+      site.inert = isInert;
+      if (isInert) {
+        site.setAttribute('aria-hidden', 'true');
+      } else {
+        site.removeAttribute('aria-hidden');
+      }
+    }
+
+    function getModalFocusableElements() {
+      const overlay = document.getElementById('project-modal-overlay');
+      if (!overlay || overlay.hidden) return [];
+
+      const focusableSelector = [
+        'a[href]',
+        'button:not([disabled])',
+        'input:not([disabled])',
+        'select:not([disabled])',
+        'textarea:not([disabled])',
+        '[tabindex]:not([tabindex="-1"])'
+      ].join(',');
+
+      return Array.from(overlay.querySelectorAll(focusableSelector))
+        .filter((element) => !element.closest('[hidden]') && element.tabIndex >= 0);
+    }
+
+    function trapModalFocus(event) {
+      const overlay = document.getElementById('project-modal-overlay');
+      if (!overlay || overlay.hidden || !overlay.classList.contains('open')) return;
+
+      const focusable = getModalFocusableElements();
+      if (!focusable.length) {
+        event.preventDefault();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (!overlay.contains(document.activeElement)) {
+        event.preventDefault();
+        first.focus();
+        return;
+      }
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
     function openProjectModal(projectId) {
       const overlay = document.getElementById('project-modal-overlay');
       const project = getProject(projectId);
@@ -2870,8 +2967,9 @@
         .map((tag) => `<span class="tag">${tag}</span>`)
         .join('');
 
+      overlay.hidden = false;
       overlay.classList.add('open');
-      overlay.setAttribute('aria-hidden', 'false');
+      setPageInert(true);
       document.body.style.overflow = 'hidden';
 
       const closeButton = document.getElementById('modal-close');
@@ -2883,12 +2981,14 @@
       if (!overlay) return;
 
       overlay.classList.remove('open');
-      overlay.setAttribute('aria-hidden', 'true');
+      overlay.hidden = true;
       document.body.style.overflow = '';
+      setPageInert(false);
 
       if (lastFocused && document.contains(lastFocused) && typeof lastFocused.focus === 'function') {
-        lastFocused.focus();
+        lastFocused.focus({ preventScroll: true });
       }
+      lastFocused = null;
     }
 
     function setupProjectModal() {
@@ -2907,6 +3007,8 @@
       document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && overlay.classList.contains('open')) {
           closeProjectModal();
+        } else if (event.key === 'Tab') {
+          trapModalFocus(event);
         }
       });
     }
@@ -2999,6 +3101,5 @@
        setLastUpdated();
      }
    </script>
-   <canvas class="bg-particles" aria-hidden="true"></canvas>
  </body>
 </html>
