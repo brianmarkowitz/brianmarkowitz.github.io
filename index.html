@@ -397,13 +397,14 @@
     }
 
     .stream-shell {
+      --stream-pad: clamp(0.62rem, 1.8vw, 0.96rem);
       border: 1px solid rgba(164, 194, 236, 0.24);
       border-radius: var(--radius-lg);
       background: rgba(10, 20, 35, 0.4);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       box-shadow: 0 18px 38px rgba(0, 0, 0, 0.36);
-      padding: clamp(0.62rem, 1.8vw, 0.96rem);
+      padding: var(--stream-pad);
       position: relative;
       isolation: isolate;
     }
@@ -455,6 +456,92 @@
       gap: clamp(0.74rem, 1.5vw, 1rem);
     }
 
+    .stream-scroll-layout {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: clamp(0.46rem, 1vw, 0.74rem);
+      align-items: start;
+    }
+
+    .stream-rail {
+      position: sticky;
+      top: calc(var(--topbar-height) + 1rem);
+      height: min(68vh, 620px);
+      min-height: 360px;
+      display: flex;
+      justify-content: center;
+      padding: 0.28rem 0;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(8, 18, 31, 0.72), rgba(7, 15, 27, 0.28));
+      border: 1px solid rgba(164, 194, 236, 0.16);
+      box-shadow: inset 0 0 18px rgba(31, 182, 255, 0.04);
+    }
+
+    .stream-rail-track {
+      width: 2px;
+      height: 100%;
+      position: relative;
+      border-radius: 999px;
+      background: rgba(164, 194, 236, 0.18);
+      overflow: visible;
+    }
+
+    .stream-rail-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--rail-progress, 0%);
+      border-radius: inherit;
+      background: linear-gradient(180deg, var(--rail-accent, var(--accent)), rgba(57, 217, 138, 0.72));
+      box-shadow: 0 0 18px color-mix(in srgb, var(--rail-accent, var(--accent)) 56%, transparent);
+      transition: height 180ms ease, background 180ms ease;
+    }
+
+    .stream-rail-markers {
+      position: absolute;
+      inset: -4px 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .rail-marker {
+      width: 11px;
+      height: 11px;
+      border: 1px solid rgba(164, 194, 236, 0.5);
+      border-radius: 999px;
+      background: #071321;
+      box-shadow: 0 0 0 3px rgba(7, 16, 28, 0.78);
+      cursor: pointer;
+      pointer-events: auto;
+      padding: 0;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+    }
+
+    .rail-marker:hover,
+    .rail-marker:focus-visible {
+      transform: scale(1.28);
+      border-color: var(--marker-accent, var(--accent));
+      outline: none;
+    }
+
+    .rail-marker.is-active {
+      transform: scale(1.42);
+      border-color: var(--marker-accent, var(--accent));
+      background: var(--marker-accent, var(--accent));
+      box-shadow:
+        0 0 0 4px rgba(7, 16, 28, 0.86),
+        0 0 20px color-mix(in srgb, var(--marker-accent, var(--accent)) 62%, transparent);
+    }
+
+    .rail-marker[hidden] {
+      display: none;
+    }
+
     .stream-empty {
       color: var(--muted);
       font-size: 0.82rem;
@@ -495,7 +582,15 @@
       --card-scale: 1;
       --lift: 0px;
       --media-shift: 0px;
+      --media-scale: 1.012;
       --glow: 0.08;
+      --card-opacity: 1;
+      --card-blur: 0px;
+      --card-brightness: 1;
+      --card-saturate: 1;
+      --card-tilt: 0deg;
+      --lane-accent: var(--accent);
+      --lane-accent-soft: rgba(31, 182, 255, 0.16);
       border: 1px solid rgba(164, 194, 236, 0.22);
       border-radius: var(--radius-md);
       background: rgba(10, 20, 34, 0.4);
@@ -510,12 +605,30 @@
       min-height: clamp(390px, 62vh, 620px);
       position: sticky;
       top: calc(var(--topbar-height) + 0.76rem);
-      transform: translateY(var(--lift)) scale(var(--card-scale));
+      transform: translateY(var(--lift)) scale(var(--card-scale)) rotateX(var(--card-tilt));
       transform-origin: center top;
-      transition: border-color 220ms ease, box-shadow 220ms ease;
+      transition: border-color 220ms ease, box-shadow 220ms ease, filter 220ms ease, opacity 220ms ease;
       box-shadow: 0 18px 34px rgba(0, 0, 0, 0.33);
       overflow: hidden;
       isolation: isolate;
+      opacity: var(--card-opacity);
+      filter: saturate(var(--card-saturate)) brightness(var(--card-brightness)) blur(var(--card-blur));
+      will-change: transform, filter, opacity;
+    }
+
+    .stream-card[data-system="core-data"] {
+      --lane-accent: #1fb6ff;
+      --lane-accent-soft: rgba(31, 182, 255, 0.16);
+    }
+
+    .stream-card[data-system="intelligent-products"] {
+      --lane-accent: #39d98a;
+      --lane-accent-soft: rgba(57, 217, 138, 0.16);
+    }
+
+    .stream-card[data-system="interface-labs"] {
+      --lane-accent: #ffbc5f;
+      --lane-accent-soft: rgba(255, 188, 95, 0.16);
     }
 
     .stream-card::after {
@@ -525,7 +638,7 @@
       z-index: 0;
       pointer-events: none;
       background:
-        radial-gradient(circle at 16% 18%, rgba(31, 182, 255, 0.2), transparent 44%),
+        radial-gradient(circle at 16% 18%, var(--lane-accent-soft), transparent 44%),
         radial-gradient(circle at 85% 88%, rgba(57, 217, 138, 0.16), transparent 52%);
       opacity: var(--glow);
       transition: opacity 220ms ease;
@@ -537,10 +650,11 @@
     }
 
     .stream-card.is-active {
-      border-color: rgba(31, 182, 255, 0.82);
+      border-color: color-mix(in srgb, var(--lane-accent) 82%, white 4%);
       box-shadow:
         0 24px 46px rgba(0, 0, 0, 0.42),
-        0 0 0 1px rgba(31, 182, 255, 0.18);
+        0 0 0 1px color-mix(in srgb, var(--lane-accent) 26%, transparent),
+        0 0 34px color-mix(in srgb, var(--lane-accent) 18%, transparent);
     }
 
     .stream-media {
@@ -573,12 +687,13 @@
       height: auto;
       object-fit: contain;
       object-position: center top;
-      transform: none;
+      transform: translate3d(0, var(--media-shift), 0) scale(var(--media-scale));
       transition: transform 220ms ease, filter 220ms ease;
+      will-change: transform;
     }
 
     .stream-media-link:hover img {
-      transform: scale(1.01);
+      transform: translate3d(0, var(--media-shift), 0) scale(calc(var(--media-scale) + 0.01));
     }
 
     .stream-media-badge {
@@ -1564,7 +1679,7 @@
       }
 
       .stream-media-link:hover img {
-        transform: scale(1.02);
+        transform: translate3d(0, var(--media-shift), 0) scale(calc(var(--media-scale) + 0.01));
       }
 
       .spotlight-card {
@@ -1636,6 +1751,14 @@
         padding: 0.56rem;
       }
 
+      .stream-scroll-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .stream-rail {
+        display: none;
+      }
+
       .stream-head {
         margin-bottom: 0.5rem;
       }
@@ -1662,11 +1785,25 @@
           "media"
           "body"
           "detail";
+        --card-scale: 1 !important;
+        --lift: 0px !important;
+        --card-tilt: 0deg !important;
+        --card-opacity: 1 !important;
+        --card-blur: 0px !important;
+        --card-brightness: 1 !important;
+        --card-saturate: 1 !important;
+        --media-shift: 0px !important;
+        --media-scale: 1 !important;
       }
 
       .stream-media {
         padding: 0;
         aspect-ratio: 16 / 10;
+      }
+
+      .stream-media img,
+      .stream-media-link:hover img {
+        transform: none;
       }
 
       .stream-body {
@@ -1764,9 +1901,23 @@
       .stream-card,
       .modal-overlay,
       .spotlight-media img,
-      .stream-media img {
+      .stream-media img,
+      .rail-marker,
+      .stream-rail-fill {
         transition: none !important;
         animation: none !important;
+      }
+
+      .stream-card {
+        --card-scale: 1 !important;
+        --lift: 0px !important;
+        --card-tilt: 0deg !important;
+        --card-opacity: 1 !important;
+        --card-blur: 0px !important;
+        --card-brightness: 1 !important;
+        --card-saturate: 1 !important;
+        --media-shift: 0px !important;
+        --media-scale: 1 !important;
       }
     }
   </style>
@@ -1835,7 +1986,7 @@
       smx = lerp(smx, mouseX, 0.08);
       smy = lerp(smy, mouseY, 0.08);
 
-      const time = frameCount * 0.01;
+      const time = frameCount * 0.01 + window.scrollY * 0.002;
       const influenceRadius = repelRadius * 1.5; // Wider area for "folding" look
 
       for (let i = 0; i < dots.length; i++) {
@@ -1949,7 +2100,15 @@
             <p class="stream-kicker">Scroll Project Stream</p>
             <p class="stream-progress" id="stream-progress">00 / 00</p>
           </div>
-          <div class="project-stream" id="project-stream"></div>
+          <div class="stream-scroll-layout">
+            <aside class="stream-rail" aria-label="Project position">
+              <div class="stream-rail-track">
+                <div class="stream-rail-fill" id="stream-rail-fill" aria-hidden="true"></div>
+                <div class="stream-rail-markers" id="stream-rail-markers"></div>
+              </div>
+            </aside>
+            <div class="project-stream" id="project-stream"></div>
+          </div>
         </section>
       </div>
     </section>
@@ -2340,6 +2499,8 @@
     let topbarResizeObserver = null;
     let streamCards = [];
     let streamSteps = [];
+    let railMarkers = [];
+    let streamRailFill = null;
     let streamFramePending = false;
 
     function getProject(projectId) {
@@ -2626,6 +2787,15 @@
       return [...stackItems, ...focusItems];
     }
 
+    function getLaneAccent(systemId) {
+      const accents = {
+        'core-data': '#1fb6ff',
+        'intelligent-products': '#39d98a',
+        'interface-labs': '#ffbc5f'
+      };
+      return accents[systemId] || '#1fb6ff';
+    }
+
     function projectMatchesActiveFilter(project) {
       return activeFilter === 'all' || project.systemId === activeFilter;
     }
@@ -2666,6 +2836,7 @@
       });
 
       updateStreamProgress(projectId);
+      updateRailState(projectId);
     }
 
     let activeFilter = 'all';
@@ -2720,6 +2891,72 @@
       requestStreamFrame();
     }
 
+    function renderStreamRail() {
+      const markerRoot = document.getElementById('stream-rail-markers');
+      streamRailFill = document.getElementById('stream-rail-fill');
+      if (!markerRoot || !streamRailFill) return;
+
+      markerRoot.innerHTML = projects
+        .map((project) => `
+          <button
+            class="rail-marker"
+            type="button"
+            data-id="${project.id}"
+            data-system="${project.systemId}"
+            style="--marker-accent: ${getLaneAccent(project.systemId)}"
+            aria-label="Jump to ${project.title}"
+            title="${project.title}"
+          ></button>
+        `)
+        .join('');
+
+      railMarkers = Array.from(markerRoot.querySelectorAll('.rail-marker'));
+      railMarkers.forEach((marker) => {
+        marker.addEventListener('click', () => {
+          const projectId = Number(marker.dataset.id);
+          const target = streamSteps.find((item) => Number(item.card.dataset.id) === projectId);
+          if (!target) return;
+
+          setActiveProject(projectId);
+          target.step.scrollIntoView({
+            behavior: reducedMotionQuery.matches ? 'auto' : 'smooth',
+            block: 'center'
+          });
+        });
+      });
+
+      updateRailState(state.activeProjectId);
+    }
+
+    function updateRailState(projectId = state.activeProjectId) {
+      if (!railMarkers.length) return;
+
+      const visibleProjects = getVisibleProjects();
+      const visibleIds = new Set(visibleProjects.map((project) => project.id));
+      const visibleIndex = Math.max(0, visibleProjects.findIndex((project) => project.id === projectId));
+      const activeProject = getProject(projectId);
+      const railProgress = visibleProjects.length <= 1
+        ? 100
+        : (visibleIndex / (visibleProjects.length - 1)) * 100;
+
+      railMarkers.forEach((marker) => {
+        const markerId = Number(marker.dataset.id);
+        const isVisible = visibleIds.has(markerId);
+        marker.hidden = !isVisible;
+        marker.classList.toggle('is-active', markerId === projectId);
+        if (markerId === projectId) {
+          marker.setAttribute('aria-current', 'true');
+        } else {
+          marker.removeAttribute('aria-current');
+        }
+      });
+
+      if (streamRailFill) {
+        streamRailFill.style.setProperty('--rail-progress', `${railProgress}%`);
+        streamRailFill.style.setProperty('--rail-accent', getLaneAccent(activeProject.systemId));
+      }
+    }
+
     function renderProjectStream() {
       const root = document.getElementById('project-stream');
       if (!root) return;
@@ -2739,7 +2976,7 @@
         .map((project) => {
           return `
             <div class="stream-step">
-              <article class="stream-card ${project.id === state.activeProjectId ? 'is-active' : ''}" data-id="${project.id}">
+              <article class="stream-card ${project.id === state.activeProjectId ? 'is-active' : ''}" data-id="${project.id}" data-system="${project.systemId}">
                 <div class="stream-media">
                   ${buildStreamMedia(project)}
                 </div>
@@ -2798,6 +3035,7 @@
         }))
         .filter((item) => item.card);
       streamCards = streamSteps.map((item) => item.card);
+      renderStreamRail();
       setActiveProject(state.activeProjectId || projects[0].id);
       requestStreamFrame();
       setupReveal();
@@ -2835,6 +3073,7 @@
       ) || 0;
       const viewportSpan = Math.max(window.innerHeight - topbarHeight, 1);
       const focusLine = topbarHeight + viewportSpan * 0.5;
+      const reduceScrollMotion = reducedMotionQuery.matches;
 
       let closestId = state.activeProjectId;
       let closestDistance = Number.POSITIVE_INFINITY;
@@ -2846,11 +3085,33 @@
         const center = rect.top + rect.height / 2;
         const delta = (center - focusLine) / viewportSpan;
         const absDelta = Math.min(Math.abs(delta), 1.2);
+        const depth = Math.max(0, 1 - absDelta);
 
-        card.style.setProperty('--card-scale', (1 - absDelta * 0.045).toFixed(3));
-        card.style.setProperty('--lift', `${((1 - absDelta) * -7).toFixed(2)}px`);
-        card.style.setProperty('--media-shift', `${(delta * -20).toFixed(2)}px`);
-        card.style.setProperty('--glow', Math.max(0.04, 0.2 - absDelta * 0.13).toFixed(3));
+        if (reduceScrollMotion) {
+          card.style.setProperty('--card-scale', '1');
+          card.style.setProperty('--lift', '0px');
+          card.style.setProperty('--media-shift', '0px');
+          card.style.setProperty('--media-scale', '1');
+          card.style.setProperty('--glow', '0.08');
+          card.style.setProperty('--card-opacity', '1');
+          card.style.setProperty('--card-blur', '0px');
+          card.style.setProperty('--card-brightness', '1');
+          card.style.setProperty('--card-saturate', '1');
+          card.style.setProperty('--card-tilt', '0deg');
+          card.style.zIndex = '';
+        } else {
+          card.style.setProperty('--card-scale', (0.935 + depth * 0.065).toFixed(3));
+          card.style.setProperty('--lift', `${(-10 * depth).toFixed(2)}px`);
+          card.style.setProperty('--media-shift', `${(delta * -32).toFixed(2)}px`);
+          card.style.setProperty('--media-scale', (1.018 + depth * 0.018).toFixed(3));
+          card.style.setProperty('--glow', Math.max(0.04, 0.24 - absDelta * 0.16).toFixed(3));
+          card.style.setProperty('--card-opacity', (0.66 + depth * 0.34).toFixed(3));
+          card.style.setProperty('--card-blur', `${((1 - depth) * 0.75).toFixed(2)}px`);
+          card.style.setProperty('--card-brightness', (0.78 + depth * 0.22).toFixed(3));
+          card.style.setProperty('--card-saturate', (0.72 + depth * 0.34).toFixed(3));
+          card.style.setProperty('--card-tilt', `${(delta * -1.6).toFixed(2)}deg`);
+          card.style.zIndex = String(Math.round(depth * 100) + 1);
+        }
 
         if (rect.bottom < topbarHeight + 20 || rect.top > window.innerHeight - 20) {
           return;
