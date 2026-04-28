@@ -454,6 +454,7 @@
     .project-stream {
       display: grid;
       gap: clamp(0.74rem, 1.5vw, 1rem);
+      transform-style: preserve-3d;
     }
 
     .stream-scroll-layout {
@@ -461,6 +462,8 @@
       grid-template-columns: 34px minmax(0, 1fr);
       gap: clamp(0.46rem, 1vw, 0.74rem);
       align-items: start;
+      perspective: 1400px;
+      perspective-origin: 52% 18vh;
     }
 
     .stream-rail {
@@ -475,6 +478,39 @@
       background: linear-gradient(180deg, rgba(8, 18, 31, 0.72), rgba(7, 15, 27, 0.28));
       border: 1px solid rgba(164, 194, 236, 0.16);
       box-shadow: inset 0 0 18px rgba(31, 182, 255, 0.04);
+      overflow: visible;
+      isolation: isolate;
+    }
+
+    .stream-rail::before,
+    .stream-rail::after {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .stream-rail::before {
+      inset: 0;
+      border-radius: inherit;
+      background:
+        radial-gradient(circle at 50% var(--rail-progress, 0%), color-mix(in srgb, var(--rail-accent, var(--accent)) 24%, transparent), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 42%, rgba(255, 255, 255, 0.03));
+      opacity: 0.82;
+      transition: background 180ms ease;
+    }
+
+    .stream-rail::after {
+      top: calc(var(--rail-progress, 0%) - 32px);
+      left: 50%;
+      width: 34px;
+      height: 64px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: radial-gradient(circle, color-mix(in srgb, var(--rail-accent, var(--accent)) 72%, transparent), transparent 68%);
+      filter: blur(8px);
+      opacity: 0.7;
+      transition: top 180ms ease, background 180ms ease;
     }
 
     .stream-rail-track {
@@ -484,6 +520,7 @@
       border-radius: 999px;
       background: rgba(164, 194, 236, 0.18);
       overflow: visible;
+      z-index: 1;
     }
 
     .stream-rail-fill {
@@ -536,6 +573,7 @@
       box-shadow:
         0 0 0 4px rgba(7, 16, 28, 0.86),
         0 0 20px color-mix(in srgb, var(--marker-accent, var(--accent)) 62%, transparent);
+      animation: markerPulse 1.9s ease-in-out infinite;
     }
 
     .rail-marker[hidden] {
@@ -580,15 +618,29 @@
 
     .stream-card {
       --card-scale: 1;
+      --card-x: 0px;
+      --card-z: 0px;
       --lift: 0px;
       --media-shift: 0px;
+      --media-drift: 0px;
+      --media-glint: -140%;
       --media-scale: 1.012;
+      --media-tilt: 0deg;
       --glow: 0.08;
+      --scan-y: 50%;
+      --scan-opacity: 0;
       --card-opacity: 1;
       --card-blur: 0px;
       --card-brightness: 1;
       --card-saturate: 1;
       --card-tilt: 0deg;
+      --card-yaw: 0deg;
+      --copy-shift: 0px;
+      --copy-opacity: 1;
+      --detail-lift: 0px;
+      --detail-opacity: 1;
+      --shadow-y: 18px;
+      --shadow-blur: 34px;
       --lane-accent: var(--accent);
       --lane-accent-soft: rgba(31, 182, 255, 0.16);
       border: 1px solid rgba(164, 194, 236, 0.22);
@@ -605,10 +657,10 @@
       min-height: clamp(390px, 62vh, 620px);
       position: sticky;
       top: calc(var(--topbar-height) + 0.76rem);
-      transform: translateY(var(--lift)) scale(var(--card-scale)) rotateX(var(--card-tilt));
+      transform: perspective(1200px) translate3d(var(--card-x), var(--lift), var(--card-z)) scale(var(--card-scale)) rotateX(var(--card-tilt)) rotateY(var(--card-yaw));
       transform-origin: center top;
       transition: border-color 220ms ease, box-shadow 220ms ease, filter 220ms ease, opacity 220ms ease;
-      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.33);
+      box-shadow: 0 var(--shadow-y) var(--shadow-blur) rgba(0, 0, 0, 0.33);
       overflow: hidden;
       isolation: isolate;
       opacity: var(--card-opacity);
@@ -631,15 +683,35 @@
       --lane-accent-soft: rgba(255, 188, 95, 0.16);
     }
 
+    .stream-card::before,
     .stream-card::after {
       content: '';
       position: absolute;
-      inset: 0;
       z-index: 0;
       pointer-events: none;
+    }
+
+    .stream-card::before {
+      left: -12%;
+      right: -12%;
+      top: var(--scan-y);
+      height: 116px;
+      background:
+        linear-gradient(180deg, transparent, color-mix(in srgb, var(--lane-accent) 18%, transparent) 44%, rgba(255, 255, 255, 0.18) 50%, transparent 62%),
+        linear-gradient(90deg, transparent, color-mix(in srgb, var(--lane-accent) 28%, transparent), transparent);
+      filter: blur(0.2px);
+      mix-blend-mode: screen;
+      opacity: var(--scan-opacity);
+      transform: translateY(-50%) rotate(-2deg);
+      transition: opacity 160ms ease, top 160ms ease;
+    }
+
+    .stream-card::after {
+      inset: 0;
       background:
         radial-gradient(circle at 16% 18%, var(--lane-accent-soft), transparent 44%),
-        radial-gradient(circle at 85% 88%, rgba(57, 217, 138, 0.16), transparent 52%);
+        radial-gradient(circle at 85% 88%, rgba(57, 217, 138, 0.16), transparent 52%),
+        linear-gradient(90deg, color-mix(in srgb, var(--lane-accent) 16%, transparent), transparent 20%, transparent 80%, color-mix(in srgb, var(--lane-accent) 10%, transparent));
       opacity: var(--glow);
       transition: opacity 220ms ease;
     }
@@ -652,18 +724,36 @@
     .stream-card.is-active {
       border-color: color-mix(in srgb, var(--lane-accent) 82%, white 4%);
       box-shadow:
-        0 24px 46px rgba(0, 0, 0, 0.42),
+        0 var(--shadow-y) calc(var(--shadow-blur) + 12px) rgba(0, 0, 0, 0.42),
         0 0 0 1px color-mix(in srgb, var(--lane-accent) 26%, transparent),
         0 0 34px color-mix(in srgb, var(--lane-accent) 18%, transparent);
     }
 
     .stream-media {
       grid-area: media;
+      position: relative;
       background: linear-gradient(180deg, rgba(4, 11, 23, 0.96), rgba(6, 14, 24, 0.72));
       overflow: hidden;
       min-height: 0;
       padding: clamp(0.52rem, 0.9vw, 0.74rem);
       align-self: start;
+      transform: translate3d(var(--media-drift), 0, 0);
+      transition: transform 180ms ease;
+      will-change: transform;
+    }
+
+    .stream-media::after {
+      content: '';
+      position: absolute;
+      inset: clamp(0.52rem, 0.9vw, 0.74rem);
+      border-radius: 22px;
+      pointer-events: none;
+      z-index: 2;
+      background: linear-gradient(110deg, transparent 22%, rgba(255, 255, 255, 0.16) 48%, color-mix(in srgb, var(--lane-accent) 22%, transparent) 54%, transparent 72%);
+      mix-blend-mode: screen;
+      opacity: var(--scan-opacity);
+      transform: translateX(var(--media-glint));
+      transition: opacity 180ms ease, transform 180ms ease;
     }
 
     .stream-media-frame,
@@ -679,6 +769,9 @@
       overflow: hidden;
       background: #050c18;
       box-shadow: 0 18px 28px rgba(0, 0, 0, 0.24);
+      transform: rotateZ(var(--media-tilt));
+      transition: transform 180ms ease, border-color 180ms ease;
+      z-index: 1;
     }
 
     .stream-media img {
@@ -709,6 +802,7 @@
       display: grid;
       gap: 0.12rem;
       pointer-events: none;
+      z-index: 3;
     }
 
     .stream-media-badge.is-private {
@@ -771,6 +865,10 @@
       display: grid;
       gap: 0.34rem;
       align-content: start;
+      opacity: var(--copy-opacity);
+      transform: translate3d(var(--copy-shift), 0, 0);
+      transition: opacity 180ms ease, transform 180ms ease;
+      will-change: transform, opacity;
     }
 
     .stream-detail-band {
@@ -782,6 +880,10 @@
       gap: 0.58rem;
       align-items: center;
       background: linear-gradient(180deg, rgba(7, 16, 27, 0.42), rgba(7, 16, 27, 0.1));
+      opacity: var(--detail-opacity);
+      transform: translate3d(0, var(--detail-lift), 0);
+      transition: opacity 180ms ease, transform 180ms ease;
+      will-change: transform, opacity;
     }
 
     .stream-detail-side {
@@ -1616,6 +1718,19 @@
       }
     }
 
+    @keyframes markerPulse {
+      0%, 100% {
+        box-shadow:
+          0 0 0 4px rgba(7, 16, 28, 0.86),
+          0 0 20px color-mix(in srgb, var(--marker-accent, var(--accent)) 62%, transparent);
+      }
+      50% {
+        box-shadow:
+          0 0 0 7px rgba(7, 16, 28, 0.72),
+          0 0 32px color-mix(in srgb, var(--marker-accent, var(--accent)) 86%, transparent);
+      }
+    }
+
     @keyframes modalRise {
       from {
         opacity: 0;
@@ -1786,14 +1901,25 @@
           "body"
           "detail";
         --card-scale: 1 !important;
+        --card-x: 0px !important;
+        --card-z: 0px !important;
         --lift: 0px !important;
         --card-tilt: 0deg !important;
+        --card-yaw: 0deg !important;
         --card-opacity: 1 !important;
         --card-blur: 0px !important;
         --card-brightness: 1 !important;
         --card-saturate: 1 !important;
+        --scan-opacity: 0 !important;
+        --copy-shift: 0px !important;
+        --copy-opacity: 1 !important;
+        --detail-lift: 0px !important;
+        --detail-opacity: 1 !important;
         --media-shift: 0px !important;
+        --media-drift: 0px !important;
+        --media-glint: -140% !important;
         --media-scale: 1 !important;
+        --media-tilt: 0deg !important;
       }
 
       .stream-media {
@@ -1804,6 +1930,13 @@
       .stream-media img,
       .stream-media-link:hover img {
         transform: none;
+      }
+
+      .stream-media,
+      .stream-body,
+      .stream-detail-band {
+        transform: none;
+        opacity: 1;
       }
 
       .stream-body {
@@ -1899,6 +2032,12 @@
       .mini-btn,
       .topnav-github,
       .stream-card,
+      .stream-card::before,
+      .stream-card::after,
+      .stream-media,
+      .stream-media::after,
+      .stream-body,
+      .stream-detail-band,
       .modal-overlay,
       .spotlight-media img,
       .stream-media img,
@@ -1910,14 +2049,25 @@
 
       .stream-card {
         --card-scale: 1 !important;
+        --card-x: 0px !important;
+        --card-z: 0px !important;
         --lift: 0px !important;
         --card-tilt: 0deg !important;
+        --card-yaw: 0deg !important;
         --card-opacity: 1 !important;
         --card-blur: 0px !important;
         --card-brightness: 1 !important;
         --card-saturate: 1 !important;
+        --scan-opacity: 0 !important;
+        --copy-shift: 0px !important;
+        --copy-opacity: 1 !important;
+        --detail-lift: 0px !important;
+        --detail-opacity: 1 !important;
         --media-shift: 0px !important;
+        --media-drift: 0px !important;
+        --media-glint: -140% !important;
         --media-scale: 1 !important;
+        --media-tilt: 0deg !important;
       }
     }
   </style>
@@ -2969,8 +3119,13 @@
       });
 
       if (streamRailFill) {
+        const railRoot = streamRailFill.closest('.stream-rail');
         streamRailFill.style.setProperty('--rail-progress', `${railProgress}%`);
         streamRailFill.style.setProperty('--rail-accent', getLaneAccent(activeProject.systemId));
+        if (railRoot) {
+          railRoot.style.setProperty('--rail-progress', `${railProgress}%`);
+          railRoot.style.setProperty('--rail-accent', getLaneAccent(activeProject.systemId));
+        }
       }
     }
 
@@ -3095,38 +3250,74 @@
       let closestId = state.activeProjectId;
       let closestDistance = Number.POSITIVE_INFINITY;
 
-      streamSteps.forEach(({ step, card }) => {
+      streamSteps.forEach(({ step, card }, index) => {
         if (!isStepVisible(step)) return;
 
         const rect = step.getBoundingClientRect();
         const center = rect.top + rect.height / 2;
         const delta = (center - focusLine) / viewportSpan;
+        const clampedDelta = Math.max(-1, Math.min(1, delta));
         const absDelta = Math.min(Math.abs(delta), 1.2);
         const depth = Math.max(0, 1 - absDelta);
+        const stepProgress = Math.max(0, Math.min(1, (focusLine - rect.top) / Math.max(rect.height, 1)));
+        const side = index % 2 === 0 ? -1 : 1;
 
         if (reduceScrollMotion) {
           card.style.setProperty('--card-scale', '1');
+          card.style.setProperty('--card-x', '0px');
+          card.style.setProperty('--card-z', '0px');
           card.style.setProperty('--lift', '0px');
           card.style.setProperty('--media-shift', '0px');
+          card.style.setProperty('--media-drift', '0px');
+          card.style.setProperty('--media-glint', '-140%');
           card.style.setProperty('--media-scale', '1');
+          card.style.setProperty('--media-tilt', '0deg');
           card.style.setProperty('--glow', '0.08');
+          card.style.setProperty('--scan-y', '50%');
+          card.style.setProperty('--scan-opacity', '0');
           card.style.setProperty('--card-opacity', '1');
           card.style.setProperty('--card-blur', '0px');
           card.style.setProperty('--card-brightness', '1');
           card.style.setProperty('--card-saturate', '1');
           card.style.setProperty('--card-tilt', '0deg');
+          card.style.setProperty('--card-yaw', '0deg');
+          card.style.setProperty('--copy-shift', '0px');
+          card.style.setProperty('--copy-opacity', '1');
+          card.style.setProperty('--detail-lift', '0px');
+          card.style.setProperty('--detail-opacity', '1');
+          card.style.setProperty('--shadow-y', '18px');
+          card.style.setProperty('--shadow-blur', '34px');
           card.style.zIndex = '';
         } else {
-          card.style.setProperty('--card-scale', (0.935 + depth * 0.065).toFixed(3));
-          card.style.setProperty('--lift', `${(-10 * depth).toFixed(2)}px`);
-          card.style.setProperty('--media-shift', `${(delta * -32).toFixed(2)}px`);
-          card.style.setProperty('--media-scale', (1.018 + depth * 0.018).toFixed(3));
-          card.style.setProperty('--glow', Math.max(0.04, 0.24 - absDelta * 0.16).toFixed(3));
-          card.style.setProperty('--card-opacity', (0.66 + depth * 0.34).toFixed(3));
-          card.style.setProperty('--card-blur', `${((1 - depth) * 0.75).toFixed(2)}px`);
-          card.style.setProperty('--card-brightness', (0.78 + depth * 0.22).toFixed(3));
-          card.style.setProperty('--card-saturate', (0.72 + depth * 0.34).toFixed(3));
-          card.style.setProperty('--card-tilt', `${(delta * -1.6).toFixed(2)}deg`);
+          const falloff = 1 - depth;
+          const stackX = side * falloff * Math.min(24, window.innerWidth * 0.018);
+          const scanY = 12 + stepProgress * 76;
+          const mediaGlint = -135 + stepProgress * 270;
+
+          card.style.setProperty('--card-scale', (0.92 + depth * 0.08).toFixed(3));
+          card.style.setProperty('--card-x', `${stackX.toFixed(2)}px`);
+          card.style.setProperty('--card-z', `${(depth * 44 - 30).toFixed(2)}px`);
+          card.style.setProperty('--lift', `${(-14 * depth).toFixed(2)}px`);
+          card.style.setProperty('--media-shift', `${(clampedDelta * -44).toFixed(2)}px`);
+          card.style.setProperty('--media-drift', `${(clampedDelta * -12).toFixed(2)}px`);
+          card.style.setProperty('--media-glint', `${mediaGlint.toFixed(2)}%`);
+          card.style.setProperty('--media-scale', (1.018 + depth * 0.024).toFixed(3));
+          card.style.setProperty('--media-tilt', `${(clampedDelta * 0.55).toFixed(2)}deg`);
+          card.style.setProperty('--glow', Math.max(0.05, 0.28 - absDelta * 0.17).toFixed(3));
+          card.style.setProperty('--scan-y', `${scanY.toFixed(2)}%`);
+          card.style.setProperty('--scan-opacity', Math.max(0, depth * 0.38 - falloff * 0.08).toFixed(3));
+          card.style.setProperty('--card-opacity', (0.58 + depth * 0.42).toFixed(3));
+          card.style.setProperty('--card-blur', `${(falloff * 0.95).toFixed(2)}px`);
+          card.style.setProperty('--card-brightness', (0.72 + depth * 0.28).toFixed(3));
+          card.style.setProperty('--card-saturate', (0.68 + depth * 0.4).toFixed(3));
+          card.style.setProperty('--card-tilt', `${(clampedDelta * -2.2).toFixed(2)}deg`);
+          card.style.setProperty('--card-yaw', `${(clampedDelta * side * 3.2).toFixed(2)}deg`);
+          card.style.setProperty('--copy-shift', `${(clampedDelta * -18).toFixed(2)}px`);
+          card.style.setProperty('--copy-opacity', (0.7 + depth * 0.3).toFixed(3));
+          card.style.setProperty('--detail-lift', `${(falloff * 12).toFixed(2)}px`);
+          card.style.setProperty('--detail-opacity', (0.66 + depth * 0.34).toFixed(3));
+          card.style.setProperty('--shadow-y', `${(16 + depth * 18).toFixed(2)}px`);
+          card.style.setProperty('--shadow-blur', `${(30 + depth * 34).toFixed(2)}px`);
           card.style.zIndex = String(Math.round(depth * 100) + 1);
         }
 
