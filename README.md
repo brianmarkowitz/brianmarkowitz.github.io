@@ -1,6 +1,6 @@
 # Demo Projects Portfolio
 
-Static portfolio page for 18 demo projects across data architecture, AI products, and applied interface work. The site is implemented as a single `index.html` page with local assets in `static/`.
+Static portfolio page for 19 demo projects across data architecture, AI products, and applied interface work. The site is implemented as a single `index.html` page with local assets in `static/`.
 
 ## Contents
 
@@ -11,7 +11,7 @@ Static portfolio page for 18 demo projects across data architecture, AI products
 
 ## Current Portfolio
 
-- 18 projects
+- 19 projects
 - Static HTML, CSS, and JavaScript
 - Local project images in `static/`
 - Responsive project stream, filters, preview media, and dossier modal

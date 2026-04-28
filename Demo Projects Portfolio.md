@@ -1,6 +1,6 @@
 # Demo Projects Portfolio
 
-Concise inventory of the 18 projects currently defined in `index.html`.
+Concise inventory of the 19 projects currently defined in `index.html`.
 
 | # | Project | Status | Focus |
 |---|---|---|---|
@@ -22,5 +22,6 @@ Concise inventory of the 18 projects currently defined in `index.html`.
 | 16 | Brian Resume | Live Site | Professional resume showcase |
 | 17 | ResumeDB | Live Site | Resume database and profile management platform |
 | 18 | FluGlobe Visualization | Live Demo | Avian influenza outbreak and flyway globe visualization |
+| 19 | Prompt Library | Live Demo | Local-first reusable AI prompt management and organization workspace |
 
 Project links, tags, stack notes, images, and access messaging are maintained in the `rawProjects` array in `index.html`.

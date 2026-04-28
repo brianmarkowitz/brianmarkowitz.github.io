@@ -2476,10 +2476,27 @@
     demoUrl: 'https://fluglobe.vercel.app/',
     codeUrl: '',
     image: 'static/project_18_fluglobe.png'
+  },
+  {
+    id: 19,
+    title: 'Prompt Library',
+    year: '2026',
+    status: 'Live Demo',
+    systemId: 'intelligent-products',
+    systemLabel: 'Intelligent Data Products',
+    summary: 'Local-first prompt management app for organizing reusable AI prompts, categories, search, and quick-copy workflows.',
+    architecture: 'Built a browser-native library surface with prompt metadata, category organization, variable-aware templates, and persistent local storage.',
+    impact: 'Reduces repeated prompt drafting and gives teams a structured workspace for reusable AI operating patterns.',
+    stack: 'React, local storage, prompt templating, responsive product UX',
+    proof: 'Public live demo available.',
+    tags: ['Prompt Engineering', 'Knowledge Systems', 'AI Enablement'],
+    demoUrl: 'https://prompt-library-ten-lac.vercel.app/',
+    codeUrl: '',
+    image: 'static/project_19_prompt_library.png'
   }
 ];
 
-    const impressivenessOrder = [8, 2, 4, 5, 11, 18, 10, 1, 12, 3, 7, 15, 16, 17, 6, 9, 13, 14];
+    const impressivenessOrder = [8, 2, 4, 5, 11, 19, 18, 10, 1, 12, 3, 7, 15, 16, 17, 6, 9, 13, 14];
     const rankById = Object.fromEntries(impressivenessOrder.map((id, index) => [id, index + 1]));
 
     const projects = rawProjects
@@ -2575,7 +2592,7 @@
       ]
     };
 
-    const singleScreenshotDossierIds = new Set([15, 16, 17]);
+    const singleScreenshotDossierIds = new Set([15, 16, 17, 19]);
 
     function createCardAction(label, url, variant = '') {
       if (!url) return '';
