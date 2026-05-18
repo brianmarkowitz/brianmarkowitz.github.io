@@ -1,6 +1,6 @@
 # Demo Projects Portfolio
 
-Concise inventory of the 19 projects currently defined in `index.html`.
+Concise inventory of the 23 projects currently defined in `index.html`.
 
 | # | Project | Status | Focus |
 |---|---|---|---|
@@ -23,5 +23,9 @@ Concise inventory of the 19 projects currently defined in `index.html`.
 | 17 | ResumeDB | Live Site | Resume database and profile management platform |
 | 18 | FluGlobe Visualization | Live Demo | Avian influenza outbreak and flyway globe visualization |
 | 19 | Prompt Library | Live Demo | Local-first reusable AI prompt management and organization workspace |
+| 20 | Compliance Tracker Workspace | Live Demo | Acquisition request tracking and compliance workflow workspace |
+| 21 | ImmPort Intervention/Cohort Export | Protected Console | Governed operator console for ImmPort intervention and cohort exports |
+| 22 | Agent Skills Library | Live Workspace | Governed shared-agent workflow catalog, install guidance, and analytics workspace |
+| 23 | iDPCC Export Dashboard | Protected Console | BV-BRC package export operations and accession ID return workflow |
 
 Project links, tags, stack notes, images, and access messaging are maintained in the `rawProjects` array in `index.html`.
