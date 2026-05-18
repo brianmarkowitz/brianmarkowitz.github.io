@@ -2643,10 +2643,78 @@
     demoUrl: 'https://prompt-library-ten-lac.vercel.app/',
     codeUrl: '',
     image: 'static/project_19_prompt_library.png'
+  },
+  {
+    id: 20,
+    title: 'Compliance Tracker Workspace',
+    year: '2026',
+    status: 'Live Demo',
+    systemId: 'interface-labs',
+    systemLabel: 'Applied Product Interfaces',
+    summary: 'Acquisition request workspace for intake, checklist readiness, status routing, and manager/specialist review.',
+    architecture: 'Separated requester, manager, and specialist workspaces with role-aware queues, readiness scoring, and request detail workflows.',
+    impact: 'Turns acquisition support into a visible queue with actionable status, blockers, and next-step controls.',
+    stack: 'React, role-based workflow UX, request queue modeling, compliance operations',
+    proof: 'Public live demo available.',
+    tags: ['Workflow Systems', 'Compliance', 'Operations UX'],
+    demoUrl: 'https://acquisitions-tracker.vercel.app/',
+    codeUrl: '',
+    image: 'static/project_20_acquisitions_tracker.png'
+  },
+  {
+    id: 21,
+    title: 'ImmPort Intervention/Cohort Export',
+    year: '2026',
+    status: 'Protected Console',
+    systemId: 'core-data',
+    systemLabel: 'Core Data Architecture',
+    summary: 'QC operator console for running approved ImmPort intervention and cohort exports, managing the study library, and downloading generated ZIP packages.',
+    architecture: 'Composed protected operator workflows for study selection, readiness checks, export execution, activity tracking, admin accounts, and audit diagnostics.',
+    impact: 'Gives operators a governed export surface with repeatable run history, readiness gates, and package downloads.',
+    stack: 'AWS, Cognito, export orchestration, operator console, ZIP packaging',
+    proof: 'Login-protected production console available.',
+    tags: ['ImmPort', 'CIVICs', 'Export Operations'],
+    demoUrl: 'https://immport-cohort-export-prod.sdmcc.niaidcivics.org/',
+    codeUrl: '',
+    image: 'static/project_21_immport_cohort_export.png'
+  },
+  {
+    id: 22,
+    title: 'Agent Skills Library',
+    year: '2026',
+    status: 'Live Workspace',
+    systemId: 'intelligent-products',
+    systemLabel: 'Intelligent Data Products',
+    summary: 'Governed agent skills catalog and request workspace for shared workflows, install guidance, access roles, and operational analytics.',
+    architecture: 'Combined public inventory/docs with signed-in install requests, governance review, reports, analytics, and admin access controls.',
+    impact: 'Standardizes reusable agent workflows with a governed path from request to validation to install.',
+    stack: 'AWS Cognito, inventory generation, governance workflow, analytics dashboard',
+    proof: 'Public catalog and live workspace available.',
+    tags: ['Agent Workflows', 'Governance', 'Knowledge Systems'],
+    demoUrl: 'https://skills.idpcc.ceirr-network-dev.org/',
+    codeUrl: '',
+    image: 'static/project_22_agent_skills_library.png'
+  },
+  {
+    id: 23,
+    title: 'iDPCC Export Dashboard',
+    year: '2026',
+    status: 'Protected Console',
+    systemId: 'core-data',
+    systemLabel: 'Core Data Architecture',
+    summary: 'BV-BRC package operations dashboard for searching export-ready records, previewing impact, and generating governed CSV packages.',
+    architecture: 'Built filter-driven export source selection, dry-run side-effect review, package history, and returned BV-BRC accession ID update workflows.',
+    impact: 'Provides governed export packaging and accession reconciliation for BV-BRC submission operations.',
+    stack: 'React, AWS Cognito, governed CSV exports, operational run history',
+    proof: 'Login-protected production dashboard available.',
+    tags: ['BV-BRC', 'iDPCC', 'Export Operations'],
+    demoUrl: 'https://bvbrc-export.idpcc.ceirr-network.org/',
+    codeUrl: '',
+    image: 'static/project_23_bvbrc_export_dashboard.png'
   }
 ];
 
-    const impressivenessOrder = [8, 2, 4, 5, 11, 19, 18, 10, 1, 12, 3, 7, 15, 16, 17, 6, 9, 13, 14];
+    const impressivenessOrder = [23, 21, 8, 22, 20, 2, 4, 5, 11, 19, 18, 10, 1, 12, 3, 7, 15, 16, 17, 6, 9, 13, 14];
     const rankById = Object.fromEntries(impressivenessOrder.map((id, index) => [id, index + 1]));
 
     const projects = rawProjects
@@ -2742,7 +2810,7 @@
       ]
     };
 
-    const singleScreenshotDossierIds = new Set([15, 16, 17, 19]);
+    const singleScreenshotDossierIds = new Set([15, 16, 17, 19, 20, 21, 22, 23]);
 
     function createCardAction(label, url, variant = '') {
       if (!url) return '';
@@ -2755,14 +2823,15 @@
         const isProtected = /login|protected/i.test(project.proof);
         const isSite = project.status.includes('Site');
         const isBlog = project.status.includes('Blog');
+        const isWorkspace = /Console|Workspace|Dashboard/i.test(project.status);
 
         if (isProtected) {
           return {
             key: 'login',
             label: 'Login Required',
-            headline: isSite ? 'Protected live site available' : 'Protected live demo available',
+            headline: isWorkspace ? 'Protected live console available' : isSite ? 'Protected live site available' : 'Protected live demo available',
             note: 'Use the live link or the preview image to open this project. A sign-in step is required before you can explore it.',
-            mediaTitle: 'Protected Access',
+            mediaTitle: isWorkspace ? 'Protected Console' : 'Protected Access',
             mediaHint: 'Click the screenshot to open the experience, then sign in to continue.'
           };
         }
@@ -2770,9 +2839,9 @@
         return {
           key: 'live',
           label: 'Live',
-          headline: isBlog ? 'Public live blog available' : isSite ? 'Public live site available' : 'Public live demo available',
+          headline: isBlog ? 'Public live blog available' : isWorkspace ? 'Public live workspace available' : isSite ? 'Public live site available' : 'Public live demo available',
           note: 'Use the live link or the preview image to open the project in a new tab.',
-          mediaTitle: isBlog ? 'Live Blog' : isSite ? 'Live Site' : 'Live Demo',
+          mediaTitle: isBlog ? 'Live Blog' : isWorkspace ? 'Live Workspace' : isSite ? 'Live Site' : 'Live Demo',
           mediaHint: 'Click the screenshot to open the live experience.'
         };
       }
@@ -2802,9 +2871,11 @@
       if (project.access.key === 'source') return 'View Code';
       if (!project.demoUrl) return 'No Public Link';
       if (project.access.key === 'login') {
+        if (/Console|Workspace|Dashboard/i.test(project.status)) return 'Open Protected Console';
         return project.status.includes('Site') ? 'Open Protected Site' : 'Open Protected Demo';
       }
       if (project.status.includes('Blog')) return 'Visit Live Blog';
+      if (/Console|Workspace|Dashboard/i.test(project.status)) return 'Open Live Workspace';
       return project.status.includes('Site') ? 'Visit Live Site' : 'Open Live Demo';
     }
 
