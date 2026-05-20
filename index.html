@@ -653,8 +653,7 @@
       box-shadow: 0 var(--shadow-y) var(--shadow-blur) rgba(0, 0, 0, 0.33);
       overflow: hidden;
       isolation: isolate;
-      opacity: var(--card-opacity);
-      filter: saturate(var(--card-saturate)) brightness(var(--card-brightness)) blur(var(--card-blur));
+      opacity: 1;
       will-change: transform, filter, opacity;
     }
 
@@ -817,7 +816,7 @@
       display: grid;
       gap: 0.34rem;
       align-content: start;
-      opacity: var(--copy-opacity);
+      opacity: 1;
       transform: translate3d(var(--copy-shift), 0, 0);
       transition: opacity 180ms ease, transform 180ms ease;
       will-change: transform, opacity;
@@ -832,7 +831,7 @@
       gap: 0.58rem;
       align-items: center;
       background: linear-gradient(180deg, rgba(7, 16, 27, 0.42), rgba(7, 16, 27, 0.1));
-      opacity: var(--detail-opacity);
+      opacity: 1;
       transform: translate3d(0, var(--detail-lift), 0);
       transition: opacity 180ms ease, transform 180ms ease;
       will-change: transform, opacity;
@@ -3326,19 +3325,19 @@
           card.style.setProperty('--media-glint', `${mediaGlint.toFixed(2)}%`);
           card.style.setProperty('--media-scale', (1.018 + depth * 0.024).toFixed(3));
           card.style.setProperty('--media-tilt', `${(clampedDelta * 0.55).toFixed(2)}deg`);
-          card.style.setProperty('--glow', Math.max(0.05, 0.28 - absDelta * 0.17).toFixed(3));
+          card.style.setProperty('--glow', '0');
           card.style.setProperty('--scan-y', `${scanY.toFixed(2)}%`);
-          card.style.setProperty('--scan-opacity', Math.max(0, depth * 0.38 - falloff * 0.08).toFixed(3));
-          card.style.setProperty('--card-opacity', (0.58 + depth * 0.42).toFixed(3));
-          card.style.setProperty('--card-blur', `${(falloff * 0.95).toFixed(2)}px`);
+          card.style.setProperty('--scan-opacity', '0');
+          card.style.setProperty('--card-opacity', '1');
+          card.style.setProperty('--card-blur', '0px');
           card.style.setProperty('--card-brightness', '1');
           card.style.setProperty('--card-saturate', '1');
           card.style.setProperty('--card-tilt', `${(clampedDelta * -2.2).toFixed(2)}deg`);
           card.style.setProperty('--card-yaw', `${(clampedDelta * side * 3.2).toFixed(2)}deg`);
           card.style.setProperty('--copy-shift', `${(clampedDelta * -18).toFixed(2)}px`);
-          card.style.setProperty('--copy-opacity', (0.7 + depth * 0.3).toFixed(3));
+          card.style.setProperty('--copy-opacity', '1');
           card.style.setProperty('--detail-lift', `${(falloff * 12).toFixed(2)}px`);
-          card.style.setProperty('--detail-opacity', (0.66 + depth * 0.34).toFixed(3));
+          card.style.setProperty('--detail-opacity', '1');
           card.style.setProperty('--shadow-y', `${(16 + depth * 18).toFixed(2)}px`);
           card.style.setProperty('--shadow-blur', `${(30 + depth * 34).toFixed(2)}px`);
           card.style.zIndex = String(Math.round(depth * 100) + 1);
