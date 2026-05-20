@@ -410,17 +410,7 @@
     }
 
     .stream-shell::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      pointer-events: none;
-      z-index: -1;
-      background:
-        linear-gradient(115deg, rgba(31, 182, 255, 0.08), transparent 38%),
-        linear-gradient(300deg, rgba(57, 217, 138, 0.06), transparent 34%);
-      opacity: 0.95;
-      animation: streamAura 16s ease-in-out infinite alternate;
+      display: none;
     }
 
     .stream-head {
@@ -685,35 +675,7 @@
 
     .stream-card::before,
     .stream-card::after {
-      content: '';
-      position: absolute;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .stream-card::before {
-      left: -12%;
-      right: -12%;
-      top: var(--scan-y);
-      height: 116px;
-      background:
-        linear-gradient(180deg, transparent, color-mix(in srgb, var(--lane-accent) 18%, transparent) 44%, rgba(255, 255, 255, 0.18) 50%, transparent 62%),
-        linear-gradient(90deg, transparent, color-mix(in srgb, var(--lane-accent) 28%, transparent), transparent);
-      filter: blur(0.2px);
-      mix-blend-mode: screen;
-      opacity: var(--scan-opacity);
-      transform: translateY(-50%) rotate(-2deg);
-      transition: opacity 160ms ease, top 160ms ease;
-    }
-
-    .stream-card::after {
-      inset: 0;
-      background:
-        radial-gradient(circle at 16% 18%, var(--lane-accent-soft), transparent 44%),
-        radial-gradient(circle at 85% 88%, rgba(57, 217, 138, 0.16), transparent 52%),
-        linear-gradient(90deg, color-mix(in srgb, var(--lane-accent) 16%, transparent), transparent 20%, transparent 80%, color-mix(in srgb, var(--lane-accent) 10%, transparent));
-      opacity: var(--glow);
-      transition: opacity 220ms ease;
+      display: none;
     }
 
     .stream-card > * {
@@ -743,17 +705,7 @@
     }
 
     .stream-media::after {
-      content: '';
-      position: absolute;
-      inset: clamp(0.52rem, 0.9vw, 0.74rem);
-      border-radius: 22px;
-      pointer-events: none;
-      z-index: 2;
-      background: linear-gradient(110deg, transparent 22%, rgba(255, 255, 255, 0.16) 48%, color-mix(in srgb, var(--lane-accent) 22%, transparent) 54%, transparent 72%);
-      mix-blend-mode: screen;
-      opacity: var(--scan-opacity);
-      transform: translateX(var(--media-glint));
-      transition: opacity 180ms ease, transform 180ms ease;
+      display: none;
     }
 
     .stream-media-frame,
@@ -3379,8 +3331,8 @@
           card.style.setProperty('--scan-opacity', Math.max(0, depth * 0.38 - falloff * 0.08).toFixed(3));
           card.style.setProperty('--card-opacity', (0.58 + depth * 0.42).toFixed(3));
           card.style.setProperty('--card-blur', `${(falloff * 0.95).toFixed(2)}px`);
-          card.style.setProperty('--card-brightness', (0.72 + depth * 0.28).toFixed(3));
-          card.style.setProperty('--card-saturate', (0.68 + depth * 0.4).toFixed(3));
+          card.style.setProperty('--card-brightness', '1');
+          card.style.setProperty('--card-saturate', '1');
           card.style.setProperty('--card-tilt', `${(clampedDelta * -2.2).toFixed(2)}deg`);
           card.style.setProperty('--card-yaw', `${(clampedDelta * side * 3.2).toFixed(2)}deg`);
           card.style.setProperty('--copy-shift', `${(clampedDelta * -18).toFixed(2)}px`);
