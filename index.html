@@ -1022,6 +1022,15 @@
       overflow: hidden;
     }
 
+    .stream-visit-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.36rem;
+      align-items: center;
+      justify-content: flex-end;
+      flex-shrink: 0;
+    }
+
     .stream-insights {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1921,6 +1930,10 @@
         align-items: flex-start;
       }
 
+      .stream-visit-actions {
+        justify-content: flex-start;
+      }
+
       .stream-insights {
         grid-template-columns: 1fr;
       }
@@ -2643,6 +2656,8 @@
     proof: 'Public catalog and live workspace available.',
     tags: ['Agent Workflows', 'Governance', 'Knowledge Systems'],
     demoUrl: 'https://skills.idpcc.ceirr-network-dev.org/',
+    backupUrl: 'https://agent-skills-backup.vercel.app/',
+    backupLabel: 'Open Backup',
     codeUrl: '',
     image: 'static/project_22_agent_skills_library.png'
   },
@@ -2874,13 +2889,21 @@
     }
 
     function buildVisitBand(project) {
-      let actionMarkup = '<span class="mini-pill">Local Preview Only</span>';
+      const actionItems = [];
 
       if (project.demoUrl) {
-        actionMarkup = createCardAction(getVisitActionLabel(project), project.demoUrl, 'primary strong');
+        actionItems.push(createCardAction(getVisitActionLabel(project), project.demoUrl, 'primary strong'));
       } else if (project.access.key === 'source') {
-        actionMarkup = createCardAction('View Code', project.codeUrl, 'secondary');
+        actionItems.push(createCardAction('View Code', project.codeUrl, 'secondary'));
       }
+
+      if (project.backupUrl) {
+        actionItems.push(createCardAction(project.backupLabel || 'Open Backup', project.backupUrl, 'secondary'));
+      }
+
+      const actionMarkup = actionItems.length
+        ? `<div class="stream-visit-actions">${actionItems.join('')}</div>`
+        : '<span class="mini-pill">Local Preview Only</span>';
 
       return `
         <div class="stream-visit-band is-${project.access.key}">
@@ -2899,6 +2922,10 @@
 
       if (project.demoUrl) {
         actions.push(createCardAction(getVisitActionLabel(project), project.demoUrl, 'primary strong'));
+      }
+
+      if (project.backupUrl) {
+        actions.push(createCardAction(project.backupLabel || 'Open Backup', project.backupUrl, 'secondary'));
       }
 
       if (project.codeUrl) {
