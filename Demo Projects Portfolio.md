@@ -1,6 +1,6 @@
 # Demo Projects Portfolio
 
-Concise inventory of the 23 projects currently defined in `index.html`.
+Concise inventory of the 26 projects currently defined in `index.html`.
 
 | # | Project | Status | Focus |
 |---|---|---|---|
@@ -27,5 +27,8 @@ Concise inventory of the 23 projects currently defined in `index.html`.
 | 21 | ImmPort Intervention/Cohort Export | Protected Console | Governed operator console for ImmPort intervention and cohort exports |
 | 22 | Agent Skills Library | Live Workspace | Governed shared-agent workflow catalog, install guidance, and analytics workspace |
 | 23 | iDPCC Export Dashboard | Protected Console | BV-BRC package export operations and accession ID return workflow |
+| 24 | HRSA Contract Closeout Assistant | Live Demo | Contract closeout workbench for readiness gaps, stakeholder requests, and CO review |
+| 25 | D-TAIP Prototype | Live Demo | Deflection technical assistance workspace for DSAP action-plan generation |
+| 26 | Brian Wiki | Protected Site | Private Memory Wiki with Work and LCARS modes shown through safe locked previews |
 
 Project links, tags, stack notes, images, and access messaging are maintained in the `rawProjects` array in `index.html`.
