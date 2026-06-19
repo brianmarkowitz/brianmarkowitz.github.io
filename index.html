@@ -2677,10 +2677,62 @@
     demoUrl: 'https://bvbrc-export.idpcc.ceirr-network.org/',
     codeUrl: '',
     image: 'static/project_23_bvbrc_export_dashboard.png'
+  },
+  {
+    id: 24,
+    title: 'HRSA Contract Closeout Assistant',
+    year: '2026',
+    status: 'Live Demo',
+    systemId: 'core-data',
+    systemLabel: 'Core Data Architecture',
+    summary: 'Contract closeout workbench for triaging HRSA closeout files, readiness gaps, stakeholder requests, and contracting officer review.',
+    architecture: 'Modeled role-aware queues, checklist readiness, deobligation signals, stakeholder follow-up, evidence review, and advisory closeout guidance.',
+    impact: 'Turns fragmented contract closeout status into a clear operator workspace with next actions, aging signals, and accountable review paths.',
+    stack: 'React, Vercel, contract closeout workflow UX, advisory rules, operator dashboards',
+    proof: 'Public live demo available.',
+    tags: ['Contract Closeout', 'HRSA', 'Workflow Systems'],
+    demoUrl: 'https://hrsa-closeout-codex-prototype.vercel.app/',
+    codeUrl: '',
+    image: 'static/project_24_hrsa_closeout.png'
+  },
+  {
+    id: 25,
+    title: 'D-TAIP Prototype',
+    year: '2026',
+    status: 'Live Demo',
+    systemId: 'intelligent-products',
+    systemLabel: 'Intelligent Data Products',
+    summary: 'Deflection technical assistance workspace that structures raw workshop notes into DSAP-aligned action plans.',
+    architecture: 'Combined synthetic workshop scenarios, DSAP coverage checks, AI-assisted drafting, facilitator decisions, and reusable method memory.',
+    impact: 'Helps facilitators convert messy planning sessions into structured action-plan language while keeping final decisions human-owned.',
+    stack: 'React, Vercel, Groq AI, DSAP workflow modeling, knowledge graph memory',
+    proof: 'Public live demo available.',
+    tags: ['Technical Assistance', 'AI Facilitation', 'Action Planning'],
+    demoUrl: 'https://d-taip-prototype.vercel.app/',
+    codeUrl: '',
+    image: 'static/project_25_d_taip.png'
+  },
+  {
+    id: 26,
+    title: 'Brian Wiki',
+    year: '2026',
+    status: 'Protected Site',
+    systemId: 'intelligent-products',
+    systemLabel: 'Intelligent Data Products',
+    summary: 'Protected personal Memory Wiki for browsing imported Codex history through daily logs, search, graph navigation, and mode-aware themes.',
+    architecture: 'Built hash-routed private wiki access, local memory import surfaces, date-based navigation, search affordances, and Work/LCARS theme modes.',
+    impact: 'Creates a durable recall layer for prior agent work while keeping the archive behind explicit access controls.',
+    stack: 'Static React app, generated memory data, protected access, hash routing, themed UI modes',
+    proof: 'PIN-protected private workspace available.',
+    tags: ['Memory Wiki', 'Knowledge Systems', 'Private Workspace'],
+    demoUrl: 'https://brian-wiki.vercel.app/#/log/2026-05-24',
+    codeUrl: '',
+    image: 'static/project_26_brian_wiki_lcars.png',
+    galleryLabels: ['LCARS Mode', 'Work Mode', 'LCARS Mode', 'Work Mode']
   }
 ];
 
-    const impressivenessOrder = [23, 21, 8, 22, 20, 2, 4, 5, 11, 19, 18, 10, 1, 12, 3, 7, 15, 16, 17, 6, 9, 13, 14];
+    const impressivenessOrder = [24, 25, 23, 21, 8, 22, 26, 20, 2, 4, 5, 11, 19, 18, 10, 1, 12, 3, 7, 15, 16, 17, 6, 9, 13, 14];
     const rankById = Object.fromEntries(impressivenessOrder.map((id, index) => [id, index + 1]));
 
     const projects = rawProjects
@@ -2773,10 +2825,15 @@
         'static/project_18_fluglobe_extra_1.png',
         'static/project_18_fluglobe_extra_2.png',
         'static/project_18_fluglobe_extra_3.png'
+      ],
+      26: [
+        'static/project_26_brian_wiki_work.png',
+        'static/project_26_brian_wiki_lcars.png',
+        'static/project_26_brian_wiki_work.png'
       ]
     };
 
-    const singleScreenshotDossierIds = new Set([15, 16, 17, 19, 20, 21, 22, 23]);
+    const singleScreenshotDossierIds = new Set([15, 16, 17, 19, 20, 21, 22, 23, 24, 25]);
 
     function createCardAction(label, url, variant = '') {
       if (!url) return '';
@@ -2969,8 +3026,8 @@
       return frames
         .map((frame, index) => `
           <figure class="modal-shot ${frame.cls}">
-            <img src="${baseSources[index]}" alt="${project.title} ${frame.label}" loading="lazy">
-            <figcaption>${frame.label}</figcaption>
+            <img src="${baseSources[index]}" alt="${project.title} ${(project.galleryLabels || [])[index] || frame.label}" loading="lazy">
+            <figcaption>${(project.galleryLabels || [])[index] || frame.label}</figcaption>
           </figure>
         `)
         .join('');
