@@ -1,34 +1,30 @@
-# Demo Projects Portfolio
+# Brian Markowitz Portfolio
 
-Static portfolio page for 26 demo projects across data architecture, AI products, and applied interface work. The site is implemented as a single `index.html` page with local assets in `static/`.
+A static, responsive portfolio of 26 projects across data architecture, AI products, and applied interfaces.
 
-## Contents
+## Files
 
-- `index.html` - Main static portfolio page and project data
-- `static/` - Project preview images and supporting assets
-- `Demo Projects Portfolio.md` - Concise project inventory
-- `.gitignore` - Local ignore rules
+- `index.html` — page structure and accessible project dialog
+- `styles.css` — ivory, charcoal, and orange visual design with mobile and reduced-motion support
+- `projects.js` — original project inventory, ordering, links, and screenshot galleries
+- `portfolio.js` — combined category/search filtering, project details, and screenshot selection
+- `static/` — real project previews and generated hero sculpture
+- `Demo Projects Portfolio.md` — readable project inventory
 
-## Current Portfolio
-
-- 26 projects
-- Static HTML, CSS, and JavaScript
-- Local project images in `static/`
-- Responsive project stream, filters, preview media, and dossier modal
-- Mix of public live demos, live sites, protected demos, source links, and internal-only entries
-
-## Local Preview
+## Local preview
 
 ```bash
-python3 -m http.server 8000
+python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-Open `http://localhost:8000`.
+Open `http://localhost:8000`. No build step or package installation is required.
 
-## Updating Projects
+## Updating projects
 
-Project metadata lives in the `rawProjects` array inside `index.html`. Add or update local preview media in `static/`, then update the matching project entry with title, summary, stack, proof, links, tags, and image path.
+Edit `rawProjects` in `projects.js`. Each entry includes its original status, access evidence, URLs, summary, architecture, outcome, stack, tags, and local screenshot. Update `impressivenessOrder` for display order and `galleryExtrasById` for additional screenshots. Search matches titles, summaries, technologies, categories, status, and tags. Search and discipline filters work together.
+
+Project links open in a separate tab. Protected and internal projects retain explicit access labels. The portfolio describes the stored project inventory; it does not perform live service health checks.
 
 ## Deployment
 
-This is a static site and can be hosted on GitHub Pages, S3 static website hosting, Netlify, Vercel, CloudFront, or any basic static web host.
+Deploy these files to any static web host. Google Fonts is optional; local sans-serif and monospace fallbacks are provided. No deployment is performed by the local preview command.
