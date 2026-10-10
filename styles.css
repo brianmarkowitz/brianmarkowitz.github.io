@@ -425,7 +425,7 @@ h2 {
 .access-label.login::before {
   background:#a65c12
 }
-.access-label.local::before,.access-label.source::before {
+.access-label.local::before,.access-label.source::before,.access-label.request::before {
   background:#75786d
 }
 .project-card h3 {
