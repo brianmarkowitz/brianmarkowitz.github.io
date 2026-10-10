@@ -2,7 +2,10 @@
 const categories = { 'core-data': 'Data systems', 'intelligent-products': 'AI products', 'interface-labs': 'Interfaces' };
 const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const safeURL = value => /^https?:\/\//i.test(value || '') ? escapeHTML(value) : '';
+// Only these projects may link out. New projects default to requesting access.
+const publicProjectIds = new Set([9, 10, 11, 13, 16, 17, 18]);
 function accessFor(project) {
+  if (!publicProjectIds.has(project.id)) return { key: 'request', label: 'Access by request' };
   if (project.demoUrl) return /login|protected/i.test(project.proof) ? { key: 'login', label: 'Login required' } : { key: 'live', label: 'Public access' };
   return project.codeUrl ? { key: 'source', label: 'Source only' } : { key: 'local', label: 'Internal / preview' };
 }
@@ -16,6 +19,20 @@ function externalLink(url, label, className = 'text-action') {
   const href = safeURL(url);
   return href ? `<a class="${className}" href="${href}" target="_blank" rel="noopener noreferrer">${escapeHTML(label)} <span aria-hidden="true">↗</span></a>` : '';
 }
+function projectLinks(project, detailed = false) {
+  const className = detailed ? 'button' : 'text-action';
+  if (!publicProjectIds.has(project.id)) {
+    const subject = encodeURIComponent(`Access request: ${project.title}`);
+    return `<a class="${className}" href="mailto:bmarko@gmail.com?subject=${subject}">Request access <span aria-hidden="true">↗</span></a>`;
+  }
+  const primary = project.demoUrl
+    ? externalLink(project.demoUrl, project.access.key === 'login' ? 'Open · login required' : 'Open experience', className)
+    : externalLink(project.codeUrl, 'View source', className);
+  return primary + (detailed ? [
+    project.demoUrl ? externalLink(project.codeUrl, 'View source', 'button secondary') : '',
+    externalLink(project.backupUrl, project.backupLabel || 'Open backup', 'button secondary')
+  ].join('') : '');
+}
 function renderProjects() {
   const words = search.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
   const visible = projects.filter(project => {
@@ -28,7 +45,7 @@ function renderProjects() {
       <div class="card-meta"><span>${escapeHTML(categories[project.systemId])} / ${escapeHTML(project.year)}</span><span class="access-label ${project.access.key}">${project.access.label}</span></div>
       <h3><button type="button" data-project="${project.id}">${escapeHTML(project.title)}</button></h3>
       <p class="card-summary">${escapeHTML(project.summary)}</p>
-      <div class="card-actions"><button class="text-action" type="button" data-project="${project.id}">View project <span aria-hidden="true">→</span></button>${project.demoUrl ? externalLink(project.demoUrl, project.access.key === 'login' ? 'Open · login required' : 'Open experience') : project.codeUrl ? externalLink(project.codeUrl, 'View source') : ''}</div>
+      <div class="card-actions"><button class="text-action" type="button" data-project="${project.id}">View project <span aria-hidden="true">→</span></button>${projectLinks(project)}</div>
     </article>`).join('');
   document.getElementById('results-summary').textContent = `${String(visible.length).padStart(2, '0')} / ${projects.length} projects${activeFilter === 'all' ? ' — All disciplines' : ` — ${categories[activeFilter]}`}`;
   document.getElementById('empty-state').hidden = visible.length !== 0;
@@ -56,11 +73,7 @@ function openProject(id, trigger) {
   document.getElementById('detail-meta').textContent = `${project.year} · ${project.status} · ${project.access.label}`;
   document.getElementById('detail-title').textContent = project.title;
   document.getElementById('detail-summary').textContent = project.summary;
-  document.getElementById('detail-actions').innerHTML = [
-    externalLink(project.demoUrl, project.access.key === 'login' ? 'Open project · login required' : 'Open experience', 'button'),
-    externalLink(project.codeUrl, 'View source', 'button secondary'),
-    externalLink(project.backupUrl, project.backupLabel || 'Open backup', 'button secondary')
-  ].join('');
+  document.getElementById('detail-actions').innerHTML = projectLinks(project, true);
   const sourceFrames = [project.image, ...(galleryExtrasById[id] || [])];
   const frames = [...new Set(sourceFrames)].map((src, index) => ({ src, label: project.galleryLabels?.[sourceFrames.indexOf(src)] || (index === 0 ? 'Overview' : `View ${index + 1}`) }));
   const preview = document.getElementById('detail-image');
@@ -77,7 +90,7 @@ function openProject(id, trigger) {
     preview.alt = `${project.title} — ${frame.label}`;
     thumbnails.querySelectorAll('button').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
   };
-  const accessNote = project.access.key === 'login' ? 'Sign-in is required to explore this project.' : project.access.key === 'local' ? 'Local or internal preview only. No public URL is available.' : project.access.key === 'source' ? 'Source is available; there is no public deployment.' : 'Public project link available. Opens in a new tab.';
+  const accessNote = project.access.key === 'request' ? 'Email bmarko@gmail.com to request access to this project.' : project.access.key === 'login' ? 'Sign-in is required to explore this project.' : project.access.key === 'local' ? 'Local or internal preview only. No public URL is available.' : project.access.key === 'source' ? 'Source is available; there is no public deployment.' : 'Public project link available. Opens in a new tab.';
   document.getElementById('detail-notes').innerHTML = [
     ['Architecture', project.architecture], ['Outcome', project.impact], ['Stack', project.stack], ['Status & access', `${project.proof} ${accessNote}`]
   ].map(([heading, copy]) => `<section><h3>${heading}</h3><p>${escapeHTML(copy)}</p>${heading === 'Stack' ? `<div class="detail-tags">${project.tags.map(tag => `<span>${escapeHTML(tag)}</span>`).join('')}</div>` : ''}</section>`).join('');
