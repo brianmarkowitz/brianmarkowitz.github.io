@@ -247,7 +247,7 @@ module.exports = {
       contribution:
         "I paired a listening check and bedside confirmation with AlarmKit scheduling for one-time or weekly alarms. If no tested tone fits, setup stops rather than guessing.",
       outcome:
-        "Partners can test a tone before adding it to their wake-up routine. Microphone setup stays on the device.",
+        "Partners can test a tone before adding it to their wake-up routine. Partner responses and alarms stay on the iPhone.",
       tech: ["iOS", "AlarmKit", "Local audio"],
       access: "Public website & App Store",
       url: "https://couplesalarm.com/",
