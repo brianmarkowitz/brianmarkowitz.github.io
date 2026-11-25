@@ -1,9 +1,10 @@
 // Verified copy, deliberate public-link allowlist, media attribution, and editorial ordering.
 module.exports = {
-  featured: [27, 1, 11],
+  featured: [11, 18, 27],
+  // Public proofs first, then management and systems work. Internal refresh is last.
   order: [
-    27, 1, 11, 28, 9, 18, 10, 4, 5, 2, 8, 7, 17, 3, 13, 15, 16, 14, 6, 26, 12,
-    19, 20, 21, 22, 23, 24, 25,
+    11, 18, 27, 28, 9, 4, 5, 2, 23, 21, 8, 22, 7, 17, 3, 19, 10, 12, 24, 20, 25,
+    6, 26, 15, 13, 14, 16, 1,
   ],
   publicIds: [9, 10, 11, 13, 16, 17, 18, 27, 28],
   categories: {
@@ -248,9 +249,11 @@ module.exports = {
       outcome:
         "Partners can test a tone before adding it to their wake-up routine. Microphone setup stays on the device.",
       tech: ["iOS", "AlarmKit", "Local audio"],
-      access: "App Store",
-      url: "https://apps.apple.com/us/app/couples-alarm/id6792771975",
-      linkLabel: "View on the App Store",
+      access: "Public website & App Store",
+      url: "https://couplesalarm.com/",
+      linkLabel: "Visit Couples Alarm",
+      secondaryUrl: "https://apps.apple.com/us/app/couples-alarm/id6792771975",
+      secondaryLabel: "View on the App Store",
     },
     28: {
       name: "Forever Paws",
@@ -344,13 +347,12 @@ module.exports = {
       alt: "FluGlobe shows an interactive globe, migration routes and sample avian influenza records.",
     },
     27: {
-      type: "App Store screenshot",
-      src: "static/portfolio/couples-alarm-listening-test.webp",
-      caption: "Listening check",
-      fit: "portrait",
-      width: 880,
-      height: 1912,
-      alt: "Couples Alarm’s iPhone listening-test screen, ready for one partner’s turn.",
+      type: "Public screenshot",
+      src: "static/portfolio/couples-alarm-landing.webp",
+      caption: "Product landing page · Nov 25, 2026",
+      width: 1280,
+      height: 800,
+      alt: "Couples Alarm homepage with the headline “Your alarm doesn’t have to be theirs,” app-store badges, and two phone screens.",
     },
     28: {
       type: "Product screenshot",

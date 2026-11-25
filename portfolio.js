@@ -3,10 +3,7 @@
   const rows = [...document.querySelectorAll("#index-list > li")];
   const filters = [...document.querySelectorAll("[data-filter]")];
   const search = document.getElementById("search");
-  const more = document.getElementById("more");
-  const normalLimit = 7;
-  let selection = "all",
-    limit = normalLimit;
+  let selection = "all";
   const norm = (text) =>
     text
       .normalize("NFKD")
@@ -19,19 +16,15 @@
         (selection === "all" || row.dataset.group === selection) &&
         words.every((word) => norm(row.dataset.search).includes(word)),
     );
-    const show = new Set(matches.slice(0, limit));
+    const show = new Set(matches);
     rows.forEach((row) => {
       row.hidden = !show.has(row);
     });
-    const msg = !matches.length
-      ? "0 matching projects"
-      : show.size === matches.length
-        ? `${matches.length} project${matches.length === 1 ? "" : "s"}`
-        : `Showing ${show.size} of ${matches.length} projects`;
+    const msg = matches.length
+      ? `${matches.length} project${matches.length === 1 ? "" : "s"}`
+      : "0 matching projects";
     document.getElementById("count").textContent = msg;
     document.getElementById("index-empty").hidden = !!matches.length;
-    more.hidden = matches.length <= limit;
-    more.textContent = `Show ${matches.length - show.size} more project${matches.length - show.size === 1 ? "" : "s"} ↓`;
     filters.forEach((button) =>
       button.setAttribute(
         "aria-pressed",
@@ -43,25 +36,15 @@
   filters.forEach((button) =>
     button.addEventListener("click", () => {
       selection = button.dataset.filter;
-      limit = normalLimit;
       render();
     }),
   );
   search.addEventListener("input", () => {
-    limit = normalLimit;
     render();
-  });
-  more.addEventListener("click", () => {
-    const wasVisible = new Set(rows.filter((row) => !row.hidden));
-    limit = Infinity;
-    render();
-    const firstNew = rows.find((row) => !row.hidden && !wasVisible.has(row));
-    firstNew?.querySelector("a")?.focus({ preventScroll: true });
   });
   document.getElementById("reset").addEventListener("click", () => {
     search.value = "";
     selection = "all";
-    limit = normalLimit;
     render();
     search.focus();
   });

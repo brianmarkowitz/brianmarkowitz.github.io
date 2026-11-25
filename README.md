@@ -1,6 +1,6 @@
 # Brian Markowitz · Engineering Portfolio
 
-A static GitHub Pages portfolio. The home page leads with three featured software case studies and links to an accessible, searchable project index. Each project has its own shareable HTML URL; all writing and links remain available when JavaScript is disabled.
+A static GitHub Pages portfolio. The home page leads with three featured software case studies and links to an accessible, searchable project gallery that shows all project cards and images by default. Each project has its own shareable HTML URL; all writing and links remain available when JavaScript is disabled.
 
 ## Maintenance
 
@@ -12,7 +12,7 @@ A static GitHub Pages portfolio. The home page leads with three featured softwar
 
 ## Visual sources
 
-- Couples Alarm: [official App Store listing](https://apps.apple.com/us/app/couples-alarm/id6792771975), developer listing screenshot, checked 2026-11-25.
+- Couples Alarm: [public product landing page](https://couplesalarm.com/), captured 2026-11-25 at 03:45 UTC. The landing page links to Brian’s [App Store listing](https://apps.apple.com/us/app/couples-alarm/id6792771975).
 - Forever Paws: [public home](https://foreverpaws.love/) and [Bailey’s public memorial](https://foreverpaws.love/bailey-0s6r38), screenshots captured 2026-11-25.
 - FluGlobe: [public demo](https://fluglobe.vercel.app/), captured 2026-11-25; the interface displays sample data.
 - ClawdMarks: [public field-report directory](https://www.clawdmarks.com/), captured 2026-11-25 at 03:12 UTC. The image is the anonymous directory, not an admin panel.
