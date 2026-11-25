@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="500" viewBox="0 0 640 500" fill="none" role="img" aria-labelledby="portfolio-board-t portfolio-board-d">
+<title id="portfolio-board-t">An exploded diagram of a software system</title><desc id="portfolio-board-d">Three isometric plates depict the interface, application logic and data layers. Fine registration lines show how the pieces align.</desc>
+<style>
+@media (prefers-reduced-motion: no-preference) {
+  .plate-layer { animation: settle 640ms cubic-bezier(.22,.78,.26,1) backwards; }
+  .logic-layer { animation-delay: 70ms; }
+  .interface-layer { animation-delay: 150ms; }
+  .signal { animation: send-signal 780ms 430ms cubic-bezier(.25,.55,.36,1) backwards; }
+  @keyframes settle {
+    from { transform: translateY(var(--lift)); opacity: .47; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes send-signal {
+    0% { opacity: 0; stroke-dashoffset: 310; }
+    14% { opacity: 1; }
+    76% { opacity: .87; }
+    100% { opacity: 0; stroke-dashoffset: 0; }
+  }
+}
+</style>
+<defs>
+ <pattern id="portfolio-board-dots" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="9" cy="9" r=".75" fill="#648087" opacity=".43"/></pattern>
+ <linearGradient id="portfolio-board-base" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#283b46"/><stop offset="1" stop-color="#172329"/></linearGradient>
+ <linearGradient id="portfolio-board-logic" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#819399"/><stop offset=".6" stop-color="#435a63"/><stop offset="1" stop-color="#35464d"/></linearGradient>
+ <linearGradient id="portfolio-board-top" x1="0" y1="0" x2="1" y2=".7"><stop stop-color="#e8f5af"/><stop offset=".38" stop-color="#d4ff7a"/><stop offset="1" stop-color="#9ec946"/></linearGradient>
+ <pattern id="portfolio-board-trace" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M-6 12H5l5-5h14M14 24v-6l4-4h6" stroke="#7eaab1" stroke-width="1" opacity=".7"/><circle cx="5" cy="12" r="1.35" fill="#b2cbd0"/></pattern>
+ <pattern id="portfolio-board-mesh" width="13" height="13" patternUnits="userSpaceOnUse"><path d="M0 0H13V13" stroke="#3d581e" stroke-width=".8" opacity=".48"/></pattern>
+ <path id="portfolio-board-plate" d="m307 0 156 85-184 103-156-85z"/>
+</defs>
+<rect x="8" y="10" width="620" height="472" fill="url(#portfolio-board-dots)"/>
+<g stroke="#53676c" stroke-width=".8" stroke-dasharray="3 5" opacity=".78"><path d="M123 145v202M307 42v202M463 127v202M279 230v202"/><path d="M87 318l218-124 201 109-223 126z"/><path d="m83 331 204 111 228-128"/></g>
+<g stroke-linejoin="round">
+ <g class="plate-layer data-layer" style="--lift:15px"><g transform="translate(0 226)"><path d="M123 103v13l156 85v-13z" fill="#293c45" stroke="#698089"/><path d="M279 188v13l184-103V85z" fill="#19292f" stroke="#698089"/><use href="#portfolio-board-plate" fill="url(#portfolio-board-base)" stroke="#99abb1" stroke-width="1.4"/><g transform="matrix(.91 -.51 .83 .45 145 102)"><rect x="0" y="0" width="176" height="147" rx="5" fill="url(#portfolio-board-trace)" stroke="#698b96"/><g fill="#86a6a9" stroke="#c1d4d1" stroke-width=".8"><rect x="16" y="15" width="36" height="22"/><rect x="60" y="15" width="36" height="22"/><rect x="104" y="15" width="36" height="22"/></g></g></g>
+ </g><g class="plate-layer logic-layer" style="--lift:21px"><g transform="translate(0 139)"><path d="M123 103v10l156 85v-10z" fill="#465a63" stroke="#8ea0a4"/><path d="M279 188v10l184-103V85z" fill="#2d4049" stroke="#a1afb0"/><use href="#portfolio-board-plate" fill="url(#portfolio-board-logic)" stroke="#cdd6d2" stroke-width="1.4"/><g transform="matrix(.91 -.51 .83 .45 145 102)" fill="none" stroke="#dbe8e6"><rect width="176" height="147" rx="3" stroke-opacity=".36"/><path d="M8 25h33v22h39m-72 62h36V85h37m50-39h24V21h13m-36 68h21v34h16M13 69h39m102 0h13"/><g fill="#aee16c" stroke="#e4f6c1"><rect x="66" y="42" width="65" height="59" rx="3" fill="#263b43"/><rect x="74" y="50" width="49" height="43" rx="2" stroke-opacity=".56"/><path d="M83 64h11v-7l13 15-13 14v-9H83z" fill="#263b43" stroke="none"/></g><g fill="#d1dfd9"><circle cx="8" cy="25" r="2"/><circle cx="8" cy="109" r="2"/><circle cx="168" cy="21" r="2"/><circle cx="170" cy="123" r="2"/></g></g></g>
+ </g><g class="plate-layer interface-layer" style="--lift:29px"><g transform="translate(0 43)"><path d="M123 103v9l156 85v-9z" fill="#91ba45" stroke="#d4ee98"/><path d="M279 188v9L463 94v-9z" fill="#759739" stroke="#d4ee98"/><use href="#portfolio-board-plate" fill="url(#portfolio-board-top)" stroke="#e1ffae" stroke-width="1.8"/>
+ <g transform="matrix(.91 -.51 .83 .45 145 102)"><rect width="176" height="147" rx="3" fill="url(#portfolio-board-mesh)" stroke="#577330"/>
+ <rect x="18" y="18" width="140" height="107" rx="4" fill="#d4f58b" stroke="#526d38" stroke-width="1.8"/><path d="M18 38h140" stroke="#637d3b"/><g fill="#4d6336"><circle cx="27" cy="28" r="2"/><circle cx="34" cy="28" r="2"/><circle cx="41" cy="28" r="2"/></g>
+ <path d="M31 104h47m-47-8h38m-38-8h48" stroke="#657d41" stroke-width="2.5"/><path d="M85 65h61v36H85z" fill="#a9cc70"/><path d="m90 93 12-11 8 4 9-12 6 4 13-10" stroke="#364d2b" stroke-width="2.8"/><rect x="31" y="52" width="57" height="8" rx="1" fill="#3b522c"/></g></g>
+</g></g>
+<g stroke="#81928d" stroke-width="1"><path d="m404 128 29 17h49"/><path d="m398 227 37 19h46"/><path d="m396 318 40 21h45"/></g>
+<g fill="#d3e3da" font-family="monospace" font-size="11" letter-spacing="1.5"><text x="490" y="149">INTERFACE</text><text x="490" y="250">LOGIC</text><text x="490" y="343">DATA</text></g>
+<g fill="#192425" stroke="#d5f39d"><circle cx="404" cy="128" r="3"/><circle cx="398" cy="227" r="3"/><circle cx="396" cy="318" r="3"/></g>
+<path class="signal" d="M279 414v-47l184-102V128l-58 32-35-18" pathLength="310" stroke="#defdb0" stroke-width="2" stroke-linecap="round" stroke-dasharray="33 277" opacity="0" aria-hidden="true"/>
+<g stroke="#7f9799"><path d="M16 38V17h21m553 0h21v21M16 445v21h21m553 0h21v-21"/></g>
+</svg>
