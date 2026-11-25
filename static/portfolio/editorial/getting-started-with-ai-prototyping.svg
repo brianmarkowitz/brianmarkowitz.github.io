@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+<title id="title">Concept illustration</title>
+<desc id="desc">Separate inputs converge on a layered index and continue to a reply bubble.</desc>
+<rect width="640" height="400" fill="#F1EDE2"/>
+<path d="M450 0h190v247C597 180 547 123 450 0Z" fill="#D5E4DC"/>
+<path d="M0 290c35 1 136 20 189 110H0Z" fill="#E2E8D4"/>
+<path d="M70 303c117 33 294 37 477-1" fill="none" stroke="#BBC8B4" stroke-width="1.8" stroke-dasharray="3 8" stroke-linecap="round"/>
+<path d="M105 289h70q20 0 20-20v-22q0-17 17-17h29M105 229h49q9 0 9-10v-29q0-12 12-12h66M106 167h31q8 0 8-8v-15q0-11 10-11h48q15 0 15 14" fill="none" stroke="#537B70" stroke-width="4" stroke-linecap="round"/>
+<g stroke="#2B4F4B" stroke-width="3" stroke-linejoin="round">
+  <path d="M81 151h33l12 12v31H81Z" fill="#F9F3E4"/><path d="M114 152v12h11" fill="none"/>
+  <rect x="81" y="209" width="45" height="39" rx="7" fill="#C0D9C6"/>
+  <circle cx="105" cy="288" r="20" fill="#5B8A7D"/>
+</g>
+<path d="M89 174h25m-25 9h18" stroke="#647D72" stroke-width="3" stroke-linecap="round"/>
+<path d="m90 234 9-12 6 7 7-5 6 10" fill="none" stroke="#466C64" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<g fill="#F0F2DE"><circle cx="97" cy="288" r="3"/><circle cx="105" cy="288" r="3"/><circle cx="113" cy="288" r="3"/></g>
+<path d="m218 231 97-49 97 49-97 49Z" fill="#263D3B" opacity=".20" transform="translate(5 9)"/>
+<path d="m218 211 97-49 97 49v17l-97 49-97-49Z" fill="#315957" stroke="#264541" stroke-width="4" stroke-linejoin="round"/>
+<path d="m218 211 97 49 97-49" fill="none" stroke="#C4D6BF" stroke-width="2"/>
+<path d="m218 179 97-49 97 49v17l-97 49-97-49Z" fill="#779E8F" stroke="#264541" stroke-width="4" stroke-linejoin="round"/>
+<path d="m218 179 97 49 97-49" fill="none" stroke="#CDDDBF" stroke-width="2"/>
+<path d="m218 147 97-49 97 49v17l-97 49-97-49Z" fill="#D8E9A8" stroke="#264541" stroke-width="4" stroke-linejoin="round"/>
+<path d="m218 147 97 49 97-49" fill="none" stroke="#4E786C" stroke-width="2.5"/>
+<path d="m266 147 49-25 49 25-49 25Z" fill="none" stroke="#659086" stroke-width="2"/>
+<path d="m287 148 28-14 28 14-28 14Z" fill="#789D89"/>
+<path d="M412 153h21q18 0 18-18v-2q0-12 12-12h20" fill="none" stroke="#537B70" stroke-width="4" stroke-linecap="round"/>
+<path d="m474 113 10 8-10 8" fill="none" stroke="#537B70" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M500 76h47q15 0 15 15v50q0 15-15 15h-19l-24 19v-19h-4q-15 0-15-15V91q0-15 15-15Z" fill="#2B4B48" opacity=".16" transform="translate(5 6)"/>
+<path d="M500 76h47q15 0 15 15v50q0 15-15 15h-19l-24 19v-19h-4q-15 0-15-15V91q0-15 15-15Z" fill="#396D63" stroke="#264541" stroke-width="4" stroke-linejoin="round"/>
+<path d="M503 101h40m-40 13h40m-40 13h26" stroke="#EAF0DA" stroke-width="4" stroke-linecap="round"/>
+<circle cx="515" cy="303" r="4" fill="#678F80"/><circle cx="536" cy="303" r="4" fill="#678F80"/>
+</svg>

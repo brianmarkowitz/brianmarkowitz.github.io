@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+<title id="title">Concept illustration</title>
+<desc id="desc">A magnifying glass highlights links between cells in an abstract record grid.</desc>
+<rect width="640" height="400" fill="#E8EDE3"/>
+<circle cx="431" cy="185" r="166" fill="#D3E1D6"/>
+<circle cx="431" cy="185" r="145" fill="none" stroke="#A5BAB0" stroke-width="1.5" stroke-dasharray="3 8"/>
+<path d="M0 0h187L0 169Z" fill="#F3ECDB"/>
+<path d="M104 315h430" stroke="#A6B7AC" stroke-width="2" stroke-linecap="round"/>
+<g fill="#FAF3DE" stroke="#526E65" stroke-width="3">
+  <rect x="112" y="112" width="241" height="151" rx="13"/>
+  <path d="M112 137q0-24 14-24h214q13 0 13 24v11H112Z" fill="#5C7C72" stroke="none"/>
+</g>
+<path d="M157 147v114m64-114v114m66-114v114m-174-78h238m-238 39h238" stroke="#A1B5A9" stroke-width="2"/>
+<path d="M125 130h60" stroke="#ECF2E5" stroke-width="4" stroke-linecap="round"/>
+<circle cx="135" cy="164" r="6" fill="#537B6F"/><circle cx="135" cy="201" r="6" fill="#9FAD8A"/><circle cx="135" cy="239" r="6" fill="#537B6F"/>
+<g stroke="#9DB2A4" stroke-width="4" stroke-linecap="round"><path d="M173 164h31m-31 37h31m-31 38h31m29-75h31m-31 75h31m31 0h31"/></g>
+<path d="m431 225 107 94q12 11 2 25l-8 8q-11 11-23 0l-111-99Z" fill="#20393A" stroke="#20393A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="m476 288 59 52" stroke="#74948D" stroke-width="4" stroke-linecap="round"/>
+<circle cx="393" cy="180" r="86" fill="#B6CFC0" stroke="#20393A" stroke-width="12"/>
+<circle cx="393" cy="180" r="72" fill="#E8F0D8" stroke="#8AA99C" stroke-width="3"/>
+<path d="M343 189h26q13 0 13-12v-18q0-9 10-9h37m-47 31v20q0 8 10 8h36" fill="none" stroke="#355F54" stroke-width="5" stroke-linecap="round"/>
+<rect x="333" y="179" width="20" height="20" rx="4" fill="#5D8677"/>
+<rect x="425" y="140" width="20" height="20" rx="4" fill="#D4EA94" stroke="#355F54" stroke-width="2"/>
+<rect x="425" y="199" width="20" height="20" rx="4" fill="#8FB5A6"/>
+<path d="M342 149q10-14 19-17" fill="none" stroke="#FFFAE7" stroke-width="5" stroke-linecap="round"/>
+<circle cx="518" cy="94" r="6" fill="#75988A"/><circle cx="546" cy="94" r="4" fill="#B7C7A9"/>
+</svg>

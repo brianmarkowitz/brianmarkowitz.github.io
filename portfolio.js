@@ -80,7 +80,10 @@
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
         observer.unobserve(entry.target);
-        if (!entry.target.matches(":focus-within")) {
+        if (
+          document.documentElement.dataset.motion !== "paused" &&
+          !entry.target.matches(":focus-within")
+        ) {
           entry.target.classList.add("enters-view");
         }
       }
@@ -102,4 +105,59 @@
     observer.disconnect();
     for (const card of cases) card.classList.remove("enters-view");
   });
+})();
+
+// Ambient telemetry is enhanced only when we can reliably stop it offscreen.
+(() => {
+  "use strict";
+  const button = document.getElementById("motion-control");
+  const board = document.getElementById("portfolio-board");
+  if (!button || !board || !("IntersectionObserver" in window)) return;
+
+  const root = document.documentElement;
+  const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const label = button.querySelector(".motion-label");
+  const storageKey = "portfolio.motion";
+  let paused = root.dataset.motion === "paused";
+  let boardVisible = false;
+
+  function update() {
+    root.toggleAttribute("data-motion-ready", !preference.matches);
+    root.dataset.motion = paused ? "paused" : "playing";
+    label.textContent = paused ? "Resume motion" : "Pause motion";
+    board.toggleAttribute(
+      "data-ambient-active",
+      !preference.matches && !paused && boardVisible && !document.hidden,
+    );
+  }
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      boardVisible = entry.isIntersecting && entry.intersectionRatio >= 0.15;
+      update();
+    },
+    { threshold: [0, 0.15] },
+  );
+  observer.observe(board);
+  button.addEventListener("click", () => {
+    paused = !paused;
+    if (paused)
+      document
+        .querySelectorAll(".enters-view")
+        .forEach((element) => element.classList.remove("enters-view"));
+    try {
+      if (paused) localStorage.setItem(storageKey, "paused");
+      else localStorage.removeItem(storageKey);
+    } catch {
+      // Manual control still works for this page.
+    }
+    update();
+  });
+  preference.addEventListener("change", update);
+  document.addEventListener("visibilitychange", update);
+  window.addEventListener("storage", (event) => {
+    if (event.key !== storageKey && event.key !== null) return;
+    paused = event.newValue === "paused";
+    update();
+  });
+  update();
 })();

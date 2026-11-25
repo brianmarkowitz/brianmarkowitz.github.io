@@ -1378,3 +1378,113 @@ h3,
     }
   }
 }
+
+/* A persistent user control and an observer keep the ambient board considerate. */
+.system-figure figcaption {
+  justify-content: center;
+  gap: 7px 14px;
+  flex-wrap: wrap;
+  min-height: 35px;
+}
+.board-caption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #a9b9b3 !important;
+}
+.motion-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  visibility: hidden;
+  white-space: nowrap;
+  min-width: 111px;
+  min-height: 33px;
+  padding: 5px 7px;
+  border: 1px solid #5b6d65;
+  border-radius: 2px;
+  background: transparent;
+  color: #dce5de;
+  font: 500 11px/1.25 var(--sans);
+}
+.motion-control:hover {
+  border-color: var(--lime);
+  color: var(--lime);
+}
+.motion-icon {
+  height: 9px;
+  width: 8px;
+  border-inline: 2px solid currentColor;
+}
+html[data-motion="paused"] .motion-icon {
+  border: 0;
+  background: currentColor;
+  clip-path: polygon(1px 0, 100% 50%, 1px 100%);
+}
+html[data-motion="paused"] {
+  scroll-behavior: auto;
+}
+html[data-motion="paused"] .plate-layer,
+html[data-motion="paused"] .signal,
+html[data-motion="paused"] .case.enters-view {
+  animation: none;
+}
+html[data-motion="paused"] .case img,
+html[data-motion="paused"] .read-link .arrow {
+  transition: none;
+  transform: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html[data-motion-ready] .motion-control {
+    visibility: visible;
+  }
+  html[data-motion-ready] .ambient-glint {
+    animation: ambient-telemetry 4.35s linear infinite;
+    animation-delay: var(--wait);
+    animation-play-state: paused;
+  }
+  html[data-motion-ready] #portfolio-board[data-ambient-active] .ambient-glint {
+    animation-play-state: running;
+  }
+  .ambient-data {
+    --wait: 1.05s;
+  }
+  .ambient-logic {
+    --wait: 1.83s;
+  }
+  .ambient-ui {
+    --wait: 2.61s;
+  }
+  @keyframes ambient-telemetry {
+    0%,
+    100% {
+      transform: translateX(0);
+      opacity: 0;
+    }
+    5% {
+      opacity: 0.95;
+    }
+    52% {
+      opacity: 0.95;
+    }
+    65%,
+    99% {
+      transform: translateX(42px);
+      opacity: 0;
+    }
+  }
+}
+@media (max-width: 700px) {
+  .system-figure figcaption {
+    gap: 3px 10px;
+  }
+  .board-caption {
+    gap: 5px;
+  }
+  .motion-control {
+    min-height: 32px;
+    min-width: 105px;
+  }
+}

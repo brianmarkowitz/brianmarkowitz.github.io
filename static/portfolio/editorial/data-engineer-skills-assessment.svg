@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+<title id="title">Concept illustration</title>
+<desc id="desc">A scenario board connects three checkpoints, each marked with a different kind of progress symbol.</desc>
+<rect width="640" height="400" fill="#EBF0E7"/>
+<path d="M0 312c138-9 221 43 300 88H0Z" fill="#D7E4DC"/>
+<path d="M459 0h181v195c-59-45-116-76-181-195Z" fill="#F3EDDE"/>
+<g fill="none" stroke="#9CB7AA" stroke-width="1.5" opacity=".55"><path d="M66 90h44m-22-22v44M534 315h44m-22-22v44"/><circle cx="88" cy="90" r="31"/><circle cx="556" cy="315" r="31"/></g>
+<rect x="107" y="97" width="442" height="232" rx="21" fill="#26343A" opacity=".16"/>
+<rect x="96" y="86" width="442" height="232" rx="21" fill="#FAF5E6" stroke="#26343A" stroke-width="5"/>
+<path d="M98 110q0-22 23-22h391q24 0 24 22v26H98Z" fill="#2C4748"/>
+<path d="M123 113h65" stroke="#DCE8DF" stroke-width="5" stroke-linecap="round"/>
+<g fill="#D1E9A2"><circle cx="484" cy="113" r="4"/><circle cx="501" cy="113" r="4"/></g>
+<path d="M156 220h329" stroke="#9BB7AD" stroke-width="4" stroke-dasharray="5 10" stroke-linecap="round"/>
+<g>
+  <rect x="132" y="166" width="108" height="106" rx="11" fill="#2E625F"/>
+  <rect x="263" y="166" width="108" height="106" rx="11" fill="#DCE7D8" stroke="#45615E" stroke-width="3"/>
+  <rect x="394" y="166" width="108" height="106" rx="11" fill="#F6EFDE" stroke="#778A80" stroke-width="3"/>
+</g>
+<circle cx="186" cy="204" r="20" fill="#D7EC9C"/>
+<path d="m175 204 7 8 14-17" fill="none" stroke="#294340" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M317 185l19 19-19 19-19-19Z" fill="#87AAA1" stroke="#315753" stroke-width="3"/>
+<path d="M317 185v19h19" fill="none" stroke="#F1F0DB" stroke-width="3"/>
+<circle cx="448" cy="204" r="19" fill="none" stroke="#6D8176" stroke-width="3" stroke-dasharray="3 5"/>
+<circle cx="448" cy="204" r="4" fill="#6D8176"/>
+<g stroke-linecap="round" stroke-width="4"><path d="M158 249h56" stroke="#F0F2E3"/><path d="M291 249h52" stroke="#45645F"/><path d="M422 249h52" stroke="#75857A"/></g>
+<path d="M126 294h139m16 0h22" stroke="#B1BCAF" stroke-width="3" stroke-linecap="round"/>
+<path d="M388 294h118" stroke="#B1BCAF" stroke-width="3" stroke-linecap="round"/>
+</svg>

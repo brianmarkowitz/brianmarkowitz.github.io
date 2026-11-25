@@ -32,6 +32,45 @@ const couple = {
   demoUrl: "",
 };
 const allowed = new Set(content.publicIds);
+const illustrationTypes = new Set([
+  "Architecture illustration",
+  "Concept illustration",
+  "Conceptual illustration",
+]);
+const screenshotTypes = new Set([
+  "App Store screenshot",
+  "Product screenshot",
+  "Archived screenshot",
+  "Public screenshot",
+  "Demo screenshot",
+]);
+function checkVisual(visual, project, publicProject) {
+  if (
+    !illustrationTypes.has(visual.type) &&
+    (!publicProject || !screenshotTypes.has(visual.type))
+  ) {
+    throw Error("Invalid visual or private screenshot: " + project);
+  }
+  if (typeof visual.alt !== "string" || !visual.alt.trim()) {
+    throw Error("Missing media alt text: " + project);
+  }
+  if (
+    !/^static\/[a-zA-Z0-9_./-]+$/.test(visual.src) ||
+    visual.src.split("/").includes("..") ||
+    !fs.existsSync(path.join(root, visual.src))
+  ) {
+    throw Error("Missing or unsafe media path: " + project + " " + visual.src);
+  }
+  if (visual.width != null || visual.height != null) {
+    if (
+      !Number.isInteger(visual.width) ||
+      !Number.isInteger(visual.height) ||
+      visual.width < 1 ||
+      visual.height < 1
+    )
+      throw Error("Invalid media dimensions: " + project);
+  }
+}
 const paws = {
   id: 28,
   title: "Forever Paws",
@@ -87,20 +126,7 @@ const all = [...rawProjects, couple, paws]
       shortTitle: c.shortTitle || c.name || p.title,
     };
     const visuals = [x.visual, ...x.gallery].filter(Boolean);
-    for (const visual of visuals) {
-      if (
-        !pub &&
-        !["Architecture illustration", "Concept illustration"].includes(
-          visual.type,
-        )
-      ) {
-        throw Error(
-          "Non-public project cannot display a screenshot: " + x.name,
-        );
-      }
-      if (!fs.existsSync(path.join(root, visual.src)))
-        throw Error("Missing media: " + visual.src);
-    }
+    for (const visual of visuals) checkVisual(visual, x.name, pub);
     return x;
   })
   .sort((a, b) => content.order.indexOf(a.id) - content.order.indexOf(b.id));
@@ -109,7 +135,7 @@ const byId = Object.fromEntries(all.map((p) => [p.id, p])),
 const href = (p) => "work/" + p.slug + "/",
   two = (n) => String(n).padStart(2, "0");
 const urlBase = "https://brianmarkowitz.github.io/",
-  cssVersion = "20261125-portfolio2";
+  cssVersion = "20261125-portfolio3";
 const arrows = {
   right: '<span class="arrow" aria-hidden="true">→</span>',
   ext: '<span class="arrow" aria-hidden="true">↗</span>',
@@ -120,8 +146,9 @@ const mail = "mailto:bmarko@gmail.com",
   github = "https://github.com/brianmarkowitz";
 const link = (url, label, c = "inline-link", arrow = "ext") =>
   `<a href="${esc(url)}" class="${c}">${esc(label)} ${arrows[arrow] || ""}</a>`;
+const motionBoot = `<script>try{if(localStorage.getItem("portfolio.motion")==="paused")document.documentElement.dataset.motion="paused"}catch(e){}</script>`;
 const head = (title, description, prefix, page, image) => `<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#12191b"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><link rel="canonical" href="${urlBase + page}"><meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${urlBase + page}">${image ? `<meta property="og:image" content="${urlBase + esc(image)}">` : ""}<link rel="icon" href="${prefix}static/portfolio/monogram.svg" type="image/svg+xml"><link rel="stylesheet" href="${prefix}styles.css?v=${cssVersion}"></head>`;
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#12191b">${page === "" ? motionBoot : ""}<title>${esc(title)}</title><meta name="description" content="${esc(description)}"><link rel="canonical" href="${urlBase + page}"><meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${urlBase + page}">${image ? `<meta property="og:image" content="${urlBase + esc(image)}">` : ""}<link rel="icon" href="${prefix}static/portfolio/monogram.svg" type="image/svg+xml"><link rel="stylesheet" href="${prefix}styles.css?v=${cssVersion}"></head>`;
 const nav = (base) =>
   `<a class="skip" tabindex="0" href="#main">Skip to content</a><header class="mast"><div class="wrap mast-inner"><a class="brand" href="${base || "#top"}" aria-label="Brian Markowitz portfolio home"><img src="${base}static/portfolio/monogram.svg" alt="" width="36" height="36"><span>Brian Markowitz</span></a><nav aria-label="Main navigation"><a class="nav-link" href="${base}#work"><span class="nav-full">Case studies</span><span class="nav-short">Work</span></a><a class="nav-link" href="${base}#index"><span class="nav-full">Project index</span><span class="nav-short">Index</span></a>${link(base + "#about", "About", "nav-link", "")}<a class="contact-link" href="${mail}">Contact ${arrows.ext}</a></nav></div></header>`;
 const footer = (base) =>
@@ -144,7 +171,7 @@ const featuredCard = (p, i) =>
 const board = fs
   .readFileSync(path.join(root, "static/portfolio/software-stack.svg"), "utf8")
   .trim();
-const intro = `<section class="hero"><div class="wrap hero-inner"><div class="hero-type"><p class="hero-label"><i aria-hidden="true"></i> Software engineering portfolio</p><h1>Brian<br>Markowitz<span>.</span></h1><p class="hero-role">Software developer <span>&amp;</span> data architect.</p><p class="hero-blurb">I design data pipelines, build web applications, and ship mobile software. Here’s the work, from a database refresh workflow to an iPhone alarm for two.</p><div class="hero-actions">${link("#work", "Explore case studies", "action", "down")}${link("#index", "Browse project index", "hero-text-link", "right")}</div></div><figure class="system-figure">${board}<figcaption><span>Fig. 01</span><i></i> Anatomy of a software system</figcaption></figure></div><div class="focus-band"><div class="wrap band-inner"><span class="band-id">Practice areas</span><span><b>01</b> Product development</span><span><b>02</b> Data systems</span><span><b>03</b> Applied AI</span></div></div></section>`;
+const intro = `<section class="hero"><div class="wrap hero-inner"><div class="hero-type"><p class="hero-label"><i aria-hidden="true"></i> Software engineering portfolio</p><h1>Brian<br>Markowitz<span>.</span></h1><p class="hero-role">Software developer <span>&amp;</span> data architect.</p><p class="hero-blurb">I design data pipelines, build web applications, and ship mobile software. Here’s the work, from a database refresh workflow to an iPhone alarm for two.</p><div class="hero-actions">${link("#work", "Explore case studies", "action", "down")}${link("#index", "Browse project index", "hero-text-link", "right")}</div></div><figure class="system-figure">${board}<figcaption><span class="board-caption"><span>Fig. 01</span><i aria-hidden="true"></i> Anatomy of a software system</span><button id="motion-control" class="motion-control" type="button" aria-controls="portfolio-board"><span class="motion-icon" aria-hidden="true"></span><span class="motion-label">Pause motion</span></button></figcaption></figure></div><div class="focus-band"><div class="wrap band-inner"><span class="band-id">Practice areas</span><span><b>01</b> Product development</span><span><b>02</b> Data systems</span><span><b>03</b> Applied AI</span></div></div></section>`;
 const work = `<section class="section selected wrap" id="work" aria-labelledby="work-title">${label("01", "Selected work")}<div class="section-heading"><h2 id="work-title">Case studies<span>.</span></h2><p>Three projects, from the problem I set out to solve to what I built.</p></div><div class="cases">${featured.map(featuredCard).join("")}</div></section>`;
 const filters = ["all", ...Object.keys(content.categories)]
   .map(
